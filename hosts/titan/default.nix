@@ -23,6 +23,7 @@ in
     inputs.disko.nixosModules.disko
     ./disk-primary.nix
     ./disk-secondary.nix
+    ./hardware.nix
     ../../modules/nixos
   ];
 
@@ -30,6 +31,7 @@ in
     # User Configuration
     isNormalUser = true;
     description = formatUsername username;
+    hashedPasswordFile = config.sops.secrets."users/quinno/password".path;
     extraGroups =
       [ "wheel" ]
       ++ lib.optional config.security.rtkit.enable "rtkit"
