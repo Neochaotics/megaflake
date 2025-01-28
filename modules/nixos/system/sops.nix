@@ -19,7 +19,7 @@ in
 
   config = lib.mkIf cfg.enable {
     sops = {
-      defaultSopsFile = ./secrets/general.yaml;
+      defaultSopsFile = /etc/nixos/modules/system/secrets/general.yaml;
       age = {
         generateKey = true;
       };

@@ -31,7 +31,6 @@ in
     # User Configuration
     isNormalUser = true;
     description = formatUsername username;
-    hashedPasswordFile = config.sops.secrets."users/quinno/password".path;
     extraGroups =
       [ "wheel" ]
       ++ lib.optional config.security.rtkit.enable "rtkit"
@@ -64,7 +63,7 @@ in
       nix.enable = true;
       sysctl.enable = true;
       systemd-boot.enable = true;
-      sops.enable = true;
+      sops.enable = false;
     };
     services = {
       ananicy.enable = true;
