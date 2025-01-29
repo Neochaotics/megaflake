@@ -10,7 +10,7 @@
       "SUPER ALT SHIFT, B, exec, uwsm app -- chromium.desktop:new-private-window"
       "SUPER, Return, exec, uwsm app -- foot.desktop"
       "SUPER, E, exec, uwsm app -- thunar.desktop"
-      "SUPER, V, exec, uwsm app -- pavucontrol"
+      "SUPER, V, exec, uwsm app -- pavucontrol-qt.desktop"
       "SUPER, D, exec, uwsm app -- legcord"
 
       # General Control

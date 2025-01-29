@@ -21,7 +21,7 @@ in
     };
 
     environment.systemPackages = with pkgs; [
-      lxqt.pavucontrol-qt
+      pavucontrol
       qpwgraph
       playerctl
       alsa-utils

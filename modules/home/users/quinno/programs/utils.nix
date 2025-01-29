@@ -16,9 +16,6 @@ in
     home.packages = with pkgs; [
       age
       sops
-      stremio
-      zed
-      vim
     ];
     programs = {
 
