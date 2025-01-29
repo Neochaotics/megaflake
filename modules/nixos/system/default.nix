@@ -6,5 +6,6 @@
     ./nix.nix
     ./sops.nix
     ./sysctl.nix
+    ./stylix.nix
   ];
 }

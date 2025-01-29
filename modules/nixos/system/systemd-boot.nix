@@ -16,14 +16,14 @@ in
     boot = {
       plymouth = {
         enable = true;
-        #logo = "";
-        theme = "hexagon_2";
-        themePackages = with pkgs; [
-          # By default we would install all themes
-          (adi1090x-plymouth-themes.override {
-            selected_themes = [ "hexagon_2" ];
-          })
-        ];
+        #logo = "";managed by stylix
+        # theme = "hexagon_2";
+        #themePackages = with pkgs; [
+        # By default we would install all themes
+        #(adi1090x-plymouth-themes.override {
+        #selected_themes = [ "hexagon_2" ];
+        #})
+        #];
       };
       kernelPackages = pkgs.linuxPackages_zen;
       loader = {
@@ -48,6 +48,7 @@ in
       consoleLogLevel = lib.mkForce 0;
       initrd = {
         verbose = false;
+        systemd.enable = true;
       };
     };
     services.scx.enable = true; # by default uses scx_rustland scheduler

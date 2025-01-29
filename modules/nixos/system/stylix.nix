@@ -20,21 +20,21 @@ in
   config = lib.mkIf cfg.enable {
     stylix = {
       enable = true;
+      image = ../../../hosts/titan/wallpaper.png;
+      base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-material-dark-hard.yaml";
+      cursor = {
+        package = pkgs.bibata-cursors;
+        name = "Bibata-Modern-Amber";
+      };
       fonts = {
         serif = {
-          package = pkgs.dejavu_fonts;
-          name = "DejaVu Serif";
+          package = pkgs.nerd-fonts._0xproto;
+          name = "0xProtoNFM";
         };
 
-        sansSerif = {
-          package = pkgs.dejavu_fonts;
-          name = "DejaVu Sans";
-        };
+        sansSerif = config.stylix.fonts.serif;
 
-        monospace = {
-          package = pkgs.dejavu_fonts;
-          name = "DejaVu Sans Mono";
-        };
+        monospace = config.stylix.fonts.serif;
 
         emoji = {
           package = pkgs.noto-fonts-emoji;

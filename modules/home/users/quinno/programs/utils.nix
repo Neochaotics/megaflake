@@ -23,7 +23,7 @@ in
         # ls Replacement
         enable = true;
         git = true;
-        icons = true;
+        icons = "auto";
       };
       fzf = {
         # Fuzzy Finder

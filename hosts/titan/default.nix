@@ -65,6 +65,7 @@ in
       sysctl.enable = true;
       systemd-boot.enable = true;
       sops.enable = false;
+      stylix.enable = true;
     };
     services = {
       ananicy.enable = true;
