@@ -4,6 +4,6 @@
     ./foot.nix
     ./git.nix
     ./utils.nix
-    ./fuzzle.nix
+    ./fuzzel.nix
   ];
 }
