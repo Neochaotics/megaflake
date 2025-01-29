@@ -57,6 +57,7 @@ in
       hyprland.enable = true;
       sudo.enable = true;
       steam.enable = true;
+      nvf.enable = true;
     };
     system = {
       home-manager.enable = true;

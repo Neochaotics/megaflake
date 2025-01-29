@@ -4,5 +4,6 @@
     ./sudo.nix
     ./steam.nix
     # ./utilities.nix
+    ./nvf.nix
   ];
 }
