@@ -3,7 +3,7 @@
     bind = [
       # Program Launching
       # --------------------
-      "SUPER, R, exec, pkill fuzzle || uwsm app -- fuzzle"
+      "SUPER, R, exec, pkill fuzzle || uwsm app -- fuzzel"
       "SUPER, B, exec, uwsm app -- firefox.desktop:new-window"
       "SUPER SHIFT, B, exec, uwsm app -- firefox.desktop:new-private-window"
       "SUPER ALT, B, exec, uwsm app -- chromium.desktop"
