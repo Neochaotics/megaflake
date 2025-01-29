@@ -5,7 +5,7 @@
   ...
 }:
 let
-  cfg = config.cm.home.users.quinno.programs.eza;
+  cfg = config.cm.home.users.quinno.programs.utils;
 in
 {
   options.cm.home.users.quinno.programs.utils = {
