@@ -23,6 +23,7 @@
         foot.enable = true;
         git.enable = true;
         utils.enable = true;
+        fuzzle.enable = true;
       };
       system = {
         bash.enable = true;
