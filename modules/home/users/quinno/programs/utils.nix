@@ -15,6 +15,10 @@ in
   config = lib.mkIf cfg.enable {
     home.packages = with pkgs; [
       age
+      sops
+      stremio
+      zed
+      vim
     ];
     programs = {
 
