@@ -22,6 +22,7 @@
         firefox.enable = true;
         foot.enable = true;
         git.enable = true;
+        utils.enable = true;
       };
       system = {
         bash.enable = true;
