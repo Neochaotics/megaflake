@@ -13,7 +13,7 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-      programs.fuzzle = {
+      programs.fuzzel = {
         enable = true;
       };
   };
