@@ -81,6 +81,8 @@
               # Additional formatters
               actionlint.enable = true; # GitHub Actions linter
               mdformat.enable = true; # Markdown formatter
+              yamlfmt.enable = true;
+              shfmt.enable = true;
             };
           };
 

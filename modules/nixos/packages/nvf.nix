@@ -1,6 +1,5 @@
 {
   lib,
-  pkgs,
   config,
   ...
 }:
@@ -9,9 +8,9 @@ let
 in
 {
 
-imports = [
-inputs.nvf.nixosModules.default
-];
+  imports = [
+    inputs.nvf.nixosModules.default
+  ];
 
   options.cm.nixos.packages.nvf = {
     enable = lib.mkEnableOption "Enables nvf";
@@ -20,16 +19,16 @@ inputs.nvf.nixosModules.default
   config = lib.mkIf cfg.enable {
 
     programs.nvf = {
-    enable = true;
-    # your settings need to go into the settings attribute set
-    # most settings are documented in the appendix
-    settings = {
-      vim.viAlias = false;
-      vim.vimAlias = true;
-      vim.lsp = {
-        enable = true;
+      enable = true;
+      # your settings need to go into the settings attribute set
+      # most settings are documented in the appendix
+      settings = {
+        vim.viAlias = false;
+        vim.vimAlias = true;
+        vim.lsp = {
+          enable = true;
+        };
       };
     };
-  };  
-};
+  };
 }

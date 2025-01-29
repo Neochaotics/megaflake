@@ -1,4 +1,3 @@
----
 name: Flake Lock Update
 on:
   schedule:
