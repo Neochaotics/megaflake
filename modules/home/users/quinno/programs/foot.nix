@@ -14,6 +14,11 @@ in
   config = lib.mkIf cfg.enable {
     programs.foot = {
       enable = true;
+      settings = {
+        cursor = {
+          blink = true;
+        };
+      };
     };
   };
 }
