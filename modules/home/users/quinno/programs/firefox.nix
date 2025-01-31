@@ -43,10 +43,6 @@ in
           "AutofillAddressEnabled" = false;
           "AutofillCreditCardEnabled" = false;
           "BackgroundAppUpdate" = false;
-          "BlockAboutAddons" = true;
-          "BlockAboutConfig" = false;
-          "BlockAboutProfiles" = true;
-          "BlockAboutSupport" = true;
           "CaptivePortal" = true;
           "Cookies" = {
             "AcceptThirdParty" = "from-visited";
