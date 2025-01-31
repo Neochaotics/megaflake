@@ -19,11 +19,13 @@
   cm.home.users = {
     quinno = {
       programs = {
-        firefox.enable = true;
+        firefox.enable = false;
+        schizo.enable = true;
         foot.enable = true;
         git.enable = true;
         utils.enable = true;
         fuzzel.enable = true;
+        media.enable = true;
       };
       system = {
         bash.enable = true;

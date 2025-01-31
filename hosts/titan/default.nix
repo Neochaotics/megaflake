@@ -42,7 +42,7 @@ in
   # Service Configuration
 
   services.getty = {
-    autologinUser = username;
+    autologinUser = "${username}";
     autologinOnce = true;
   };
 

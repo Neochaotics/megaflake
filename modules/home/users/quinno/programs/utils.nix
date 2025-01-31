@@ -16,9 +16,9 @@ in
     home.packages = with pkgs; [
       age
       sops
+      zed-editor
     ];
     programs = {
-
       eza = {
         # ls Replacement
         enable = true;
