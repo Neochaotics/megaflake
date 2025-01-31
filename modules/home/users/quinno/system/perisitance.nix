@@ -4,10 +4,10 @@
   ...
 }:
 let
-  cfg = config.cm.home.users.quinno.system.persistance;
+  cfg = config.cm.home.users.quinno.system.persistence;
 in
 {
-  options.cm.home.users.quinno.system.persistance = {
+  options.cm.home.users.quinno.system.persistence = {
     enable = lib.mkEnableOption "Enable persistence configuration for quinno user";
   };
 

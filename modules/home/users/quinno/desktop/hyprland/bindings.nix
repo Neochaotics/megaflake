@@ -10,7 +10,7 @@
       "SUPER ALT SHIFT, B, exec, uwsm app -- chromium.desktop:new-private-window"
       "SUPER, Return, exec, uwsm app -- foot.desktop"
       "SUPER, E, exec, uwsm app -- thunar.desktop"
-      "SUPER, V, exec, uwsm app -- pavucontrol-qt.desktop"
+      "SUPER, V, exec, uwsm app -- pavucontrol.desktop"
       "SUPER, D, exec, uwsm app -- legcord"
 
       # General Control
@@ -28,7 +28,7 @@
       "SUPER, F9, pseudo" # Enable Pseudo Tiling
       "SUPER, F10, togglefloating" # Toggle Floating Window
       "SUPER, F11, fullscreen, 0" # Toggle Fullscreen
-      "SUPER, F12, pin" # Pin window aboce others
+      "SUPER, F12, pin" # Pin window above others
 
       # Window Control
       # --------------------

@@ -13,7 +13,7 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    enviornment.packages = with pkgs; [
+    environment.packages = with pkgs; [
       # archives
       zip
       xz

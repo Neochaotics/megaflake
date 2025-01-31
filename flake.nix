@@ -83,6 +83,13 @@
               statix.enable = true; # Static analysis for Nix
               deadnix.enable = true; # Detect dead code in Nix
 
+              typos.enable = true;
+              typos.excludes = [
+                "*.png"
+                "*.yaml"
+                "modules/nixos/packages/nvf.nix"
+              ];
+
               # Additional formatters
               actionlint.enable = true; # GitHub Actions linter
               mdformat.enable = true; # Markdown formatter

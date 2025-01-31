@@ -25,7 +25,7 @@
       };
       system = {
         bash.enable = true;
-        #persistance.enable = true;
+        #persistence.enable = true;
         xdg.enable = true;
       };
       desktop.hyprland.enable = true;

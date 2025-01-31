@@ -10,7 +10,7 @@ in
 {
   imports = [
     ./general.nix
-    ./appearence.nix
+    ./appearance.nix
     ./input.nix
     ./misc.nix
 

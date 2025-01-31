@@ -19,7 +19,7 @@
   cm.home.users = {
     quinno = {
       programs = {
-        firefox.enable = false;
+        firefox.enable = true;
         schizo.enable = true;
         foot.enable = true;
         git.enable = true;
@@ -29,7 +29,7 @@
       };
       system = {
         bash.enable = true;
-        #persistance.enable = true;
+        #persistence.enable = true;
         xdg.enable = true;
       };
       desktop.hyprland.enable = true;

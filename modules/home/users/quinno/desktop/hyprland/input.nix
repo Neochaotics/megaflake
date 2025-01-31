@@ -32,7 +32,7 @@
     binds = {
       pass_mouse_when_bound = false;
       scroll_event_delay = 300;
-      workspace_back_and_forth = true;
+      workspace_back_and_forth = false;
       allow_workspace_cycles = false;
       workspace_center_on = 0;
       focus_preferred_method = 0;

@@ -39,7 +39,7 @@ in
       "vm.dirty_background_bytes" = 67108864;
 
       # The kernel flusher threads will periodically wake up and write old data out to disk.  This
-      # tunable expresses the interval between those wakeups, in 100'ths of a second (Default is 500).
+      # tunable expresses the interval between those wakeups, in hundredths of a second (Default is 500).
       "vm.dirty_writeback_centisecs" = 1500;
 
       # This action will speed up your boot and shutdown, because one less module is loaded. Additionally disabling watchdog timers increases performance and lowers power consumption
