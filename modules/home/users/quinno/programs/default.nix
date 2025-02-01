@@ -7,5 +7,6 @@
     ./fuzzel.nix
     ./media.nix
     ./ssh.nix
+    ./aria2.nix
   ];
 }

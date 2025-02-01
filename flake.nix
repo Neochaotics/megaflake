@@ -36,6 +36,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    trackerslist = {
+      url = "github:ngosang/trackerslist";
+      flake = false;
+    };
+
     # Development and formatting tools
     treefmt-nix.url = "github:numtide/treefmt-nix";
     devshell.url = "github:numtide/devshell";

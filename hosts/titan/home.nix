@@ -26,6 +26,7 @@
         fuzzel.enable = true;
         media.enable = true;
         ssh.enable = true;
+        aria2.enable = true;
       };
       system = {
         bash.enable = true;
