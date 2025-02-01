@@ -1,6 +1,8 @@
 {
   lib,
   config,
+  inputs,
+  pkgs,
   ...
 }:
 let
@@ -11,31 +13,7 @@ in
     enable = lib.mkEnableOption "Firefox browser configuration";
   };
   config = lib.mkIf cfg.enable {
-    xdg.mimeApps.defaultApplications = {
-      "text/html" = [
-        "firefox.desktop"
-        "chromium.desktop"
-      ];
-      "x-scheme-handler/http" = [
-        "firefox.desktop"
-        "chromium.desktop"
-      ];
-      "x-scheme-handler/https" = [
-        "firefox.desktop"
-        "chromium.desktop"
-      ];
-      "x-scheme-handler/about" = [
-        "firefox.desktop"
-        "chromium.desktop"
-      ];
-      "x-scheme-handler/unknown" = [
-        "firefox.desktop"
-        "chromium.desktop"
-      ];
-    };
-
     programs = {
-      # - https://mozilla.github.io/policy-templates/
       firefox = {
         enable = true;
         policies = {
@@ -50,7 +28,6 @@ in
             "BehaviorPrivateBrowsing" = "reject-tracker";
             "RejectTracker" = true;
           };
-          # "DefaultDownloadDirectory" = "${homeDir}/Downloads";
           "DisableAppUpdate" = true;
           "DisableDefaultBrowserAgent" = true;
           "DisableFeedbackCommands" = true;
@@ -65,7 +42,6 @@ in
           "DisableSetDesktopBackground" = true;
           "DisableSystemAddonUpdate" = true;
           "DisableTelemetry" = true;
-          "DisplayBookmarksToolbar" = "newtab";
           "DisplayMenuBar" = "default-off";
           "DNSOverHTTPS" = {
             "Enabled" = true;
@@ -168,197 +144,81 @@ in
             "MoreFromMozilla" = false;
             "Locked" = true;
           };
-          "Preferences" = {
-            "browser.aboutConfig.showWarning" = {
-              Value = false;
-              Status = "locked";
-            };
-            "browser.newtab.preload" = {
-              Value = false;
-              Status = "locked";
-            };
-            "browser.newtabpage.activity-stream.feeds.telemetry" = {
-              Value = false;
-              Status = "locked";
-            };
-            "geo.provider.use_geoclue" = {
-              Value = false;
-              Status = "locked";
-            };
-            "browser.region.update.enabled" = {
-              Value = false;
-              Status = "locked";
-            };
-            "app.update.auto" = {
-              Value = false;
-              Status = "locked";
-            };
-            "browser.discovery.enabled" = {
-              Value = false;
-              Status = "locked";
-            };
-            "extensions.htmlaboutaddons.recommendations.enabled" = {
-              Value = false;
-              Status = "locked";
-            };
-            "network.connectivity-service.enabled" = {
-              Value = false;
-              Status = "locked";
-            };
-            "browser.safebrowsing.malware.enabled" = {
-              Value = false;
-              Status = "locked";
-            };
-            "browser.safebrowsing.phishing.enabled" = {
-              Value = false;
-              Status = "locked";
-            };
-            "browser.tabs.crashReporting.sendReport" = {
-              Value = false;
-              Status = "locked";
-            };
-            "browser.cache.disk.enable" = {
-              Value = false;
-              Status = "locked";
-            };
-            "browser.safebrowsing.provider.google4.gethashURL" = {
-              Value = "";
-              Status = "locked";
-            };
-            "browser.safebrowsing.provider.google4.updateURL" = {
-              Value = "";
-              Status = "locked";
-            };
-            "browser.safebrowsing.provider.google.gethashURL" = {
-              Value = "";
-              Status = "locked";
-            };
-            "browser.safebrowsing.provider.google.updateURL" = {
-              Value = "";
-              Status = "locked";
-            };
-            "browser.safebrowsing.provider.google4.dataSharingURL" = {
-              Value = "";
-              Status = "locked";
-            };
-            "browser.safebrowsing.downloads.enabled" = {
-              Value = false;
-              Status = "locked";
-            };
-            "browser.safebrowsing.downloads.remote.enabled" = {
-              Value = false;
-              Status = "locked";
-            };
-            "browser.safebrowsing.downloads.remote.url" = {
-              Value = "";
-              Status = "locked";
-            };
-            "browser.safebrowsing.downloads.remote.block_potentially_unwanted" = {
-              Value = false;
-              Status = "locked";
-            };
-            "browser.safebrowsing.downloads.remote.block_uncommon" = {
-              Value = false;
-              Status = "locked";
-            };
-            "network.prefetch-next" = {
-              Value = false;
-              Status = "locked";
-            };
-            "network.dns.disablePrefetch" = {
-              Value = false;
-              Status = "locked";
-            };
-            "network.predictor.enabled" = {
-              Value = false;
-              Status = "locked";
-            };
-            "network.http.speculative-parallel-limit" = {
-              Value = 0;
-              Status = "locked";
-            };
-            "browser.places.speculativeConnect.enabled" = {
-              Value = false;
-              Status = "locked";
-            };
-            "network.dns.disableIPv6" = {
-              Value = true;
-              Status = "locked";
-            };
-            "browser.urlbar.trimURLs" = {
-              Value = false;
-              Status = "locked";
-            };
-            "browser.urlbar.speculativeConnect.enabled" = {
-              Value = false;
-              Status = "locked";
-            };
-            "browser.sessionstore.privacy_level" = {
-              Value = 2;
-              Status = "locked";
-            };
-            "browser.sessionstore.resume_from_crash" = {
-              Value = false;
-              Status = "locked";
-            };
-            "browser.shell.shortcutFavicons" = {
-              Value = false;
-              Status = "locked";
-            };
-            "dom.security.https_only_mode_send_http_background_request" = {
-              Value = false;
-              Status = "locked";
-            };
-            "browser.xul.error_pages.expert_bad_cert" = {
-              Value = true;
-              Status = "locked";
-            };
-            "network.http.referer.XOriginPolicy" = {
-              Value = 2;
-              Status = "locked";
-            };
-            "network.http.referer.XOriginTrimmingPolicy" = {
-              Value = 2;
-              Status = "locked";
-            };
-            "media.peerconnection.ice.proxy_only_if_behind_proxy" = {
-              Value = true;
-              Status = "locked";
-            };
-            "media.peerconnection.ice.default_address_only" = {
-              Value = true;
-              Status = "locked";
-            };
-            "media.peerconnection.ice.no_host" = {
-              Value = true;
-              Status = "locked";
-            };
-            "media.eme.enabled" = {
-              Value = false;
-              Status = "locked";
-            };
-            "browser.contentblocking.category" = {
-              Value = "strict";
-              Status = "locked";
-            };
-            "privacy.resistFingerprinting" = {
-              Value = true;
-              Status = "locked";
-            };
-            "privacy.window.maxInnerWidth" = {
-              Value = 1600;
-              Status = "locked";
-            };
-            "privacy.window.maxInnerHeight" = {
-              Value = 900;
-              Status = "locked";
-            };
-            "browser.display.use_system_colors" = {
-              Value = true;
-              Status = "locked";
-            };
-          };
           "UseSystemPrintDialog" = true;
+        };
+        profiles.default = {
+          isDefault = true;
+          settings = {
+            "beacon.enabled" = false;
+            "browser.contentblocking.category" = "strict";
+            "browser.display.os-zoom-behavior" = 1;
+            "browser.download.dir" = "${config.home.homeDirectory}/download";
+            "browser.newtabpage.enabled" = false; # Blank new tab page.
+            "browser.safebrowsing.appRepURL" = "";
+            "browser.safebrowsing.malware.enabled" = false;
+            "browser.search.hiddenOneOffs" = "Google,Yahoo,Bing,Amazon.com,Twitter";
+            "browser.search.suggest.enabled" = false;
+            "browser.send_pings" = false;
+            "browser.tabs.closeWindowWithLastTab" = false;
+            "browser.uidensity" = 1; # Dense.
+            "browser.urlbar.placeholderName" = "DuckDuckGo";
+            "browser.urlbar.speculativeConnect.enabled" = false;
+            "devtools.theme" = "dark";
+            "dom.battery.enabled" = false;
+            "dom.security.https_only_mode" = true;
+            "experiments.activeExperiment" = false;
+            "experiments.enabled" = false;
+            "experiments.supported" = false;
+            "extensions.unifiedExtensions.enabled" = false;
+            "general.smoothScroll" = false;
+            "geo.enabled" = false;
+            "gfx.webrender.all" = true;
+            "layout.css.devPixelsPerPx" = 1;
+            # Follow system color theme.
+            "layout.css.prefers-color-scheme.content-override" = 2;
+            "media.ffmpeg.vaapi.enabled" = true;
+            "media.navigator.enabled" = false;
+            "media.video_stats.enabled" = false;
+            "network.IDN_show_punycode" = true;
+            "network.allow-experiments" = false;
+            "network.dns.disablePrefetch" = true;
+            "network.http.referer.XOriginPolicy" = 1;
+            "network.http.referer.XOriginTrimmingPolicy" = 1;
+            "network.http.referer.trimmingPolicy" = 1;
+            "network.prefetch-next" = false;
+            "permissions.default.shortcuts" = 2; # Don't steal my shortcuts!
+            "privacy.donottrackheader.enabled" = true;
+            "privacy.donottrackheader.value" = 1;
+            "privacy.firstparty.isolate" = true;
+            "signon.rememberSignons" = false;
+            "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
+            "ui.textScaleFactor" = 100;
+
+            # Fully disable Pocket. See
+            # https://www.reddit.com/r/linux/comments/zabm2a.
+            "extensions.pocket.enabled" = false;
+            "extensions.pocket.api" = "0.0.0.0";
+            "extensions.pocket.loggedOutVariant" = "";
+            "extensions.pocket.oAuthConsumerKey" = "";
+            "extensions.pocket.onSaveRecs" = false;
+            "extensions.pocket.onSaveRecs.locales" = "";
+            "extensions.pocket.showHome" = false;
+            "extensions.pocket.site" = "0.0.0.0";
+            "browser.newtabpage.activity-stream.pocketCta" = "";
+            "browser.newtabpage.activity-stream.section.highlights.includePocket" = false;
+            "services.sync.prefs.sync.browser.newtabpage.activity-stream.section.highlights.includePocket" =
+              false;
+          };
+          extensions = with inputs.firefox-addons.packages.${pkgs.system}; [
+            auto-tab-discard
+            cookie-autodelete
+            darkreader
+            libredirect
+            link-cleaner
+            linkhints
+            skip-redirect
+            ublock-origin
+          ];
         };
       };
     };

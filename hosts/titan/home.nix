@@ -20,12 +20,12 @@
     quinno = {
       programs = {
         firefox.enable = true;
-        schizo.enable = true;
         foot.enable = true;
         git.enable = true;
         utils.enable = true;
         fuzzel.enable = true;
         media.enable = true;
+        ssh.enable = true;
       };
       system = {
         bash.enable = true;
