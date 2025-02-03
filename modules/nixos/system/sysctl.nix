@@ -8,11 +8,25 @@ let
 in
 {
   options.cm.nixos.system.sysctl = {
-    enable = lib.mkEnableOption "Enable kernel sysctl parameters for system tuning, performance optimization, and security hardening";
+    cachyos = lib.mkOption {
+      type = lib.types.bool;
+      default = true;
+      description = ''
+        Use sysctl with cachyos presets.
+        https://github.com/CachyOS/CachyOS-Settings/blob/e96d1e1dd253ed09e4104b096df543e6ecad08be/usr/lib/sysctl.d/99-cachyos-settings.conf
+      '';
+    };
+    mineral = lib.mkOption {
+      type = lib.types.bool;
+      default = true;
+      description = ''
+        Use sysctl with some nix-mineral presets.
+        https://github.com/cynicsketch/nix-mineral/blob/46bb9ac8b69c6afa86063d52298598db4a5d9bc0/nix-mineral.nix#L449
+      '';
+    };
   };
 
-  config = lib.mkIf cfg.enable {
-    # https://github.com/CachyOS/CachyOS-Settings/blob/e96d1e1dd253ed09e4104b096df543e6ecad08be/usr/lib/sysctl.d/99-cachyos-settings.conf
+  config = lib.mkIf cfg.cachyos {
     boot.kernel.sysctl = {
       # The sysctl swappiness parameter determines the kernel's preference for pushing anonymous pages or page cache to disk in memory-starved situations.
       # A low value causes the kernel to prefer freeing up open files (page cache), a high value causes the kernel to try to use swap space,

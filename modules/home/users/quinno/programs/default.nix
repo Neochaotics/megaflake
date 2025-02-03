@@ -8,5 +8,6 @@
     ./media.nix
     ./ssh.nix
     ./aria2.nix
+    ./waybar.nix
   ];
 }

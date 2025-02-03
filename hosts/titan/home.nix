@@ -27,6 +27,7 @@
         media.enable = true;
         ssh.enable = true;
         aria2.enable = true;
+        waybar.enable = true;
       };
       system = {
         bash.enable = true;

@@ -62,7 +62,10 @@ in
     system = {
       home-manager.enable = true;
       nix.enable = true;
-      sysctl.enable = true;
+      sysctl = {
+        cachyos = true;
+        mineral = false;
+      };
       systemd-boot.enable = true;
       sops.enable = false;
       stylix.enable = true;

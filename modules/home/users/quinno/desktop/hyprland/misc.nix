@@ -44,6 +44,16 @@
       force_introspection = 1; # Introspection is aimed at reducing GPU usage in certain cases, but might cause graphical glitches on nvidia.
     };
 
+    ecosystem = {
+      no_update_news = true; # https://hyprland.org/rss.xml
+      no_donation_nag = true;
+    };
+
+    experimental = {
+      wide_color_gamut = true;
+      xx_color_management_v4 = true;
+    };
+
     render = {
       explicit_sync = 2;
       explicit_sync_kms = 2;
