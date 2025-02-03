@@ -14,22 +14,18 @@ in
   };
   config = lib.mkIf cfg.enable {
     programs = {
+      chromium.enable = true;
       firefox = {
         enable = true;
+        package = pkgs.firefox;
         policies = {
           "AppAutoUpdate" = false;
           "AutofillAddressEnabled" = false;
           "AutofillCreditCardEnabled" = false;
           "BackgroundAppUpdate" = false;
-          "CaptivePortal" = true;
-          "Cookies" = {
-            "AcceptThirdParty" = "from-visited";
-            "Behavior" = "reject-tracker";
-            "BehaviorPrivateBrowsing" = "reject-tracker";
-            "RejectTracker" = true;
-          };
+          # "CaptivePortal" = true;
           "DisableAppUpdate" = true;
-          "DisableDefaultBrowserAgent" = true;
+          "DisableBuiltinPDFViewer" = true;
           "DisableFeedbackCommands" = true;
           "DisableFirefoxAccounts" = true;
           "DisableFirefoxScreenshots" = true;
@@ -45,7 +41,7 @@ in
           "DisplayMenuBar" = "default-off";
           "DNSOverHTTPS" = {
             "Enabled" = true;
-            "ProviderURL" = "https=//dns.quad9.net/dns-query";
+            "ProviderURL" = "https://dns.quad9.net/dns-query";
             "Locked" = true;
           };
           "DontCheckDefaultBrowser" = true;
@@ -86,6 +82,7 @@ in
           "InstallAddonsPermission" = {
             "Default" = false;
           };
+          "ManualAppUpdateOnly" = true;
           "NetworkPrediction" = false;
           "NewTabPage" = true;
           "NoDefaultBookmarks" = true;
@@ -93,6 +90,10 @@ in
           "OverrideFirstRunPage" = "";
           "OverridePostUpdatePage" = "";
           "PasswordManagerEnabled" = false;
+          "PDFjs" = {
+            "Enabled" = false;
+            "EnablePermissions" = false;
+          };
           "PopupBlocking" = {
             "Default" = true;
           };
@@ -123,6 +124,7 @@ in
             "Locked" = true;
           };
           "PostQuantumKeyAgreementEnabled" = true;
+          "PrintingEnabled" = true;
           "SearchBar" = "unified";
           "SearchSuggestEnabled" = false;
           "ShowHomeButton" = false;
@@ -136,88 +138,75 @@ in
             "Locked" = true;
           };
           "UserMessaging" = {
-            "WhatsNew" = false;
-            "ExtensionRecommendations" = true;
+            # "WhatsNew" = false; Deprecated
+            "ExtensionRecommendations" = false;
             "FeatureRecommendations" = false;
             "UrlbarInterventions" = false;
             "SkipOnboarding" = true;
             "MoreFromMozilla" = false;
+            "FirefoxLabs" = false;
             "Locked" = true;
           };
           "UseSystemPrintDialog" = true;
+          "Preferences" = {
+            "widget.use-xdg-desktop-portal.file-picker" = 1;
+            "widget.use-xdg-desktop-portal.location" = 0;
+            "widget.use-xdg-desktop-portal.mime-handler" = 1;
+            "widget.use-xdg-desktop-portal.open-uri" = 1;
+            "widget.use-xdg-desktop-portal.settings" = 1;
+
+          };
         };
         profiles.default = {
           isDefault = true;
           settings = {
-            "beacon.enabled" = false;
-            "browser.contentblocking.category" = "strict";
-            "browser.display.os-zoom-behavior" = 1;
-            "browser.download.dir" = "${config.home.homeDirectory}/download";
-            "browser.newtabpage.enabled" = false; # Blank new tab page.
-            "browser.safebrowsing.appRepURL" = "";
-            "browser.safebrowsing.malware.enabled" = false;
-            "browser.search.hiddenOneOffs" = "Google,Yahoo,Bing,Amazon.com,Twitter";
-            "browser.search.suggest.enabled" = false;
-            "browser.send_pings" = false;
-            "browser.tabs.closeWindowWithLastTab" = false;
-            "browser.uidensity" = 1; # Dense.
-            "browser.urlbar.placeholderName" = "DuckDuckGo";
-            "browser.urlbar.speculativeConnect.enabled" = false;
-            "devtools.theme" = "dark";
-            "dom.battery.enabled" = false;
-            "dom.security.https_only_mode" = true;
-            "experiments.activeExperiment" = false;
-            "experiments.enabled" = false;
-            "experiments.supported" = false;
-            "extensions.unifiedExtensions.enabled" = false;
-            "general.smoothScroll" = false;
-            "geo.enabled" = false;
-            "gfx.webrender.all" = true;
-            "layout.css.devPixelsPerPx" = 1;
-            # Follow system color theme.
-            "layout.css.prefers-color-scheme.content-override" = 2;
-            "media.ffmpeg.vaapi.enabled" = true;
-            "media.navigator.enabled" = false;
-            "media.video_stats.enabled" = false;
-            "network.IDN_show_punycode" = true;
-            "network.allow-experiments" = false;
-            "network.dns.disablePrefetch" = true;
-            "network.http.referer.XOriginPolicy" = 1;
-            "network.http.referer.XOriginTrimmingPolicy" = 1;
-            "network.http.referer.trimmingPolicy" = 1;
-            "network.prefetch-next" = false;
-            "permissions.default.shortcuts" = 2; # Don't steal my shortcuts!
-            "privacy.donottrackheader.enabled" = true;
-            "privacy.donottrackheader.value" = 1;
-            "privacy.firstparty.isolate" = true;
-            "signon.rememberSignons" = false;
-            "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
-            "ui.textScaleFactor" = 100;
-
-            # Fully disable Pocket. See
-            # https://www.reddit.com/r/linux/comments/zabm2a.
-            "extensions.pocket.enabled" = false;
-            "extensions.pocket.api" = "0.0.0.0";
-            "extensions.pocket.loggedOutVariant" = "";
-            "extensions.pocket.oAuthConsumerKey" = "";
-            "extensions.pocket.onSaveRecs" = false;
-            "extensions.pocket.onSaveRecs.locales" = "";
-            "extensions.pocket.showHome" = false;
-            "extensions.pocket.site" = "0.0.0.0";
-            "browser.newtabpage.activity-stream.pocketCta" = "";
-            "browser.newtabpage.activity-stream.section.highlights.includePocket" = false;
-            "services.sync.prefs.sync.browser.newtabpage.activity-stream.section.highlights.includePocket" =
-              false;
+            "browser.search.defaultenginename" = "DuckDuckGo";
+            "browser.search.order.1" = "DuckDuckGo";
+          };
+          search = {
+            force = true;
+            default = "Brave";
+            privateDefault = "Brave";
+            order = [
+              "Brave"
+              "DuckDuckGo"
+            ];
+            engines = {
+              "Brave" = {
+                urls = [
+                  {
+                    template = "https://search.brave.com/search";
+                    params = [
+                      {
+                        name = "q";
+                        value = "{searchTerms}";
+                      }
+                      {
+                        name = "safesearch";
+                        value = "off";
+                      }
+                    ];
+                  }
+                ];
+                icon = "${pkgs.papirus-icon-theme}/share/icons/Papirus/64x64/apps/brave.svg";
+                definedAliases = [ "@br" ];
+              };
+              "Bing".metaData.hidden = true;
+              "Google".metaData.hidden = true;
+              "Bookmarks".metaData.hidden = true;
+              "LibRedirect".metaData.hidden = true;
+            };
           };
           extensions = with inputs.firefox-addons.packages.${pkgs.system}; [
             auto-tab-discard
             cookie-autodelete
             darkreader
             libredirect
-            link-cleaner
             linkhints
             skip-redirect
             ublock-origin
+            bitwarden
+            aria2-integration
           ];
         };
       };
