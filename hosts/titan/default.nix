@@ -2,6 +2,7 @@
   lib,
   inputs,
   config,
+  pkgs,
   ...
 }:
 let
@@ -31,6 +32,8 @@ in
     # User Configuration
     isNormalUser = true;
     description = formatUsername username;
+    shell = pkgs.zsh;
+    ignoreShellProgramCheck = true;
     extraGroups =
       [ "wheel" ]
       ++ lib.optional config.security.rtkit.enable "rtkit"

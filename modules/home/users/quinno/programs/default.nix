@@ -9,5 +9,7 @@
     ./ssh.nix
     ./aria2.nix
     ./waybar.nix
+    ./zsh.nix
+    ./starship.nix
   ];
 }

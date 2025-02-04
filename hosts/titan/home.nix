@@ -28,6 +28,8 @@
         ssh.enable = true;
         aria2.enable = true;
         waybar.enable = true;
+        zsh.enable = true;
+        starship.enable = true;
       };
       system = {
         bash.enable = true;
