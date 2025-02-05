@@ -56,7 +56,7 @@ in
 
   ff = {
     security = {
-      sudo.enable = true;
+      sudo-rs.enable = true;
     };
   };
 
@@ -64,7 +64,6 @@ in
   cm.nixos = {
     packages = {
       hyprland.enable = true;
-      sudo.enable = false;
       steam.enable = true;
       nvf.enable = true;
     };

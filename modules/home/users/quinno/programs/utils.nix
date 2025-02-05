@@ -17,6 +17,7 @@ in
       age
       sops
       zed-editor
+      nil
     ];
     programs = {
       eza = {
