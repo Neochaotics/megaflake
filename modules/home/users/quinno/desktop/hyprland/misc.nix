@@ -50,7 +50,7 @@
     };
 
     experimental = {
-      wide_color_gamut = true;
+      # wide_color_gamut = true;
       xx_color_management_v4 = true;
     };
 

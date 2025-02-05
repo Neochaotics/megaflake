@@ -54,11 +54,17 @@ in
   networking.useDHCP = lib.mkDefault true;
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 
+  ff = {
+    security = {
+      sudo.enable = true;
+    };
+  };
+
   # Custom Module Configuration
   cm.nixos = {
     packages = {
       hyprland.enable = true;
-      sudo.enable = true;
+      sudo.enable = false;
       steam.enable = true;
       nvf.enable = true;
     };

@@ -4,13 +4,17 @@
   inputs = {
     # Core Nix dependencies
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.11";
-    nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
+    #nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.11";
     nixos-facter-modules.url = "github:numtide/nixos-facter-modules";
     schizofox.url = "github:schizofox/schizofox";
     stylix.url = "github:danth/stylix";
     sops-nix = {
       url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    ff = {
+      url = "git+ssh://git@github/freedpom/FreedpomFlake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -128,6 +132,9 @@
 
       # NixOS system configurations
       flake = {
+        nixosModules = {
+          test = ./modules/nixos;
+        };
         nixosConfigurations =
           let
             inherit (nixpkgs) lib;
@@ -142,6 +149,7 @@
                 modules = [
                   ./hosts/${hostname}
                   inputs.impermanence.nixosModules.impermanence
+                  inputs.ff.nixosModules.freedpomFlake
                 ];
               };
           in

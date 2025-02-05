@@ -9,7 +9,9 @@ _:
     "usbhid"
   ];
   boot.kernelModules = [ "kvm-amd" ];
-  hardware.cpu.amd.updateMicrocode = true;
-  hardware.graphics.enable = true;
-  hardware.enableRedistributableFirmware = true;
+  hardware = {
+    cpu.amd.updateMicrocode = true;
+    graphics.enable = true;
+    enableRedistributableFirmware = true;
+  };
 }
