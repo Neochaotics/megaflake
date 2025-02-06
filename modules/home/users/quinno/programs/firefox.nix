@@ -198,6 +198,9 @@ in
             };
           };
           extensions = with inputs.firefox-addons.packages.${pkgs.system}; [
+            bitwarden
+            aria2-integration
+            proton-vpn
             auto-tab-discard
             cookie-autodelete
             darkreader
@@ -205,8 +208,6 @@ in
             linkhints
             skip-redirect
             ublock-origin
-            bitwarden
-            aria2-integration
           ];
         };
       };

@@ -18,6 +18,7 @@ in
       sops
       zed-editor
       nil
+      wireguard-tools
     ];
     programs = {
       eza = {
