@@ -31,18 +31,18 @@ in
         }
 
         #clock {
-          border-radius: 4px;
+          border-radius: 3px;
           margin: 6px 3px;
-          padding: 6px 12px;
+          padding: 3px 6px;
         }
 
         #workspaces button {
           all: initial;
           min-width: 0;
           box-shadow: inset 0 -3px transparent;
-          padding: 6px 18px;
+          padding: 3px 12px;
           margin: 6px 3px;
-          border-radius: 4px;
+          border-radius: 3px;
         }
       '';
       settings = [
