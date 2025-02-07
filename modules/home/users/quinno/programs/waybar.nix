@@ -29,12 +29,55 @@ in
           height = 30;
           layer = "top";
           position = "top";
+          modules-left = [
+            "hyprland/workspaces"
+          ];
+          modules-center = [
+            "hyprland/window"
+          ];
           modules-right = [
             "clock"
           ];
           clock = {
             format-alt = "{:%Y-%m-%d}";
             tooltip-format = "{:%Y-%m-%d | %H:%M}";
+          };
+          "hyprland/workspaces" = {
+            "format" = "<sup>{name}</sup>{icon}{windows}";
+            "format-window-separator" = " ";
+            "format-icons" = {
+              "default" = "";
+              "empty" = "";
+            };
+            "persistent-workspaces" = {
+              "DP-2" = [
+                1
+                2
+                3
+                4
+              ];
+              "HDMI-A-1" = [
+                5
+                6
+                7
+                8
+              ];
+              "DP-5" = [
+                9
+                10
+              ];
+            };
+            "window-rewrite-default" = "";
+            "window-rewrite" = {
+              "class<foot>" = "";
+              "class<dev.zed.Zed>" = "";
+              "class<firefox>" = "󰈹";
+              "class<com.stremio.stremio>" = "";
+            };
+          };
+          "hyprland/window" = {
+            "separate-outputs" = true;
+            "icon" = false;
           };
         }
       ];
