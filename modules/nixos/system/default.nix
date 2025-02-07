@@ -7,5 +7,6 @@
     ./sops.nix
     ./sysctl.nix
     ./stylix.nix
+    ./wireguard.nix
   ];
 }
