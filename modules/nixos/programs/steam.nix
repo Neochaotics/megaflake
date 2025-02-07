@@ -5,10 +5,10 @@
   ...
 }:
 let
-  cfg = config.cm.nixos.packages.steam;
+  cfg = config.cm.nixos.programs.steam;
 in
 {
-  options.cm.nixos.packages.steam = {
+  options.cm.nixos.programs.steam = {
     enable = lib.mkEnableOption "Enable Steam gaming configuration with proton-ge, gamescope, mangohud and gamemode";
   };
 

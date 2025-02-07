@@ -3,6 +3,6 @@
     ./test
     ./services
     ./system
-    ./packages
+    ./programs
   ];
 }

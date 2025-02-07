@@ -5,7 +5,7 @@
   ...
 }:
 let
-  cfg = config.cm.nixos.packages.nvf;
+  cfg = config.cm.nixos.programs.nvf;
 in
 {
 
@@ -13,7 +13,7 @@ in
     inputs.nvf.nixosModules.default
   ];
 
-  options.cm.nixos.packages.nvf = {
+  options.cm.nixos.programs.nvf = {
     enable = lib.mkEnableOption "Enables nvf";
   };
 

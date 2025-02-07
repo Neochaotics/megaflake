@@ -96,7 +96,7 @@
               typos.excludes = [
                 "*.png"
                 "*.yaml"
-                "modules/nixos/packages/nvf.nix"
+                "modules/nixos/programs/nvf.nix"
               ];
 
               # Additional formatters

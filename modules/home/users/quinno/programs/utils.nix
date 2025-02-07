@@ -19,6 +19,8 @@ in
       zed-editor
       nil
       wireguard-tools
+      nvd
+      nix-output-monitor
     ];
     programs = {
       eza = {

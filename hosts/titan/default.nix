@@ -62,10 +62,11 @@ in
 
   # Custom Module Configuration
   cm.nixos = {
-    packages = {
+    programs = {
       hyprland.enable = true;
       steam.enable = true;
       nvf.enable = true;
+      nh.enable = true;
     };
     system = {
       home-manager.enable = true;

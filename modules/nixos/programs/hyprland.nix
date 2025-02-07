@@ -1,9 +1,9 @@
 { lib, config, ... }:
 let
-  cfg = config.cm.nixos.packages.hyprland;
+  cfg = config.cm.nixos.programs.hyprland;
 in
 {
-  options.cm.nixos.packages.hyprland = {
+  options.cm.nixos.programs.hyprland = {
     enable = lib.mkEnableOption "Enable Hyprland with UWSM";
   };
 

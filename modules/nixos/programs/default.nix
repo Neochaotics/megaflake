@@ -3,5 +3,6 @@
     ./hyprland.nix
     ./steam.nix
     ./nvf.nix
+    ./nh.nix
   ];
 }
