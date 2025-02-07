@@ -78,7 +78,7 @@ in
       systemd-boot.enable = true;
       sops.enable = false;
       stylix.enable = true;
-      wireguard.enable = true;
+      wireguard.enable = false;
     };
     services = {
       ananicy.enable = true;

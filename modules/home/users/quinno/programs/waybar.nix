@@ -19,9 +19,30 @@ in
       style = ''
         ${builtins.readFile "${pkgs.waybar}/etc/xdg/waybar/style.css"}
 
+        * {
+          border: none;
+          border-radius: 0;
+          min-height: 0;
+        }
+
         window#waybar {
           background: transparent;
           border-bottom: none;
+        }
+
+        #clock {
+          border-radius: 4px;
+          margin: 6px 3px;
+          padding: 6px 12px;
+        }
+
+        #workspaces button {
+          all: initial;
+          min-width: 0;
+          box-shadow: inset 0 -3px transparent;
+          padding: 6px 18px;
+          margin: 6px 3px;
+          border-radius: 4px;
         }
       '';
       settings = [
