@@ -21,6 +21,9 @@ in
       wireguard-tools
       nvd
       nix-output-monitor
+      p7zip
+      unzip
+      xz
     ];
     programs = {
       eza = {

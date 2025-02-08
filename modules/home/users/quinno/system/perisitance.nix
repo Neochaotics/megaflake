@@ -13,7 +13,7 @@ in
 
   config = lib.mkIf cfg.enable {
     home.persistence = {
-      "/persisthome" = {
+      "/persist/home" = {
         directories = [
           "Downloads"
           "Music"
