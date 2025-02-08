@@ -28,7 +28,13 @@ in
   config = lib.mkIf cfg.enable {
     wayland.windowManager.hyprland = {
       enable = true;
-      systemd.enable = false;
+      package = null;
+      portalPackage = null;
+      systemd = {
+        enable = false;
+        enableXdgAutostart = false;
+      };
+
       xwayland.enable = true;
     };
 
@@ -39,7 +45,7 @@ in
     '';
 
     xdg.portal = {
-      enable = true;
+      enable = lib.mkForce true;
       extraPortals = [
         pkgs.xdg-desktop-portal-hyprland
         pkgs.xdg-desktop-portal-gtk

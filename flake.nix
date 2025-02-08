@@ -40,8 +40,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    trackerslist = {
-      url = "github:ngosang/trackerslist";
+    trackers = {
+      url = "https://raw.githubusercontent.com/ngosang/trackerslist/refs/heads/master/trackers_all_https.txt";
+      type = "file";
       flake = false;
     };
 

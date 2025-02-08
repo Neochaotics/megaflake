@@ -3869,7 +3869,7 @@
         "schizofox": "schizofox",
         "sops-nix": "sops-nix",
         "stylix": "stylix",
-        "trackerslist": "trackerslist",
+        "trackers": "trackers",
         "treefmt-nix": "treefmt-nix_2"
       }
     },
@@ -4121,20 +4121,16 @@
         "type": "github"
       }
     },
-    "trackerslist": {
+    "trackers": {
       "flake": false,
       "locked": {
-        "lastModified": 1738775618,
-        "narHash": "sha256-85u0wvuoRsTyX6rO70VERdacBLVb9GFZhqKOckJ9r/Y=",
-        "owner": "ngosang",
-        "repo": "trackerslist",
-        "rev": "2c7706db3caf954d8b9694157a0ed163376ba1a2",
-        "type": "github"
+        "narHash": "sha256-6dnEYhU6uB+Pn29y883ovB0KNnp2AQGgp/9ifKOmr3g=",
+        "type": "file",
+        "url": "https://raw.githubusercontent.com/ngosang/trackerslist/refs/heads/master/trackers_all_https.txt"
       },
       "original": {
-        "owner": "ngosang",
-        "repo": "trackerslist",
-        "type": "github"
+        "type": "file",
+        "url": "https://raw.githubusercontent.com/ngosang/trackerslist/refs/heads/master/trackers_all_https.txt"
       }
     },
     "treefmt-nix": {
