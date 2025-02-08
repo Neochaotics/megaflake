@@ -17,6 +17,8 @@ in
     ./bindings.nix
     ./monitors.nix
     ./windowrules.nix
+
+    ./idlelock.nix
   ];
 
   options.cm.home.users.quinno.desktop.hyprland = {

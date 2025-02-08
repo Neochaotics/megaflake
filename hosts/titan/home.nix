@@ -36,7 +36,10 @@
         #persistence.enable = true;
         xdg.enable = true;
       };
-      desktop.hyprland.enable = true;
+      desktop.hyprland = {
+        enable = true;
+        idlelock.enable = true;
+      };
     };
   };
 
