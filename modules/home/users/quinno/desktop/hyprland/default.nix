@@ -2,6 +2,7 @@
   lib,
   config,
   pkgs,
+  inputs,
   ...
 }:
 let
@@ -19,6 +20,8 @@ in
     ./windowrules.nix
 
     ./idlelock.nix
+
+    ./plugins/dynamic-cursors.nix
   ];
 
   options.cm.home.users.quinno.desktop.hyprland = {
@@ -36,6 +39,9 @@ in
       };
 
       xwayland.enable = true;
+
+      plugins = [ inputs.hypr-dynamic-cursors.packages.${pkgs.system}.hypr-dynamic-cursors ];
+
     };
 
     programs.bash.initExtra = ''

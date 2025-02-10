@@ -1,12 +1,20 @@
 {
   description = "NixOS System Configuration";
 
+  nixConfig = {
+    extra-substituters = [
+      "https://nix-community.cachix.org"
+      "https://hyprland.cachix.org"
+    ];
+    extra-trusted-public-keys = [
+      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+      "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
+    ];
+  };
+
   inputs = {
     # Core Nix dependencies
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    #nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.11";
-    nixos-facter-modules.url = "github:numtide/nixos-facter-modules";
-    schizofox.url = "github:schizofox/schizofox";
     stylix.url = "github:danth/stylix";
     sops-nix = {
       url = "github:Mic92/sops-nix";
@@ -41,7 +49,7 @@
     };
 
     trackers = {
-      url = "https://raw.githubusercontent.com/ngosang/trackerslist/refs/heads/master/trackers_all_https.txt";
+      url = "https://raw.githubusercontent.com/ngosang/trackerslist/refs/heads/master/trackers_all.txt";
       type = "file";
       flake = false;
     };
@@ -54,6 +62,12 @@
     # Flake infrastructure
     flake-parts.url = "github:hercules-ci/flake-parts";
     flake-root.url = "github:srid/flake-root";
+
+    hyprland.url = "github:hyprwm/Hyprland"; # follows development branch of hyprland
+    hypr-dynamic-cursors = {
+      url = "github:VirtCode/hypr-dynamic-cursors";
+      inputs.hyprland.follows = "hyprland"; # to make sure that the plugin is built for the correct version of hyprland
+    };
   };
 
   outputs =
