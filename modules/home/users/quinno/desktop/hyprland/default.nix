@@ -40,7 +40,9 @@ in
 
       xwayland.enable = true;
 
-      plugins = [ inputs.hypr-dynamic-cursors.packages.${pkgs.system}.hypr-dynamic-cursors ];
+      plugins = [
+        inputs.hypr-dynamic-cursors.packages.${pkgs.system}.hypr-dynamic-cursors
+      ];
 
     };
 

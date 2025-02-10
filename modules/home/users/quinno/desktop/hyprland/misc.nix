@@ -42,11 +42,6 @@
           force_zero_scaling = false;
         };
 
-        opengl = {
-          nvidia_anti_flicker = true; # On non-nvidia, this is ignored.
-          force_introspection = 1; # Introspection is aimed at reducing GPU usage in certain cases, but might cause graphical glitches on nvidia.
-        };
-
         ecosystem = {
           no_update_news = true; # https://hyprland.org/rss.xml
           no_donation_nag = true;
@@ -55,12 +50,6 @@
         experimental = {
           # wide_color_gamut = true;
           xx_color_management_v4 = true;
-        };
-
-        render = {
-          explicit_sync = 2;
-          explicit_sync_kms = 2;
-          direct_scanout = true; # Enables direct scanout. Direct scanout attempts to reduce lag when there is only one fullscreen application on a screen (e.g. game). It is also recommended to set this to false if the fullscreen application shows graphical glitches.
         };
 
         debug = {

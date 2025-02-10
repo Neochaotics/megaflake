@@ -58,7 +58,7 @@
             # 0 / false - never use pixelated scaling
             # 1 / true  - use pixelated when no highres image
             # 2         - always use pixleated scaling
-            nearest = true;
+            nearest = 0;
 
             # enable dedicated hyprcursor support
             enabled = true;
