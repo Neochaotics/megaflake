@@ -49,18 +49,6 @@ in
     autologinOnce = true;
   };
 
-  services.kmscon = {
-    enable = true;
-    autologinUser = "${username}";
-    fonts = [
-      {
-        name = "Source Code Pro";
-        package = pkgs.source-code-pro;
-      }
-    ];
-    useXkbConfig = true;
-  };
-
   # System Configuration
   system.stateVersion = "24.11";
   networking.useDHCP = lib.mkDefault true;
@@ -90,12 +78,13 @@ in
       systemd-boot.enable = true;
       sops.enable = false;
       stylix.enable = true;
-      wireguard.enable = true;
+      wireguard.enable = false;
     };
     services = {
       ananicy.enable = true;
       pipewire.enable = true;
       openssh.enable = true;
+      kmscon.enable = true;
     };
   };
 }
