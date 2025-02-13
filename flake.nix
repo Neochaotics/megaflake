@@ -164,7 +164,6 @@
                 modules = [
                   ./hosts/${hostname}
                   inputs.impermanence.nixosModules.impermanence
-                  inputs.ff.nixosModules.freedpomFlake
                 ];
               };
           in

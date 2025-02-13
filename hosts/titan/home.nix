@@ -7,6 +7,7 @@
   imports = [
     ../../modules/home/users/quinno
     inputs.impermanence.homeManagerModules.impermanence
+    inputs.ff.homeManagerModules.freedpomFlake
     inputs.sops-nix.homeManagerModules.sops
   ];
 
@@ -14,6 +15,12 @@
     stateVersion = "24.05";
     username = "quinno";
     homeDirectory = "/home/quinno";
+  };
+
+  ff = {
+    programs = {
+      bash.enable = true;
+    };
   };
 
   cm.home.users = {
@@ -32,7 +39,7 @@
         starship.enable = true;
       };
       system = {
-        bash.enable = true;
+        bash.enable = false;
         #persistence.enable = true;
         xdg.enable = true;
       };
