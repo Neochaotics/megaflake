@@ -1,3 +1,5 @@
 [submodule "modules/FreedpomFlake"]
 	path = modules/FreedpomFlake
 	url = git@github:freedpom/FreedpomFlake
+[submodule "modules/QModule"]
+	path = modules/QModule

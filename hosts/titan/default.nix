@@ -22,21 +22,28 @@ in
 {
   imports = [
     inputs.ff.nixosModules.freedpomFlake
+    inputs.qm.nixosModules.qModule
     inputs.disko.nixosModules.disko
     ./disk-primary.nix
     ./disk-secondary.nix
     ./hardware.nix
-    ../../modules/nixos
+    ../../modules/test/cespool.nix
   ];
 
-  fonts.packages = with pkgs; [
-    noto-fonts
-    liberation_ttf
-    dina-font
-    proggyfonts
-    nerdfonts
+  nixpkgs.overlays = [
+    (_final: _prev: { stable = import inputs.nixpkgs-stable { system = "x86_64-linux"; }; })
   ];
-  #++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
+
+  fonts.packages =
+    with pkgs;
+    [
+      noto-fonts
+      liberation_ttf
+      dina-font
+      proggyfonts
+
+    ]
+    ++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
 
   users.users.${username} = {
     # User Configuration
@@ -53,6 +60,8 @@ in
   home-manager.users.${username} = import ./home.nix;
 
   # Service Configuration
+  #
+  boot.kernelPackages = pkgs.linuxPackages_zen;
 
   services.getty = {
     autologinUser = "${username}";
@@ -68,33 +77,30 @@ in
     security = {
       sudo-rs.enable = true;
     };
-  };
-
-  # Custom Module Configuration
-  cm.nixos = {
-    programs = {
-      hyprland.enable = true;
-      steam.enable = true;
-      nvf.enable = true;
-      nh.enable = true;
+    services = {
+      ananicy.enable = true;
+      pipewire.enable = true;
+      openssh.enable = true;
     };
     system = {
-      home-manager.enable = true;
       nix.enable = true;
       sysctl = {
         cachyos = true;
         mineral = false;
       };
       systemd-boot.enable = true;
-      sops.enable = false;
-      stylix.enable = true;
-      wireguard.enable = false;
     };
-    services = {
-      ananicy.enable = true;
-      pipewire.enable = true;
-      openssh.enable = true;
-      kmscon.enable = false;
+  };
+
+  # Custom Module Configuration
+  qm = {
+    programs = {
+      hyprland.enable = true;
+      steam.enable = true;
+      nvf.enable = true;
+      nh.enable = true;
     };
+    stylix.enable = true;
+    wireguard.enable = false;
   };
 }

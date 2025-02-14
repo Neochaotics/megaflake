@@ -14,16 +14,21 @@
 
   inputs = {
     # Core Nix dependencies
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
-    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     stylix.url = "github:danth/stylix";
     sops-nix = {
       url = "github:Mic92/sops-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs-stable";
     };
 
     ff = {
-      url = "git+ssh://git@github/freedpom/FreedpomFlake";
+      url = "/etc/nixos/modules/FreedpomFlake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    qm = {
+      url = "/etc/nixos/modules/QModule";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -72,11 +77,7 @@
   };
 
   outputs =
-    inputs@{
-      flake-parts,
-      nixpkgs,
-      ...
-    }:
+    inputs@{ self, flake-parts, ... }:
     flake-parts.lib.mkFlake { inherit inputs; } {
       systems = [
         "x86_64-linux"
@@ -95,20 +96,9 @@
         {
           config,
           pkgs,
-          system,
           ...
         }:
         {
-          _module.args.pkgs = import inputs.nixpkgs {
-            inherit system;
-            config = { };
-          };
-
-          _module.args.upkgs = import inputs.nixpkgs-unstable {
-            inherit system;
-            config = { };
-          };
-
           # Code formatting and linting setup
           treefmt.config = {
             inherit (config.flake-root) projectRootFile;
@@ -126,7 +116,7 @@
               typos.excludes = [
                 "*.png"
                 "*.yaml"
-                "modules/nixos/programs/nvf.nix"
+                "modules/QModule/nixos/programs/nvf.nix"
               ];
 
               # Additional formatters
@@ -162,20 +152,16 @@
 
       # NixOS system configurations
       flake = {
-        nixosModules = {
-          test = ./modules/nixos;
-        };
         nixosConfigurations =
           let
-            inherit (nixpkgs) lib;
+            inherit (self.inputs.nixpkgs) lib;
             hostNames = builtins.attrNames (builtins.readDir ./hosts);
             mkHost =
               hostname:
-              nixpkgs.lib.nixosSystem {
+              self.inputs.nixpkgs.lib.nixosSystem {
                 specialArgs = {
                   inherit inputs hostname lib;
-                  outputs = inputs.self;
-                  upkgs = inputs.nixpkgs-unstable;
+                  outputs = self;
                 };
                 modules = [
                   ./hosts/${hostname}

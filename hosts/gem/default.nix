@@ -22,20 +22,30 @@ in
 {
   imports = [
     inputs.ff.nixosModules.freedpomFlake
+    inputs.qm.nixosModules.qModule
     inputs.disko.nixosModules.disko
     ./disks.nix
     ./hardware.nix
-    ../../modules/nixos
+    ../../modules/test/cespool.nix
   ];
+  nixpkgs.overlays = [
+    (_final: _prev: { stable = import inputs.nixpkgs-stable { system = "x86_64-linux"; }; })
+  ];
+  boot = {
 
-  fonts.packages = with pkgs; [
-    noto-fonts
-    liberation_ttf
-    dina-font
-    proggyfonts
-    nerdfonts
-  ];
-  #++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
+    zfs.package = pkgs.stable.zfs;
+    kernelPackages = pkgs.stable.linuxPackages_latest;
+  };
+
+  fonts.packages =
+    with pkgs;
+    [
+      noto-fonts
+      liberation_ttf
+      dina-font
+      proggyfonts
+    ]
+    ++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
 
   users.users.${username} = {
     # User Configuration
@@ -67,33 +77,30 @@ in
     security = {
       sudo-rs.enable = true;
     };
-  };
-
-  # Custom Module Configuration
-  cm.nixos = {
-    programs = {
-      hyprland.enable = true;
-      steam.enable = true;
-      nvf.enable = true;
-      nh.enable = true;
+    services = {
+      ananicy.enable = true;
+      pipewire.enable = true;
+      openssh.enable = true;
     };
     system = {
-      home-manager.enable = true;
       nix.enable = true;
       sysctl = {
         cachyos = true;
         mineral = false;
       };
       systemd-boot.enable = true;
-      sops.enable = false;
-      stylix.enable = true;
-      wireguard.enable = false;
     };
-    services = {
-      ananicy.enable = true;
-      pipewire.enable = true;
-      openssh.enable = true;
-      kmscon.enable = false;
+  };
+
+  # Custom Module Configuration
+  qm = {
+    programs = {
+      hyprland.enable = true;
+      steam.enable = true;
+      nvf.enable = true;
+      nh.enable = true;
     };
+    stylix.enable = true;
+    wireguard.enable = false;
   };
 }
