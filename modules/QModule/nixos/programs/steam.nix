@@ -8,7 +8,7 @@ let
   cfg = config.qm.programs.steam;
 in
 {
-  options.qm.steam = {
+  options.qm.programs.steam = {
     enable = lib.mkEnableOption "Enable Steam gaming configuration with proton-ge, gamescope, mangohud and gamemode";
   };
 

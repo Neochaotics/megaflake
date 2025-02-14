@@ -98,7 +98,6 @@ in
       hyprland.enable = true;
       steam.enable = true;
       nvf.enable = true;
-      nh.enable = true;
     };
     stylix.enable = true;
     wireguard.enable = false;

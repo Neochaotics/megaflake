@@ -166,6 +166,7 @@
                 modules = [
                   ./hosts/${hostname}
                   inputs.impermanence.nixosModules.impermanence
+                  inputs.home-manager.nixosModules.home-manager
                 ];
               };
           in
