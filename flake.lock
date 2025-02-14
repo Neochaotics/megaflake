@@ -188,11 +188,11 @@
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1739546989,
-        "narHash": "sha256-ysv4TEoobqby+4uerssnxVOwnD+18yM4eC1TXAz0Ugk=",
+        "lastModified": 1739547070,
+        "narHash": "sha256-H8QDS2j6fkqX0WfgnGCwY4nZ00Qg2Y/F4KnjERQFn10=",
         "ref": "refs/heads/main",
-        "rev": "7a011881f4755db315277f7cc89fe5446f6e1c16",
-        "revCount": 9,
+        "rev": "0668cd9444b957c001c659e28de79c39e04e7173",
+        "revCount": 10,
         "type": "git",
         "url": "file:///etc/nixos/modules/FreedpomFlake"
       },
@@ -897,11 +897,11 @@
         "xdph": "xdph"
       },
       "locked": {
-        "lastModified": 1739446679,
-        "narHash": "sha256-W4/dpSdDzsqw2diGefNHlhYFhx18oX4k7GLDjvGc96E=",
+        "lastModified": 1739547063,
+        "narHash": "sha256-HOKqsauJjL2hsocuCc+ryMZ+LXkoIOCGOyYvAJ20a40=",
         "owner": "hyprwm",
         "repo": "Hyprland",
-        "rev": "40adb3dfb4b6f8cf0c5093f095954e3ef162a8eb",
+        "rev": "df3fba157279de53c582344b59699a21ac5d62b5",
         "type": "github"
       },
       "original": {
