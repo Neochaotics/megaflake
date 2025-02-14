@@ -188,11 +188,11 @@
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1739547070,
-        "narHash": "sha256-H8QDS2j6fkqX0WfgnGCwY4nZ00Qg2Y/F4KnjERQFn10=",
+        "lastModified": 1739567110,
+        "narHash": "sha256-ZALoSw1YD5GhRFEHgHqi6/Zu+R67f0W3+/RihbzAJQA=",
         "ref": "refs/heads/main",
-        "rev": "0668cd9444b957c001c659e28de79c39e04e7173",
-        "revCount": 10,
+        "rev": "cf35094c5eff881253fd3684cc20c06d9f6e0e06",
+        "revCount": 11,
         "type": "git",
         "url": "file:///etc/nixos/modules/FreedpomFlake"
       },
@@ -210,11 +210,11 @@
       },
       "locked": {
         "dir": "pkgs/firefox-addons",
-        "lastModified": 1739505810,
-        "narHash": "sha256-KYAgDKO5wjs3JZEJS44MJyDPmIwuBMNqQtWWhe4CJHA=",
+        "lastModified": 1739560528,
+        "narHash": "sha256-3Jrft2ofBt46Pw63P2EI0XmezXFsDnvpTY3m8JhkoBI=",
         "owner": "rycee",
         "repo": "nur-expressions",
-        "rev": "871cfa4510f81b925f16d83477dcccb1ea866bb7",
+        "rev": "a311134ebd4c9e654807cbd77516fac7bd08a7ae",
         "type": "gitlab"
       },
       "original": {
@@ -747,11 +747,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1739470101,
-        "narHash": "sha256-NxNe32VB4XI/xIXrsKmIfrcgtEx5r/5s52pL3CpEcA4=",
+        "lastModified": 1739559906,
+        "narHash": "sha256-iK5BXN5uDXVe76ssYTkFHl7oNZe+hhwcO3N7EN9yxqQ=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "5031c6d2978109336637977c165f82aa49fa16a7",
+        "rev": "9daae9a67af7b4d341e2c806fa274a9c0925d7cf",
         "type": "github"
       },
       "original": {
