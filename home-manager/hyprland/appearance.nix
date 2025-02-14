@@ -1,6 +1,6 @@
 { config, lib, ... }:
 {
-  wayland.windowManager.hyprland.settings = lib.mkIf config.qm.desktop.hyprland {
+  wayland.windowManager.hyprland.settings = lib.mkIf config.qm.desktop.hyprland.enable {
     decoration = {
       rounding = 6;
       active_opacity = 1.0;
