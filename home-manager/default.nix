@@ -1,7 +1,7 @@
 { ... }:
 {
   imports = [
-    ./desktop/hyprland
+    ./hyprland
     ./programs
     ./system
   ];
