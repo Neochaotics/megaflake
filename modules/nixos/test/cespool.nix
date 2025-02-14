@@ -2,6 +2,7 @@
 {
   networking = {
     hostName = hostname; # Define your hostname.
+    hostId = "00000000"; # Define your host ID.
     networkmanager.enable = true;
   };
   i18n.defaultLocale = "en_US.UTF-8";

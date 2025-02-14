@@ -36,12 +36,12 @@ in
       };
       fonts = {
         monospace = {
-          package = pkgs.nerd-fonts._0xproto;
+          package = pkgs.nerdfonts.override { fonts = [ "0xProto" ]; };
           name = "0xProto Nerd Font Mono";
         };
 
         serif = {
-          package = pkgs.nerd-fonts._0xproto;
+          package = pkgs.nerdfonts.override { fonts = [ "0xProto" ]; };
           name = "0xProto Nerd Font Propo";
         };
 

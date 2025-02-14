@@ -23,8 +23,7 @@ in
   imports = [
     inputs.ff.nixosModules.freedpomFlake
     inputs.disko.nixosModules.disko
-    ./disk-primary.nix
-    ./disk-secondary.nix
+    ./disks.nix
     ./hardware.nix
     ../../modules/nixos
   ];

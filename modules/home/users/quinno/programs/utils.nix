@@ -24,6 +24,7 @@ in
       p7zip
       unzip
       xz
+      inkscape
     ];
     programs = {
       eza = {

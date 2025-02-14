@@ -1,9 +1,9 @@
 {
   disko.devices = {
     disk = {
-      x = {
+      nvme1 = {
         type = "disk";
-        device = "/dev/sdx";
+        device = "/dev/nvme0n1";
         content = {
           type = "gpt";
           partitions = {
@@ -27,9 +27,9 @@
           };
         };
       };
-      y = {
+      nvme2 = {
         type = "disk";
-        device = "/dev/sdy";
+        device = "/dev/nvme1n1";
         content = {
           type = "gpt";
           partitions = {
@@ -50,7 +50,7 @@
         mode = "mirror";
         # Workaround: cannot import 'zroot': I/O error in disko tests
         options.cachefile = "none";
-        mountpoint = "none";
+        #mountpoint = "none";
         postCreateHook = "zfs list -t snapshot -H -o name | grep -E '^zroot@blank$' || zfs snapshot zroot@blank";
 
         datasets = {
@@ -77,7 +77,7 @@
         };
       };
     };
-    root = {
+    nodev = {
       "/" = {
         fsType = "tmpfs";
         mountOptions = [

@@ -14,7 +14,8 @@
 
   inputs = {
     # Core Nix dependencies
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     stylix.url = "github:danth/stylix";
     sops-nix = {
       url = "github:Mic92/sops-nix";
@@ -77,7 +78,10 @@
       ...
     }:
     flake-parts.lib.mkFlake { inherit inputs; } {
-      systems = [ "x86_64-linux" ];
+      systems = [
+        "x86_64-linux"
+        "aarch64-linux"
+      ];
 
       imports = [
         inputs.treefmt-nix.flakeModule
@@ -91,9 +95,20 @@
         {
           config,
           pkgs,
+          system,
           ...
         }:
         {
+          _module.args.pkgs = import inputs.nixpkgs {
+            inherit system;
+            config = { };
+          };
+
+          _module.args.upkgs = import inputs.nixpkgs-unstable {
+            inherit system;
+            config = { };
+          };
+
           # Code formatting and linting setup
           treefmt.config = {
             inherit (config.flake-root) projectRootFile;
@@ -160,6 +175,7 @@
                 specialArgs = {
                   inherit inputs hostname lib;
                   outputs = inputs.self;
+                  upkgs = inputs.nixpkgs-unstable;
                 };
                 modules = [
                   ./hosts/${hostname}
