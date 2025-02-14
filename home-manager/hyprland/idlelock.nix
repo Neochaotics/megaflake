@@ -1,9 +1,9 @@
 { lib, config, ... }:
 let
-  cfg = config.cm.home.users.quinno.desktop.hyprland.idlelock;
+  cfg = config.ff.desktop.hyprland.idlelock;
 in
 {
-  options.cm.home.users.quinno.desktop.hyprland.idlelock = {
+  options.ff.desktop.hyprland.idlelock = {
     enable = lib.mkEnableOption "Enable";
   };
 
