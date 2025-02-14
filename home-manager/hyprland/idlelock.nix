@@ -1,6 +1,6 @@
 { lib, config, ... }:
 let
-  cfg = config.qm.desktop.hyprland.enable.idlelock;
+  cfg = config.qm.desktop.hyprland.idlelock;
 in
 {
   options.qm.desktop.hyprland.idlelock = {
