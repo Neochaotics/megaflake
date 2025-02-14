@@ -1488,11 +1488,11 @@
         "treefmt-nix": "treefmt-nix_2"
       },
       "locked": {
-        "lastModified": 1739548097,
-        "narHash": "sha256-q3FT/Wwtaubc7P6GBpWV7RnvN9dhmZ1AjbGh15oFZPk=",
+        "lastModified": 1739548304,
+        "narHash": "sha256-ZuV2Fr01rWoRlQ9dAHhZQ08YErHJY5AoPfqrIA4nJlo=",
         "ref": "refs/heads/master",
-        "rev": "332fff693c083992eea75c2c77f5763993acddb9",
-        "revCount": 4,
+        "rev": "3fbe966089b7adffa2bfd6e6acd0655efe9cd3cd",
+        "revCount": 5,
         "type": "git",
         "url": "file:///etc/nixos/modules/QModule"
       },
