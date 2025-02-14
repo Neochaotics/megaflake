@@ -1,6 +1,6 @@
 { config, lib, ... }:
 {
-  wayland.windowManager.hyprland.settings = lib.mkIf config.qm.desktop.hyprland {
+  wayland.windowManager.hyprland.settings = lib.mkIf config.qm.desktop.hyprland.enable {
     windowrule = [
       "float, title:^(Volume Control)$"
       "size 1050 500, title:^(Volume Control)$"

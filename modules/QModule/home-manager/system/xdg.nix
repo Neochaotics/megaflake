@@ -1,9 +1,9 @@
 { config, lib, ... }:
 let
-  cfg = config.cm.home.users.quinno.system.xdg;
+  cfg = config.qm.system.xdg;
 in
 {
-  options.cm.home.users.quinno.system.xdg = {
+  options.qm.system.xdg = {
     enable = lib.mkEnableOption "Enables XDG directory configuration and default paths";
   };
 

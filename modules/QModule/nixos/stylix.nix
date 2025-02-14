@@ -19,7 +19,7 @@ in
     stylix = {
       enable = true;
       autoEnable = true;
-      image = ../../../hosts/titan/wallpaper.png;
+      image = ./wallpaper.png;
       imageScalingMode = "fit";
       base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-material-dark-hard.yaml";
       opacity = {
