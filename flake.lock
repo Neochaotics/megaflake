@@ -188,11 +188,11 @@
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1739567110,
-        "narHash": "sha256-ZALoSw1YD5GhRFEHgHqi6/Zu+R67f0W3+/RihbzAJQA=",
+        "lastModified": 1739612877,
+        "narHash": "sha256-0lWrxcOSN8leDhpXI82krr43dqsX8RCHhiAKIokWWZY=",
         "ref": "refs/heads/main",
-        "rev": "cf35094c5eff881253fd3684cc20c06d9f6e0e06",
-        "revCount": 11,
+        "rev": "5a5181b100672b6085c0d2327472483d0bc636fa",
+        "revCount": 12,
         "type": "git",
         "url": "file:///etc/nixos/modules/FreedpomFlake"
       },
@@ -210,11 +210,11 @@
       },
       "locked": {
         "dir": "pkgs/firefox-addons",
-        "lastModified": 1739560528,
-        "narHash": "sha256-3Jrft2ofBt46Pw63P2EI0XmezXFsDnvpTY3m8JhkoBI=",
+        "lastModified": 1739592202,
+        "narHash": "sha256-ghQ9Z+PONjMTv4TK0+WyMM9Ih5osZL21UdgLbbJnSek=",
         "owner": "rycee",
         "repo": "nur-expressions",
-        "rev": "a311134ebd4c9e654807cbd77516fac7bd08a7ae",
+        "rev": "4e266f1da531f169f1ff3d62942cf9cd901ee579",
         "type": "gitlab"
       },
       "original": {
@@ -747,11 +747,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1739559906,
-        "narHash": "sha256-iK5BXN5uDXVe76ssYTkFHl7oNZe+hhwcO3N7EN9yxqQ=",
+        "lastModified": 1739571712,
+        "narHash": "sha256-0UdSDV/TBY+GuxXLbrLq3l2Fq02ciyKCIMy4qmnfJXQ=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "9daae9a67af7b4d341e2c806fa274a9c0925d7cf",
+        "rev": "6d3163aea47fdb1fe19744e91306a2ea4f602292",
         "type": "github"
       },
       "original": {
@@ -897,11 +897,11 @@
         "xdph": "xdph"
       },
       "locked": {
-        "lastModified": 1739547063,
-        "narHash": "sha256-HOKqsauJjL2hsocuCc+ryMZ+LXkoIOCGOyYvAJ20a40=",
+        "lastModified": 1739579367,
+        "narHash": "sha256-sbTs15lTk/snZTFve02kXEojC5PD+/F0zaEBV62h9/k=",
         "owner": "hyprwm",
         "repo": "Hyprland",
-        "rev": "df3fba157279de53c582344b59699a21ac5d62b5",
+        "rev": "2f967037aa00c4aecce62222e5e21c1790148eb0",
         "type": "github"
       },
       "original": {
@@ -1745,7 +1745,7 @@
     "trackers": {
       "flake": false,
       "locked": {
-        "narHash": "sha256-53V9EQJZasKkkVYtunBtok/3lz567v0MxpzJ+To4yBE=",
+        "narHash": "sha256-p8Tzsj20LPNLMQfttPNEEZwNX0rFF5K7oUa6o7c5ES0=",
         "type": "file",
         "url": "https://raw.githubusercontent.com/ngosang/trackerslist/refs/heads/master/trackers_all.txt"
       },
