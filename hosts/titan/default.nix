@@ -37,7 +37,7 @@ in
   sops = {
     defaultSopsFile = ./secrets.yaml;
     age = {
-      generateKey = true;
+      keyFile = "~/.config/sops/age/keys.txt";
     };
     secrets = {
       "qpassword" = {
