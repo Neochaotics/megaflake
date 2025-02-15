@@ -6,13 +6,6 @@
 }:
 {
 
-  programs = {
-    nh = {
-      enable = true;
-      flake = "/etc/nixos";
-    };
-  };
-
   networking = {
     hostName = hostname; # Define your hostname.
     hostId = "00000000"; # Define your host ID.

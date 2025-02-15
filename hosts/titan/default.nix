@@ -34,6 +34,18 @@ in
     (_final: _prev: { stable = import inputs.nixpkgs-stable { system = "x86_64-linux"; }; })
   ];
 
+  sops = {
+    defaultSopsFile = ./secrets.yaml;
+    age = {
+      generateKey = true;
+    };
+    secrets = {
+      "qpassword" = {
+        neededForUsers = true;
+      };
+    };
+  };
+
   fonts.packages =
     with pkgs;
     [
@@ -44,17 +56,22 @@ in
 
     ]
     ++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
+  users = {
 
-  users.users.${username} = {
-    # User Configuration
-    isNormalUser = true;
-    description = formatUsername username;
-    shell = pkgs.zsh;
-    ignoreShellProgramCheck = true;
-    extraGroups =
-      [ "wheel" ]
-      ++ lib.optional config.security.rtkit.enable "rtkit"
-      ++ lib.optional config.services.pipewire.enable "audio";
+    users.${username} = {
+      # User Configuration
+      isNormalUser = true;
+      description = formatUsername username;
+      #hashedPasswordFile = config.sops.secrets.qpassword.path;
+      initialPassword = "password";
+      shell = pkgs.zsh;
+      ignoreShellProgramCheck = true;
+      extraGroups =
+        [ "wheel" ]
+        ++ lib.optional config.security.rtkit.enable "rtkit"
+        ++ lib.optional config.services.pipewire.enable "audio";
+    };
+    mutableUsers = true;
   };
 
   home-manager.users.${username} = import ./home.nix;
