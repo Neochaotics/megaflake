@@ -11,7 +11,6 @@
     stateVersion = "24.05";
     username = "quinno";
     homeDirectory = "/home/quinno";
-    enableNixpkgsReleaseCheck = false;
   };
 
   ff = {

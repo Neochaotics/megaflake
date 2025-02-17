@@ -153,27 +153,36 @@
         };
 
       # NixOS system configurations
-      flake = {
-        nixosConfigurations =
-          let
-            inherit (self.inputs.nixpkgs) lib;
-            hostNames = builtins.attrNames (builtins.readDir ./hosts);
-            mkHost =
-              hostname:
-              self.inputs.nixpkgs.lib.nixosSystem {
-                specialArgs = {
-                  inherit inputs hostname lib;
-                  outputs = self;
+      flake.nixosConfigurations =
+        let
+          inherit (self.inputs.nixpkgs) lib;
+          hostNames = builtins.attrNames (builtins.readDir ./hosts);
+          mkHost =
+            hostname:
+            self.inputs.nixpkgs.lib.nixosSystem {
+              specialArgs = {
+                inherit
+                  inputs
+                  hostname
+                  lib
+                  ;
+                outputs = self;
+                spkgs = import inputs.nixpkgs {
+                  system = "x86_64-linux";
+                  overlays = [
+                    (_final: _prev: { stable = import inputs.nixpkgs-stable { system = "x86_64-linux"; }; })
+                  ];
+                  config = { };
                 };
-                modules = [
-                  ./hosts/${hostname}
-                  inputs.impermanence.nixosModules.impermanence
-                  inputs.home-manager.nixosModules.home-manager
-                  inputs.sops-nix.nixosModules.sops
-                ];
               };
-          in
-          lib.genAttrs hostNames mkHost;
-      };
+              modules = [
+                ./hosts/${hostname}
+                inputs.impermanence.nixosModules.impermanence
+                inputs.home-manager.nixosModules.home-manager
+                inputs.sops-nix.nixosModules.sops
+              ];
+            };
+        in
+        lib.genAttrs hostNames mkHost;
     };
 }

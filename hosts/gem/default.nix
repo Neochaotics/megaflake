@@ -3,6 +3,7 @@
   inputs,
   config,
   pkgs,
+  spkgs,
   ...
 }:
 let
@@ -26,15 +27,11 @@ in
     inputs.disko.nixosModules.disko
     ./disks.nix
     ./hardware.nix
-    ../../modules/test/cespool.nix
   ];
-  nixpkgs.overlays = [
-    (_final: _prev: { stable = import inputs.nixpkgs-stable { system = "x86_64-linux"; }; })
-  ];
-  boot = {
 
-    zfs.package = pkgs.stable.zfs;
-    kernelPackages = pkgs.stable.linuxPackages_latest;
+  boot = {
+    zfs.package = spkgs.zfs;
+    kernelPackages = spkgs.linuxPackages_latest;
   };
 
   fonts.packages =
@@ -74,6 +71,7 @@ in
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 
   ff = {
+    common.enable = true;
     security = {
       sudo-rs.enable = true;
     };

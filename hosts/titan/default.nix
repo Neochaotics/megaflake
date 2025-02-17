@@ -27,11 +27,6 @@ in
     ./disk-primary.nix
     ./disk-secondary.nix
     ./hardware.nix
-    ../../modules/test/cespool.nix
-  ];
-
-  nixpkgs.overlays = [
-    (_final: _prev: { stable = import inputs.nixpkgs-stable { system = "x86_64-linux"; }; })
   ];
 
   sops = {
@@ -46,18 +41,7 @@ in
     };
   };
 
-  fonts.packages =
-    with pkgs;
-    [
-      noto-fonts
-      liberation_ttf
-      dina-font
-      proggyfonts
-
-    ]
-    ++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
   users = {
-
     users.${username} = {
       # User Configuration
       isNormalUser = true;
@@ -75,22 +59,14 @@ in
   };
 
   home-manager.users.${username} = import ./home.nix;
-
-  # Service Configuration
-  #
   boot.kernelPackages = pkgs.linuxPackages_zen;
 
-  services.getty = {
-    autologinUser = "${username}";
-    autologinOnce = true;
-  };
-
   # System Configuration
-  system.stateVersion = "24.11";
-  networking.useDHCP = lib.mkDefault true;
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
+  system.stateVersion = "24.11";
 
   ff = {
+    common.enable = true;
     security = {
       sudo-rs.enable = true;
     };
