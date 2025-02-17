@@ -58,6 +58,8 @@ in
     mutableUsers = true;
   };
 
+  getty.autologinUser = "${username}";
+
   home-manager.users.${username} = import ./home.nix;
   boot.kernelPackages = pkgs.linuxPackages_zen;
 
