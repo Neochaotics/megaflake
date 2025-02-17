@@ -188,11 +188,11 @@
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1739771934,
-        "narHash": "sha256-WTRi5UniHq2SiBHRr8ROZQmlVSa5aBm92bOEWcit1ps=",
+        "lastModified": 1739772496,
+        "narHash": "sha256-5FD3axD5JgvxJXvsTaqMmeZptFv1WyWF1r1bkeqH1XA=",
         "ref": "refs/heads/main",
-        "rev": "ebc39c967ec48a0bc81cc821b8c6d6750a77c64c",
-        "revCount": 16,
+        "rev": "432841c92469215a79170cc8ec7d5a4a6e1ca2b0",
+        "revCount": 17,
         "type": "git",
         "url": "file:///etc/nixos/modules/FreedpomFlake"
       },
