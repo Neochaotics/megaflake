@@ -1,6 +1,7 @@
 {
 
   boot.initrd.availableKernelModules = [
+    "hid-generic"
     "nvme"
     "xhci_pci"
     "thunderbolt"

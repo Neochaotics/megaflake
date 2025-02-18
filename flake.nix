@@ -27,12 +27,12 @@
     };
 
     ff = {
-      url = "/etc/nixos/modules/FreedpomFlake";
+      url = "github:freedpom/FreedpomFlake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     qm = {
-      url = "/etc/nixos/modules/QModule";
+      url = "./modules/QModule";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

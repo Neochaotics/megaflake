@@ -1490,11 +1490,11 @@
       "locked": {
         "lastModified": 1,
         "narHash": "sha256-Z9Dm4YtciUtyqVuYj6ysHFNaTJWkhHY1y8qvGS3sR9w=",
-        "path": "/nix/store/l05zxa2ccr85999d35y93b03z1dfqa3l-source/modules/QModule",
+        "path": "/nix/store/dir7iqcph4kcdrkb1ngm198fi6h80945-source/modules/QModule",
         "type": "path"
       },
       "original": {
-        "path": "/nix/store/l05zxa2ccr85999d35y93b03z1dfqa3l-source/modules/QModule",
+        "path": "/nix/store/dir7iqcph4kcdrkb1ngm198fi6h80945-source/modules/QModule",
         "type": "path"
       }
     },
