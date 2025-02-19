@@ -1,21 +1,22 @@
 _:
 
 {
-  boot.initrd.availableKernelModules = [
-    "hid-generic"
-    "nvme"
-    "xhci_pci"
-    "ahci"
-    "usbhid"
-    "amdgpu"
-  ];
-  boot.kernelModules = [ "kvm-amd" ];
-
-  boot.kernelParams = [
-    "video=DP-2:2560x1440@144"
-    "video=DP-5:1920x1080@60"
-    "video=HDMI-A-1:1920x1080@60"
-  ];
+  boot = {
+    initrd.availableKernelModules = [
+      "hid-generic"
+      "nvme"
+      "xhci_pci"
+      "ahci"
+      "usbhid"
+      "amdgpu"
+    ];
+    kernelModules = [ "kvm-amd" ];
+    kernelParams = [
+      "video=DP-2:2560x1440@144"
+      "video=DP-5:1920x1080@60"
+      "video=HDMI-A-1:1920x1080@60"
+    ];
+  };
   hardware = {
 
     cpu.amd.updateMicrocode = true;

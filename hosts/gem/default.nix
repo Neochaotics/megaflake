@@ -3,7 +3,6 @@
   inputs,
   config,
   pkgs,
-  spkgs,
   ...
 }:
 let
@@ -19,6 +18,18 @@ let
       else
         c
     ) name;
+
+  zfsCompatibleKernelPackages = lib.filterAttrs (
+    name: kernelPackages:
+    (builtins.match "linux_[0-9]+_[0-9]+" name) != null
+    && (builtins.tryEval kernelPackages).success
+    && (!kernelPackages.${config.boot.zfs.package.kernelModuleAttribute}.meta.broken)
+  ) pkgs.linuxKernel.packages;
+  latestKernelPackage = lib.last (
+    lib.sort (a: b: (lib.versionOlder a.kernel.version b.kernel.version)) (
+      builtins.attrValues zfsCompatibleKernelPackages
+    )
+  );
 in
 {
   imports = [
@@ -30,45 +41,43 @@ in
   ];
 
   boot = {
-    zfs.package = spkgs.zfs;
-    kernelPackages = spkgs.linuxPackages_latest;
+    kernelPackages = latestKernelPackage;
   };
 
-  fonts.packages =
-    with pkgs;
-    [
-      noto-fonts
-      liberation_ttf
-      dina-font
-      proggyfonts
-    ]
-    ++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
-
-  users.users.${username} = {
-    # User Configuration
-    isNormalUser = true;
-    description = formatUsername username;
-    shell = pkgs.zsh;
-    ignoreShellProgramCheck = true;
-    extraGroups =
-      [ "wheel" ]
-      ++ lib.optional config.security.rtkit.enable "rtkit"
-      ++ lib.optional config.services.pipewire.enable "audio";
+  sops = {
+    defaultSopsFile = ./secrets.yaml;
+    age = {
+      keyFile = "~/.config/sops/age/keys.txt";
+    };
   };
 
-  home-manager.users.${username} = import ./home.nix;
+  users = {
+    users.${username} = {
+      # User Configuration
+      isNormalUser = true;
+      description = formatUsername username;
+      #hashedPasswordFile = config.sops.secrets.qpassword.path;
+      initialPassword = "password";
+      shell = pkgs.zsh;
+      ignoreShellProgramCheck = true;
+      extraGroups =
+        [ "wheel" ]
+        ++ lib.optional config.security.rtkit.enable "rtkit"
+        ++ lib.optional config.services.pipewire.enable "audio";
+    };
+    mutableUsers = true;
+  };
 
-  # Service Configuration
+  services.getty.autologinUser = "${username}";
 
-  services.getty = {
-    autologinUser = "${username}";
-    autologinOnce = true;
+  home-manager = {
+    users.${username} = import ./home.nix;
+    extraSpecialArgs = { inherit username; };
   };
 
   # System Configuration
-  system.stateVersion = "24.11";
-  networking.useDHCP = lib.mkDefault true;
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
+  system.stateVersion = "24.11";
 
   ff = {
     common.enable = true;

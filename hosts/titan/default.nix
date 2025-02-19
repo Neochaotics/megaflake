@@ -59,8 +59,11 @@ in
   };
 
   services.getty.autologinUser = "${username}";
+  home-manager = {
+    users.${username} = import ./home.nix;
+    extraSpecialArgs = { inherit username; };
+  };
 
-  home-manager.users.${username} = import ./home.nix;
   boot.kernelPackages = pkgs.linuxPackages_zen;
 
   # System Configuration
