@@ -197,7 +197,7 @@ in
               "LibRedirect".metaData.hidden = true;
             };
           };
-          extensions = with inputs.firefox-addons.packages.${pkgs.system}; [
+          extensions.packages = with inputs.firefox-addons.packages.${pkgs.system}; [
             bitwarden
             aria2-integration
             proton-vpn
