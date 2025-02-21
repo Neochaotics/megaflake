@@ -1472,11 +1472,11 @@
         "treefmt-nix": "treefmt-nix_2"
       },
       "locked": {
-        "lastModified": 1739995128,
-        "narHash": "sha256-xUv0+M7DKmwiy/Fr1DA3aIOGomBhJbejP2xwuOlAKio=",
+        "lastModified": 1740106181,
+        "narHash": "sha256-wN0xjzAGj1Jds3FJRfblUINdw0lV76zydaesvew9t1Y=",
         "owner": "Neochaotics",
         "repo": "NixModule",
-        "rev": "8f8bd48e6c099a87b15c51dcd2c1a3e65e3b1b0a",
+        "rev": "ec25f61b5c891d4fb9470aba32b93b34368efad2",
         "type": "github"
       },
       "original": {
