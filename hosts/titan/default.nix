@@ -29,18 +29,6 @@ in
     ./hardware.nix
   ];
 
-  sops = {
-    defaultSopsFile = ./secrets.yaml;
-    age = {
-      keyFile = "~/.config/sops/age/keys.txt";
-    };
-    secrets = {
-      "qpassword" = {
-        neededForUsers = true;
-      };
-    };
-  };
-
   users = {
     users.${username} = {
       # User Configuration

@@ -20,10 +20,6 @@
     # Core Nix dependencies
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     stylix.url = "github:danth/stylix";
-    sops-nix = {
-      url = "github:Mic92/sops-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
 
     ff = {
       url = "github:freedpom/FreedpomFlake";
@@ -31,7 +27,7 @@
     };
 
     qm = {
-      url = "./modules/QModule";
+      url = "github:Neochaotics/NixModule";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -167,20 +163,11 @@
                   hostname
                   lib
                   ;
-                outputs = self;
-                spkgs = import inputs.nixpkgs {
-                  system = "x86_64-linux";
-                  overlays = [
-                    (_final: _prev: { stable = import inputs.nixpkgs-stable { system = "x86_64-linux"; }; })
-                  ];
-                  config = { };
-                };
               };
               modules = [
                 ./hosts/${hostname}
                 inputs.impermanence.nixosModules.impermanence
                 inputs.home-manager.nixosModules.home-manager
-                inputs.sops-nix.nixosModules.sops
               ];
             };
         in
