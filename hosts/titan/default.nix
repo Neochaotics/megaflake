@@ -29,6 +29,13 @@ in
     ./hardware.nix
   ];
 
+  age = {
+    rekey = {
+      masterIdentities = [ "/persist/age.key" ];
+      hostPubkey = "/etc/ssh/ssh_host_ed25519_key.pub";
+    };
+  };
+
   users = {
     users.${username} = {
       # User Configuration

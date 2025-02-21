@@ -40,6 +40,8 @@ in
     ./hardware.nix
   ];
 
+  age.rekey.masterIdentities = [ "/persist/age.key" ];
+
   boot = {
     kernelPackages = latestKernelPackage;
   };

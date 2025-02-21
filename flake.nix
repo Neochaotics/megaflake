@@ -31,6 +31,16 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    agenix = {
+      url = "github:ryantm/agenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.darwin.follows = "";
+    };
+    agenix-rekey = {
+      url = "github:oddlama/agenix-rekey";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     nvf = {
       url = "github:notashelf/nvf";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -132,6 +142,9 @@
             motd = ""; # Message of the day
             packages = [
               pkgs.nil # Nix Language Server
+              pkgs.nixd
+              pkgs.agenix-cli
+              pkgs.rage
               config.treefmt.build.wrapper
             ] ++ (pkgs.lib.attrValues config.treefmt.build.programs);
           };
@@ -168,6 +181,8 @@
                 ./hosts/${hostname}
                 inputs.impermanence.nixosModules.impermanence
                 inputs.home-manager.nixosModules.home-manager
+                inputs.agenix.nixosModules.default
+                inputs.agenix-rekey.nixosModules.default
               ];
             };
         in
