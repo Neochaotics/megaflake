@@ -41,7 +41,8 @@ in
       extraGroups =
         [ "wheel" ]
         ++ lib.optional config.security.rtkit.enable "rtkit"
-        ++ lib.optional config.services.pipewire.enable "audio";
+        ++ lib.optional config.services.pipewire.enable "audio"
+        ++ lib.optional config.hardware.i2c.enable "i2c";
     };
     mutableUsers = true;
   };

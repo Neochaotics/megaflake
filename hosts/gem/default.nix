@@ -44,13 +44,6 @@ in
     kernelPackages = latestKernelPackage;
   };
 
-  sops = {
-    defaultSopsFile = ./secrets.yaml;
-    age = {
-      keyFile = "~/.config/sops/age/keys.txt";
-    };
-  };
-
   users = {
     users.${username} = {
       # User Configuration

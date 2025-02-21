@@ -4,7 +4,6 @@
     inputs.impermanence.homeManagerModules.impermanence
     inputs.ff.homeManagerModules.freedpomFlake
     inputs.qm.homeManagerModules.qModule
-    inputs.sops-nix.homeManagerModules.sops
   ];
 
   home = {
