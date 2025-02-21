@@ -21,6 +21,11 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     stylix.url = "github:danth/stylix";
 
+    lix-module = {
+      url = "https://git.lix.systems/lix-project/nixos-module/archive/2.92.0.tar.gz";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     ff = {
       url = "github:freedpom/FreedpomFlake";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -183,6 +188,7 @@
                 inputs.home-manager.nixosModules.home-manager
                 inputs.agenix.nixosModules.default
                 inputs.agenix-rekey.nixosModules.default
+                inputs.lix-module.nixosModules.default
               ];
             };
         in
