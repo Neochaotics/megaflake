@@ -18,6 +18,7 @@ in
       sops
       zed-editor
       nil
+      nixd
       wireguard-tools
       nvd
       nix-output-monitor
