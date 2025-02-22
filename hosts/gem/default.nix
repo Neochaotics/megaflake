@@ -39,8 +39,17 @@ in
     ./disks.nix
     ./hardware.nix
   ];
-
-  age.rekey.masterIdentities = [ "/persist/age.key" ];
+  age = {
+    secrets.crypt = {
+      generator.script = "hex";
+    };
+    rekey = {
+      masterIdentities = [ "/nix/persist/age.key" ];
+      localStorageDir = "/nix/persist/rekey";
+      generatedSecretsDir = "/nix/persist/rekey/generated";
+      storageMode = "local";
+    };
+  };
 
   boot = {
     kernelPackages = latestKernelPackage;
@@ -85,6 +94,7 @@ in
       openssh.enable = true;
     };
     system = {
+      persistence.enable = true;
       nix.enable = true;
       sysctl = {
         cachyos = true;

@@ -34,6 +34,7 @@
     };
     system = {
       xdg.enable = true;
+      persistence.enable = true;
     };
     desktop.hyprland = {
       enable = true;

@@ -59,20 +59,21 @@
             options = {
               mountpoint = "none";
               encryption = "aes-256-gcm";
-              keyformat = "passphrase";
+              keyformat = "hex";
+              keylocation = "file:///persist/rekey/generated/crypt.key";
             };
           };
-          "encrypted/nix" = {
+          "crypt/nix" = {
             type = "zfs_fs";
             mountpoint = "/nix";
           };
-          "encrypted/persist" = {
+          "crypt/nix/persist" = {
             type = "zfs_fs";
-            mountpoint = "/persist";
+            mountpoint = "/nix/persist";
           };
-          "encrypted/persist/home" = {
+          "crypt/nix/persist/home" = {
             type = "zfs_fs";
-            mountpoint = "/persist/home";
+            mountpoint = "/nix/persist/home";
           };
         };
       };
@@ -87,4 +88,5 @@
       };
     };
   };
+  fileSystems."/nix/persist".neededForBoot = true;
 }
