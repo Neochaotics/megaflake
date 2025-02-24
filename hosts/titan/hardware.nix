@@ -3,12 +3,12 @@ _:
 {
   boot = {
     initrd.availableKernelModules = [
+      "ahci"
+      "amdgpu"
       "hid-generic"
       "nvme"
-      "xhci_pci"
-      "ahci"
       "usbhid"
-      "amdgpu"
+      "xhci_pci"
     ];
     kernelModules = [ "kvm-amd" ];
     kernelParams = [

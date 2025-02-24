@@ -1,3 +1,4 @@
+_:
 {
   disko.devices = {
     disk = {
@@ -59,8 +60,8 @@
             options = {
               mountpoint = "none";
               encryption = "aes-256-gcm";
-              keyformat = "hex";
-              keylocation = "file:///persist/rekey/generated/crypt.key";
+              keyformat = "passphrase";
+              #keylocation = "file://" + "${config.age.secrets.crypt.path}";
             };
           };
           "crypt/nix" = {

@@ -3,6 +3,7 @@
   inputs,
   config,
   pkgs,
+  self,
   ...
 }:
 let
@@ -32,7 +33,9 @@ in
   age = {
     rekey = {
       masterIdentities = [ "/persist/age.key" ];
-      hostPubkey = "/etc/ssh/ssh_host_ed25519_key.pub";
+      localStorageDir = "${self}" + "/secrets/rekeyed/${config.networking.hostName}";
+      generatedSecretsDir = "${self}" + "/secrets/generated/${config.networking.hostName}";
+      storageMode = "local";
     };
   };
 

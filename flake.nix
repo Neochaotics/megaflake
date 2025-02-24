@@ -69,8 +69,7 @@
     };
 
     trackers = {
-      url = "https://raw.githubusercontent.com/ngosang/trackerslist/refs/heads/master/trackers_all.txt";
-      type = "file";
+      url = "github:ngosang/trackerslist";
       flake = false;
     };
 
@@ -103,6 +102,7 @@
         inputs.devshell.flakeModule
         inputs.flake-root.flakeModule
         inputs.git-hooks-nix.flakeModule
+        inputs.agenix-rekey.flakeModule
       ];
 
       # Per-system configuration
@@ -114,6 +114,8 @@
         }:
         {
           # Code formatting and linting setup
+          flake-root.projectRootFile = "flake.nix";
+          agenix-rekey.nixosConfigurations = inputs.self.nixosConfigurations;
           treefmt.config = {
             inherit (config.flake-root) projectRootFile;
             flakeCheck = false;
@@ -131,6 +133,7 @@
                 "*.png"
                 "*.yaml"
                 "modules/QModule/nixos/programs/nvf.nix"
+                "secrets/"
               ];
 
               # Additional formatters
@@ -148,9 +151,8 @@
             packages = [
               pkgs.nil # Nix Language Server
               pkgs.nixd
-              pkgs.agenix-cli
-              pkgs.rage
               config.treefmt.build.wrapper
+              config.agenix-rekey.package
             ] ++ (pkgs.lib.attrValues config.treefmt.build.programs);
           };
 
@@ -180,6 +182,7 @@
                   inputs
                   hostname
                   lib
+                  self
                   ;
               };
               modules = [

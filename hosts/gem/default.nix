@@ -3,6 +3,7 @@
   inputs,
   config,
   pkgs,
+  self,
   ...
 }:
 let
@@ -41,12 +42,12 @@ in
   ];
   age = {
     secrets.crypt = {
-      generator.script = "hex";
+      generator.script = "passphrase";
     };
     rekey = {
-      masterIdentities = [ "/nix/persist/age.key" ];
-      localStorageDir = "/nix/persist/rekey";
-      generatedSecretsDir = "/nix/persist/rekey/generated";
+      masterIdentities = [ "/persist/age.key" ];
+      localStorageDir = "${self}" + "/secrets/rekeyed/${config.networking.hostName}";
+      generatedSecretsDir = "${self}" + "/secrets/generated/${config.networking.hostName}";
       storageMode = "local";
     };
   };

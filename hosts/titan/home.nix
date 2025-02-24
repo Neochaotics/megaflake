@@ -15,6 +15,10 @@
     username = "quinno";
     homeDirectory = "/home/quinno";
     #enableNixpkgsReleaseCheck = false;
+    packages = with pkgs; [
+      zed-editor
+      vesktop
+    ];
   };
 
   ff = {
@@ -45,6 +49,4 @@
       idlelock.enable = true;
     };
   };
-
-  home.packages = with pkgs; [ vesktop ];
 }
