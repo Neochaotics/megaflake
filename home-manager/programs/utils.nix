@@ -14,9 +14,6 @@ in
 
   config = lib.mkIf cfg.enable {
     home.packages = with pkgs; [
-      age
-      sops
-      zed-editor
       nil
       nixd
       wireguard-tools
@@ -25,7 +22,6 @@ in
       p7zip
       unzip
       xz
-      inkscape
     ];
     programs = {
       eza = {
