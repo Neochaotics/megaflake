@@ -29,11 +29,13 @@
     ff = {
       url = "github:freedpom/FreedpomFlake";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "home-manager";
     };
 
     qm = {
       url = "github:Neochaotics/NixModule";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "home-manager";
     };
 
     agenix = {
