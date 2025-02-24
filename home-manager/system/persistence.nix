@@ -8,7 +8,7 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    home.persistence."/persistent/home/${config.home.username}" = {
+    home.persistence."/nix/persist/home" = {
       directories = [
         "Downloads"
         "Music"
