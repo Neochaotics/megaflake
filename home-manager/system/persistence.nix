@@ -8,7 +8,7 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    home.persistence."/nix/persist/home" = {
+    home.persistence."/nix/persist/home/${config.home.username}" = {
       directories = [
         "Downloads"
         "Music"
@@ -18,6 +18,8 @@ in
         ".gnupg"
         ".ssh"
         ".local/share/keyrings"
+        ".nix-profile"
+        ".local/state/nix/profiles/profile"
       ];
       allowOther = true;
     };
