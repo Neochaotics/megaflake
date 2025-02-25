@@ -1717,11 +1717,11 @@
         "treefmt-nix": "treefmt-nix_3"
       },
       "locked": {
-        "lastModified": 1740431862,
-        "narHash": "sha256-zPu7f0BV786FGFhdjTYjH1hs7KYCBsQXDTUmPLXTJhI=",
+        "lastModified": 1740512428,
+        "narHash": "sha256-4wk+iGyblC9v4EJqgP0lb1s8TTfGcZZZCgwVAG0/TW8=",
         "owner": "Neochaotics",
         "repo": "NixModule",
-        "rev": "4eb9a9d314cb59fdd03a1ff3615d561d8358af07",
+        "rev": "490f291b9c422622f0febec2cd496500817a4742",
         "type": "github"
       },
       "original": {
