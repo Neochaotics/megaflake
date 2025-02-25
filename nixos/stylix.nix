@@ -19,7 +19,10 @@ in
     stylix = {
       enable = true;
       autoEnable = true;
-      image = ./wallpaper.png;
+      image = pkgs.fetchurl {
+        url = "https://raw.githubusercontent.com/AngelJumbo/gruvbox-wallpapers/refs/heads/main/wallpapers/minimalistic/war-in-space.png";
+        sha256 = "enQo3wqhgf0FEPHj2coOCvo7DuZv+x5rL/WIo4qPI50=";
+      };
       imageScalingMode = "fit";
       base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-material-dark-hard.yaml";
       opacity = {
