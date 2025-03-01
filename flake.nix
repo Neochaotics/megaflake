@@ -22,10 +22,10 @@
       ];
       flake = {
         nixosModules = {
-          default = ./nixos;
+          qModule = ./nixos;
         };
         homeManagerModules = {
-          default = ./home-manager;
+          qModule = ./home-manager;
         };
       };
     };
