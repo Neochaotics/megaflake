@@ -95,11 +95,11 @@
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1740862470,
-        "narHash": "sha256-w263Wf7uDYNC0kaA24Lk240j4p7ECGxgL/AqwqcgwUU=",
+        "lastModified": 1740863970,
+        "narHash": "sha256-b6+ppUX12LrjNxk3dg1x0pF6btwAXwKwcJUQHYKM050=",
         "owner": "Freedpom",
         "repo": "FreedpomFormatter",
-        "rev": "d85f8f0ae0f089ec41e3b2acb0d4398533eb27be",
+        "rev": "7bb4ae3dc440e6ca9b22b1ff8109377fcba6ec2e",
         "type": "github"
       },
       "original": {
