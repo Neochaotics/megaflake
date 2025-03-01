@@ -70,10 +70,16 @@
           "crypt/nix/persist" = {
             type = "zfs_fs";
             mountpoint = "/nix/persist";
+            mountOptions = [
+              "mode=777"
+            ];
           };
           "crypt/nix/persist/home" = {
             type = "zfs_fs";
             mountpoint = "/nix/persist/home";
+            mountOptions = [
+              "mode=777"
+            ];
           };
         };
       };
@@ -82,7 +88,14 @@
       "/" = {
         fsType = "tmpfs";
         mountOptions = [
-          "size=5G"
+          "size=3G"
+          "mode=755"
+        ];
+      };
+      "/home" = {
+        fsType = "tmpfs";
+        mountOptions = [
+          "size=6G"
           "mode=755"
         ];
       };
