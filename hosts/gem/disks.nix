@@ -92,7 +92,7 @@
           "mode=755"
         ];
       };
-      "/home" = {
+      "/home/quinno" = {
         fsType = "tmpfs";
         mountOptions = [
           "size=6G"
