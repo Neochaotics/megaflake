@@ -96,6 +96,8 @@
         fsType = "tmpfs";
         mountOptions = [
           "size=6G"
+          "uid=1000"
+          "gid=1000"
           "mode=755"
         ];
       };
