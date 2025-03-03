@@ -74,9 +74,9 @@
               "mode=777"
             ];
           };
-          "crypt/nix/persist/home" = {
+          "crypt/nix/persist/home/quinno" = {
             type = "zfs_fs";
-            mountpoint = "/nix/persist/home";
+            mountpoint = "/nix/persist/home/quinno";
             mountOptions = [
               "mode=777"
             ];
