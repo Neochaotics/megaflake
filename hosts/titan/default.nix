@@ -69,6 +69,8 @@ in
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   system.stateVersion = "24.11";
 
+  services.tailscale.enable = true;
+
   ff = {
     common.enable = true;
     security = {

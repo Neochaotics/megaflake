@@ -35,6 +35,7 @@ in
 
   boot = {
     kernelPackages = pkgs.linuxPackages_cachyos-server;
+    zfs.package = pkgs.zfs_cachyos;
   };
 
   users = {
@@ -56,6 +57,8 @@ in
   # System Configuration
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   system.stateVersion = "24.11";
+
+  services.tailscale.enable = true;
 
   ff = {
     common.enable = true;
