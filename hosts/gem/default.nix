@@ -39,6 +39,7 @@ in
     inputs.disko.nixosModules.disko
     ./disks.nix
     ./hardware.nix
+    (import ../../home/quinno { userName = username; inherit lib; })
   ];
   age = {
     secrets.crypt = {
@@ -58,9 +59,6 @@ in
 
   users = {
     users.${username} = {
-      # User Configuration
-      isNormalUser = true;
-      description = formatUsername username;
       #hashedPasswordFile = config.sops.secrets.qpassword.path;
       initialPassword = "password";
       shell = pkgs.zsh;
@@ -74,11 +72,6 @@ in
   };
 
   services.getty.autologinUser = "${username}";
-
-  home-manager = {
-    users.${username} = import ./home.nix;
-    extraSpecialArgs = { inherit username; };
-  };
 
   # System Configuration
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
