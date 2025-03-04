@@ -63,7 +63,7 @@ in
     extraSpecialArgs = { inherit username; };
   };
 
-  boot.kernelPackages = pkgs.linuxPackages_zen;
+  boot.kernelPackages = pkgs.linuxPackages_cachyos;
 
   # System Configuration
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";

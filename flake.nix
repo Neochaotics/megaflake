@@ -19,6 +19,7 @@
   inputs = {
     # Core Nix dependencies
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
     stylix.url = "github:danth/stylix";
 
     agenix = {
@@ -129,6 +130,7 @@
                 inputs.agenix.nixosModules.default
                 inputs.agenix-rekey.nixosModules.default
                 inputs.lix-module.nixosModules.default
+                inputs.chaotic.nixosModules.default
               ];
             };
         in
