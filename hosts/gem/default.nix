@@ -8,17 +8,6 @@
 }:
 let
   username = "quinno";
-  formatUsername =
-    name:
-    lib.strings.stringAsChars (
-      c:
-      if c == builtins.substring ((builtins.stringLength name) - 1) 1 name then
-        " ${lib.strings.toUpper c}"
-      else if c == (builtins.substring 0 1 name) then
-        lib.strings.toUpper c
-      else
-        c
-    ) name;
 
   zfsCompatibleKernelPackages = lib.filterAttrs (
     name: kernelPackages:
@@ -39,7 +28,10 @@ in
     inputs.disko.nixosModules.disko
     ./disks.nix
     ./hardware.nix
-    (import ../../home/quinno { userName = username; inherit lib; })
+    (import ../../home/quinno {
+      userName = username;
+      inherit lib;
+    })
   ];
   age = {
     secrets.crypt = {

@@ -108,7 +108,9 @@
       flake.nixosConfigurations =
         let
           inherit (self.inputs.nixpkgs) lib;
-          hostNames = builtins.attrNames (builtins.readDir ./hosts);
+          hostNames = builtins.attrNames (
+            lib.attrsets.filterAttrs (_name: type: type == "directory") (builtins.readDir ./hosts)
+          );
           mkHost =
             hostname:
             self.inputs.nixpkgs.lib.nixosSystem {
