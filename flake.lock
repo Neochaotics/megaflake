@@ -283,11 +283,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1741205644,
-        "narHash": "sha256-NBg0w1cVzG22HGzOuC2M/NHvpz3YGg16fjjxRvLbAak=",
+        "lastModified": 1741207247,
+        "narHash": "sha256-ZUMj8U3k8AHBv/2p+nyYZeEL7bvsEi8loRYynlHXoMA=",
         "owner": "freedpom",
         "repo": "FreedpomFlake",
-        "rev": "b2fd188cd13d7046b5e5310da4875c3f386a7fd2",
+        "rev": "76c60dec1b4e34dd27265956f9f75e2f8e7c5857",
         "type": "github"
       },
       "original": {
