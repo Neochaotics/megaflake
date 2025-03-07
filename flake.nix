@@ -40,7 +40,7 @@
     ff = {
       url = "github:freedpom/FreedpomFlake";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.home-manager.follows = "home-manager";
+      #inputs.home-manager.follows = "home-manager";
     };
 
     firefox-addons = {
@@ -82,7 +82,7 @@
     qm = {
       url = "github:Neochaotics/NixModule";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.home-manager.follows = "home-manager";
+      #inputs.home-manager.follows = "home-manager";
     };
 
     trackers = {

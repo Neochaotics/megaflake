@@ -16,11 +16,10 @@ in
     inputs.disko.nixosModules.disko
     ./disks.nix
     ./hardware.nix
-    ../../home
-    #(import ../../home/quinno {
-    #  userName = username;
-    #  inherit lib;
-    #})
+    (import ../../home/quinno {
+      userName = username;
+      inherit lib;
+    })
   ];
   age = {
     secrets.crypt = {

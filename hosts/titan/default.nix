@@ -82,6 +82,7 @@ in
       openssh.enable = true;
     };
     system = {
+      fontsu.enable = true;
       nix.enable = true;
       sysctl = {
         cachyos = true;
