@@ -8,6 +8,10 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    fpFmt = {
+      url = "github:freedpom/FreedpomFormatter";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -19,6 +23,7 @@
       ];
       imports = [
         inputs.home-manager.flakeModules.home-manager
+        inputs.fpFmt.flakeModule
       ];
       flake = {
         nixosModules = {

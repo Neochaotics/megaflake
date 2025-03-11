@@ -204,18 +204,21 @@ in
               "LibRedirect".metaData.hidden = true;
             };
           };
-          extensions.packages = with inputs.firefox-addons.packages.${pkgs.system}; [
-            bitwarden
-            aria2-integration
-            proton-vpn
-            auto-tab-discard
-            cookie-autodelete
-            darkreader
-            libredirect
-            linkhints
-            skip-redirect
-            ublock-origin
-          ];
+          extensions = {
+            force = true;
+            packages = with inputs.firefox-addons.packages.${pkgs.system}; [
+              bitwarden
+              aria2-integration
+              proton-vpn
+              auto-tab-discard
+              cookie-autodelete
+              darkreader
+              libredirect
+              linkhints
+              skip-redirect
+              ublock-origin
+            ];
+          };
         };
       };
     };

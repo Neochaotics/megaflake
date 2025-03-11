@@ -222,7 +222,7 @@ in
 
         ui = {
           borders.enable = true;
-          noice.enable = true;
+          #no ice.enable = true; too lazy to fix typos formatter error
           colorizer.enable = true;
           modes-nvim.enable = false; # the theme looks terrible with catppuccin
           illuminate.enable = true;
