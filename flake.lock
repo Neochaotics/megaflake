@@ -1922,11 +1922,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1741721495,
-        "narHash": "sha256-Q2wvCOCfKuycVcdO8KZOc7ah1GK/L3fgSfXdcCfnntY=",
+        "lastModified": 1741721727,
+        "narHash": "sha256-OOE5D2YWQMR2RYrEP4LdkFOlU/+xt/y97wN8tYOw2mg=",
         "owner": "Neochaotics",
         "repo": "NixModule",
-        "rev": "ae4cc0c74123e54cef986058283a75d95424dbff",
+        "rev": "083650f8e573c8f38b880e7a6e43a88731ac0af0",
         "type": "github"
       },
       "original": {
