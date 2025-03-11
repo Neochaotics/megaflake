@@ -13,6 +13,13 @@ in
     enable = lib.mkEnableOption "Firefox browser configuration";
   };
   config = lib.mkIf cfg.enable {
+    stylix.targets = {
+      firefox = {
+        colorTheme.enable = true;
+        firefoxGnomeTheme.enable = true;
+        profileNames = [ "default" ];
+      };
+    };
     programs = {
       chromium.enable = true;
       firefox = {

@@ -59,16 +59,6 @@ in
           terminal = 16;
         };
       };
-      targets = {
-        firefox = {
-          colorTheme.enable = true;
-          firefoxGnomeTheme.enable = true;
-          profileNames = [ "default" ];
-        };
-        hyprland = {
-          hyprpaper.enable = true;
-        };
-      };
     };
   };
 }
