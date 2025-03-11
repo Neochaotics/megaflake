@@ -128,15 +128,7 @@ in
         statusline = {
           lualine = {
             enable = true;
-            theme = "catppuccin";
           };
-        };
-
-        theme = {
-          enable = true;
-          name = "catppuccin";
-          style = "mocha";
-          transparent = false;
         };
 
         autopairs.nvim-autopairs.enable = true;
@@ -224,7 +216,7 @@ in
           borders.enable = true;
           #no ice.enable = true; too lazy to fix typos formatter error
           colorizer.enable = true;
-          modes-nvim.enable = false; # the theme looks terrible with catppuccin
+          modes-nvim.enable = false;
           illuminate.enable = true;
           breadcrumbs = {
             enable = true;
