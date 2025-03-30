@@ -34,6 +34,7 @@ in
       cursor = {
         package = pkgs.bibata-cursors;
         name = "Bibata-Modern-Amber";
+        size = 32;
       };
       fonts = {
         monospace = {
