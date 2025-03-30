@@ -29,7 +29,7 @@
         nixosModules = {
           qModule = ./nixos;
         };
-        homeManagerModules = {
+        homeModules = {
           qModule = ./home-manager;
         };
       };
