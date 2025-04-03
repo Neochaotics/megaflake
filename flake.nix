@@ -69,10 +69,10 @@
 
     impermanence.url = "github:nix-community/impermanence";
 
-    lix-module = {
-      url = "git+https://git.lix.systems/lix-project/nixos-module?ref=stable";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    #lix-module = {
+    #  url = "git+https://git.lix.systems/lix-project/nixos-module?ref=stable";
+    #  inputs.nixpkgs.follows = "nixpkgs";
+    #};
 
     nvf = {
       url = "github:notashelf/nvf";
@@ -129,9 +129,10 @@
                 inputs.home-manager.nixosModules.home-manager
                 inputs.agenix.nixosModules.default
                 inputs.agenix-rekey.nixosModules.default
-                inputs.lix-module.nixosModules.default
+                #inputs.lix-module.nixosModules.default
                 inputs.chaotic.nixosModules.default
               ];
+
             };
         in
         lib.genAttrs hostNames mkHost;

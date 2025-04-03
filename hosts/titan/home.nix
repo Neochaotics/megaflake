@@ -6,8 +6,8 @@
 {
   imports = [
     inputs.impermanence.homeManagerModules.impermanence
-    inputs.ff.homeManagerModules.freedpomFlake
-    inputs.qm.homeManagerModules.qModule
+    inputs.ff.homeModules.freedpomFlake
+    inputs.qm.homeModules.qModule
   ];
 
   home = {

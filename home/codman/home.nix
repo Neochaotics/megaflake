@@ -12,8 +12,8 @@
 
   home = {
     stateVersion = "24.05";
-    username = "quinno";
-    homeDirectory = "/home/quinno";
+    username = "codman";
+    homeDirectory = "/home/codman";
     #enableNixpkgsReleaseCheck = false;
     packages = with pkgs; [
       zed-editor

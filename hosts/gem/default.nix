@@ -49,7 +49,7 @@ in
         ++ lib.optional config.security.rtkit.enable "rtkit"
         ++ lib.optional config.services.pipewire.enable "audio";
     };
-    mutableUsers = true;
+    mutableUsers = lib.mkForce true;
   };
 
   services.getty.autologinUser = "${username}";
