@@ -23,10 +23,11 @@ _:
     graphics.enable = true;
     enableRedistributableFirmware = true;
 
-    openrazer = {
-      enable = true;
-      users = [ "quinno" ];
-    };
+    # wouldnt build 04/04/2025
+    #openrazer = {
+    #  enable = true;
+    #  users = [ "quinno" ];
+    #};
     display = {
       edid = {
         enable = true;
