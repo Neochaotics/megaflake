@@ -4,7 +4,7 @@
     monitor = [
       "DP-2, 2560x1440@120, auto, 1"
       "DP-1,1920x1080@60, auto-right, 1, transform, 3"
-      "DP-5, 1920x1080@60, auto-up, 1"
+      "HDMI-A-1, 1920x1080@60, auto-up, 1"
     ];
 
     workspace = [
@@ -16,8 +16,8 @@
       "6, monitor:DP-1"
       "7, monitor:DP-1"
       "8, monitor:DP-1"
-      "9, monitor:DP-5"
-      "10, monitor:DP-5"
+      "9, monitor:HDMI-A-1"
+      "10, monitor:HDMI-A-1"
       "name:G, on-created-empty:uwsm app -- steam.desktop:Library, monitor:DP-2"
     ];
   };
