@@ -10,7 +10,13 @@ in
   config = lib.mkIf cfg.enable {
     programs.starship = {
       enable = true;
-      # settings = {};
+      presets = [
+        "nerd-font-symbols"
+        "no-empty-icons"
+        "jetpack"
+      ];
+      enableBashIntegration = true;
+      enableZshIntegration = true;
     };
   };
 }
