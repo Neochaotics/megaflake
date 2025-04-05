@@ -17,7 +17,7 @@ in
         continuation_prompt = "[▸▹ ](dimmed white)";
 
         format = ''
-          ($nix_shell$container$fill$git_metrics\n)$cmd_duration\
+          "($nix_shell$container$fill$git_metrics\n)$cmd_duration\
           $hostname\
           $localip\
           $shlvl\
@@ -26,11 +26,11 @@ in
           $jobs\
           $sudo\
           $username\
-          $character
+          $character"
         '';
 
         right_format = ''
-          $singularity\
+          "$singularity\
           $kubernetes\
           $directory\
           $vcsh\
@@ -99,7 +99,7 @@ in
           $status\
           $os\
           $battery\
-          $time
+          $time"
         '';
 
         fill = {
@@ -178,7 +178,10 @@ in
           style = "italic bright-blue";
           truncation_symbol = "⋯";
           truncation_length = 11;
-          ignore_branches = ["main" "master"];
+          ignore_branches = [
+            "main"
+            "master"
+          ];
           only_attached = true;
         };
 
@@ -220,9 +223,12 @@ in
         nodejs = {
           format = " [node](italic) [◫ ($version)](bold bright-green)";
           version_format = "\${raw}";
-          detect_files = ["package-lock.json" "yarn.lock"];
-          detect_folders = ["node_modules"];
-          detect_extensions = [];
+          detect_files = [
+            "package-lock.json"
+            "yarn.lock"
+          ];
+          detect_folders = [ "node_modules" ];
+          detect_extensions = [ ];
         };
 
         python = {
