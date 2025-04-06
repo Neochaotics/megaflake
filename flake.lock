@@ -2287,11 +2287,11 @@
     "trackers": {
       "flake": false,
       "locked": {
-        "lastModified": 1743890855,
-        "narHash": "sha256-yJvM5SsJ/1t/wjiY8SHydnx2BavYrpNv2E97m9w9n6Y=",
+        "lastModified": 1743977249,
+        "narHash": "sha256-PrrsviewkcNZs/skiIbOKe6NZgyJe6O1h81PsCEGkHY=",
         "owner": "ngosang",
         "repo": "trackerslist",
-        "rev": "039172392c3dc99f209ee24cba7c21a5d7137c77",
+        "rev": "aa71afbfc5085d03c82b3a77e0ec8a45b6ec44ee",
         "type": "github"
       },
       "original": {
