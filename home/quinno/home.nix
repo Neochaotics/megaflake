@@ -18,6 +18,7 @@
     packages = with pkgs; [
       zed-editor
       vesktop
+      element-desktop
     ];
   };
 
