@@ -2018,11 +2018,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1743972758,
-        "narHash": "sha256-sGd02BW0ZjpOrvHA/QgHhFNNKIDxGKkalTlrcmJKwPg=",
+        "lastModified": 1743977132,
+        "narHash": "sha256-2Ktq6+ut2eX4D55IqFFJ8ku60TR2MTM2QXSMyPzg/0o=",
         "owner": "Neochaotics",
         "repo": "NixModule",
-        "rev": "d2046ad198442242513f20329627bd780609d1ad",
+        "rev": "cfca746690f5c75fc1eff6a72b72f8d0f95b9663",
         "type": "github"
       },
       "original": {
