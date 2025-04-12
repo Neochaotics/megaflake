@@ -17,7 +17,8 @@
     #enableNixpkgsReleaseCheck = false;
     packages = with pkgs; [
       zed-editor
-      vesktop
+      legcord
+      element-desktop
     ];
   };
 

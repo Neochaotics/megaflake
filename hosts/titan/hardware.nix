@@ -1,5 +1,7 @@
-_:
-
+{ pkgs, inputs, ... }:
+let
+  hyprpkgs = inputs.hyprland.inputs.nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system};
+in
 {
 
   ff.hardware.displays = {
@@ -29,9 +31,13 @@ _:
     ];
   };
   hardware = {
-
     cpu.amd.updateMicrocode = true;
-    graphics.enable = true;
+    graphics = {
+      enable = true;
+      enable32Bit = true;
+      extraPackages = [ hyprpkgs.mesa.drivers ];
+      extraPackages32 = [ hyprpkgs.pkgsi686Linux.mesa.drivers ];
+    };
     enableRedistributableFirmware = true;
 
     # wouldnt build 04/04/2025
