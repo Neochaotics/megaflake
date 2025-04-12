@@ -1612,11 +1612,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1744491827,
-        "narHash": "sha256-8Y2NFclEaHSdU/hnmhPAh8XcGFaKeA3Af2As+bLeaPo=",
+        "lastModified": 1744497096,
+        "narHash": "sha256-+3UwmtV1AX997rU6EQXYYaMpaQtdbeZxZEW2ckAvlN0=",
         "owner": "Neochaotics",
         "repo": "NixModule",
-        "rev": "6eefbea694e8f2a0bf62c216cabdcbd141c7669f",
+        "rev": "e54c2bcc3092d6ffb1d1c267762a7ad8a27705ff",
         "type": "github"
       },
       "original": {
@@ -1864,11 +1864,11 @@
     "trackers": {
       "flake": false,
       "locked": {
-        "lastModified": 1744409257,
-        "narHash": "sha256-XoSDQuIpgh1ksc+KSnnyBni4Vf40joEp42qyA12wjeM=",
+        "lastModified": 1744495618,
+        "narHash": "sha256-s4sEcl5Tbki+QIT7F8F3W8KRgDozJwAsvZyLMvoJV0U=",
         "owner": "ngosang",
         "repo": "trackerslist",
-        "rev": "efa42969806efec1112eeeb6409c8b14a73ca417",
+        "rev": "e277672672e37f9df8fc14c42a2e62bf8057fd01",
         "type": "github"
       },
       "original": {
