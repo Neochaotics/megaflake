@@ -32,8 +32,8 @@ in
     home.sessionVariables.NIXOS_OZONE_WL = "1";
     wayland.windowManager.hyprland = {
       enable = true;
-      package = null;
-      portalPackage = null;
+      #package = null;
+      #portalPackage = null;
       systemd = {
         enable = false;
         enableXdgAutostart = false;
@@ -41,7 +41,7 @@ in
 
       xwayland.enable = true;
 
-      plugins = [ inputs.hypr-dynamic-cursors.packages.${pkgs.system}.hypr-dynamic-cursors ];
+      #plugins = [ inputs.hypr-dynamic-cursors.packages.${pkgs.system}.hypr-dynamic-cursors ];
 
     };
 
