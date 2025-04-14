@@ -45,19 +45,19 @@
 
     cursor = {
       sync_gsettings_theme = true;
-      no_hardware_cursors = 2;
-      no_break_fs_vrr = false;
-      min_refresh_rate = 24; # Minimum refresh rate for cursor movement when no_break_fs_vrr is active. Set to minimum supported refresh rate or higher
-      hotspot_padding = 1;
-      inactive_timeout = 0;
+      no_hardware_cursors = 1;
+      no_break_fs_vrr = 2;
+      min_refresh_rate = 30;
+      hotspot_padding = 3;
+      inactive_timeout = 180;
       no_warps = false;
       persistent_warps = false;
-      warp_on_change_workspace = false;
-      # default_monitor = ;
+      warp_on_change_workspace = 2;
+      default_monitor = "DP-2";
       zoom_factor = 1.0;
       zoom_rigid = false;
       enable_hyprcursor = true;
-      hide_on_key_press = false;
+      hide_on_key_press = true;
       hide_on_touch = true;
     };
   };

@@ -43,10 +43,10 @@
     ecosystem = {
       no_update_news = true; # https://hyprland.org/rss.xml
       no_donation_nag = true;
+      #enforce_permissions = true;
     };
 
     experimental = {
-      # wide_color_gamut = true;
       xx_color_management_v4 = true;
     };
 
