@@ -19,6 +19,22 @@ in
           sort_sensitive=false;
           sort_reverse=false;
           sort_dir_first=true;
+          linemode = "size";
+          show_hidden = true;
+          show_symlink=true;
+          scrolloff = 12;
+        };
+        preview = {
+          wrap = "yes";
+          tab_size = 2;
+          max_width = 640;
+          max_height = 480;
+          image_filter="lanczos3";
+          image_quality = 75;
+          sixel_fraction=10;
+        };
+        input = {
+          cursor_blink = true;
         };
       };
     };
