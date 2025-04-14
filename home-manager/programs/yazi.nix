@@ -40,29 +40,29 @@ in
         input = {
           cursor_blink = true;
         };
+        opener = {
+          play = [
+            {
+              run = "mpv \"$@\"";
+              orphan = true;
+              for = "unix";
+            }
+          ];
+          edit = [
+            {
+              run = "$EDITOR \"$@\"";
+              block = true;
+              for = "unix";
+            }
+          ];
+          open = [
+            {
+              run = "xdg-open \"$@\"";
+              desc = "Openz";
+            }
+          ];
+        };
       };
-    };
-    opener = {
-      play = [
-        {
-          run = "mpv \"$@\"";
-          orphan = true;
-          for = "unix";
-        }
-      ];
-      edit = [
-        {
-          run = "$EDITOR \"$@\"";
-          block = true;
-          for = "unix";
-        }
-      ];
-      open = [
-        {
-          run = "xdg-open \"$@\"";
-          desc = "Openz";
-        }
-      ];
     };
   };
 }
