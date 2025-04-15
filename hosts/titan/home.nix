@@ -44,6 +44,7 @@
       zsh.enable = true;
       starship.enable = true;
       yazi.enable = true;
+      bottom.enable = true;
     };
     system = {
       xdg.enable = true;
