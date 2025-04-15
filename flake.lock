@@ -1612,11 +1612,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1744750835,
-        "narHash": "sha256-K76o6fuG9Cor4spV7Vkn25pnBCFcvA1nw1pFaAYJWps=",
+        "lastModified": 1744751427,
+        "narHash": "sha256-0NdRXeOuAwDdtFAWmBGpovsmYvcjjIbBsYjqWFrzFa4=",
         "owner": "Neochaotics",
         "repo": "NixModule",
-        "rev": "966fc8dfe91e50e6057545780835bec632f9900a",
+        "rev": "156562d9cbc6d732e9d396ad24eedb50b699a05d",
         "type": "github"
       },
       "original": {
