@@ -1,9 +1,4 @@
-{ pkgs, inputs, ... }:
-let
-  hyprpkgs = inputs.hyprland.inputs.nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system};
-in
 {
-
   ff.hardware.displays = {
     test = {
       port = "DP-2";
@@ -35,8 +30,6 @@ in
     graphics = {
       enable = true;
       enable32Bit = true;
-      extraPackages = [ hyprpkgs.mesa.drivers ];
-      extraPackages32 = [ hyprpkgs.pkgsi686Linux.mesa.drivers ];
     };
     enableRedistributableFirmware = true;
 

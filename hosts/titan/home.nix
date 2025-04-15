@@ -41,6 +41,7 @@
       waybar.enable = true;
       zsh.enable = true;
       starship.enable = true;
+      yazi.enable = true;
     };
     system = {
       xdg.enable = true;

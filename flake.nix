@@ -61,12 +61,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    hypr-dynamic-cursors = {
-      url = "github:VirtCode/hypr-dynamic-cursors";
-      inputs.hyprland.follows = "hyprland";
-    };
-    hyprland.url = "github:hyprwm/Hyprland?tag=0.48.1";
-
     impermanence.url = "github:nix-community/impermanence";
 
     #lix-module = {
