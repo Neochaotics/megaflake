@@ -19,6 +19,8 @@
       zed-editor
       legcord
       element-desktop
+      kmon
+      gping
     ];
   };
 
