@@ -12,6 +12,7 @@ in
       enable = true;
       enableBashIntegration = true;
       enableZshIntegration = true;
+      shellWrapperName = "fm";
       settings = {
         manager = {
           ratio = [
