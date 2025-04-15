@@ -12,5 +12,6 @@
     ./zsh.nix
     ./starship.nix
     ./yazi.nix
+    ./bottom.nix
   ];
 }
