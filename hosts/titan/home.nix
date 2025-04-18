@@ -21,6 +21,7 @@
       element-desktop
       kmon
       gping
+      gitoxide
     ];
   };
 
