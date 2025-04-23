@@ -32,11 +32,13 @@ in
           enable = true;
           args = [
             "--rt"
-            "-b"
+            "-f"
             "-W 2560"
             "-H 1440"
             "-r 144"
             "--adaptive-sync"
+            "--hdr-enabled"
+            "-O DP-2"
           ];
         };
       };

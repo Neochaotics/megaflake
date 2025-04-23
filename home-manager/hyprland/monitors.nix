@@ -2,7 +2,7 @@
 {
   wayland.windowManager.hyprland.settings = lib.mkIf config.qm.desktop.hyprland.enable {
     monitor = [
-      "DP-2, 2560x1440@120, 0x0, 1"
+      "DP-2, 2560x1440@120, 0x0, 1, bitdepth, 10"
       "DP-1,1920x1080@60, auto-right, 1, transform, 3"
       "HDMI-A-1, 1920x1080@60, auto-up, 1"
     ];
