@@ -19,18 +19,26 @@ in
         "steam"
         "steam-unwrapped"
       ];
-    programs.steam = {
-      enable = true;
-      extraCompatPackages = with pkgs; [ proton-ge-bin ];
-      extraPackages = with pkgs; [
-        gamescope
-        mangohud
-        gamemode
-        mesa
-      ];
-      protontricks.enable = true;
-      gamescopeSession = {
+    programs = {
+      gamescope = {
         enable = true;
+        capSysNice = true;
+      };
+      steam = {
+        enable = true;
+        extraCompatPackages = with pkgs; [ proton-ge-bin ];
+        protontricks.enable = true;
+        gamescopeSession = {
+          enable = true;
+          args = [
+            "--rt"
+            "-b"
+            "-W 2560"
+            "-H 1440"
+            "-r 144"
+            "--adaptive-sync"
+          ];
+        };
       };
     };
   };
