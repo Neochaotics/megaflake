@@ -18,7 +18,7 @@
       "8, monitor:DP-1"
       "9, monitor:HDMI-A-1"
       "10, monitor:HDMI-A-1"
-      "name:G, on-created-empty:uwsm app -- steam.desktop:Library, monitor:DP-2"
+      "name:G, monitor:DP-2"
     ];
   };
 }
