@@ -17,7 +17,12 @@
     #enableNixpkgsReleaseCheck = false;
     packages = with pkgs; [
       zed-editor
-      vesktop
+      legcord
+      element-desktop
+      kmon
+      gping
+      gitoxide
+      warp
     ];
   };
 
@@ -40,6 +45,8 @@
       waybar.enable = true;
       zsh.enable = true;
       starship.enable = true;
+      yazi.enable = true;
+      bottom.enable = true;
     };
     system = {
       xdg.enable = true;
