@@ -22,7 +22,7 @@
       kmon
       gping
       gitoxide
-      warp
+      warp-terminal
     ];
   };
 
