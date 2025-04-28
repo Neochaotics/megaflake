@@ -109,14 +109,15 @@
         let
           # Import nixpkgs library
           inherit (self.inputs.nixpkgs) lib;
-          
+
           # Automatically discover all host configurations from the hosts directory
           hostNames = builtins.attrNames (
             lib.attrsets.filterAttrs (_name: type: type == "directory") (builtins.readDir ./hosts)
           );
-          
+
           # Function to create a NixOS system configuration for each host
-          mkHost = hostname:
+          mkHost =
+            hostname:
             self.inputs.nixpkgs.lib.nixosSystem {
               # Special arguments passed to all modules
               specialArgs = {
@@ -127,23 +128,23 @@
                   self
                   ;
               };
-              
+
               # Modules to include in each system configuration
               modules = [
                 # Host-specific configuration
                 ./hosts/${hostname}
-                
+
                 # Core system modules
                 inputs.impermanence.nixosModules.impermanence
                 inputs.home-manager.nixosModules.home-manager
-                
+
                 # Security modules
                 inputs.agenix.nixosModules.default
                 inputs.agenix-rekey.nixosModules.default
-                
+
                 # Package repositories
                 inputs.chaotic.nixosModules.default
-                
+
                 # Disabled modules
                 #inputs.lix-module.nixosModules.default
               ];
