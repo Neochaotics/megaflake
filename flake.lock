@@ -267,11 +267,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1745006896,
-        "narHash": "sha256-L0ze3EksEX7qKqCp8Wj7pfvlY8TYa9PbGZS5GCe1W1I=",
+        "lastModified": 1745884454,
+        "narHash": "sha256-olzYivhtHX9t1fwzLkUIEtbL+0oZi43eRkOtyjnn7uY=",
         "owner": "freedpom",
         "repo": "FreedpomFlake",
-        "rev": "4c20935318ab0c196e960b8b22add78ddc495023",
+        "rev": "695d2a92d8b7d653b40cbfcc29c3eb5f21a01811",
         "type": "github"
       },
       "original": {
@@ -732,11 +732,11 @@
         "treefmt-nix": "treefmt-nix_3"
       },
       "locked": {
-        "lastModified": 1741722062,
-        "narHash": "sha256-+ZJwpCuS4qoo4kSuXl+uKJo6yE4JUMpCMJHF0jMpN5E=",
+        "lastModified": 1745877494,
+        "narHash": "sha256-YHtTreP5MXOGHv1UdWRtye/nWjYKPdV7387Oqwvu9Ds=",
         "owner": "freedpom",
         "repo": "FreedpomFormatter",
-        "rev": "b77eea33cd3849300889997168dcc44bab0c0061",
+        "rev": "9cece4fd849cfd318e45db49736488256c65577b",
         "type": "github"
       },
       "original": {
@@ -1864,11 +1864,11 @@
     "trackers": {
       "flake": false,
       "locked": {
-        "lastModified": 1745791619,
-        "narHash": "sha256-ZqSRIvWoY3KX1IjEUD7oBKcdzxe1X+eLbB3jFOghyvg=",
+        "lastModified": 1745878021,
+        "narHash": "sha256-GcyU/4P3jFeKyFVI3gY6tJjZi6W8Gt+VigZQZlyTwoA=",
         "owner": "ngosang",
         "repo": "trackerslist",
-        "rev": "59c0bdc6ac9b43da98fa14b08cc199af7c3db170",
+        "rev": "645c5d409b7a74925d311ed4c5858c1b19c3191b",
         "type": "github"
       },
       "original": {
