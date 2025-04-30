@@ -167,8 +167,8 @@ in
         profiles.default = {
           isDefault = true;
           settings = {
-            "browser.search.defaultenginename" = "DuckDuckGo";
-            "browser.search.order.1" = "DuckDuckGo";
+            "browser.search.defaultenginename" = "ddg";
+            "browser.search.order.1" = "ddg";
           };
           search = {
             force = true;
@@ -176,7 +176,7 @@ in
             privateDefault = "Brave";
             order = [
               "Brave"
-              "DuckDuckGo"
+              "ddg"
             ];
             engines = {
               "Brave" = {
@@ -198,8 +198,8 @@ in
                 icon = "${pkgs.papirus-icon-theme}/share/icons/Papirus/64x64/apps/brave.svg";
                 definedAliases = [ "@br" ];
               };
-              "Bing".metaData.hidden = true;
-              "Google".metaData.hidden = true;
+              "bing".metaData.hidden = true;
+              "google".metaData.hidden = true;
               "Bookmarks".metaData.hidden = true;
               "LibRedirect".metaData.hidden = true;
             };

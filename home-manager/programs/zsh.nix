@@ -19,7 +19,7 @@ in
       syntaxHighlighting.enable = true;
       autocd = true;
       enableCompletion = true;
-      initExtra = ''
+      initContent = ''
         if uwsm check may-start; then
           exec uwsm start -S hyprland-uwsm.desktop
         fi
