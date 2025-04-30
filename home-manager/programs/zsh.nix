@@ -19,8 +19,9 @@ in
       syntaxHighlighting.enable = true;
       autocd = true;
       enableCompletion = true;
-      initContent = ''
-        if uwsm check may-start; then
+      profileExtra = ''
+        # Only try to launch Hyprland if we're on TTY1
+        if [[ "$(tty)" == "/dev/tty1" ]] && uwsm check may-start; then
           exec uwsm start -S hyprland-uwsm.desktop
         fi
       '';
