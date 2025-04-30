@@ -27,7 +27,7 @@
       "amd_iommu=on" # Enable IOMMU for better device isolation
       "iommu=pt" # Pass-through mode for IOMMU
       "idle=nomwait" # Improves AMD CPU power efficiency
-      "pcie_aspm=force" # Force PCIe Active State Power Management
+      # Removed "pcie_aspm=force" as it was causing USB devices to shut off
       "pci=pcie_bus_perf" # Optimize PCIe bus performance
       "transparent_hugepage=always" # Better memory management for Zen architecture
     ];
@@ -36,8 +36,17 @@
     enable = true;
     cpuFreqGovernor = "schedutil"; # Optimal for AMD Ryzen on B650
     powertop.enable = true;
-    scsiLinkPolicy = "med_power_with_dipm";
+    scsiLinkPolicy = "max_performance"; # Prevent storage devices from power-saving issues
   };
+
+  # Prevent USB devices from auto-suspending
+  services.udev.extraRules = ''
+    # Disable USB autosuspend for all USB devices (keyboards, mice, etc.)
+    ACTION=="add", SUBSYSTEM=="usb", ATTR{power/autosuspend}="0", ATTR{power/control}="on"
+
+    # Extra protection for HID devices specifically
+    ACTION=="add", SUBSYSTEM=="usb", ATTR{bInterfaceClass}=="03", ATTR{power/autosuspend}="-1", ATTR{power/control}="on"
+  '';
   hardware = {
     cpu = {
       amd = {
