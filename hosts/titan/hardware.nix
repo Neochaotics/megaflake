@@ -27,25 +27,24 @@
       "amd_iommu=on" # Enable IOMMU for better device isolation
       "iommu=pt" # Pass-through mode for IOMMU
       "idle=nomwait" # Improves AMD CPU power efficiency
-      # Removed "pcie_aspm=force" as it was causing USB devices to shut off
       "pci=pcie_bus_perf" # Optimize PCIe bus performance
       "transparent_hugepage=always" # Better memory management for Zen architecture
     ];
   };
   powerManagement = {
     enable = true;
-    cpuFreqGovernor = "schedutil"; # Optimal for AMD Ryzen on B650
+    cpuFreqGovernor = "performance";
     powertop.enable = true;
-    scsiLinkPolicy = "max_performance"; # Prevent storage devices from power-saving issues
+    scsiLinkPolicy = "max_performance";
   };
 
-  # Prevent USB devices from auto-suspending
+  # Prevent specific USB devices from auto-suspending
   services.udev.extraRules = ''
-    # Disable USB autosuspend for all USB devices (keyboards, mice, etc.)
-    ACTION=="add", SUBSYSTEM=="usb", ATTR{power/autosuspend}="0", ATTR{power/control}="on"
+    # CTRL Keyboard (04d8:eed2)
+    SUBSYSTEM=="usb", ATTR{idVendor}=="04d8", ATTR{idProduct}=="eed2", ATTR{power/control}="on", ATTR{power/autosuspend}="-1"
 
-    # Extra protection for HID devices specifically
-    ACTION=="add", SUBSYSTEM=="usb", ATTR{bInterfaceClass}=="03", ATTR{power/autosuspend}="-1", ATTR{power/control}="on"
+    # Razer Basilisk Ultimate Mouse (1532:0086)
+    SUBSYSTEM=="usb", ATTR{idVendor}=="1532", ATTR{idProduct}=="0086", ATTR{power/control}="on", ATTR{power/autosuspend}="-1"
   '';
   hardware = {
     cpu = {
