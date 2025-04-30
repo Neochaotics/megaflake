@@ -12,21 +12,47 @@
   boot = {
     initrd.availableKernelModules = [
       "ahci"
-      "amdgpu"
       "hid-generic"
       "nvme"
       "usbhid"
       "xhci_pci"
     ];
-    kernelModules = [ "kvm-amd" ];
     kernelParams = [
       "video=DP-2:2560x1440@144"
       "video=DP-1:1920x1080@60"
       "video=HDMI-A-1:1920x1080@60"
+
+      # AMD optimizations
+      "amd_pstate=active" # Enable active pstate for better power management
+      "amd_iommu=on" # Enable IOMMU for better device isolation
+      "iommu=pt" # Pass-through mode for IOMMU
+      "idle=nomwait" # Improves AMD CPU power efficiency
+      "pcie_aspm=force" # Force PCIe Active State Power Management
+      "pci=pcie_bus_perf" # Optimize PCIe bus performance
+      "transparent_hugepage=always" # Better memory management for Zen architecture
     ];
   };
+  powerManagement = {
+    enable = true;
+    cpuFreqGovernor = "schedutil"; # Optimal for AMD Ryzen on B650
+    powertop.enable = true;
+    scsiLinkPolicy = "med_power_with_dipm";
+  };
   hardware = {
-    cpu.amd.updateMicrocode = true;
+    cpu = {
+      amd = {
+        updateMicrocode = true;
+        sev.enable = true; # Enable AMD Secure Encrypted Virtualization
+      };
+    };
+
+    # AMD chipset specific features
+    amdgpu = {
+      initrd.enable = true;
+      opencl.enable = true;
+      amdvlk.enable = true;
+    };
+
     graphics = {
       enable = true;
       enable32Bit = true;
