@@ -39,7 +39,20 @@ in
             "-O DP-2"
           ];
         };
+        extraPkgs = with pkgs; [
+          mangohud
+          gamemode
+        ];
       };
+    };
+
+    # Enable gamemode service
+    services.gamemode.enable = true;
+
+    # Configure mangohud system-wide
+    environment.sessionVariables = {
+      MANGOHUD = "1";
+      MANGOHUD_CONFIG = "cpu_temp,gpu_temp,gpu_core_clock,gpu_mem_clock,fps,frametime,vram,ram";
     };
   };
 }
