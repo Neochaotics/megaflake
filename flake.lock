@@ -758,11 +758,11 @@
         "treefmt-nix": "treefmt-nix_4"
       },
       "locked": {
-        "lastModified": 1741722062,
-        "narHash": "sha256-+ZJwpCuS4qoo4kSuXl+uKJo6yE4JUMpCMJHF0jMpN5E=",
+        "lastModified": 1745877494,
+        "narHash": "sha256-YHtTreP5MXOGHv1UdWRtye/nWjYKPdV7387Oqwvu9Ds=",
         "owner": "freedpom",
         "repo": "FreedpomFormatter",
-        "rev": "b77eea33cd3849300889997168dcc44bab0c0061",
+        "rev": "9cece4fd849cfd318e45db49736488256c65577b",
         "type": "github"
       },
       "original": {
@@ -1093,11 +1093,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1743788974,
-        "narHash": "sha256-2LeVyQZI2wTkSzMLvnN/kJjXVWp4HCVUoq17Bv8TNTk=",
+        "lastModified": 1746040799,
+        "narHash": "sha256-osgPX/SzIpkR50vev/rqoTEAVkEcOWXoQXmbzsaI4KU=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "0f5908daf890c3d7e7052bef1d6deb0f2710aaa1",
+        "rev": "5f217e5a319f6c186283b530f8c975e66c028433",
         "type": "github"
       },
       "original": {
@@ -1566,11 +1566,11 @@
         "systems": "systems_3"
       },
       "locked": {
-        "lastModified": 1746010885,
-        "narHash": "sha256-/Wwmjxwk+zYS8qyWxFw4Ap5iOyitPCz60LceqAYsrBQ=",
+        "lastModified": 1746052492,
+        "narHash": "sha256-1O7oXrrzGij2HwbwwLcbGNM5UbqFXTRb1q59lzE71jM=",
         "owner": "notashelf",
         "repo": "nvf",
-        "rev": "099907591a98163283b8d89afe9a342216d454da",
+        "rev": "ef3928be60ffee84062a0db4392834b339833245",
         "type": "github"
       },
       "original": {
@@ -1612,11 +1612,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1746042061,
-        "narHash": "sha256-SlT6HzSfShQ10E7zpw/otuRd3O5/J6mGYz5YZEBcSw8=",
+        "lastModified": 1746057548,
+        "narHash": "sha256-B5D3JXKVCOFKPe7QuNhSOePqc27rKA5Yqy/RLCOEC5E=",
         "owner": "Neochaotics",
         "repo": "NixModule",
-        "rev": "41a71ebdd05855f65ec45d7bddc5883e23cfdf90",
+        "rev": "745c480c7bd22bdb595289755ad39e583b3c52f1",
         "type": "github"
       },
       "original": {
@@ -1864,11 +1864,11 @@
     "trackers": {
       "flake": false,
       "locked": {
-        "lastModified": 1745964411,
-        "narHash": "sha256-qQPJFbamhwHIN32wdr2vlwW2k1pHmVOHdibCG8IGfY4=",
+        "lastModified": 1746050822,
+        "narHash": "sha256-bU8VuzfIzk+em8EE/KB3pG4fgK/Vr1cRIVjwys3jYKc=",
         "owner": "ngosang",
         "repo": "trackerslist",
-        "rev": "29318d5d0660f29fd31a67ee501acab136ec2071",
+        "rev": "fb3cc4411036e9c511cd41187735c64215712fff",
         "type": "github"
       },
       "original": {
