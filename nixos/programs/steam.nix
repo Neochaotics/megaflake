@@ -24,6 +24,10 @@ in
         enable = true;
         capSysNice = true;
       };
+      gamemode = {
+        enable = true;
+        enableRenice = false; # handled by ananicy
+      };
       steam = {
         enable = true;
         extraCompatPackages = with pkgs; [ proton-ge-bin ];
@@ -45,9 +49,6 @@ in
         ];
       };
     };
-
-    # Enable gamemode service
-    services.gamemode.enable = true;
 
     # Configure mangohud system-wide
     environment.sessionVariables = {
