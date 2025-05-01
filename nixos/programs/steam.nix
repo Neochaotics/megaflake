@@ -39,7 +39,7 @@ in
             "-O DP-2"
           ];
         };
-        extraPkgs = with pkgs; [
+        extraPackages = with pkgs; [
           mangohud
           gamemode
         ];
