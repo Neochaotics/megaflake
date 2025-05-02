@@ -33,45 +33,13 @@ extra-substituters = [
 ];
 ```
 
-## Installation
-
-1. Clone this repository to `/etc/nixos`:
-
-   ```bash
-   sudo git clone https://github.com/Neochaotics/nixosconf /etc/nixos
-   ```
-
-1. Choose or create a host configuration in the `hosts/` directory
-
-1. Build and activate the configuration:
-
-   ```bash
-   cd /etc/nixos
-   sudo nixos-rebuild switch --flake .#hostname
-   ```
-
 ## Directory Structure
 
 - **flake.nix**: Core configuration and input definitions
-- **hosts/**: Host-specific configurations (automatically discovered)
+- **hosts/**: Host-specific configurations
 - **home/**: Home-manager configurations
 - **secrets/**: Encrypted secrets managed by agenix
 - **scripts/**: Utility scripts for system management
-
-## System Requirements
-
-- NixOS (unstable channel recommended)
-- x86_64 or aarch64 architecture
-- Internet connection during initial setup
-- GPG or SSH keys for secrets (optional, required for agenix)
-
-## Host Configuration
-
-To add a new host:
-
-1. Create a directory in `hosts/` with the hostname
-1. Add configuration.nix, hardware-configuration.nix, and other modules
-1. The system automatically discovers and builds configurations for all hosts in the directory
 
 ## Module Integration
 
@@ -102,7 +70,3 @@ qm = {
 - **Stylix**: System-wide theming
 - **Disko**: Declarative disk partitioning
 - **flake-parts**: Modular flake structure
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
