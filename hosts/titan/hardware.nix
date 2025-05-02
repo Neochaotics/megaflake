@@ -1,4 +1,5 @@
-{
+
+{pkgs, ...}: {
   ff.hardware.displays = {
     test = {
       port = "DP-2";
@@ -29,6 +30,14 @@
       "idle=nomwait" # Improves AMD CPU power efficiency
       "pci=pcie_bus_perf" # Optimize PCIe bus performance
       "transparent_hugepage=always" # Better memory management for Zen architecture
+
+      # GPU optimizations for latency reduction
+      "amdgpu.ppfeaturemask=0xffffffff" # Enable all PowerPlay features
+      "amdgpu.dc=1" # Enable Display Core
+      "amdgpu.dcfeaturemask=0x8" # Enable FreeSync support
+      "amdgpu.freesync_video=1" # Enable FreeSync for video playback
+      "amdgpu.runpm=1" # Enable runtime power management
+      "amdgpu.hw_i2c=1" # Enable hardware I2C for better EDID support
     ];
   };
   powerManagement = {
@@ -45,6 +54,15 @@
 
     # Razer Basilisk Ultimate Mouse (1532:0086)
     SUBSYSTEM=="usb", ATTR{idVendor}=="1532", ATTR{idProduct}=="0086", ATTR{power/control}="on", ATTR{power/autosuspend}="-1"
+
+    # Focusrite Scarlett Solo
+    SUBSYSTEM=="sound", ATTR{id}=="*Focusrite*", ENV{PULSE_PROFILE_SET}="professional-audio.conf", ENV{PULSE_PROFILE}="analog-stereo", ATTR{power/control}="on"
+
+    # DualSense Controller
+    SUBSYSTEM=="sound", ATTR{id}=="*DualSense*", ENV{PULSE_PROFILE_SET}="game-controller.conf", ENV{PULSE_PROFILE}="analog-stereo+input", ATTR{power/control}="on"
+
+    # Generic USB Audio
+    SUBSYSTEM=="sound", ATTR{id}=="*Generic_USB_Audio*", ENV{PULSE_PROFILE_SET}="mixer.conf", ENV{PULSE_PROFILE}="analog-stereo"
   '';
   hardware = {
     cpu = {
@@ -64,7 +82,11 @@
     graphics = {
       enable = true;
       enable32Bit = true;
+      extraPackages = with pkgs; [
+        amdvlk
+      ];
     };
+
     enableRedistributableFirmware = true;
 
     # wouldnt build 04/04/2025
@@ -94,5 +116,15 @@
         MINSTOP=hwmon3/pwm1=16
       '';
     };
+  };
+
+  # Environment variables for better GPU and display performance
+  environment.sessionVariables = {
+    WLR_DRM_NO_ATOMIC = "1"; # Helps with flickering issues
+    __GL_GSYNC_ALLOWED = "1"; # Enable G-Sync if available
+    __GL_VRR_ALLOWED = "1"; # Enable Variable Refresh Rate
+    ENABLE_VKBASALT = "1"; # Enable VkBasalt for better visuals with minimal overhead
+    AMD_VULKAN_ICD = "RADV"; # Use RADV by default
+    __GL_THREADED_OPTIMIZATIONS = "1"; # Enable threaded optimizations
   };
 }
