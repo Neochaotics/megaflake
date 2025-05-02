@@ -267,16 +267,15 @@
         ]
       },
       "locked": {
-        "lastModified": 1746213217,
+        "lastModified": 1746216085,
         "narHash": "sha256-CZMHkiJILsn+MW/A6HvtwogHRlsmSelxZ0HCdKcCovc=",
         "owner": "freedpom",
         "repo": "FreedpomFlake",
-        "rev": "f86de1f97ffef580985b7968f11da3b5b21db6d7",
+        "rev": "b96ce38c1e1a0e5e2b80d24472be71d35cfd845a",
         "type": "github"
       },
       "original": {
         "owner": "freedpom",
-        "ref": "feat/pipewire-low-latency",
         "repo": "FreedpomFlake",
         "type": "github"
       }
@@ -1613,11 +1612,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1746057873,
-        "narHash": "sha256-9afiylkG+jvLfqykQozSH3AcAiEJ3ZICpJGvbFWiyJE=",
+        "lastModified": 1746216162,
+        "narHash": "sha256-sdNzMshMtL/gL5FFR0dV1yXoZP/rcqPhtOJObO0ow68=",
         "owner": "Neochaotics",
         "repo": "NixModule",
-        "rev": "6b1836606cc21a6e4fd47ba539349b872aac1fdd",
+        "rev": "c899fd9d83eeb9552da41224cb24a439ce499799",
         "type": "github"
       },
       "original": {
