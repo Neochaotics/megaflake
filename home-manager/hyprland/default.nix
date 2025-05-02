@@ -49,21 +49,5 @@ in
         exec uwsm start -S hyprland-uwsm.desktop
       fi
     '';
-
-    xdg.portal = {
-      enable = lib.mkForce true;
-      extraPortals = [
-        pkgs.xdg-desktop-portal-hyprland
-        pkgs.xdg-desktop-portal-gtk
-      ];
-      config = {
-        hyprland = {
-          default = [
-            "hyprland"
-            "gtk"
-          ];
-        };
-      };
-    };
   };
 }
