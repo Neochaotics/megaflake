@@ -27,6 +27,13 @@ in
                   require("avante_lib").load()
                 '';
                 setupModule = "avante";
+                setupOpts = {
+                  provider = "ollama";
+                  ollama = {
+                    endpoint = "http://localhost:11434/";
+                    model = "";
+                  };
+                };
               };
             };
           };
