@@ -27,7 +27,7 @@ let
       owner = "Kaiser-Yang";
       repo = "blink-cmp-git";
       rev = "master";
-      sha256 = lib.fakeSha256;
+      sha256 = "sha256-DXeMRK96t6knpb+XO+b1nsbcHlQMYPjUID06IAfhsis=";
     };
   };
   blink-cmp-conventional-commits = pkgs.vimUtils.buildVimPlugin {
