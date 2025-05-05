@@ -1,16 +1,4 @@
-{ pkgs, lib, ... }:
-
-let
-  blink-cmp-avante = pkgs.vimUtils.buildVimPlugin {
-    name = "blink-cmp-avante";
-    src = pkgs.fetchFromGitHub {
-      owner = "Kaiser-Yang";
-      repo = "blink-cmp-avante";
-      rev = "main";
-      sha256 = lib.fakeSha256;
-    };
-  };
-in
+_:
 {
   programs.nvf.settings.vim.autocomplete.blink-cmp = {
     enable = true;
@@ -90,7 +78,7 @@ in
 
       avante = {
         enable = true;
-        package = blink-cmp-avante;
+        package = null;
         module = "blink-cmp-avante";
       };
     };
