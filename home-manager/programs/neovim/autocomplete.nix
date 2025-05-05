@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ pkgs, ... }:
 let
   blink-cmp-avante = pkgs.vimUtils.buildVimPlugin {
     pname = "blink-cmp-avante";
@@ -8,36 +8,6 @@ let
       repo = "blink-cmp-avante";
       rev = "master";
       sha256 = "sha256-YCBYae/hP0B7eaRf/Q9nel9RiqKV5ih1LkTdIa1hymU=";
-    };
-  };
-  blink-cmp-dictionary = pkgs.vimUtils.buildVimPlugin {
-    pname = "blink-cmp-dictionary";
-    version = "latest";
-    src = pkgs.fetchFromGitHub {
-      owner = "Kaiser-Yang";
-      repo = "blink-cmp-dictionary";
-      rev = "master";
-      sha256 = "sha256-Yws8B+l5L7ZgtEUuirrDXCL2X66Jl5+bcoOLXsqdVA8=";
-    };
-  };
-  blink-cmp-git = pkgs.vimUtils.buildVimPlugin {
-    pname = "blink-cmp-git";
-    version = "latest";
-    src = pkgs.fetchFromGitHub {
-      owner = "Kaiser-Yang";
-      repo = "blink-cmp-git";
-      rev = "master";
-      sha256 = "sha256-DXeMRK96t6knpb+XO+b1nsbcHlQMYPjUID06IAfhsis=";
-    };
-  };
-  blink-cmp-conventional-commits = pkgs.vimUtils.buildVimPlugin {
-    pname = "blink-cmp-avante";
-    version = "latest";
-    src = pkgs.fetchFromGitHub {
-      owner = "disrupted";
-      repo = "blink-cmp-conventional-commits";
-      rev = "main";
-      sha256 = lib.fakeSha256;
     };
   };
 in
@@ -88,15 +58,6 @@ in
           avante = {
             module = "blink-cmp-avante";
           };
-          dictionary = {
-            module = "blink-cmp-dictionary";
-          };
-          git = {
-            module = "blink-cmp-git";
-          };
-          conventional-commits = {
-            module = "blink-cmp-conventional-commits";
-          };
         };
       };
 
@@ -132,24 +93,6 @@ in
         enable = true;
         package = blink-cmp-avante;
         module = "blink-cmp-avante";
-      };
-
-      dictionary = {
-        enable = true;
-        package = blink-cmp-dictionary;
-        module = "blink-cmp-dictionary";
-      };
-
-      git = {
-        enable = true;
-        package = blink-cmp-git;
-        module = "blink-cmp-git";
-      };
-
-      conventional-commits = {
-        enable = true;
-        package = blink-cmp-conventional-commits;
-        module = "blink-cmp-conventional-commits";
       };
     };
   };
