@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 let
   blink-cmp-avante = pkgs.vimUtils.buildVimPlugin {
     pname = "blink-cmp-avante";
@@ -17,7 +17,7 @@ let
       owner = "Kaiser-Yang";
       repo = "blink-cmp-dictionary";
       rev = "master";
-      sha256 = "sha256-YCBYae/hP0B7eaRf/Q9nel9RiqKV5ih1LkTdIa1hymU=";
+      sha256 = lib.fakeSha256;
     };
   };
   blink-cmp-git = pkgs.vimUtils.buildVimPlugin {
@@ -27,7 +27,7 @@ let
       owner = "Kaiser-Yang";
       repo = "blink-cmp-git";
       rev = "master";
-      sha256 = "sha256-YCBYae/hP0B7eaRf/Q9nel9RiqKV5ih1LkTdIa1hymU=";
+      sha256 = lib.fakeSha256;
     };
   };
   blink-cmp-conventional-commits = pkgs.vimUtils.buildVimPlugin {
@@ -37,7 +37,7 @@ let
       owner = "disrupted";
       repo = "blink-cmp-conventional-commits";
       rev = "main";
-      sha256 = "sha256-YCBYae/hP0B7eaRf/Q9nel9RiqKV5ih1LkTdIa1hymU=";
+      sha256 = lib.fakeSha256;
     };
   };
 in
