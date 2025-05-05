@@ -68,7 +68,7 @@
 
     # -- Custom modules and flakes --
     ff = {
-      url = "github:freedpom/FreedpomFlake";
+      url = "path:/home/quinno/github/freedpom/FreedpomFlake";
       inputs.nixpkgs.follows = "nixpkgs";
       #inputs.home-manager.follows = "home-manager";
     };
@@ -77,7 +77,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     qm = {
-      url = "github:Neochaotics/NixModule";
+      url = "path:/home/quinno/github/Neochaotics/NixModule";
       inputs.nixpkgs.follows = "nixpkgs";
       #inputs.home-manager.follows = "home-manager";
     };
