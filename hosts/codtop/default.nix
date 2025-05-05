@@ -85,7 +85,6 @@ in
     programs = {
       hyprland.enable = true;
       steam.enable = true;
-      nvf.enable = true;
     };
     stylix.enable = true;
     wireguard.enable = false;
