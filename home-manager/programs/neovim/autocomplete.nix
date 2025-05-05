@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ pkgs, ... }:
 let
   blink-cmp-avante = pkgs.vimUtils.buildVimPlugin {
     pname = "blink-cmp-avante";
@@ -7,7 +7,7 @@ let
       owner = "Kaiser-Yang";
       repo = "blink-cmp-avante";
       rev = "master";
-      sha256 = lib.fakeSha256;
+      sha256 = "sha256-YCBYae/hP0B7eaRf/Q9nel9RiqKV5ih1LkTdIa1hymU=";
     };
   };
 in
