@@ -13,5 +13,6 @@
     ./starship.nix
     ./yazi.nix
     ./bottom.nix
+    ./nvim.nix
   ];
 }
