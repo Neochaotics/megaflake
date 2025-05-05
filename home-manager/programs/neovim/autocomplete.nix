@@ -1,5 +1,4 @@
-_:
-{
+_: {
   programs.nvf.settings.vim.autocomplete.blink-cmp = {
     enable = true;
 
@@ -24,16 +23,12 @@ _:
           "path"
           "snippets"
           "buffer"
-          "avante"
           "spell"
           "ripgrep"
         ];
 
         # Configure providers
         providers = {
-          avante = {
-            module = "blink-cmp-avante";
-          };
         };
       };
 
@@ -74,12 +69,6 @@ _:
         enable = true;
         package = "blink-cmp-spell";
         module = "blink-cmp-spell";
-      };
-
-      avante = {
-        enable = true;
-        package = null;
-        module = "blink-cmp-avante";
       };
     };
   };
