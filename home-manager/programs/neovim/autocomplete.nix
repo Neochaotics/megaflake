@@ -6,7 +6,7 @@ let
     src = pkgs.fetchFromGitHub {
       owner = "Kaiser-Yang";
       repo = "blink-cmp-avante";
-      rev = "main";
+      rev = "master";
       sha256 = lib.fakeSha256;
     };
   };
