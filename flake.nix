@@ -13,12 +13,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    obsidian-nvim.url = "github:epwalsh/obsidian.nvim";
+    #obsidian-nvim.url = "github:epwalsh/obsidian.nvim";
 
     nvf = {
       url = "github:notashelf/nvf";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.obsidian-nvim.follows = "obsidian-nvim";
+      #inputs.obsidian-nvim.follows = "obsidian-nvim";
     };
   };
 
