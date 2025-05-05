@@ -17,6 +17,16 @@ in
 
     friendly-snippets.enable = true;
 
+    mappings = {
+      complete = "<C-Space>";
+      confirm = "<CR>";
+      next = "<Tab>";
+      previous = "<S-Tab>";
+      close = "<C-e>";
+      scrollDocsUp = "<C-u>";
+      scrollDocsDown = "<C-d>";
+    };
+
     setupOpts = {
       completion = {
         menu.auto_show = true;
@@ -49,15 +59,6 @@ in
       # Configure key mappings
       keymap = {
         preset = "none";
-        "<CR>" = [ "confirm" ];
-        "<Tab>" = [ "select_next_or_confirm" ];
-        "<S-Tab>" = [ "select_prev" ];
-        "<C-Space>" = [ "complete" ];
-        "<C-e>" = [ "close" ];
-        "<C-u>" = [ "scroll_docs_up" ];
-        "<C-d>" = [ "scroll_docs_down" ];
-        "<C-n>" = [ "select_next" ];
-        "<C-p>" = [ "select_prev" ];
       };
 
       cmdline = {
