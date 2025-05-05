@@ -15,7 +15,7 @@ in
         enable = true;
         settings = {
         vim = {
-          viAlias = false;
+          viAlias = true;
           vimAlias = true;
 
           lazy = {
@@ -31,7 +31,7 @@ in
                   provider = "ollama";
                   ollama = {
                     endpoint = "http://localhost:11434/";
-                    model = "";
+                    model = "qwen2.5-coder:32b";
                   };
                 };
               };
