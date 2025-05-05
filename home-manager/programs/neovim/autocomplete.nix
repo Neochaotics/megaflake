@@ -1,4 +1,17 @@
-_: {
+{ pkgs, lib, ... }:
+let
+  blink-cmp-avante = pkgs.vimUtils.buildVimPlugin {
+    pname = "blink-cmp-avante";
+    version = "latest";
+    src = pkgs.fetchFromGitHub {
+      owner = "Kaiser-Yang";
+      repo = "blink-cmp-avante";
+      rev = "main";
+      sha256 = lib.fakeSha256;
+    };
+  };
+in
+{
   programs.nvf.settings.vim.autocomplete.blink-cmp = {
     enable = true;
 
@@ -25,10 +38,11 @@ _: {
           "buffer"
           "spell"
           "ripgrep"
+          "avante"
         ];
 
-        # Configure providers
         providers = {
+          avante.module = "blink-cmp-avante";
         };
       };
 
@@ -69,6 +83,12 @@ _: {
         enable = true;
         package = "blink-cmp-spell";
         module = "blink-cmp-spell";
+      };
+
+      avante = {
+        enable = true;
+        package = blink-cmp-avante;
+        module = "blink-cmp-avante";
       };
     };
   };
