@@ -10,6 +10,36 @@ let
       sha256 = "sha256-YCBYae/hP0B7eaRf/Q9nel9RiqKV5ih1LkTdIa1hymU=";
     };
   };
+  blink-cmp-dictionary = pkgs.vimUtils.buildVimPlugin {
+    pname = "blink-cmp-dictionary";
+    version = "latest";
+    src = pkgs.fetchFromGitHub {
+      owner = "Kaiser-Yang";
+      repo = "blink-cmp-dictionary";
+      rev = "master";
+      sha256 = "sha256-YCBYae/hP0B7eaRf/Q9nel9RiqKV5ih1LkTdIa1hymU=";
+    };
+  };
+  blink-cmp-git = pkgs.vimUtils.buildVimPlugin {
+    pname = "blink-cmp-git";
+    version = "latest";
+    src = pkgs.fetchFromGitHub {
+      owner = "Kaiser-Yang";
+      repo = "blink-cmp-git";
+      rev = "master";
+      sha256 = "sha256-YCBYae/hP0B7eaRf/Q9nel9RiqKV5ih1LkTdIa1hymU=";
+    };
+  };
+  blink-cmp-conventional-commits = pkgs.vimUtils.buildVimPlugin {
+    pname = "blink-cmp-avante";
+    version = "latest";
+    src = pkgs.fetchFromGitHub {
+      owner = "disrupted";
+      repo = "blink-cmp-conventional-commits";
+      rev = "main";
+      sha256 = "sha256-YCBYae/hP0B7eaRf/Q9nel9RiqKV5ih1LkTdIa1hymU=";
+    };
+  };
 in
 {
   programs.nvf.settings.vim.autocomplete.blink-cmp = {
@@ -49,14 +79,27 @@ in
           "spell"
           "ripgrep"
           "avante"
+          "conventional-commits"
+          "dictionary"
+          "git"
         ];
 
         providers = {
-          avante.module = "blink-cmp-avante";
+          avante = {
+            module = "blink-cmp-avante";
+          };
+          dictionary = {
+            module = "blink-cmp-dictionary";
+          };
+          git = {
+            module = "blink-cmp-git";
+          };
+          conventional-commits = {
+            module = "blink-cmp-conventional-commits";
+          };
         };
       };
 
-      # Configure key mappings
       keymap = {
         preset = "none";
       };
@@ -72,7 +115,6 @@ in
       };
     };
 
-    # Configure built-in source plugins
     sourcePlugins = {
       ripgrep = {
         enable = true;
@@ -90,6 +132,24 @@ in
         enable = true;
         package = blink-cmp-avante;
         module = "blink-cmp-avante";
+      };
+
+      dictionary = {
+        enable = true;
+        package = blink-cmp-dictionary;
+        module = "blink-cmp-dictionary";
+      };
+
+      git = {
+        enable = true;
+        package = blink-cmp-git;
+        module = "blink-cmp-git";
+      };
+
+      conventional-commits = {
+        enable = true;
+        package = blink-cmp-conventional-commits;
+        module = "blink-cmp-conventional-commits";
       };
     };
   };
