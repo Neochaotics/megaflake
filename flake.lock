@@ -1730,8 +1730,8 @@
         "nvf": "nvf_2"
       },
       "locked": {
-        "lastModified": 1746474268,
-        "narHash": "sha256-iqOGncliDtDO45Z10LWBM2DMd0f2rXrF6KRLgUtx/yg=",
+        "lastModified": 1746475669,
+        "narHash": "sha256-aai5pt/67OOlSok+KKRiTU6qXPmNx7f+0gXWN1wRg4c=",
         "path": "/home/quinno/github/Neochaotics/NixModule",
         "type": "path"
       },
