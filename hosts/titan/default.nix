@@ -80,6 +80,7 @@ in
       ananicy.enable = true;
       pipewire.enable = true;
       openssh.enable = true;
+      ollama.enable = true;
     };
     system = {
       fontsu.enable = true;
@@ -97,7 +98,6 @@ in
     programs = {
       hyprland.enable = true;
       steam.enable = true;
-      nvf.enable = true;
     };
     stylix.enable = true;
     wireguard.enable = false;

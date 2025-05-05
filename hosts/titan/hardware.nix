@@ -54,15 +54,6 @@
 
     # Razer Basilisk Ultimate Mouse (1532:0086)
     SUBSYSTEM=="usb", ATTR{idVendor}=="1532", ATTR{idProduct}=="0086", ATTR{power/control}="on", ATTR{power/autosuspend}="-1"
-
-    # Focusrite Scarlett Solo
-    SUBSYSTEM=="sound", ATTR{id}=="*Focusrite*", ENV{PULSE_PROFILE_SET}="professional-audio.conf", ENV{PULSE_PROFILE}="analog-stereo", ATTR{power/control}="on"
-
-    # DualSense Controller
-    SUBSYSTEM=="sound", ATTR{id}=="*DualSense*", ENV{PULSE_PROFILE_SET}="game-controller.conf", ENV{PULSE_PROFILE}="analog-stereo+input", ATTR{power/control}="on"
-
-    # Generic USB Audio
-    SUBSYSTEM=="sound", ATTR{id}=="*Generic_USB_Audio*", ENV{PULSE_PROFILE_SET}="mixer.conf", ENV{PULSE_PROFILE}="analog-stereo"
   '';
   hardware = {
     cpu = {

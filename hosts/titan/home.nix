@@ -47,6 +47,7 @@
       starship.enable = true;
       yazi.enable = true;
       bottom.enable = true;
+      nvim.enable = true;
     };
     system = {
       xdg.enable = true;
