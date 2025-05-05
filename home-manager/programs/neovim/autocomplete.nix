@@ -1,0 +1,98 @@
+{ pkgs, lib, ... }:
+
+let
+  blink-cmp-avante = pkgs.vimUtils.buildVimPlugin {
+    name = "blink-cmp-avante";
+    src = pkgs.fetchFromGitHub {
+      owner = "Kaiser-Yang";
+      repo = "blink-cmp-avante";
+      rev = "main";
+      sha256 = lib.fakeSha256;
+    };
+  };
+in
+{
+  programs.nvf.settings.vim.autocomplete.blink-cmp = {
+    enable = true;
+
+    friendly-snippets.enable = true;
+
+    setupOpts = {
+      completion = {
+        menu.auto_show = true;
+        documentation = {
+          auto_show = true;
+          auto_show_delay_ms = 200;
+        };
+      };
+
+      fuzzy = {
+        implementation = "prefer_rust";
+      };
+
+      sources = {
+        default = [
+          "lsp"
+          "path"
+          "snippets"
+          "buffer"
+          "avante"
+          "spell"
+          "ripgrep"
+        ];
+
+        # Configure providers
+        providers = {
+          avante = {
+            module = "blink-cmp-avante";
+          };
+        };
+      };
+
+      # Configure key mappings
+      keymap = {
+        preset = "none";
+        "<CR>" = [ "confirm" ];
+        "<Tab>" = [ "select_next_or_confirm" ];
+        "<S-Tab>" = [ "select_prev" ];
+        "<C-Space>" = [ "complete" ];
+        "<C-e>" = [ "close" ];
+        "<C-u>" = [ "scroll_docs_up" ];
+        "<C-d>" = [ "scroll_docs_down" ];
+        "<C-n>" = [ "select_next" ];
+        "<C-p>" = [ "select_prev" ];
+      };
+
+      cmdline = {
+        sources = [
+          "path"
+          "cmdline"
+        ];
+        keymap = {
+          preset = "none";
+        };
+      };
+    };
+
+    # Configure built-in source plugins
+    sourcePlugins = {
+      ripgrep = {
+        enable = true;
+        package = "blink-ripgrep-nvim";
+        module = "blink-ripgrep";
+      };
+
+      spell = {
+        enable = true;
+        package = "blink-cmp-spell";
+        module = "blink-cmp-spell";
+      };
+
+      avante = {
+        enable = true;
+        package = blink-cmp-avante;
+        module = "blink-cmp-avante";
+      };
+    };
+  };
+}
