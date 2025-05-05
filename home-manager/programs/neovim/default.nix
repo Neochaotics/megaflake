@@ -12,7 +12,7 @@ in
 
   imports = [
     inputs.nvf.homeManagerModules.default
-    #./autocomplete.nix
+    ./autocomplete.nix
   ];
 
   options.qm.programs.nvim = {
@@ -46,7 +46,9 @@ in
           };
 
           enableLuaLoader = true;
-          enableEditorconfig = true;
+          globals = {
+            editorconfig = true;
+          };
 
           debugMode = {
             enable = false;
