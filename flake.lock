@@ -1733,11 +1733,11 @@
         "nvf": "nvf_2"
       },
       "locked": {
-        "lastModified": 1746471039,
-        "narHash": "sha256-MeySKQLUzYVhqBMJg0eivR1dWa54Q/S3osbZIGRdHDg=",
+        "lastModified": 1746471616,
+        "narHash": "sha256-MOagupqBxcqpOCr3hdQvYgSiqVMz+Ob/fnO9JDaX06U=",
         "owner": "Neochaotics",
         "repo": "NixModule",
-        "rev": "a8eb91d33b78a2ff76b11720e0409f04beafbd0f",
+        "rev": "0d7a394d0fab45abf6eff830d493a23bc331bd78",
         "type": "github"
       },
       "original": {
