@@ -13,6 +13,7 @@ in
   imports = [
     inputs.nvf.homeManagerModules.default
     ./autocomplete.nix
+    ./binds.nix
   ];
 
   options.qm.programs.nvim = {
