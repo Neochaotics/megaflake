@@ -14,6 +14,10 @@ in
     inputs.nvf.homeManagerModules.default
     ./autocomplete.nix
     ./binds.nix
+    ./comments.nix
+    ./dashboard.nix
+    ./debug.nix
+    ./diagnostics.nix
   ];
 
   options.qm.programs.nvim = {
@@ -53,6 +57,7 @@ in
 
           debugMode = {
             enable = false;
+            level = 16;
             logFile = "/tmp/nvim.log";
           };
 
