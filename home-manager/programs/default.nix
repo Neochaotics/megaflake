@@ -14,5 +14,6 @@
     ./yazi.nix
     ./bottom.nix
     ./neovim
+    ./mpv.nix
   ];
 }
