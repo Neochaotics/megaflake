@@ -7,7 +7,7 @@ _: {
       "usb_storage"
       "sd_mod"
     ];
-    kernelModules = [ "kvm-intel" ];  # Change to kvm-amd for AMD processors
+    kernelModules = [ "kvm-intel" ]; # Change to kvm-amd for AMD processors
   };
   hardware.enableRedistributableFirmware = true;
 
@@ -30,4 +30,3 @@ _: {
     };
   };
 }
-

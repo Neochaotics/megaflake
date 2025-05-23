@@ -16,10 +16,23 @@ in
     inputs.disko.nixosModules.disko
     ./disks.nix
     ./hardware.nix
+    (import ../../home/quinno {
+      userName = username;
+      inherit lib;
+    })
   ];
 
   boot = {
     kernelPackages = pkgs.linuxPackages_latest;
+  };
+
+  age = {
+    rekey = {
+      masterIdentities = [ "/persist/age.key" ];
+      localStorageDir = "${self}" + "/secrets/rekeyed/${config.networking.hostName}";
+      generatedSecretsDir = "${self}" + "/secrets/generated/${config.networking.hostName}";
+      storageMode = "local";
+    };
   };
 
   users = {
@@ -73,4 +86,3 @@ in
     stylix.enable = true;
   };
 }
-
