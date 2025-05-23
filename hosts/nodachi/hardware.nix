@@ -1,5 +1,5 @@
-
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   ff.hardware.displays = {
     test = {
       port = "DP-2";
