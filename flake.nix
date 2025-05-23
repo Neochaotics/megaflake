@@ -23,9 +23,14 @@
   inputs = {
     # -- Core dependencies --
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
 
     # -- System management --
+    nix-on-droid = {
+      url = "github:nix-community/nix-on-droid/release-24.05";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -152,5 +157,17 @@
         in
         # Generate configurations for all hosts
         lib.genAttrs hostNames mkHost;
+
+      # Nix-on-Droid configurations
+      flake.nixOnDroidConfigurations.tanto = inputs.nix-on-droid.lib.nixOnDroidConfiguration {
+        pkgs = inputs.nixpkgs.legacyPackages.aarch64-linux;
+        extraSpecialArgs = {
+          inherit inputs self lib;
+          hostname = "tanto";
+        };
+        modules = [
+          ./hosts/tanto.nix
+        ];
+      };
     };
 }
