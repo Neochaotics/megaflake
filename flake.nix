@@ -162,7 +162,8 @@
       flake.nixOnDroidConfigurations.tanto = inputs.nix-on-droid.lib.nixOnDroidConfiguration {
         pkgs = inputs.nixpkgs.legacyPackages.aarch64-linux;
         extraSpecialArgs = {
-          inherit inputs self lib;
+          inherit inputs self;
+          inherit (inputs.nixpkgs) lib;
           hostname = "tanto";
         };
         modules = [
