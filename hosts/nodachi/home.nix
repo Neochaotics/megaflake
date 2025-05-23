@@ -23,6 +23,7 @@
       gping
       gitoxide
       warp-terminal
+      dolphin-emu
     ];
   };
 
@@ -48,6 +49,7 @@
       yazi.enable = true;
       bottom.enable = true;
       nvim.enable = true;
+      mpv.enable = true;
     };
     system = {
       xdg.enable = true;
