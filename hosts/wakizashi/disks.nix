@@ -61,4 +61,3 @@
   };
   fileSystems."/nix".neededForBoot = true;
 }
-

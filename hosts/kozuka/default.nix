@@ -22,9 +22,6 @@ in
     })
   ];
   age = {
-    secrets.crypt = {
-      generator.script = "passphrase";
-    };
     rekey = {
       masterIdentities = [ "/persist/age.key" ];
       localStorageDir = "${self}" + "/secrets/rekeyed/${config.networking.hostName}";
