@@ -26,7 +26,7 @@ _: {
           platform_profile = "performance";
           # scaling_min_freq = 800000
           # scaling_max_freq = 1000000
-          tubo = "auto"; # alawys, auto, never
+          tubo = "auto"; # always, auto, never
         };
         battery = {
           governor = "powersave";
