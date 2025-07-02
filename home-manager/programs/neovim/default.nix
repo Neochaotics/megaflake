@@ -44,7 +44,6 @@ in
           withRuby = false;
 
           preventJunkFiles = true;
-          useSystemClipboard = true;
           spellcheck = {
             enable = true;
             languages = [ "en" ];
