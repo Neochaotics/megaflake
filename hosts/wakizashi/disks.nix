@@ -2,7 +2,7 @@
   disko.devices = {
     disk.nix = {
       type = "disk";
-      device = "/dev/disk/by-id/REPLACE_WITH_ACTUAL_DISK_ID";
+      device = "/dev/disk/by-id/ata-CT1000BX500SSD1_2451E99B1181";
       content = {
         type = "gpt";
         partitions = {
