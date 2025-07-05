@@ -2,8 +2,8 @@
 {
   wayland.windowManager.hyprland.settings = lib.mkIf config.qm.desktop.hyprland.enable {
     monitor = [
-      "DP-5,1920x1080@60, auto-right, 1, vrr, 0"
-      "HDMI-A-1, 1920x1080@60, 0x0, 1, vrr, 2"
+      "DP-5, 1920x1080@60, auto-right, 2"
+      "HDMI-A-1, 1920x1080@60, 0x0, 2"
     ];
 
     workspace = [

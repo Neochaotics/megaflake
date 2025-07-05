@@ -4,8 +4,8 @@
     general = {
       border_size = 2;
       no_border_on_floating = false;
-      gaps_in = 6;
-      gaps_out = 12;
+      gaps_in = 3;
+      gaps_out = 6;
       gaps_workspaces = 0;
       # "col.active_border" = "rgb(D34000)"; Managed by stylix
       # "col.inactive_border" = "rgb(2C1B16)"; Managed by stylix
