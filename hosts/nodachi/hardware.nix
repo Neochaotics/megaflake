@@ -1,14 +1,14 @@
 { pkgs, ... }:
 {
-  ff.hardware.displays = {
-    test = {
-      port = "DP-2";
-      refreshRate = 144;
-      resWidth = 2560;
-      resHeight = 1440;
-      ownedWorkspaces = [ 1 ];
-    };
-  };
+  # ff.hardware.displays = {
+  #   test = {
+  #     port = "DP-2";
+  #     refreshRate = 144;
+  #     resWidth = 2560;
+  #     resHeight = 1440;
+  #     ownedWorkspaces = [ 1 ];
+  #   };
+  # };
 
   boot = {
     initrd.availableKernelModules = [

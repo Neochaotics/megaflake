@@ -91,6 +91,12 @@ in
       };
       systemd-boot.enable = true;
     };
+    #    useCmini = {
+    #      enableHM = true;
+    #      users.quinno = {
+    #        homeModule = ./home.nix;
+    #      };
+    #    };
   };
 
   # Custom Module Configuration
