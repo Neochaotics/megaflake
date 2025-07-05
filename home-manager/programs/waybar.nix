@@ -65,21 +65,17 @@ in
               "empty" = "";
             };
             "persistent-workspaces" = {
-              "DP-2" = [
-                1
-                2
-                3
-                4
-              ];
-              "DP-1" = [
+              "DP-5" = [
                 5
                 6
                 7
                 8
               ];
               "HDMI-A-1" = [
-                9
-                10
+                1
+                2
+                3
+                4
               ];
             };
             "window-rewrite-default" = "";
