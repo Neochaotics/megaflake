@@ -17,27 +17,22 @@
       "nvme"
       "usbhid"
       "xhci_pci"
+      "sp5100_tco"
     ];
     kernelParams = [
       "video=DP-2:2560x1440@144"
       "video=DP-1:1920x1080@60"
       "video=HDMI-A-1:1920x1080@60"
-
-      # AMD optimizations
       "amd_pstate=active" # Enable active pstate for better power management
       "amd_iommu=on" # Enable IOMMU for better device isolation
       "iommu=pt" # Pass-through mode for IOMMU
       "idle=nomwait" # Improves AMD CPU power efficiency
       "pci=pcie_bus_perf" # Optimize PCIe bus performance
       "transparent_hugepage=always" # Better memory management for Zen architecture
-
-      # GPU optimizations for latency reduction
-      "amdgpu.ppfeaturemask=0xffffffff" # Enable all PowerPlay features
-      "amdgpu.dc=1" # Enable Display Core
-      "amdgpu.dcfeaturemask=0x8" # Enable FreeSync support
-      "amdgpu.freesync_video=1" # Enable FreeSync for video playback
-      "amdgpu.runpm=1" # Enable runtime power management
-      "amdgpu.hw_i2c=1" # Enable hardware I2C for better EDID support
+      "amdgpu.hw_i2c=1" # Enable hardware I2C
+      "nowatchdog"
+      "quiet"
+      "splash"
     ];
   };
   powerManagement = {
