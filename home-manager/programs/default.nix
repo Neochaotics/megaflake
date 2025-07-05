@@ -15,5 +15,6 @@
     ./bottom.nix
     ./neovim
     ./mpv.nix
+    ./zellij.nix
   ];
 }
