@@ -20,8 +20,7 @@
       "sp5100_tco"
     ];
     kernelParams = [
-      "video=DP-2:2560x1440@144"
-      "video=DP-1:1920x1080@60"
+      "video=DP-5:1920x1080@60"
       "video=HDMI-A-1:1920x1080@60"
       "amd_pstate=active" # Enable active pstate for better power management
       "amd_iommu=on" # Enable IOMMU for better device isolation
@@ -74,12 +73,6 @@
     };
 
     enableRedistributableFirmware = true;
-
-    # wouldnt build 04/04/2025
-    #openrazer = {
-    #  enable = true;
-    #  users = [ "quinno" ];
-    #};
     display = {
       edid = {
         enable = true;
@@ -102,15 +95,5 @@
         MINSTOP=hwmon3/pwm1=16
       '';
     };
-  };
-
-  # Environment variables for better GPU and display performance
-  environment.sessionVariables = {
-    WLR_DRM_NO_ATOMIC = "1"; # Helps with flickering issues
-    __GL_GSYNC_ALLOWED = "1"; # Enable G-Sync if available
-    __GL_VRR_ALLOWED = "1"; # Enable Variable Refresh Rate
-    ENABLE_VKBASALT = "1"; # Enable VkBasalt for better visuals with minimal overhead
-    AMD_VULKAN_ICD = "RADV"; # Use RADV by default
-    __GL_THREADED_OPTIMIZATIONS = "1"; # Enable threaded optimizations
   };
 }
