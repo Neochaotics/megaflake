@@ -90,6 +90,7 @@ in
         mineral = false;
       };
       systemd-boot.enable = true;
+      performance.enable = true;
     };
     #    useCmini = {
     #      enableHM = true;
