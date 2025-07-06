@@ -6,9 +6,9 @@
     #  "HDMI-A-1, 1920x1080@60, 0x0, 1"
     #];
 
-    monitors = lib.mapAttrs' (name: cfg: [
-      "${name}, ${cfg.resolution.width}x${cfg.resolution.height}, auto, 1"
-    ]) config.ff.hardware.videoPorts;
+    monitor = lib.mapAttrsToList (
+      name: cfg: "${name}, ${cfg.resolution.width}x${cfg.resolution.height}, auto, 1"
+    ) config.ff.hardware.videoPorts;
 
     workspace = [
       "1, monitor:HDMI-A-1"
