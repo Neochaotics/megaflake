@@ -9,6 +9,7 @@
   #     ownedWorkspaces = [ 1 ];
   #   };
   # };
+  #
 
   boot = {
     initrd.availableKernelModules = [

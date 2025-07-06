@@ -26,10 +26,15 @@
       dolphin-emu
     ];
   };
-
   ff = {
     programs = {
       bash.enable = true;
+    };
+    hardware.videoPorts = {
+      "DP-5".resolution = {
+        width = 1600;
+        height = 900;
+      };
     };
   };
 
