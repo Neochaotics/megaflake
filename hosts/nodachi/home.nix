@@ -32,8 +32,12 @@
     };
     hardware.videoPorts = {
       "DP-5".resolution = {
-        width = 1600;
-        height = 900;
+        width = 1920;
+        height = 1080;
+      };
+      "HDMI-A-1".resolution = {
+        width = 4096;
+        height = 2160;
       };
     };
   };

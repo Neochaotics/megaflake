@@ -75,8 +75,10 @@
     ff = {
       #url = "path:/home/quinno/github/freedpom/FreedpomFlake";
       url = "github:freedpom/FreedpomFlake";
-      inputs.nixpkgs.follows = "nixpkgs";
-      #inputs.home-manager.follows = "home-manager";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        home-manager.follows = "home-manager";
+      };
     };
     nvf = {
       url = "github:notashelf/nvf";
@@ -85,8 +87,11 @@
     qm = {
       #url = "path:/home/quinno/github/Neochaotics/NixModule";
       url = "github:Neochaotics/NixModule";
-      inputs.nixpkgs.follows = "nixpkgs";
-      #inputs.home-manager.follows = "home-manager";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        home-manager.follows = "home-manager";
+        ff.follows = "ff";
+      };
     };
 
     # -- Disabled modules (kept for reference) --
