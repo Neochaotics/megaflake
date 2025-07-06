@@ -7,7 +7,7 @@
     #];
 
     monitor = lib.mapAttrsToList (
-      name: cfg: "${name}, ${cfg.resolution.width}x${cfg.resolution.height}, auto, 1"
+      name: cfg: "${name}, ${toString cfg.resolution.width}x${toString cfg.resolution.height}, auto, 1"
     ) config.ff.hardware.videoPorts;
 
     workspace = [
