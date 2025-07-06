@@ -12,6 +12,12 @@
       url = "github:freedpom/FreedpomFormatter";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    ff = {
+      #url = "path:/home/quinno/github/freedpom/FreedpomFlake";
+      url = "github:freedpom/FreedpomFlake";
+      inputs.nixpkgs.follows = "nixpkgs";
+      #inputs.home-manager.follows = "home-manager";
+    };
 
     #obsidian-nvim.url = "github:epwalsh/obsidian.nvim";
 
