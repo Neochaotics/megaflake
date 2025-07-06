@@ -247,11 +247,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1751820309,
-        "narHash": "sha256-xx8tcn77crvqz4mDdw1fj5lLI4kc21GfuBufuK+u0o8=",
+        "lastModified": 1751821080,
+        "narHash": "sha256-yAbZZ3BUsuwVc19l3Bm1ZK4jNucM2+K37SXN3whchLA=",
         "owner": "freedpom",
         "repo": "FreedpomFlake",
-        "rev": "79946f97da1fbceb96d4d4d280845944dc36c719",
+        "rev": "aff28f073d71e89551cefeb863a5979248371a6d",
         "type": "github"
       },
       "original": {
@@ -1818,11 +1818,11 @@
         "nvf": "nvf_2"
       },
       "locked": {
-        "lastModified": 1751819952,
-        "narHash": "sha256-x3QKEHrR91tJnrGK48k8OEzaGwzFJYVUV09+tAk8frk=",
+        "lastModified": 1751821123,
+        "narHash": "sha256-dDU4hLWcK9f3oCpE7JN52Auwwt8dx/8BoDYhx3h+D4s=",
         "owner": "Neochaotics",
         "repo": "NixModule",
-        "rev": "d909b83bd9fe10647ef91d8d88d6bab6006cb673",
+        "rev": "683e067258c3517117a2c1e3f98aa7af8dfe16b9",
         "type": "github"
       },
       "original": {
