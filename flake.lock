@@ -1818,11 +1818,11 @@
         "nvf": "nvf_2"
       },
       "locked": {
-        "lastModified": 1751805929,
-        "narHash": "sha256-ih40kieGJP3xhs6p3eh3vRspyIguaL1gUjM6nJefF0A=",
+        "lastModified": 1751806333,
+        "narHash": "sha256-pTkrcQFwVodp19KaP4kpmswCim97XAmLR5r3ag81iiw=",
         "owner": "Neochaotics",
         "repo": "NixModule",
-        "rev": "7c7ceecec537100a625ee880dfcbbbeb69ad107f",
+        "rev": "f5d6fb65a115c3830b1fb0b53e3f2b7f17371607",
         "type": "github"
       },
       "original": {
