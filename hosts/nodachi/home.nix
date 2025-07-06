@@ -31,13 +31,18 @@
       bash.enable = true;
     };
     hardware.videoPorts = {
-      "DP-5".resolution = {
-        width = 1920;
-        height = 1080;
+      "DP-5" = {
+        resolution = {
+          width = 1920;
+          height = 1080;
+        };
       };
-      "HDMI-A-1".resolution = {
-        width = 4096;
-        height = 2160;
+      "HDMI-A-1" = {
+        resolution = {
+          width = 3840;
+          height = 2160;
+        };
+        scale = 2;
       };
     };
   };
