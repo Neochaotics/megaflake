@@ -80,7 +80,7 @@ in
       ananicy.enable = true;
       pipewire.enable = true;
       openssh.enable = true;
-      ollama.enable = true;
+      ollama.enable = false;
     };
     system = {
       fontsu.enable = true;

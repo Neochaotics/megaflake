@@ -41,15 +41,17 @@
     powertop.enable = true;
     scsiLinkPolicy = "max_performance";
   };
+  services = {
 
-  # Prevent specific USB devices from auto-suspending
-  services.udev.extraRules = ''
-    # CTRL Keyboard (04d8:eed2)
-    SUBSYSTEM=="usb", ATTR{idVendor}=="04d8", ATTR{idProduct}=="eed2", ATTR{power/control}="on", ATTR{power/autosuspend}="-1"
+    scx.enable = false;
+    udev.extraRules = ''
+      # CTRL Keyboard (04d8:eed2)
+      SUBSYSTEM=="usb", ATTR{idVendor}=="04d8", ATTR{idProduct}=="eed2", ATTR{power/control}="on", ATTR{power/autosuspend}="-1"
 
-    # Razer Basilisk Ultimate Mouse (1532:0086)
-    SUBSYSTEM=="usb", ATTR{idVendor}=="1532", ATTR{idProduct}=="0086", ATTR{power/control}="on", ATTR{power/autosuspend}="-1"
-  '';
+      # Razer Basilisk Ultimate Mouse (1532:0086)
+      SUBSYSTEM=="usb", ATTR{idVendor}=="1532", ATTR{idProduct}=="0086", ATTR{power/control}="on", ATTR{power/autosuspend}="-1"
+    '';
+  };
   hardware = {
     cpu = {
       amd = {
