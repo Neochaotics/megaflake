@@ -1,6 +1,7 @@
-{ config, ... }:
+{ config, pkgs, ... }:
 {
   boot = {
+    #kernelPackages = pkgs.linuxPackages_cachyos_lts;
     initrd.availableKernelModules = [
       "ehci_pci"
       "xhci_pci"
@@ -10,6 +11,7 @@
       "usb_storage"
       "usbhid"
       "hid-generic"
+      "hid_apple"
       "sd_mod"
       "sr_mod"
     ];
@@ -17,22 +19,16 @@
       "kvm-intel"
       "wl"
     ];
-    # extraModulePackages = [
-    #   (config.boot.kernelPackages.broadcom_sta.overrideAttrs (old: {
-    #     patches = old.patches ++ [
-    #       (builtins.fetchurl {
-    #         url = "https://raw.githubusercontent.com/archlinux/svntogit-community/5ec5b248976f84fcd7e3d7fae49ee91289912d12/trunk/012-linux517.patch";
-    #         sha256 = "df557afdb0934ed2de6ab967a350d777cbb7b53bf0b1bdaaa7f77a53102f30ac";
-    #       })
-    #     ];
-    #   }))
-    # ];
+    #extraModulePackages = [
+    #  config.boot.kernelPackages.broadcom_sta
+    #];
     kernelParams = [
       "video=LVDS-1:1280x800@60"
     ];
   };
   hardware = {
     enableRedistributableFirmware = true;
+    firmware = [ pkgs.b43Firmware_5_1_138 ];
     nvidia.package = config.boot.kernelPackages.nvidiaPackages.legacy_340;
 
     graphics = {
