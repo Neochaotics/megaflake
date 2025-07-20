@@ -25,55 +25,60 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    programs.nvf = {
-      enable = true;
+    programs = {
+      neovide = {
+        enable = true;
+      };
+      nvf = {
+        enable = true;
 
-      defaultEditor = true;
-      enableManpages = true;
+        defaultEditor = true;
+        enableManpages = true;
 
-      settings = {
-        vim = {
+        settings = {
+          vim = {
 
-          package = pkgs.neovim-unwrapped;
+            package = pkgs.neovim-unwrapped;
 
-          viAlias = true;
-          vimAlias = true;
+            viAlias = true;
+            vimAlias = true;
 
-          withNodeJs = false;
-          withPython3 = false;
-          withRuby = false;
+            withNodeJs = false;
+            withPython3 = false;
+            withRuby = false;
 
-          preventJunkFiles = true;
-          spellcheck = {
-            enable = true;
-            languages = [ "en" ];
-          };
+            preventJunkFiles = true;
+            spellcheck = {
+              enable = true;
+              languages = [ "en" ];
+            };
 
-          enableLuaLoader = true;
-          globals = {
-            editorconfig = true;
-          };
+            enableLuaLoader = true;
+            globals = {
+              editorconfig = true;
+            };
 
-          debugMode = {
-            enable = false;
-            level = 16;
-            logFile = "/tmp/nvim.log";
-          };
+            debugMode = {
+              enable = false;
+              level = 16;
+              logFile = "/tmp/nvim.log";
+            };
 
-          lazy = {
-            plugins = {
-              "avante.nvim" = {
-                package = pkgs.vimPlugins.avante-nvim;
-                lazy = true;
-                before = ''
-                  require("avante_lib").load()
-                '';
-                setupModule = "avante";
-                setupOpts = {
-                  provider = "ollama";
-                  ollama = {
-                    endpoint = "http://localhost:11434/";
-                    model = "qwen2.5-coder:32b";
+            lazy = {
+              plugins = {
+                "avante.nvim" = {
+                  package = pkgs.vimPlugins.avante-nvim;
+                  lazy = true;
+                  before = ''
+                    require("avante_lib").load()
+                  '';
+                  setupModule = "avante";
+                  setupOpts = {
+                    provider = "ollama";
+                    ollama = {
+                      endpoint = "http://localhost:11434/";
+                      model = "qwen2.5-coder:32b";
+                    };
                   };
                 };
               };
