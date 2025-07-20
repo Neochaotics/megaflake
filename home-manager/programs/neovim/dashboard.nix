@@ -4,7 +4,7 @@
       enable = true;
       #layout = [ ];
       #opts = { };
-      #theme = "dashboard";
+      theme = "startify";
     };
   };
 }
