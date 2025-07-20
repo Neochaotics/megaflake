@@ -21,7 +21,7 @@ in
         enable = true;
 
         userName = "Neochaotics";
-        userEmail = "neochaotics@pm.me";
+        userEmail = "72465280+Neochaotics@users.noreply.github.com";
 
         extraConfig = {
           core = {
