@@ -48,11 +48,12 @@ in
       initialPassword = "password";
       shell = pkgs.zsh;
       ignoreShellProgramCheck = true;
-      extraGroups =
-        [ "wheel" ]
-        ++ lib.optional config.security.rtkit.enable "rtkit"
-        ++ lib.optional config.services.pipewire.enable "audio"
-        ++ lib.optional config.hardware.i2c.enable "i2c";
+      extraGroups = [
+        "wheel"
+      ]
+      ++ lib.optional config.security.rtkit.enable "rtkit"
+      ++ lib.optional config.services.pipewire.enable "audio"
+      ++ lib.optional config.hardware.i2c.enable "i2c";
     };
     mutableUsers = lib.mkForce true;
   };

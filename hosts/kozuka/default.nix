@@ -41,10 +41,11 @@ in
       initialPassword = "password";
       shell = pkgs.zsh;
       ignoreShellProgramCheck = true;
-      extraGroups =
-        [ "wheel" ]
-        ++ lib.optional config.security.rtkit.enable "rtkit"
-        ++ lib.optional config.services.pipewire.enable "audio";
+      extraGroups = [
+        "wheel"
+      ]
+      ++ lib.optional config.security.rtkit.enable "rtkit"
+      ++ lib.optional config.services.pipewire.enable "audio";
     };
     mutableUsers = lib.mkForce true;
   };
