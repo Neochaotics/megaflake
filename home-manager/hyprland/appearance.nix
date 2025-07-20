@@ -3,7 +3,7 @@
   stylix.targets.hyprland.hyprpaper.enable = true;
   wayland.windowManager.hyprland.settings = lib.mkIf config.qm.desktop.hyprland.enable {
     decoration = {
-      rounding = 9;
+      rounding = 3;
       active_opacity = 1.0;
       inactive_opacity = 1.0;
       fullscreen_opacity = 1.0;
