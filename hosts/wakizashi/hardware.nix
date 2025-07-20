@@ -14,23 +14,28 @@
       "hid_apple"
       "sd_mod"
       "sr_mod"
+      "nouveau"
     ];
     kernelModules = [
       "kvm-intel"
       "wl"
     ];
-    #extraModulePackages = [
-    #  config.boot.kernelPackages.broadcom_sta
-    #];
+    blacklistedKernelModules = [ "nvidia" ];
     kernelParams = [
       "video=LVDS-1:1280x800@60"
     ];
   };
+  services.xserver = {
+    enable = false;
+    videoDrivers = [ "nouveau" ];
+  };
   hardware = {
     enableRedistributableFirmware = true;
     firmware = [ pkgs.b43Firmware_5_1_138 ];
-    nvidia.package = config.boot.kernelPackages.nvidiaPackages.legacy_340;
-
+    nvidia = {
+      open = true;
+      modesetting.enable = true;
+    };
     graphics = {
       enable = true;
       enable32Bit = true;
