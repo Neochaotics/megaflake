@@ -20,9 +20,9 @@
       swallow_regex = "foot";
       # swallow_exception_regex=;
       focus_on_activate = false;
-      #mouse_move_focuses_monitor = true;
+      mouse_move_focuses_monitor = true;
       #render_ahead_of_time = false; # [Warning: buggy] starts rendering before your monitor displays a frame in order to lower latency
-      render_ahead_safezone = 1; # how many ms of safezone to add to rendering ahead of time. Recommended 1-2.
+      #render_ahead_safezone = 1; # how many ms of safezone to add to rendering ahead of time. Recommended 1-2.
       allow_session_lock_restore = false;
       # background_color = "rgb(1F0F0B)"; Managed by stylix
       close_special_on_empty = true;
