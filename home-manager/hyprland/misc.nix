@@ -50,6 +50,10 @@
       xx_color_management_v4 = true;
     };
 
+    render = {
+      ew_render_scheduling = true;
+    };
+
     debug = {
       enable_stdout_logs = false;
     };
