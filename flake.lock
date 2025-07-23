@@ -1706,11 +1706,11 @@
         "nvf": "nvf_2"
       },
       "locked": {
-        "lastModified": 1753263078,
-        "narHash": "sha256-YF9vwm9JG1IWkd8nQLebOgdhCtu9FQbWgbphop44uo4=",
+        "lastModified": 1753263770,
+        "narHash": "sha256-jvXK8R4JM7qwpNdUXwxAxaGrDm9cpVlM80msVlTRrFo=",
         "owner": "Neochaotics",
         "repo": "NixModule",
-        "rev": "d1963dddf8749d37df65a16d28d055c385eb24bd",
+        "rev": "8786d876cac1dc32616ddf162ea1d0647de97ecb",
         "type": "github"
       },
       "original": {
