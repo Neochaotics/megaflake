@@ -28,6 +28,11 @@
       special_fallthrough = false;
       off_window_axis_events = 1;
       emulate_discrete_scroll = 1;
+      touchpad = {
+        disable_while_typing = true;
+        natural_scroll = true;
+        tap_button_map = "lmr";
+      };
     };
 
     binds = {
@@ -59,11 +64,6 @@
       enable_hyprcursor = true;
       hide_on_key_press = true;
       hide_on_touch = true;
-    };
-    touchpad = {
-      disable_while_typing = true;
-      natural_scroll = true;
-      tap_button_map = "lmr";
     };
   };
   home.pointerCursor.hyprcursor.enable = true;

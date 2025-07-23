@@ -51,7 +51,7 @@
     };
 
     render = {
-      ew_render_scheduling = true;
+      new_render_scheduling = true;
     };
 
     debug = {
