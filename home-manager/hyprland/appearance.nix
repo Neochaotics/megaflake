@@ -9,9 +9,10 @@
       inactive_opacity = 0.8;
       fullscreen_opacity = 1.0;
       dim_inactive = true;
-      dim_strength = 0.3;
+      dim_strength = 0.1;
       dim_special = 0.0;
       dim_around = 0.3;
+      border_part_of_window = false;
       # screen_shader = ;
 
       blur = {
@@ -21,11 +22,11 @@
         ignore_opacity = false;
         new_optimizations = true;
         xray = false;
-        noise = 0.03;
-        contrast = 0.9;
-        brightness = 0.9;
+        noise = 0.003;
+        contrast = 0.6;
+        brightness = 0.6;
         vibrancy = 0.09;
-        vibrancy_darkness = 0.0;
+        vibrancy_darkness = 0.09;
         special = false;
         popups = false;
         popups_ignorealpha = 0.2;
