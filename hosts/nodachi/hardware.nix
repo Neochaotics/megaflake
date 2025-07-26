@@ -1,4 +1,4 @@
-_:
+{ config, ... }:
 {
   # ff.hardware.displays = {
   #   test = {
@@ -12,6 +12,7 @@ _:
   #
 
   boot = {
+    extraModulePackages = with config.boot.kernelPackages; [ it87 ];
     initrd.availableKernelModules = [
       "ahci"
       "hid-generic"
@@ -19,6 +20,7 @@ _:
       "usbhid"
       "xhci_pci"
       "sp5100_tco"
+      "it87"
     ];
     kernelParams = [
       "video=DP-5:1920x1080@60"
