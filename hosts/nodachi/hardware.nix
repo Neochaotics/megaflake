@@ -20,8 +20,11 @@
       "usbhid"
       "xhci_pci"
       "sp5100_tco"
-      "it87"
     ];
+    kernelModules = [ "it87" ];
+    extraModprobeConfig = "
+    options it87 ignore_resource_conflict=1
+    ";
     kernelParams = [
       "video=DP-5:1920x1080@60"
       "video=HDMI-A-1:1920x1080@60"
