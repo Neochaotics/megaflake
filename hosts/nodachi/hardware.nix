@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+_:
 {
   # ff.hardware.displays = {
   #   test = {
@@ -64,15 +64,11 @@
     amdgpu = {
       initrd.enable = true;
       opencl.enable = true;
-      amdvlk.enable = true;
-    };
-
-    graphics = {
-      enable = true;
-      enable32Bit = true;
-      extraPackages = with pkgs; [
-        amdvlk
-      ];
+      amdvlk = {
+        # hahah enables graphics
+        enable = true;
+        support32Bit.enable = true;
+      };
     };
 
     enableRedistributableFirmware = true;
