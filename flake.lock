@@ -247,11 +247,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1753658994,
-        "narHash": "sha256-w8jixrhFSzPu8O4LvDeHz6lhzELCJ3dfK3EzKLoRvP0=",
+        "lastModified": 1753659117,
+        "narHash": "sha256-4ITN6DoRl67BlHuC1Isp7HIefI8cLXdQGOdI1Uh0eN0=",
         "ref": "feat/update-consoles",
-        "rev": "0bdbec84ad9cbe8135c54d44f705f1ca3f2df9d2",
-        "revCount": 154,
+        "rev": "06a87c725ab9143cb272ac8ae48c0c55c28c5f08",
+        "revCount": 155,
         "type": "git",
         "url": "https://github.com/freedpom/FreedpomFlake"
       },
