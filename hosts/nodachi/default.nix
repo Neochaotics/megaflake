@@ -82,6 +82,10 @@ in
       pipewire.enable = true;
       openssh.enable = true;
       ollama.enable = false;
+      virt-reality = {
+        enable = true;
+        autoStart = true;
+      };
     };
     system = {
       fontsu.enable = true;
