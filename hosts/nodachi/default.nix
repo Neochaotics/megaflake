@@ -82,6 +82,27 @@ in
       pipewire.enable = true;
       openssh.enable = true;
       ollama.enable = false;
+      consoles = {
+        enable = true;
+        getty = [
+          "quinno@tty1"
+          "tty3"
+          "tty5"
+        ];
+        kmscon = [
+          "tty2"
+          "tty4"
+          "tty6"
+        ];
+        kmsconConfig = {
+          font = {
+            name = "monospace";
+            size = 14;
+          };
+          scrollbackSize = 2000;
+          hwaccel = false;
+        };
+      };
       virt-reality = {
         enable = true;
         autoStart = true;

@@ -24,6 +24,7 @@
       gitoxide
       warp-terminal
       dolphin-emu
+      sidequest
     ];
   };
   ff = {
