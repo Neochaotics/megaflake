@@ -99,8 +99,11 @@ in
             name = "monospace";
             size = 14;
           };
+          hwaccel = true;
+          drm = true;
+          video.gpus = "primary";
           scrollbackSize = 2000;
-          hwaccel = false;
+
         };
       };
       virt-reality = {
