@@ -247,11 +247,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1753764391,
-        "narHash": "sha256-MtPKjEczB/GQ8Cqj6TMYCWlIn35Rnc5G4PXVpUG5rPg=",
+        "lastModified": 1753800721,
+        "narHash": "sha256-x/YUpA+g2iNWYHNGgGqWyBu9w3CJmFzvcr4UfxF8+T8=",
         "owner": "freedpom",
         "repo": "FreedpomFlake",
-        "rev": "80c6255d31b689b5bc1a01d9aee8566217538cb6",
+        "rev": "94a9806590d4893c2e77907e305fa29ea85b3e3d",
         "type": "github"
       },
       "original": {
@@ -1507,11 +1507,11 @@
     },
     "nixpkgs_8": {
       "locked": {
-        "lastModified": 1753549186,
-        "narHash": "sha256-Znl7rzuxKg/Mdm6AhimcKynM7V3YeNDIcLjBuoBcmNs=",
+        "lastModified": 1753694789,
+        "narHash": "sha256-cKgvtz6fKuK1Xr5LQW/zOUiAC0oSQoA9nOISB0pJZqM=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "17f6bd177404d6d43017595c5264756764444ab8",
+        "rev": "dc9637876d0dcc8c9e5e22986b857632effeb727",
         "type": "github"
       },
       "original": {
