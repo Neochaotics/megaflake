@@ -65,7 +65,7 @@
       starship.enable = true;
       yazi.enable = true;
       bottom.enable = true;
-      nvim.enable = true;
+      #nvim.enable = true;
       mpv.enable = true;
     };
     system = {

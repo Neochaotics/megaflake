@@ -109,6 +109,7 @@ in
       virt-reality = {
         enable = true;
         autoStart = true;
+        bitrate = 150000000;
       };
     };
     system = {

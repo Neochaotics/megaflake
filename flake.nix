@@ -74,7 +74,8 @@
     # -- Custom modules and flakes --
     ff = {
       #url = "path:/home/quinno/github/freedpom/FreedpomFlake";
-      url = "git+https://github.com/freedpom/FreedpomFlake?ref=feat/update-consoles";
+      #url = "git+https://github.com/freedpom/FreedpomFlake?ref=feat/update-consoles";
+      url = "github:freedpom/FreedpomFlake";
       inputs = {
         nixpkgs.follows = "nixpkgs";
         home-manager.follows = "home-manager";
