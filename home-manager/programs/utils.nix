@@ -3,11 +3,9 @@
   config,
   pkgs,
   ...
-}:
-let
+}: let
   cfg = config.qm.programs.utils;
-in
-{
+in {
   options.qm.programs.utils = {
     enable = lib.mkEnableOption "Enable configuration";
   };

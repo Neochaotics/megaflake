@@ -4,12 +4,9 @@
   inputs,
   pkgs,
   ...
-}:
-let
+}: let
   cfg = config.qm.programs.nvim;
-in
-{
-
+in {
   imports = [
     inputs.nvf.homeManagerModules.default
     ./autocomplete.nix
@@ -37,7 +34,6 @@ in
 
         settings = {
           vim = {
-
             package = pkgs.neovim-unwrapped;
 
             viAlias = true;
@@ -50,7 +46,7 @@ in
             preventJunkFiles = true;
             spellcheck = {
               enable = true;
-              languages = [ "en" ];
+              languages = ["en"];
             };
 
             enableLuaLoader = true;

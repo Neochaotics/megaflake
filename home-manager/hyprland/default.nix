@@ -2,11 +2,9 @@
   lib,
   config,
   ...
-}:
-let
+}: let
   cfg = config.qm.desktop.hyprland;
-in
-{
+in {
   imports = [
     ./general.nix
     ./appearance.nix
@@ -40,7 +38,6 @@ in
       xwayland.enable = true;
 
       #plugins = [ inputs.hypr-dynamic-cursors.packages.${pkgs.system}.hypr-dynamic-cursors ];
-
     };
 
     programs.bash.initExtra = ''

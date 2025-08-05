@@ -1,8 +1,10 @@
-{ lib, config, ... }:
-let
-  cfg = config.qm.programs.ssh;
-in
 {
+  lib,
+  config,
+  ...
+}: let
+  cfg = config.qm.programs.ssh;
+in {
   options.qm.programs.ssh = {
     enable = lib.mkEnableOption "Enable ssh configuration";
   };
@@ -14,7 +16,7 @@ in
       matchBlocks = {
         github = {
           hostname = "github.com";
-          identityFile = [ "${config.home.homeDirectory}/.ssh/ssh_id_ed25519_key" ];
+          identityFile = ["${config.home.homeDirectory}/.ssh/ssh_id_ed25519_key"];
           identitiesOnly = true;
         };
       };

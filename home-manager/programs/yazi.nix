@@ -1,8 +1,10 @@
-{ lib, config, ... }:
-let
-  cfg = config.qm.programs.yazi;
-in
 {
+  lib,
+  config,
+  ...
+}: let
+  cfg = config.qm.programs.yazi;
+in {
   options.qm.programs.yazi = {
     enable = lib.mkEnableOption "Enable configuration";
   };

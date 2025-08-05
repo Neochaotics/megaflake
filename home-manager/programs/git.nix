@@ -3,19 +3,16 @@
   config,
   pkgs,
   ...
-}:
-let
+}: let
   cfg = config.qm.programs.git;
-in
-{
+in {
   options.qm.programs.git = {
     enable = lib.mkEnableOption "Enable git configuration";
   };
 
   config = lib.mkIf cfg.enable {
-    home.packages = [ pkgs.gh ];
+    home.packages = [pkgs.gh];
     programs = {
-
       gitui.enable = true;
       git = {
         enable = true;

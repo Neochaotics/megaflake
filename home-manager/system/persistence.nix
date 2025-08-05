@@ -1,8 +1,10 @@
-{ lib, config, ... }:
-let
-  cfg = config.qm.system.persistence;
-in
 {
+  lib,
+  config,
+  ...
+}: let
+  cfg = config.qm.system.persistence;
+in {
   options.qm.system.persistence = {
     enable = lib.mkEnableOption "Enable home persistence";
   };

@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-let
+{pkgs, ...}: let
   blink-cmp-avante = pkgs.vimUtils.buildVimPlugin {
     pname = "blink-cmp-avante";
     version = "latest";
@@ -10,8 +9,7 @@ let
       sha256 = "sha256-erYg/oTS5iq83XjGck/JQCPrFCylly/8ZwFGTjICXzk=";
     };
   };
-in
-{
+in {
   programs.nvf.settings.vim = {
     autopairs.nvim-autopairs.enable = true;
     autocomplete.blink-cmp = {
@@ -99,5 +97,4 @@ in
       };
     };
   };
-
 }

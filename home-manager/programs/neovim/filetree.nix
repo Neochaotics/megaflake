@@ -20,11 +20,11 @@
           toggleDapUI = "<leader>du"; # Toggle DAP UI
           toggleRepl = "<leader>dr"; # Toggle REPL
         };
-        sources = { };
+        sources = {};
         ui = {
           enable = true;
           autoStart = true;
-          setupOpts = { };
+          setupOpts = {};
         };
       };
     };

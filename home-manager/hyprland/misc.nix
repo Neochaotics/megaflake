@@ -1,5 +1,8 @@
-{ config, lib, ... }:
 {
+  config,
+  lib,
+  ...
+}: {
   wayland.windowManager.hyprland.settings = lib.mkIf config.qm.desktop.hyprland.enable {
     misc = {
       disable_hyprland_logo = true;

@@ -1,8 +1,10 @@
-{ lib, config, ... }:
-let
-  cfg = config.qm.programs.zsh;
-in
 {
+  lib,
+  config,
+  ...
+}: let
+  cfg = config.qm.programs.zsh;
+in {
   options.qm.programs.zsh = {
     enable = lib.mkEnableOption "Enable";
   };

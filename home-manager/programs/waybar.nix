@@ -3,11 +3,9 @@
   config,
   pkgs,
   ...
-}:
-let
+}: let
   cfg = config.qm.programs.waybar;
-in
-{
+in {
   options.qm.programs.waybar = {
     enable = lib.mkEnableOption "Enable ";
   };
@@ -50,9 +48,9 @@ in
           height = 30;
           layer = "top";
           position = "top";
-          modules-left = [ "hyprland/workspaces" ];
-          modules-center = [ "hyprland/window" ];
-          modules-right = [ "clock" ];
+          modules-left = ["hyprland/workspaces"];
+          modules-center = ["hyprland/window"];
+          modules-right = ["clock"];
           clock = {
             format-alt = "{:%Y-%m-%d}";
             tooltip-format = "{:%Y-%m-%d | %H:%M}";

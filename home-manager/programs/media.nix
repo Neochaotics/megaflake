@@ -3,11 +3,9 @@
   config,
   pkgs,
   ...
-}:
-let
+}: let
   cfg = config.qm.programs.media;
-in
-{
+in {
   options.qm.programs.media = {
     enable = lib.mkEnableOption "Enable configuration";
   };

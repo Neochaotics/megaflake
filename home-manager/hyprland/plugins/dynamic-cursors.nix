@@ -1,5 +1,8 @@
-{ config, lib, ... }:
 {
+  config,
+  lib,
+  ...
+}: {
   wayland.windowManager.hyprland.settings = lib.mkIf config.qm.desktop.hyprland.enable {
     "plugin:dynamic-cursors" = {
       enabled = true;
@@ -13,7 +16,6 @@
       # configure shake to find
       # magnifies the cursor if its is being shaken
       shake = {
-
         # enables shake to find
         enabled = true;
 
@@ -50,7 +52,6 @@
       # use hyprcursor to get a higher resolution texture when the cursor is magnified
       # see the `hyprcursor` section below
       hyprcursor = {
-
         # use nearest-neighbour (pixelated) scaling when magnifing beyond texture size
         # this will also have effect without hyprcursor support being enabled
         # 0 / false - never use pixelated scaling

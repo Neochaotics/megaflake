@@ -1,15 +1,19 @@
-{ config, lib, ... }:
 {
+  config,
+  lib,
+  ...
+}: {
   wayland.windowManager.hyprland.settings = lib.mkIf config.qm.desktop.hyprland.enable {
     #monitor = [
     #  "DP-5, 1920x1080@60, auto-right, 1"
     #  "HDMI-A-1, 1920x1080@60, 0x0, 1"
     #];
 
-    monitor = lib.mapAttrsToList (
-      name: cfg:
-      "${name}, ${toString cfg.resolution.width}x${toString cfg.resolution.height}@${toString cfg.framerate}, ${cfg.position}, ${toString cfg.scale}"
-    ) config.ff.hardware.videoPorts;
+    monitor =
+      lib.mapAttrsToList (
+        name: cfg: "${name}, ${toString cfg.resolution.width}x${toString cfg.resolution.height}@${toString cfg.framerate}, ${cfg.position}, ${toString cfg.scale}"
+      )
+      config.ff.hardware.videoPorts;
 
     workspace = [
       "1, monitor:HDMI-A-1"

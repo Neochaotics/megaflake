@@ -1,8 +1,10 @@
-{ lib, config, ... }:
-let
-  cfg = config.qm.wireguard;
-in
 {
+  lib,
+  config,
+  ...
+}: let
+  cfg = config.qm.wireguard;
+in {
   options.qm.wireguard = {
     enable = lib.mkEnableOption "Enable";
   };
@@ -10,14 +12,14 @@ in
   config = lib.mkIf cfg.enable {
     networking.wg-quick.interfaces = {
       wg0 = {
-        address = [ "10.2.0.2/32" ];
-        dns = [ "10.2.0.1" ];
+        address = ["10.2.0.2/32"];
+        dns = ["10.2.0.1"];
         privateKeyFile = "/persist/wg0.key";
 
         peers = [
           {
             publicKey = "tHwmpVZsh4yfoA9/vWbacF6cWcXUKE9wuDP5bz66oh8=";
-            allowedIPs = [ "0.0.0.0/0" ];
+            allowedIPs = ["0.0.0.0/0"];
             endpoint = "138.199.50.107:51820";
           }
         ];

@@ -1,8 +1,10 @@
-{ lib, config, ... }:
-let
-  cfg = config.qm.programs.fuzzel;
-in
 {
+  lib,
+  config,
+  ...
+}: let
+  cfg = config.qm.programs.fuzzel;
+in {
   options.qm.programs.fuzzel = {
     enable = lib.mkEnableOption "Enable configuration";
   };

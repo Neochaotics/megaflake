@@ -1,8 +1,10 @@
-{ lib, config, ... }:
-let
-  cfg = config.qm.programs.aria2;
-in
 {
+  lib,
+  config,
+  ...
+}: let
+  cfg = config.qm.programs.aria2;
+in {
   options.qm.programs.aria2 = {
     enable = lib.mkEnableOption "Enable configuration";
   };
