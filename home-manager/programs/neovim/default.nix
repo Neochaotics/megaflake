@@ -13,8 +13,9 @@ in {
     ./binds.nix
     ./comments.nix
     ./dashboard.nix
-    ./debug.nix
+    #./debug.nix
     ./diagnostics.nix
+    ./filetree.nix
   ];
 
   options.qm.programs.nvim = {
