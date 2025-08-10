@@ -69,7 +69,6 @@ in
       openssh.enable = true;
     };
     system = {
-      persistence.enable = true;
       nix.enable = true;
       sysctl = {
         cachyos = true;

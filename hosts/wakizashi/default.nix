@@ -16,9 +16,8 @@ in
     inputs.disko.nixosModules.disko
     ./disks.nix
     ./hardware.nix
-    (import ../../home/quinno {
-      userName = username;
-      inherit lib;
+    (import ./home.nix {
+      inherit lib username;
     })
   ];
 
@@ -70,7 +69,6 @@ in
       openssh.enable = true;
     };
     system = {
-      persistence.enable = true;
       nix.enable = true;
       sysctl = {
         cachyos = true;
