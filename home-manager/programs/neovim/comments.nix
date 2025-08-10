@@ -1,5 +1,5 @@
 {
-  programs.nvf.settingsvim.comments.comment-nvim = {
+  programs.nvf.settings.vim.comments.comment-nvim = {
     enable = true;
 
     mappings = {
