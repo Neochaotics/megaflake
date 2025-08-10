@@ -64,8 +64,6 @@ in {
 
   boot.kernelPackages = pkgs.linuxPackages_cachyos;
 
-  # System Configuration
-  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   system.stateVersion = "24.11";
 
   services.tailscale.enable = true;

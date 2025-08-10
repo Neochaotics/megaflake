@@ -111,7 +111,6 @@
       # Supported system types
       systems = [
         "x86_64-linux"
-        "aarch64-linux"
       ];
 
       # Flake modules to import
@@ -148,6 +147,7 @@
             modules = [
               {
                 nixpkgs.config.allowUnfree = true;
+                nixpkgs.hostPlatform = "x86_64-linux";
                 networking.hostName = hostname;
               }
 
@@ -179,18 +179,5 @@
       in
         # Generate configurations for all hosts
         lib.genAttrs hostNames mkHost;
-
-      # Nix-on-Droid configurations
-      flake.nixOnDroidConfigurations.tanto = inputs.nix-on-droid.lib.nixOnDroidConfiguration {
-        pkgs = inputs.nixpkgs.legacyPackages.aarch64-linux;
-        extraSpecialArgs = {
-          inherit inputs self;
-          inherit (inputs.nixpkgs) lib;
-          hostname = "tanto";
-        };
-        modules = [
-          ./hosts/tanto.nix
-        ];
-      };
     };
 }
