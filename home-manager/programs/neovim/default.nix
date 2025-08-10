@@ -36,48 +36,51 @@ in {
           vim = {
             package = pkgs.neovim-unwrapped;
 
-            viAlias = true;
+            bell = "none";
             vimAlias = true;
-
             withNodeJs = false;
             withPython3 = false;
-            withRuby = false;
-
+            withRuby = true;
             preventJunkFiles = true;
+
+            globals = {
+              editorconfig = true;
+              mapleader = " ";
+              maplocalleader = ",";
+            };
+
+            options = {
+              autoindent = true;
+              cmdheight = 1;
+              cursorlineopt = "line";
+              shiftwidth = 8;
+              signcolumn = "yes";
+              splitbelow = true;
+              tm = 500;
+              updatetime = 300;
+              wrap = true;
+            };
+
+            clipboard = {
+              enable = false;
+              providers = {
+                xsel = {
+                  enable = false;
+                };
+              };
+            };
+
             spellcheck = {
               enable = true;
               languages = ["en"];
             };
 
             enableLuaLoader = true;
-            globals = {
-              editorconfig = true;
-            };
 
             debugMode = {
               enable = false;
               level = 16;
               logFile = "/tmp/nvim.log";
-            };
-
-            lazy = {
-              plugins = {
-                "avante.nvim" = {
-                  package = pkgs.vimPlugins.avante-nvim;
-                  lazy = true;
-                  before = ''
-                    require("avante_lib").load()
-                  '';
-                  setupModule = "avante";
-                  setupOpts = {
-                    provider = "ollama";
-                    ollama = {
-                      endpoint = "http://localhost:11434/";
-                      model = "qwen2.5-coder:32b";
-                    };
-                  };
-                };
-              };
             };
           };
         };
