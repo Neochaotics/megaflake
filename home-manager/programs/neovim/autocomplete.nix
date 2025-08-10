@@ -1,7 +1,7 @@
 _: {
   programs.nvf.settings.vim = {
     autocomplete = {
-      enableSharedCmpSources = false;
+      # enableSharedCmpSources = false;
 
       blink-cmp = {
         enable = true;
