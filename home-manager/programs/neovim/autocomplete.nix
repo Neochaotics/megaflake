@@ -1,98 +1,69 @@
-{pkgs, ...}: let
-  blink-cmp-avante = pkgs.vimUtils.buildVimPlugin {
-    pname = "blink-cmp-avante";
-    version = "latest";
-    src = pkgs.fetchFromGitHub {
-      owner = "Kaiser-Yang";
-      repo = "blink-cmp-avante";
-      rev = "master";
-      sha256 = "sha256-erYg/oTS5iq83XjGck/JQCPrFCylly/8ZwFGTjICXzk=";
-    };
-  };
-in {
+_: {
   programs.nvf.settings.vim = {
-    autopairs.nvim-autopairs.enable = true;
-    autocomplete.blink-cmp = {
-      enable = true;
+    autocomplete = {
+      enableSharedCmpSources = false;
 
-      friendly-snippets.enable = true;
+      blink-cmp = {
+        enable = true;
 
-      mappings = {
-        complete = "<C-Space>";
-        confirm = "<CR>";
-        next = "<Tab>";
-        previous = "<S-Tab>";
-        close = "<C-e>";
-        scrollDocsUp = "<C-u>";
-        scrollDocsDown = "<C-d>";
-      };
+        friendly-snippets.enable = true;
 
-      setupOpts = {
-        completion = {
-          menu.auto_show = true;
-          documentation = {
-            auto_show = true;
-            auto_show_delay_ms = 200;
+        mappings = {
+          close = "<C-e>";
+          complete = "<C-Space>";
+          confirm = "<CR>";
+          next = "<Tab>";
+          previous = "<S-Tab>";
+          scrollDocsDown = "<C-f>";
+          scrollDocsUp = "<C-d>";
+        };
+
+        setupOpts = {
+          cmdline = {
+            keymap.preset = "none";
+            sources = null;
+          };
+          completion = {
+            documentation.auto_show = true;
+            documentation.auto_show_delay_ms = 200;
+            menu.auto_show = true;
+          };
+          fuzzy.implementation = "prefer_rust";
+          keymap.preset = "none";
+          sources = {
+            default = [
+              "lsp"
+              "path"
+              "snippets"
+              "buffer"
+            ];
+            providers = {};
           };
         };
 
-        fuzzy = {
-          implementation = "prefer_rust";
-        };
-
-        sources = {
-          default = [
-            "lsp"
-            "path"
-            "snippets"
-            "buffer"
-            "spell"
-            "ripgrep"
-            "avante"
-            "conventional-commits"
-            "dictionary"
-            "git"
-          ];
-
-          providers = {
-            avante = {
-              module = "blink-cmp-avante";
-            };
+        sourcePlugins = {
+          emoji = {
+            enable = false;
+            package = "blink-emoji-nvim";
+            module = "blink-emoji";
           };
-        };
-
-        keymap = {
-          preset = "none";
-        };
-
-        cmdline = {
-          sources = [
-            "path"
-            "cmdline"
-          ];
-          keymap = {
-            preset = "none";
+          ripgrep = {
+            enable = false;
+            package = "blink-ripgrep-nvim";
+            module = "blink-ripgrep";
+          };
+          spell = {
+            enable = false;
+            package = "blink-cmp-spell";
+            module = "blink-cmp-spell";
           };
         };
       };
 
-      sourcePlugins = {
-        ripgrep = {
+      autopairs = {
+        nvim-autopairs = {
           enable = true;
-          package = "blink-ripgrep-nvim";
-          module = "blink-ripgrep";
-        };
-
-        spell = {
-          enable = true;
-          package = "blink-cmp-spell";
-          module = "blink-cmp-spell";
-        };
-
-        avante = {
-          enable = true;
-          package = blink-cmp-avante;
-          module = "blink-cmp-avante";
+          setupOpts = {};
         };
       };
     };
