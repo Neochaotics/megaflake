@@ -59,12 +59,11 @@ _: {
           };
         };
       };
-
-      autopairs = {
-        nvim-autopairs = {
-          enable = true;
-          setupOpts = {};
-        };
+    };
+    autopairs = {
+      nvim-autopairs = {
+        enable = true;
+        setupOpts = {};
       };
     };
   };
