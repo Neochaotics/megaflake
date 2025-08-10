@@ -7,6 +7,16 @@
   ...
 }: let
   username = "quinno";
+  formatUsername = name:
+    lib.strings.stringAsChars (
+      c:
+        if c == builtins.substring ((builtins.stringLength name) - 1) 1 name
+        then " ${lib.strings.toUpper c}"
+        else if c == (builtins.substring 0 1 name)
+        then lib.strings.toUpper c
+        else c
+    )
+    name;
 in {
   imports = [
     inputs.ff.nixosModules.freedpomFlake
@@ -14,10 +24,6 @@ in {
     inputs.disko.nixosModules.disko
     ./disks.nix
     ./hardware.nix
-    (import ../../home/quinno {
-      userName = username;
-      inherit lib;
-    })
   ];
   age = {
     rekey = {
@@ -35,6 +41,9 @@ in {
 
   users = {
     users.${username} = {
+      # User Configuration
+      isNormalUser = true;
+      description = formatUsername username;
       #hashedPasswordFile = config.sops.secrets.qpassword.path;
       initialPassword = "password";
       shell = pkgs.zsh;
@@ -44,12 +53,17 @@ in {
           "wheel"
         ]
         ++ lib.optional config.security.rtkit.enable "rtkit"
-        ++ lib.optional config.services.pipewire.enable "audio";
+        ++ lib.optional config.services.pipewire.enable "audio"
+        ++ lib.optional config.hardware.i2c.enable "i2c";
     };
     mutableUsers = lib.mkForce true;
   };
 
   services.getty.autologinUser = "${username}";
+  home-manager = {
+    users.${username} = import ./home.nix;
+    extraSpecialArgs = {inherit username;};
+  };
 
   # System Configuration
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";

@@ -11,23 +11,35 @@
 
   home = {
     stateVersion = "24.05";
-    username = "codman";
-    homeDirectory = "/home/codman";
+    username = "quinno";
+    homeDirectory = "/home/quinno";
     #enableNixpkgsReleaseCheck = false;
     packages = with pkgs; [
-      zed-editor
-      legcord
       element-desktop
       kmon
       gping
       gitoxide
-      warp-terminal
     ];
   };
-
   ff = {
     programs = {
       bash.enable = true;
+    };
+    hardware.videoPorts = {
+      "DP-5" = {
+        resolution = {
+          width = 1920;
+          height = 1080;
+        };
+        position = "auto-right";
+      };
+      "HDMI-A-1" = {
+        resolution = {
+          width = 3840;
+          height = 2160;
+        };
+        scale = 2;
+      };
     };
   };
 
@@ -46,6 +58,8 @@
       starship.enable = true;
       yazi.enable = true;
       bottom.enable = true;
+      nvim.enable = true;
+      mpv.enable = true;
     };
     system = {
       xdg.enable = true;
