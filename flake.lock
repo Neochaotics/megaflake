@@ -252,11 +252,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1754619634,
-        "narHash": "sha256-qeytKgrFMXVafrFumJBRxUHC/hSxZ1GwhmroGTjUk4c=",
+        "lastModified": 1754803496,
+        "narHash": "sha256-n6MQgs7xDIKpTQsi2FNt1nUTEZOPbP04zJnt1EeHKNY=",
         "owner": "freedpom",
         "repo": "FreedpomFlake",
-        "rev": "4b4ef32d9204da3c0010fe84b81c9b3131769a31",
+        "rev": "06160735061c19d2d2f80faa4e83decd28476332",
         "type": "github"
       },
       "original": {
@@ -1905,6 +1905,21 @@
         "type": "github"
       }
     },
+    "preservation": {
+      "locked": {
+        "lastModified": 1751384068,
+        "narHash": "sha256-xGq+Om1ReXcQy6h57yj9V5nOM84g/GBJ3m6oxe1a3js=",
+        "owner": "nix-community",
+        "repo": "preservation",
+        "rev": "286737ba485f30c1687c833e66f5901a6c8dc019",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "preservation",
+        "type": "github"
+      }
+    },
     "qm": {
       "inputs": {
         "ff": [
@@ -1921,11 +1936,11 @@
         "nvf": "nvf_2"
       },
       "locked": {
-        "lastModified": 1754802302,
-        "narHash": "sha256-BE3reGQYl5f/I0rp2aQqnYcaKk2+S95wgWvIxjGFoRo=",
+        "lastModified": 1754804196,
+        "narHash": "sha256-ddfV+zUjbOUFtKu2vg3jESHvq8jgi9Ec27fJl3ToeC4=",
         "owner": "Neochaotics",
         "repo": "NixModule",
-        "rev": "ef2f0537ec029b29faac2fd3c31aa237e119875d",
+        "rev": "193c4ca620cb332a433c7fd5e38fff19480583b5",
         "type": "github"
       },
       "original": {
@@ -1951,6 +1966,7 @@
         "nixpkgs": "nixpkgs_8",
         "nixpkgs-stable": "nixpkgs-stable",
         "nvf": "nvf",
+        "preservation": "preservation",
         "qm": "qm",
         "stylix": "stylix",
         "trackers": "trackers"
