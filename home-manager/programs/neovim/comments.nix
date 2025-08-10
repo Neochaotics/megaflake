@@ -1,5 +1,5 @@
 {
-  programs.nvf.settings.vim.comments.comment-nvim = {
+  programs.nvf.settingsvim.comments.comment-nvim = {
     enable = true;
 
     mappings = {
@@ -13,8 +13,8 @@
 
     setupOpts = {
       mappings = {
-        basic = true;
-        extra = true;
+        basic = false;
+        extra = false;
       };
     };
   };
