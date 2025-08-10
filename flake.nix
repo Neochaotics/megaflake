@@ -146,6 +146,11 @@
 
             # Modules to include in each system configuration
             modules = [
+              {
+                nixpkgs.config.allowUnfree = true;
+                networking.hostName = hostname;
+              }
+
               # Host-specific configuration
               ./hosts/${hostname}
 
@@ -153,6 +158,12 @@
               inputs.impermanence.nixosModules.impermanence
               inputs.preservation.nixosModules.preservation
               inputs.home-manager.nixosModules.home-manager
+              {
+                home-manager = {
+                  useGlobalPkgs = true;
+                  useUserPackages = true;
+                };
+              }
 
               # Security modules
               inputs.agenix.nixosModules.default
