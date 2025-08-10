@@ -2,8 +2,7 @@
   pkgs,
   inputs,
   ...
-}:
-{
+}: {
   imports = [
     inputs.impermanence.homeManagerModules.impermanence
     inputs.ff.homeModules.freedpomFlake

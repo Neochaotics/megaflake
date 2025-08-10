@@ -17,7 +17,7 @@
             #passwordFile = "/tmp/secondary.key";
             content = {
               type = "btrfs";
-              extraArgs = [ "-f" ];
+              extraArgs = ["-f"];
               subvolumes = {
                 "/games" = {
                   mountpoint = "/games";

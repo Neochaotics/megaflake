@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   boot = {
     #kernelPackages = pkgs.linuxPackages_cachyos_lts;
     initrd.availableKernelModules = [
@@ -20,18 +19,18 @@
       "kvm-intel"
       "wl"
     ];
-    blacklistedKernelModules = [ "nvidia" ];
+    blacklistedKernelModules = ["nvidia"];
     kernelParams = [
       "video=LVDS-1:1280x800@60"
     ];
   };
   services.xserver = {
     enable = false;
-    videoDrivers = [ "nouveau" ];
+    videoDrivers = ["nouveau"];
   };
   hardware = {
     enableRedistributableFirmware = true;
-    firmware = [ pkgs.b43Firmware_5_1_138 ];
+    firmware = [pkgs.b43Firmware_5_1_138];
     nvidia = {
       open = true;
       modesetting.enable = true;

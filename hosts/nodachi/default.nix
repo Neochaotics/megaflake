@@ -5,22 +5,19 @@
   pkgs,
   self,
   ...
-}:
-let
+}: let
   username = "quinno";
-  formatUsername =
-    name:
+  formatUsername = name:
     lib.strings.stringAsChars (
       c:
-      if c == builtins.substring ((builtins.stringLength name) - 1) 1 name then
-        " ${lib.strings.toUpper c}"
-      else if c == (builtins.substring 0 1 name) then
-        lib.strings.toUpper c
-      else
-        c
-    ) name;
-in
-{
+        if c == builtins.substring ((builtins.stringLength name) - 1) 1 name
+        then " ${lib.strings.toUpper c}"
+        else if c == (builtins.substring 0 1 name)
+        then lib.strings.toUpper c
+        else c
+    )
+    name;
+in {
   imports = [
     inputs.ff.nixosModules.freedpomFlake
     inputs.qm.nixosModules.qModule
@@ -32,7 +29,7 @@ in
 
   age = {
     rekey = {
-      masterIdentities = [ "/persist/age.key" ];
+      masterIdentities = ["/persist/age.key"];
       localStorageDir = "${self}" + "/secrets/rekeyed/${config.networking.hostName}";
       generatedSecretsDir = "${self}" + "/secrets/generated/${config.networking.hostName}";
       storageMode = "local";
@@ -48,12 +45,13 @@ in
       initialPassword = "password";
       shell = pkgs.zsh;
       ignoreShellProgramCheck = true;
-      extraGroups = [
-        "wheel"
-      ]
-      ++ lib.optional config.security.rtkit.enable "rtkit"
-      ++ lib.optional config.services.pipewire.enable "audio"
-      ++ lib.optional config.hardware.i2c.enable "i2c";
+      extraGroups =
+        [
+          "wheel"
+        ]
+        ++ lib.optional config.security.rtkit.enable "rtkit"
+        ++ lib.optional config.services.pipewire.enable "audio"
+        ++ lib.optional config.hardware.i2c.enable "i2c";
     };
     mutableUsers = lib.mkForce true;
   };
@@ -61,7 +59,7 @@ in
   services.getty.autologinUser = "${username}";
   home-manager = {
     users.${username} = import ./home.nix;
-    extraSpecialArgs = { inherit username; };
+    extraSpecialArgs = {inherit username;};
   };
 
   boot.kernelPackages = pkgs.linuxPackages_cachyos;
@@ -103,7 +101,6 @@ in
           drm = true;
           video.gpus = "primary";
           scrollbackSize = 2000;
-
         };
       };
       virt-reality = {

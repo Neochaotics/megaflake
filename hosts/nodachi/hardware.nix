@@ -1,5 +1,4 @@
-{ config, ... }:
-{
+{config, ...}: {
   # ff.hardware.displays = {
   #   test = {
   #     port = "DP-2";
@@ -12,7 +11,7 @@
   #
 
   boot = {
-    extraModulePackages = with config.boot.kernelPackages; [ it87 ];
+    extraModulePackages = with config.boot.kernelPackages; [it87];
     initrd.availableKernelModules = [
       "ahci"
       "hid-generic"
@@ -21,7 +20,7 @@
       "xhci_pci"
       "sp5100_tco"
     ];
-    kernelModules = [ "it87" ];
+    kernelModules = ["it87"];
     extraModprobeConfig = "
     options it87 ignore_resource_conflict=1
     ";
@@ -47,7 +46,6 @@
     scsiLinkPolicy = "max_performance";
   };
   services = {
-
     scx.enable = false;
     udev.extraRules = ''
       # CTRL Keyboard (04d8:eed2)

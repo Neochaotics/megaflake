@@ -1,8 +1,4 @@
-{
-  inputs,
-  ...
-}:
-{
+{inputs, ...}: {
   imports = [
     inputs.ff.nixosModules.freedpomFlake
     inputs.qm.nixosModules.qModule

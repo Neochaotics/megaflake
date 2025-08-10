@@ -102,9 +102,12 @@
     #  inputs.nixpkgs.follows = "nixpkgs";
     #};
   };
-  outputs =
-    inputs@{ self, flake-parts, ... }:
-    flake-parts.lib.mkFlake { inherit inputs; } {
+  outputs = inputs @ {
+    self,
+    flake-parts,
+    ...
+  }:
+    flake-parts.lib.mkFlake {inherit inputs;} {
       # Supported system types
       systems = [
         "x86_64-linux"
@@ -119,52 +122,50 @@
       ];
 
       # NixOS system configurations
-      flake.nixosConfigurations =
-        let
-          # Import nixpkgs library
-          inherit (self.inputs.nixpkgs) lib;
+      flake.nixosConfigurations = let
+        # Import nixpkgs library
+        inherit (self.inputs.nixpkgs) lib;
 
-          # Automatically discover all host configurations from the hosts directory
-          hostNames = builtins.attrNames (
-            lib.attrsets.filterAttrs (_name: type: type == "directory") (builtins.readDir ./hosts)
-          );
+        # Automatically discover all host configurations from the hosts directory
+        hostNames = builtins.attrNames (
+          lib.attrsets.filterAttrs (_name: type: type == "directory") (builtins.readDir ./hosts)
+        );
 
-          # Function to create a NixOS system configuration for each host
-          mkHost =
-            hostname:
-            self.inputs.nixpkgs.lib.nixosSystem {
-              # Special arguments passed to all modules
-              specialArgs = {
-                inherit
-                  inputs
-                  hostname
-                  lib
-                  self
-                  ;
-              };
-
-              # Modules to include in each system configuration
-              modules = [
-                # Host-specific configuration
-                ./hosts/${hostname}
-
-                # Core system modules
-                inputs.impermanence.nixosModules.impermanence
-                inputs.preservation.nixosModules.preservation
-                inputs.home-manager.nixosModules.home-manager
-
-                # Security modules
-                inputs.agenix.nixosModules.default
-                inputs.agenix-rekey.nixosModules.default
-
-                # Package repositories
-                inputs.chaotic.nixosModules.default
-
-                # Disabled modules
-                #inputs.lix-module.nixosModules.default
-              ];
+        # Function to create a NixOS system configuration for each host
+        mkHost = hostname:
+          self.inputs.nixpkgs.lib.nixosSystem {
+            # Special arguments passed to all modules
+            specialArgs = {
+              inherit
+                inputs
+                hostname
+                lib
+                self
+                ;
             };
-        in
+
+            # Modules to include in each system configuration
+            modules = [
+              # Host-specific configuration
+              ./hosts/${hostname}
+
+              # Core system modules
+              inputs.impermanence.nixosModules.impermanence
+              inputs.preservation.nixosModules.preservation
+              inputs.home-manager.nixosModules.home-manager
+
+              # Security modules
+              inputs.agenix.nixosModules.default
+              inputs.agenix-rekey.nixosModules.default
+
+              # Package repositories
+              inputs.chaotic.nixosModules.default
+
+              # Disabled modules
+              #inputs.lix-module.nixosModules.default
+            ];
+          };
+      in
         # Generate configurations for all hosts
         lib.genAttrs hostNames mkHost;
 

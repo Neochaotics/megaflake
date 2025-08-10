@@ -5,11 +5,9 @@
   pkgs,
   self,
   ...
-}:
-let
+}: let
   username = "quinno";
-in
-{
+in {
   imports = [
     inputs.ff.nixosModules.freedpomFlake
     inputs.qm.nixosModules.qModule
@@ -27,7 +25,7 @@ in
 
   age = {
     rekey = {
-      masterIdentities = [ "/persist/age.key" ];
+      masterIdentities = ["/persist/age.key"];
       localStorageDir = "${self}" + "/secrets/rekeyed/${config.networking.hostName}";
       generatedSecretsDir = "${self}" + "/secrets/generated/${config.networking.hostName}";
       storageMode = "local";
@@ -39,11 +37,12 @@ in
       initialPassword = "password";
       shell = pkgs.zsh;
       ignoreShellProgramCheck = true;
-      extraGroups = [
-        "wheel"
-      ]
-      ++ lib.optional config.security.rtkit.enable "rtkit"
-      ++ lib.optional config.services.pipewire.enable "audio";
+      extraGroups =
+        [
+          "wheel"
+        ]
+        ++ lib.optional config.security.rtkit.enable "rtkit"
+        ++ lib.optional config.services.pipewire.enable "audio";
     };
     mutableUsers = lib.mkForce true;
   };
