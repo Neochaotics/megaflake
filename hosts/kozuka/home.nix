@@ -4,7 +4,6 @@
   ...
 }: {
   imports = [
-    inputs.impermanence.homeManagerModules.impermanence
     inputs.ff.homeModules.freedpomFlake
     inputs.qm.homeModules.qModule
   ];
