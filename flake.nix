@@ -27,15 +27,10 @@
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
 
     # -- System management --
-    nix-on-droid = {
-      url = "github:nix-community/nix-on-droid/release-24.05";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    impermanence.url = "github:nix-community/impermanence";
     preservation.url = "github:nix-community/preservation";
     disko = {
       url = "github:nix-community/disko/latest";
@@ -44,15 +39,15 @@
     stylix.url = "github:danth/stylix";
 
     # -- Security and secrets management --
-    agenix = {
-      url = "github:ryantm/agenix";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.darwin.follows = "";
-    };
-    agenix-rekey = {
-      url = "github:oddlama/agenix-rekey";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    #agenix = {
+    #  url = "github:ryantm/agenix";
+    #  inputs.nixpkgs.follows = "nixpkgs";
+    #  inputs.darwin.follows = "";
+    #};
+    #agenix-rekey = {
+    #  url = "github:oddlama/agenix-rekey";
+    #  inputs.nixpkgs.follows = "nixpkgs";
+    #};
 
     # -- Development tools --
     flake-parts.url = "github:hercules-ci/flake-parts";
@@ -116,7 +111,7 @@
       # Flake modules to import
       imports = [
         inputs.flake-root.flakeModule
-        inputs.agenix-rekey.flakeModule
+        #inputs.agenix-rekey.flakeModule
         inputs.fpFmt.flakeModule
       ];
 
@@ -155,7 +150,6 @@
               ./hosts/${hostname}
 
               # Core system modules
-              inputs.impermanence.nixosModules.impermanence
               inputs.preservation.nixosModules.preservation
               inputs.home-manager.nixosModules.home-manager
               {
@@ -166,8 +160,8 @@
               }
 
               # Security modules
-              inputs.agenix.nixosModules.default
-              inputs.agenix-rekey.nixosModules.default
+              # inputs.agenix.nixosModules.default
+              # inputs.agenix-rekey.nixosModules.default
 
               # Package repositories
               inputs.chaotic.nixosModules.default
