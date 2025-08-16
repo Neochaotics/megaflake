@@ -1594,11 +1594,11 @@
         "nvf": "nvf_2"
       },
       "locked": {
-        "lastModified": 1755369527,
-        "narHash": "sha256-G0Jk3RAKe+aXTGzHgKm6S7lgf2NGjHLdzAIhH3XpQQQ=",
+        "lastModified": 1755369911,
+        "narHash": "sha256-CfDFLXmxl2UmmxBgNbPlV6IkjGItfZB02gQ8VqEMg60=",
         "owner": "Neochaotics",
         "repo": "NixModule",
-        "rev": "1b31800af2e26eb5ad7b5bce52113880c6eb1b9d",
+        "rev": "462251287ce95fc0879943dafa72a66d27d26df1",
         "type": "github"
       },
       "original": {
