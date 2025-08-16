@@ -7,22 +7,21 @@
     bind = [
       # Program Launching
       # --------------------
-      "SUPER, R, exec, pkill fuzzle || uwsm app -- fuzzel"
-      "SUPER, B, exec, uwsm app -- firefox.desktop:new-window"
-      "SUPER SHIFT, B, exec, uwsm app -- firefox.desktop:new-private-window"
-      "SUPER ALT, B, exec, uwsm app -- chromium.desktop"
-      "SUPER ALT SHIFT, B, exec, uwsm app -- chromium.desktop:new-private-window"
-      "SUPER, Return, exec, uwsm app -- foot.desktop"
-      "SUPER, E, exec, uwsm app -- thunar.desktop"
-      "SUPER, V, exec, uwsm app -- pavucontrol.desktop"
-      "SUPER, D, exec, uwsm app -- legcord"
+      "SUPER, R, exec, pkill fuzzle || fuzzel"
+      "SUPER, B, exec, firefox.desktop:new-window"
+      "SUPER SHIFT, B, exec, firefox.desktop:new-private-window"
+      "SUPER ALT, B, exec, chromium.desktop"
+      "SUPER ALT SHIFT, B, exec, chromium.desktop:new-private-window"
+      "SUPER, Return, exec, foot.desktop"
+      "SUPER, E, exec, thunar.desktop"
+      "SUPER, V, exec, pavucontrol.desktop"
+      "SUPER, D, exec, legcord"
 
       # General Control
       # --------------------
       "SUPER CTRL ALT, P, exec, systemctl poweroff"
       "SUPER CTRL ALT, R, exec, systemctl reboot"
       "SUPER CTRL ALT, L, exec, hyprlock"
-      "SUPER CTRL ALT, K, exec, uwsm stop"
 
       # General Control
       # --------------------
