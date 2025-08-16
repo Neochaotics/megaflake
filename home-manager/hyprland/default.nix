@@ -25,25 +25,24 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    home.sessionVariables.NIXOS_OZONE_WL = "1";
+    home.packages = with pkgs; [
+      wl-clipboard
+      hyprpolkitagent
+      hyprland-qtutils
+    ];
+
     wayland.windowManager.hyprland = {
       enable = true;
       #package = null;
       #portalPackage = null;
       systemd = {
-        enable = false;
-        enableXdgAutostart = false;
+        enable = true;
+        enableXdgAutostart = true;
       };
 
       xwayland.enable = true;
 
       #plugins = [ inputs.hypr-dynamic-cursors.packages.${pkgs.system}.hypr-dynamic-cursors ];
     };
-
-    programs.bash.initExtra = ''
-      if uwsm check may-start; then
-        exec uwsm start -S hyprland-uwsm.desktop
-      fi
-    '';
   };
 }
