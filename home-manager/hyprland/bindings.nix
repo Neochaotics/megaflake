@@ -8,13 +8,11 @@
       # Program Launching
       # --------------------
       "SUPER, R, exec, pkill fuzzle || fuzzel"
-      "SUPER, B, exec, firefox.desktop:new-window"
-      "SUPER SHIFT, B, exec, firefox.desktop:new-private-window"
-      "SUPER ALT, B, exec, chromium.desktop"
-      "SUPER ALT SHIFT, B, exec, chromium.desktop:new-private-window"
-      "SUPER, Return, exec, foot.desktop"
+      "SUPER, B, exec, firefox"
+      "SUPER ALT, B, exec, chromium"
+      "SUPER, Return, exec, foot"
       "SUPER, E, exec, thunar.desktop"
-      "SUPER, V, exec, pavucontrol.desktop"
+      "SUPER, V, exec, pavucontrol"
       "SUPER, D, exec, legcord"
 
       # General Control
