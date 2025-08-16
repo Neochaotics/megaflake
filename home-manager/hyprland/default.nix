@@ -11,6 +11,7 @@ in {
     ./appearance.nix
     ./input.nix
     ./misc.nix
+    ./env.nix
 
     ./bindings.nix
     ./monitors.nix
