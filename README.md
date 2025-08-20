@@ -1,4 +1,4 @@
-# MegaFlake - NixOS System Configuration
+# MegaFlake - NixOS System Configuration [WIP]
 
 ![nix-lock-update-status](https://img.shields.io/github/actions/workflow/status/Neochaotics/nixosconf/nix-lock-update.yml?logo=nixos&logoColor=white&label=Lock%20Update&labelColor=%23779ECB)
 ![nix-flake-check-status](https://img.shields.io/github/actions/workflow/status/Neochaotics/nixosconf/nix-flake-check.yml?logo=nixos&logoColor=white&label=Flake%20Check&labelColor=%23779ECB)
@@ -13,7 +13,7 @@ Comprehensive NixOS system configuration built as a modular flake. Designed to p
 
 ## Key Features
 
-- **Impermanence**: Ephemeral root filesystem with persistent user data
+- **Preservation**: Ephemeral root filesystem with persistent user data
 - **Home Manager**: Declarative user environment management
 - **Agenix**: Secure secret management with GPG and SSH key support
 - **Chaotic-Nyx**: Access to additional software packages
@@ -37,7 +37,6 @@ extra-substituters = [
 
 - **flake.nix**: Core configuration and input definitions
 - **hosts/**: Host-specific configurations
-- **home/**: Home-manager configurations
 - **secrets/**: Encrypted secrets managed by agenix
 - **scripts/**: Utility scripts for system management
 
