@@ -48,7 +48,7 @@
 
     animations = {
       enabled = true;
-      first_launch_animation = true;
+      workspace_wraparound = true;
     };
     bezier = [
       "linear, 0, 0, 1, 1"
