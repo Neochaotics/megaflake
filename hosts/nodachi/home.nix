@@ -2,7 +2,8 @@
   pkgs,
   inputs,
   ...
-}: {
+}:
+{
   imports = [
     inputs.ff.homeModules.freedpomFlake
     inputs.qm.homeModules.qModule
@@ -16,13 +17,9 @@
     packages = with pkgs; [
       zed-editor
       legcord
-      element-desktop
       kmon
       gping
       gitoxide
-      warp-terminal
-      dolphin-emu
-      sidequest
     ];
   };
   ff = {
@@ -54,7 +51,7 @@
       git.enable = true;
       utils.enable = true;
       fuzzel.enable = true;
-      media.enable = true;
+      media.enable = false;
       ssh.enable = true;
       aria2.enable = true;
       waybar.enable = true;
