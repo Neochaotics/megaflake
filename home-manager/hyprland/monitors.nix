@@ -9,10 +9,18 @@
     #  "HDMI-A-1, 1920x1080@60, 0x0, 1"
     #];
 
-    monitor =
-      lib.mapAttrsToList (
-        name: cfg: "${name}, ${toString cfg.resolution.width}x${toString cfg.resolution.height}@${toString cfg.framerate}, ${cfg.position}, ${toString cfg.scale}, transform, ${toString cfg.transform}"
-      )
+    monitorv2 =
+      lib.mapAttrsToList (name: cfg: ''
+        {
+          output = ${name}
+          mode = ${toString cfg.resolution.width}x${toString cfg.resolution.height}@${toString cfg.framerate}
+          position = ${cfg.position}
+          scale = ${toString cfg.scale}
+          transform = ${toString cfg.transform}${
+          lib.optionalString (cfg ? mirror) "\n        mirror = ${cfg.mirror}"
+        }${lib.optionalString (cfg ? bitdepth) "\n        bitdepth = ${toString cfg.bitdepth}"}
+        }
+      '')
       config.ff.hardware.videoPorts;
 
     workspace = [
