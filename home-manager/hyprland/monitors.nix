@@ -50,7 +50,7 @@
             then ", vrr, 1"
             else "";
         in
-          base + transform + mirror + bitdepth + cm + hdr + sdrbrightness + sdrsaturation + vrr
+          base + transform + mirror + bitdepth + cm + sdrbrightness + sdrsaturation + vrr
       )
       config.ff.hardware.videoPorts;
 
