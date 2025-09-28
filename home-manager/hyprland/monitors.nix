@@ -10,33 +10,52 @@
           resolution = "${toString cfg.resolution.width}x${toString cfg.resolution.height}@${toString cfg.framerate}";
           inherit (cfg) position;
           scale = toString cfg.scale;
-          transform = "transform, ${toString cfg.transform}";
+
+          # Always present base parts
+          base = "${name}, ${resolution}, ${position}, ${scale}";
+
+          # Optional extras:
+          transform =
+            if (cfg ? transform) && (cfg.transform != null) && (cfg.transform != 0)
+            then ", transform, ${toString cfg.transform}"
+            else "";
 
           mirror =
             if (cfg ? mirror) && (cfg.mirror != null)
             then ", mirror, ${cfg.mirror}"
             else "";
+
           bitdepth =
-            if cfg.colorDepth == 10
+            if (cfg ? colorDepth) && (cfg.colorDepth == 10)
             then ", bitdepth, 10"
             else "";
+
           cm =
             if (cfg ? cm) && (cfg.cm != null)
             then ", cm, ${cfg.cm}"
             else "";
+
+          hdr =
+            if (cfg ? hdr) && cfg.hdr
+            then ", hdr"
+            else "";
+
           sdrbrightness =
             if (cfg ? sdrbrightness) && (cfg.sdrbrightness != null)
             then ", sdrbrightness, ${toString cfg.sdrbrightness}"
             else "";
+
           sdrsaturation =
             if (cfg ? sdrsaturation) && (cfg.sdrsaturation != null)
             then ", sdrsaturation, ${toString cfg.sdrsaturation}"
             else "";
+
           vrr =
-            if cfg.variableRefreshRate
+            if (cfg ? variableRefreshRate) && cfg.variableRefreshRate
             then ", vrr, 1"
             else "";
-        in "${name}, ${resolution}, ${position}, ${scale}, ${transform}${mirror}${bitdepth}${cm}${sdrbrightness}${sdrsaturation}${vrr}"
+        in
+          base + transform + mirror + bitdepth + cm + hdr + sdrbrightness + sdrsaturation + vrr
       )
       config.ff.hardware.videoPorts;
 
