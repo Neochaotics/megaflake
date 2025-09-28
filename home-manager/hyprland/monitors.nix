@@ -4,27 +4,46 @@
   ...
 }: {
   wayland.windowManager.hyprland.settings = lib.mkIf config.qm.desktop.hyprland.enable {
-    #monitor = [
-    #  "DP-5, 1920x1080@60, auto-right, 1"
-    #  "HDMI-A-1, 1920x1080@60, 0x0, 1"
-    #];
-
     monitor =
       lib.mapAttrsToList (
-        name: cfg: "${name}, ${toString cfg.resolution.width}x${toString cfg.resolution.height}@${toString cfg.framerate}, ${cfg.position}, ${toString cfg.scale}, transform, ${toString cfg.transform}"
+        name: cfg: let
+          resolution = "${toString cfg.resolution.width}x${toString cfg.resolution.height}@${toString cfg.framerate}";
+          inherit (cfg) position;
+          scale = toString cfg.scale;
+          transform = "transform, ${toString cfg.transform}";
+          mirror =
+            if cfg ? mirror
+            then ", mirror, ${cfg.mirror}"
+            else "";
+          bitdepth =
+            if cfg.colorDepth == 10
+            then ", bitdepth, 10"
+            else "";
+          cm =
+            if cfg ? cm
+            then ", cm, ${cfg.cm}"
+            else "";
+          sdrbrightness =
+            if cfg ? sdrbrightness
+            then ", sdrbrightness, ${toString cfg.sdrbrightness}"
+            else "";
+          sdrsaturation =
+            if cfg ? sdrsaturation
+            then ", sdrsaturation, ${toString cfg.sdrsaturation}"
+            else "";
+          vrr =
+            if cfg.variableRefreshRate
+            then ", vrr, 1"
+            else "";
+        in "${name}, ${resolution}, ${position}, ${scale}, ${transform}${mirror}${bitdepth}${cm}${sdrbrightness}${sdrsaturation}${vrr}"
       )
       config.ff.hardware.videoPorts;
 
-    workspace = [
-      "1, monitor:HDMI-A-1"
-      "2, monitor:HDMI-A-1"
-      "3, monitor:HDMI-A-1"
-      "4, monitor:HDMI-A-1"
-      "5, monitor:DP-5"
-      "6, monitor:DP-5"
-      "7, monitor:DP-5"
-      "8, monitor:DP-5"
-      "name:G, monitor:HDMI-A-1"
-    ];
+    workspace = lib.concatLists (
+      lib.mapAttrsToList (
+        name: cfg: map (ws: "${ws}, monitor:${name}") cfg.workspaces
+      )
+      config.ff.hardware.videoPorts
+    );
   };
 }
