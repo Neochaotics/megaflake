@@ -11,8 +11,9 @@
           inherit (cfg) position;
           scale = toString cfg.scale;
           transform = "transform, ${toString cfg.transform}";
+
           mirror =
-            if cfg ? mirror
+            if (cfg ? mirror) && (cfg.mirror != null)
             then ", mirror, ${cfg.mirror}"
             else "";
           bitdepth =
@@ -20,15 +21,15 @@
             then ", bitdepth, 10"
             else "";
           cm =
-            if cfg ? cm
+            if (cfg ? cm) && (cfg.cm != null)
             then ", cm, ${cfg.cm}"
             else "";
           sdrbrightness =
-            if cfg ? sdrbrightness
+            if (cfg ? sdrbrightness) && (cfg.sdrbrightness != null)
             then ", sdrbrightness, ${toString cfg.sdrbrightness}"
             else "";
           sdrsaturation =
-            if cfg ? sdrsaturation
+            if (cfg ? sdrsaturation) && (cfg.sdrsaturation != null)
             then ", sdrsaturation, ${toString cfg.sdrsaturation}"
             else "";
           vrr =
