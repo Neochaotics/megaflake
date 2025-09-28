@@ -11,7 +11,7 @@
 
     monitor =
       lib.mapAttrsToList (
-        name: cfg: "${name}, ${toString cfg.resolution.width}x${toString cfg.resolution.height}@${toString cfg.framerate}, ${cfg.position}, ${toString cfg.scale}"
+        name: cfg: "${name}, ${toString cfg.resolution.width}x${toString cfg.resolution.height}@${toString cfg.framerate}, ${cfg.position}, ${toString cfg.scale}, transform, ${toString cfg.transform}"
       )
       config.ff.hardware.videoPorts;
 
