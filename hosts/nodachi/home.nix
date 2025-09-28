@@ -26,6 +26,13 @@
       bash.enable = true;
     };
     hardware.videoPorts = {
+      "DP-1" = {
+        resolution = {
+          width = 2560;
+          height = 1440;
+        };
+        framerate = 144;
+      };
       "DP-5" = {
         resolution = {
           width = 1920;
@@ -33,12 +40,13 @@
         };
         position = "auto-right";
       };
-      "HDMI-A-1" = {
+      "HDMI-A-2" = {
         resolution = {
           width = 3840;
           height = 2160;
         };
         scale = 2;
+        position = "auto-left";
       };
     };
   };
