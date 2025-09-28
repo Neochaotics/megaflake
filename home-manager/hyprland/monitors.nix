@@ -35,11 +35,6 @@
             then ", cm, ${cfg.cm}"
             else "";
 
-          hdr =
-            if (cfg ? hdr) && cfg.hdr
-            then ", hdr"
-            else "";
-
           sdrbrightness =
             if (cfg ? sdrbrightness) && (cfg.sdrbrightness != null)
             then ", sdrbrightness, ${toString cfg.sdrbrightness}"
