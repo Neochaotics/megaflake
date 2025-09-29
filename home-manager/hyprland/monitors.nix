@@ -47,7 +47,7 @@
 
           vrr =
             if (cfg ? vrr) && (cfg.cm != null)
-            then ", vrr, ${cfg.vrr}"
+            then ", vrr, ${toString cfg.vrr}"
             else "";
         in
           base + transform + mirror + bitdepth + cm + sdrbrightness + sdrsaturation + vrr
