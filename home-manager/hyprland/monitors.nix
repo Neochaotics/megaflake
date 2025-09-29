@@ -46,8 +46,8 @@
             else "";
 
           vrr =
-            if (cfg ? variableRefreshRate) && cfg.variableRefreshRate
-            then ", vrr, 1"
+            if (cfg ? vrr) && cfg.vrr
+            then ", vrr, ${cfg.vrr}"
             else "";
         in
           base + transform + mirror + bitdepth + cm + sdrbrightness + sdrsaturation + vrr
