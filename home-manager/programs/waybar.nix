@@ -6,8 +6,8 @@
 }: let
   cfg = config.qm.programs.waybar;
 
-  persistentWorkspaces = lib.filterAttrs (_: cfg: cfg.workspaces != []) (
-    lib.mapAttrs (_: cfg: cfg) config.ff.hardware.videoPorts
+  persistentWorkspaces = lib.filterAttrs (_: workspaces: workspaces != []) (
+    lib.mapAttrs (_: cfg: cfg.workspaces) config.ff.hardware.videoPorts
   );
 in {
   options.qm.programs.waybar = {
