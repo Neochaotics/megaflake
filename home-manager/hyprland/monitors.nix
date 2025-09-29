@@ -46,7 +46,7 @@
             else "";
 
           vrr =
-            if (cfg ? vrr) && cfg.vrr
+            if (cfg ? vrr) && (cfg.cm != null)
             then ", vrr, ${cfg.vrr}"
             else "";
         in
