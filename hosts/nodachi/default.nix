@@ -57,11 +57,13 @@ in {
     extraSpecialArgs = {inherit username;};
   };
 
-  services.tailscale.enable = true;
+  services.tailscale.enable = lib.mkForce true;
 
   services.pipewire.enable = lib.mkForce true;
 
   services.flatpak.enable = true;
+
+  #programs.coolercontrol.enable = true;
 
   ff = {
     common.enable = true;
