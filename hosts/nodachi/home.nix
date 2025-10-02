@@ -34,7 +34,6 @@
       git.enable = true;
       utils.enable = true;
       fuzzel.enable = true;
-      media.enable = false;
       ssh.enable = true;
       aria2.enable = true;
       waybar.enable = true;

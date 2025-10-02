@@ -3,51 +3,51 @@
   pkgs,
   ...
 }: {
-  # ff.hardware.videoPorts = {
-  #   "DP-1" = {
-  #     resolution = {
-  #       width = 2560;
-  #       height = 1440;
-  #     };
-  #     framerate = 180;
-  #     vrr = 3;
-  #     cm = "auto";
-  #     colorDepth = 10;
-  #     workspaces = [
-  #       "1"
-  #       "2"
-  #       "3"
-  #       "4"
-  #     ];
-  #   };
-  #   "DP-5" = {
-  #     resolution = {
-  #       width = 1920;
-  #       height = 1080;
-  #     };
-  #     framerate = 75;
-  #     position = "auto-center-right";
-  #     transform = 3;
-  #     workspaces = [
-  #       "5"
-  #       "6"
-  #       "7"
-  #       "8"
-  #     ];
-  #   };
-  #   "HDMI-A-2" = {
-  #     resolution = {
-  #       width = 3840;
-  #       height = 2160;
-  #     };
-  #     scale = 2;
-  #     position = "auto-center-left";
-  #     workspaces = [
-  #       "9"
-  #       "10"
-  #     ];
-  #   };
-  # };
+  ff.hardware.displays = {
+    "DP-1" = {
+      resolution = {
+        width = 2560;
+        height = 1440;
+      };
+      framerate = 180;
+      vrr = 3;
+      colorProfile = "auto";
+      colorDepth = 32;
+      workspaces = [
+        "1"
+        "2"
+        "3"
+        "4"
+      ];
+    };
+    "DP-5" = {
+      resolution = {
+        width = 1920;
+        height = 1080;
+      };
+      framerate = 75;
+      position = "auto-center-right";
+      transform = 3;
+      workspaces = [
+        "5"
+        "6"
+        "7"
+        "8"
+      ];
+    };
+    "HDMI-A-2" = {
+      resolution = {
+        width = 3840;
+        height = 2160;
+      };
+      scale = 2;
+      position = "auto-center-left";
+      workspaces = [
+        "9"
+        "10"
+      ];
+    };
+  };
 
   boot = {
     kernelPackages = pkgs.linuxPackages_cachyos;
@@ -65,9 +65,6 @@
     options it87 ignore_resource_conflict=1
     ";
     kernelParams = [
-      "video=DP-1:2560x1440@60"
-      "video=HDMI-A-2:1920x1080@60"
-      "video=DP-5:1920x1080@60"
       "amd_pstate=active" # Enable active pstate for better power management
       "amd_iommu=on" # Enable IOMMU for better device isolation
       "iommu=pt" # Pass-through mode for IOMMU
