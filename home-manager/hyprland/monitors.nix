@@ -1,9 +1,9 @@
 {
-  config,
   lib,
+  osConfig,
   ...
 }: {
-  wayland.windowManager.hyprland.settings = lib.mkIf config.qm.desktop.hyprland.enable {
+  wayland.windowManager.hyprland.settings = lib.mkIf osConfig.qm.desktop.hyprland.enable {
     monitor =
       lib.mapAttrsToList (
         name: cfg: let
@@ -11,10 +11,8 @@
           inherit (cfg) position;
           scale = toString cfg.scale;
 
-          # Always present base parts
           base = "${name}, ${resolution}, ${position}, ${scale}";
 
-          # Optional extras:
           transform =
             if (cfg ? transform) && (cfg.transform != null) && (cfg.transform != 0)
             then ", transform, ${toString cfg.transform}"
@@ -46,19 +44,19 @@
             else "";
 
           vrr =
-            if (cfg ? vrr) && (cfg.cm != null)
+            if (cfg ? vrr) && (cfg.vrr != null)
             then ", vrr, ${toString cfg.vrr}"
             else "";
         in
           base + transform + mirror + bitdepth + cm + sdrbrightness + sdrsaturation + vrr
       )
-      config.ff.hardware.videoPorts;
+      osConfig.ff.hardware.videoPorts;
 
     workspace = lib.concatLists (
       lib.mapAttrsToList (
         name: cfg: map (ws: "${ws}, monitor:${name}") cfg.workspaces
       )
-      config.ff.hardware.videoPorts
+      osConfig.ff.hardware.videoPorts
     );
   };
 }
