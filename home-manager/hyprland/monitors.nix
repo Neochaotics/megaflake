@@ -50,13 +50,13 @@
         in
           base + transform + mirror + bitdepth + cm + sdrbrightness + sdrsaturation + vrr
       )
-      osConfig.ff.hardware.videoPorts;
+      osConfig.ff.hardware.displays;
 
     workspace = lib.concatLists (
       lib.mapAttrsToList (
         name: cfg: map (ws: "${ws}, monitor:${name}") cfg.workspaces
       )
-      osConfig.ff.hardware.videoPorts
+      osConfig.ff.hardware.displays
     );
   };
 }
