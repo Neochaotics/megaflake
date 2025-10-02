@@ -2,12 +2,13 @@
   lib,
   config,
   pkgs,
+  osConfig,
   ...
 }: let
   cfg = config.qm.programs.waybar;
 
   persistentWorkspaces = lib.filterAttrs (_: workspaces: workspaces != []) (
-    lib.mapAttrs (_: cfg: cfg.workspaces) config.ff.hardware.videoPorts
+    lib.mapAttrs (_: cfg: cfg.workspaces) osConfig.ff.hardware.videoPorts
   );
 in {
   options.qm.programs.waybar = {
