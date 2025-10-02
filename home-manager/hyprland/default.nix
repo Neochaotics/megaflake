@@ -14,7 +14,7 @@ in {
     ./env.nix
 
     ./bindings.nix
-    #./monitors.nix
+    ./monitors.nix
     ./windowrules.nix
 
     ./idlelock.nix
