@@ -51,17 +51,16 @@ in {
     mutableUsers = lib.mkForce true;
   };
 
-  services.getty.autologinUser = "${username}";
   home-manager = {
     users.${username} = import ./home.nix;
     extraSpecialArgs = {inherit username;};
   };
-
-  services.tailscale.enable = lib.mkForce true;
-
-  services.pipewire.enable = lib.mkForce true;
-
-  services.flatpak.enable = true;
+  services = {
+    getty.autologinUser = "${username}";
+    tailscale.enable = lib.mkForce true;
+    pipewire.enable = lib.mkForce true;
+    flatpak.enable = true;
+  };
 
   #programs.coolercontrol.enable = true;
 

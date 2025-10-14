@@ -5,11 +5,12 @@
 }: {
   ff.hardware.displays = {
     "DP-1" = {
+      includeKernelParams = true;
       resolution = {
         width = 2560;
         height = 1440;
       };
-      framerate = 180;
+      framerate = 120;
       vrr = 3;
       colorProfile = "auto";
       colorDepth = 32;
@@ -25,7 +26,7 @@
         width = 1920;
         height = 1080;
       };
-      framerate = 75;
+      framerate = 60;
       position = "auto-center-right";
       transform = 3;
       workspaces = [
@@ -101,15 +102,14 @@
       };
     };
 
+    graphics = {
+      enable = true;
+    };
+
     # AMD chipset specific features
     amdgpu = {
       initrd.enable = true;
       opencl.enable = true;
-      amdvlk = {
-        # hahah enables graphics
-        enable = true;
-        support32Bit.enable = true;
-      };
     };
 
     enableRedistributableFirmware = true;
