@@ -214,6 +214,8 @@ in {
               linkhints
               skip-redirect
               ublock-origin
+              stylus
+              tampermonkey
             ];
           };
         };
