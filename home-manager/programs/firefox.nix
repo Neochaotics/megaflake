@@ -84,10 +84,10 @@ in {
             "StartPage" = "none";
           };
           "HttpsOnlyMode" = "force_enabled";
-          "InstallAddonsPermission" = {
-            "Default" = false;
-          };
-          "ManualAppUpdateOnly" = true;
+          #"InstallAddonsPermission" = {
+          #  "Default" = false;
+          #};
+          #"ManualAppUpdateOnly" = true;
           "NetworkPrediction" = false;
           "NewTabPage" = true;
           "NoDefaultBookmarks" = true;
@@ -163,10 +163,6 @@ in {
         };
         profiles.default = {
           isDefault = true;
-          settings = {
-            "browser.search.defaultenginename" = "ddg";
-            "browser.search.order.1" = "ddg";
-          };
           search = {
             force = true;
             default = "Brave";
@@ -202,7 +198,7 @@ in {
             };
           };
           extensions = {
-            force = true;
+            #force = true;
             packages = with inputs.firefox-addons.packages.${pkgs.system}; [
               bitwarden
               aria2-integration
