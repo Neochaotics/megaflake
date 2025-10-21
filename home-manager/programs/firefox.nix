@@ -198,7 +198,7 @@ in {
             };
           };
           extensions = {
-            #force = true;
+            force = true;
             packages = with inputs.firefox-addons.packages.${pkgs.system}; [
               bitwarden
               aria2-integration
