@@ -22,6 +22,16 @@ in {
     ./hardware.nix
   ];
 
+  virtualisation.podman = {
+    enable = true;
+    dockerCompat = true;
+  };
+
+  environment.systemPackages = [
+    pkgs.distrobox
+    pkgs.android-studio
+  ];
+
   #age = {
   #  rekey = {
   #    masterIdentities = ["/persist/age.key"];
@@ -32,23 +42,30 @@ in {
   #};
 
   users = {
-    users.${username} = {
-      # User Configuration
-      isNormalUser = true;
-      description = formatUsername username;
-      #hashedPasswordFile = config.sops.secrets.qpassword.path;
-      initialPassword = "password";
-      shell = pkgs.zsh;
-      ignoreShellProgramCheck = true;
-      extraGroups =
-        [
-          "wheel"
-        ]
-        ++ lib.optional config.security.rtkit.enable "rtkit"
-        ++ lib.optional config.services.pipewire.enable "audio"
-        ++ lib.optional config.hardware.i2c.enable "i2c";
+    groups.caldera-rest-api = {};
+    users = {
+      caldera-rest-api = {
+        isSystemUser = true;
+        group = "caldera-rest-api";
+      };
+      ${username} = {
+        # User Configuration
+        isNormalUser = true;
+        description = formatUsername username;
+        #hashedPasswordFile = config.sops.secrets.qpassword.path;
+        initialPassword = "password";
+        shell = pkgs.zsh;
+        ignoreShellProgramCheck = true;
+        extraGroups =
+          [
+            "wheel"
+          ]
+          ++ lib.optional config.security.rtkit.enable "rtkit"
+          ++ lib.optional config.services.pipewire.enable "audio"
+          ++ lib.optional config.hardware.i2c.enable "i2c";
+      };
     };
-    mutableUsers = lib.mkForce true;
+    mutableUsers = lib.mkForce false;
   };
 
   home-manager = {
@@ -62,6 +79,14 @@ in {
     flatpak.enable = true;
   };
 
+  programs.obs-studio = {
+    enable = true;
+    enableVirtualCamera = true;
+    plugins = with pkgs.obs-studio-plugins; [
+      droidcam-obs
+    ];
+  };
+
   #programs.coolercontrol.enable = true;
 
   ff = {
@@ -70,6 +95,7 @@ in {
       sudo-rs.enable = true;
     };
     services = {
+      ntp.enable = true;
       ananicy.enable = true;
       pipewire.enable = true;
       openssh.enable = true;
@@ -98,7 +124,7 @@ in {
         };
       };
       virt-reality = {
-        enable = true;
+        enable = false;
         autoStart = true;
         bitrate = 150000000;
       };

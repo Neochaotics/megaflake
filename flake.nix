@@ -59,15 +59,18 @@
 
     # -- Applications and add-ons --
     firefox-addons = {
-      url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
+      url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons&rev=8ca0845762f7a664b1d5a920ef3bd03df50311d0";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     trackers = {
       url = "github:ngosang/trackerslist";
       flake = false;
     };
-
-    # -- Custom modules and flakes --
+    caldera = {
+      # -- Custom modules and flakes --
+      url = "/home/quinno/github/Caldera";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     ff = {
       #url = "path:/home/quinno/github/freedpom/FreedpomFlake";
       #url = "git+https://github.com/freedpom/FreedpomFlake?ref=feat/update-consoles";
