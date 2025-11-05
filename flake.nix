@@ -116,6 +116,7 @@
         inputs.flake-root.flakeModule
         #inputs.agenix-rekey.flakeModule
         inputs.fpFmt.flakeModule
+        inputs.flake-parts.flakeModules.easyOverlay
       ];
 
       # NixOS system configurations

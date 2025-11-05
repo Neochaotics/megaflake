@@ -95,6 +95,7 @@
     '';
   };
   hardware = {
+    bluetooth.enable = true;
     cpu = {
       amd = {
         updateMicrocode = true;

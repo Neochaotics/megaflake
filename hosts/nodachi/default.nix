@@ -73,6 +73,7 @@ in {
     extraSpecialArgs = {inherit username;};
   };
   services = {
+    blueman.enable = true;
     getty.autologinUser = "${username}";
     tailscale.enable = lib.mkForce true;
     pipewire.enable = lib.mkForce true;
@@ -124,7 +125,7 @@ in {
         };
       };
       virt-reality = {
-        enable = false;
+        enable = true;
         autoStart = true;
         bitrate = 150000000;
       };
