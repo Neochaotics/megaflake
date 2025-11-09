@@ -148,6 +148,11 @@ in {
       steam.enable = true;
     };
     stylix.enable = true;
-    wireguard.enable = false;
+    wireguard.enable = true;
+    antec-display = {
+      enable = true;
+      cpu.device = "k10temp-pci-00c3";
+      gpu.device = "amdgpu-pci-0300";
+    };
   };
 }

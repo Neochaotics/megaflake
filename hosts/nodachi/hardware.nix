@@ -4,7 +4,7 @@
   ...
 }: {
   ff.hardware.displays = {
-    "DP-1" = {
+    "DP-2" = {
       includeKernelParams = true;
       resolution = {
         width = 2560;
