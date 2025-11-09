@@ -37,12 +37,17 @@
     flake-parts.lib.mkFlake {inherit inputs;} {
       systems = [
         "x86_64-linux"
-        "aarch64-linux"
       ];
       imports = [
         inputs.home-manager.flakeModules.home-manager
         inputs.fpFmt.flakeModule
       ];
+      perSystem = {pkgs, ...}: {
+        packages = {
+          antec-flux-pro-display = pkgs.callPackage ./packages/antec-flux-pro-display.nix {};
+          antec-flux-pro-display-udev = pkgs.callPackage ./packages/antec-flux-pro-display-udev.nix {};
+        };
+      };
       flake = {
         nixosModules = {
           qModule = ./modules/nixos;
