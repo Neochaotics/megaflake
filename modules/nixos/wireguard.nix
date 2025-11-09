@@ -24,6 +24,19 @@ in {
           }
         ];
       };
+      wgBM = {
+        address = ["10.1.4.3/32"];
+        dns = ["10.0.0.1"];
+        privateKeyFile = "/persist/wgBM.key";
+
+        peers = [
+          {
+            publicKey = "I3X4saZKZpipmgCrvwhr5xa8SLYAaLSGOm6Y5kzPZj8=";
+            allowedIPs = ["10.1.1.0/24, 10.1.2.0/24, 10.1.4.0/24"];
+            endpoint = "bigmonkey.org:51820";
+          }
+        ];
+      };
     };
   };
 }
