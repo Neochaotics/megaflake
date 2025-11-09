@@ -11,22 +11,25 @@ in {
 
   config = lib.mkIf cfg.enable {
     networking = {
-      firewall.allowedUDPPorts = [51820]; # Clients and peers can use the same port, see listenport
-      networking.wireguard.interfaces = {
-        wgBM = {
-          ips = ["10.1.4.3/24"];
-          listenPort = 51820;
-          privateKeyFile = "/persist/wgBM.key";
-          peers = [
-            {
-              name = "bigmonkey";
-              publicKey = "I3X4saZKZpipmgCrvwhr5xa8SLYAaLSGOm6Y5kzPZj8=";
-              presharedKeyFile = "/persist/wgBMpre.key";
-              allowedIPs = ["10.1.1.0/24, 10.1.2.0/24, 10.1.4.0/24"];
-              endpoint = "bigmonkey.org:51820";
-              persistentKeepalive = 25;
-            }
-          ];
+      firewall.allowedUDPPorts = [51820];
+      networking = {
+        wg-quick.interfaces = lib.mkForce {};
+        wireguard.interfaces = {
+          wgBM = {
+            ips = ["10.1.4.3/24"];
+            listenPort = 51820;
+            privateKeyFile = "/persist/wgBM.key";
+            peers = [
+              {
+                name = "bigmonkey";
+                publicKey = "I3X4saZKZpipmgCrvwhr5xa8SLYAaLSGOm6Y5kzPZj8=";
+                presharedKeyFile = "/persist/wgBMpre.key";
+                allowedIPs = ["10.1.1.0/24, 10.1.2.0/24, 10.1.4.0/24"];
+                endpoint = "bigmonkey.org:51820";
+                persistentKeepalive = 25;
+              }
+            ];
+          };
         };
       };
     };
