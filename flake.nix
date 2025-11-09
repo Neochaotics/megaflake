@@ -45,10 +45,10 @@
       ];
       flake = {
         nixosModules = {
-          qModule = ./nixos;
+          qModule = ./modules/nixos;
         };
         homeModules = {
-          qModule = ./home-manager;
+          qModule = ./modules/home-manager;
         };
       };
     };
