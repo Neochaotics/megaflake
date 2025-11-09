@@ -19,7 +19,9 @@ in {
           privateKeyFile = "/persist/wgBM.key";
           peers = [
             {
+              name = "bigmonkey";
               publicKey = "I3X4saZKZpipmgCrvwhr5xa8SLYAaLSGOm6Y5kzPZj8=";
+              presharedKeyFile = "/persist/wgBMpre.key";
               allowedIPs = ["10.1.1.0/24, 10.1.2.0/24, 10.1.4.0/24"];
               endpoint = "bigmonkey.org:51820";
               persistentKeepalive = 25;
