@@ -6,11 +6,7 @@
   imports = [
     inputs.ff.homeModules.freedpomFlake
     inputs.qm.homeModules.qModule
-    inputs.caldera.homeManagerModules.default
   ];
-
-  #services.caldera-rest-api.enable = true;
-  caldera.api.enable = true;
 
   home = {
     stateVersion = "24.05";
@@ -18,7 +14,6 @@
     homeDirectory = "/home/quinno";
     #enableNixpkgsReleaseCheck = false;
     packages = with pkgs; [
-      #inputs.caldera.packages.${pkgs.system}.calderadock
       zed-editor
       legcord
       kmon
@@ -34,7 +29,7 @@
 
   qm = {
     programs = {
-      firefox.enable = true;
+      firefox.enable = false;
       foot.enable = true;
       git.enable = true;
       utils.enable = true;

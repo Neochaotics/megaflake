@@ -71,13 +71,12 @@
       };
     };
   };
-  outputs =
-    inputs@{
-      self,
-      flake-parts,
-      ...
-    }:
-    flake-parts.lib.mkFlake { inherit inputs; } {
+  outputs = inputs @ {
+    self,
+    flake-parts,
+    ...
+  }:
+    flake-parts.lib.mkFlake {inherit inputs;} {
       # Supported system types
       systems = [
         "x86_64-linux"
@@ -91,38 +90,36 @@
         inputs.flake-parts.flakeModules.easyOverlay
       ];
 
-      flake.nixosConfigurations =
-        let
-          inherit (self.inputs.nixpkgs) lib;
-          hostNames = builtins.attrNames (
-            lib.attrsets.filterAttrs (_name: type: type == "directory") (builtins.readDir ./hosts)
-          );
-          mkHost =
-            hostname:
-            self.inputs.nixpkgs.lib.nixosSystem {
-              specialArgs = {
-                inherit
-                  inputs
-                  hostname
-                  lib
-                  self
-                  ;
-              };
-              modules = [
-                {
-                  nixpkgs.config.allowUnfree = lib.mkForce true;
-                  nixpkgs.hostPlatform = "x86_64-linux";
-                  networking.hostName = hostname;
-                  system.stateVersion = "24.11";
-                }
-                ./hosts/${hostname}
-                inputs.chaotic.nixosModules.default
-                inputs.ff.nixosModules.freedpomFlake
-                inputs.qm.nixosModules.qModule
-                inputs.disko.nixosModules.disko
-              ];
+      flake.nixosConfigurations = let
+        inherit (self.inputs.nixpkgs) lib;
+        hostNames = builtins.attrNames (
+          lib.attrsets.filterAttrs (_name: type: type == "directory") (builtins.readDir ./hosts)
+        );
+        mkHost = hostname:
+          self.inputs.nixpkgs.lib.nixosSystem {
+            specialArgs = {
+              inherit
+                inputs
+                hostname
+                lib
+                self
+                ;
             };
-        in
+            modules = [
+              {
+                nixpkgs.config.allowUnfree = lib.mkForce true;
+                nixpkgs.hostPlatform = "x86_64-linux";
+                networking.hostName = hostname;
+                system.stateVersion = "24.11";
+              }
+              ./hosts/${hostname}
+              inputs.chaotic.nixosModules.default
+              inputs.ff.nixosModules.freedpomFlake
+              inputs.qm.nixosModules.qModule
+              inputs.disko.nixosModules.disko
+            ];
+          };
+      in
         lib.genAttrs hostNames mkHost;
     };
 }
