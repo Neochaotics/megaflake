@@ -2,21 +2,32 @@
   lib,
   config,
   pkgs,
+  inputs,
   ...
-}: let
+}:
+let
   username = "quinno";
-  formatUsername = name:
+  formatUsername =
+    name:
     lib.strings.stringAsChars (
       c:
-        if c == builtins.substring ((builtins.stringLength name) - 1) 1 name
-        then " ${lib.strings.toUpper c}"
-        else if c == (builtins.substring 0 1 name)
-        then lib.strings.toUpper c
-        else c
-    )
-    name;
-in {
+      if c == builtins.substring ((builtins.stringLength name) - 1) 1 name then
+        " ${lib.strings.toUpper c}"
+      else if c == (builtins.substring 0 1 name) then
+        lib.strings.toUpper c
+      else
+        c
+    ) name;
+in
+{
   imports = [
+    inputs.home-manager.nixosModules.home-manager
+    {
+      home-manager = {
+        useGlobalPkgs = true;
+        useUserPackages = true;
+      };
+    }
     ./disk-primary.nix
     ./disk-secondary.nix
     ./hardware.nix
@@ -42,7 +53,7 @@ in {
   #};
 
   users = {
-    groups.caldera-rest-api = {};
+    groups.caldera-rest-api = { };
     users = {
       caldera-rest-api = {
         isSystemUser = true;
@@ -56,13 +67,12 @@ in {
         initialPassword = "password";
         shell = pkgs.zsh;
         ignoreShellProgramCheck = true;
-        extraGroups =
-          [
-            "wheel"
-          ]
-          ++ lib.optional config.security.rtkit.enable "rtkit"
-          ++ lib.optional config.services.pipewire.enable "audio"
-          ++ lib.optional config.hardware.i2c.enable "i2c";
+        extraGroups = [
+          "wheel"
+        ]
+        ++ lib.optional config.security.rtkit.enable "rtkit"
+        ++ lib.optional config.services.pipewire.enable "audio"
+        ++ lib.optional config.hardware.i2c.enable "i2c";
       };
     };
     mutableUsers = lib.mkForce false;
@@ -70,7 +80,7 @@ in {
 
   home-manager = {
     users.${username} = import ./home.nix;
-    extraSpecialArgs = {inherit username;};
+    extraSpecialArgs = { inherit username; };
   };
   services = {
     blueman.enable = true;

@@ -3,7 +3,7 @@
     disk = {
       nvme0 = {
         type = "disk";
-        device = "/dev/disk/by-id/";
+        device = "/dev/disk/by-id/nvme-CT1000P310SSD8_24474C4BCC70";
         content = {
           type = "gpt";
           partitions = {
@@ -14,7 +14,7 @@
                 type = "filesystem";
                 format = "vfat";
                 mountpoint = "/boot";
-                mountOptions = ["umask=0077"];
+                mountOptions = [ "umask=0077" ];
               };
             };
 
@@ -24,7 +24,7 @@
                 type = "bcachefs";
                 filesystem = "master";
                 label = "nvme0";
-                extraFormatArgs = ["--discard"];
+                extraFormatArgs = [ "--discard" ];
               };
             };
           };
@@ -33,72 +33,47 @@
 
       nvme1 = {
         type = "disk";
-        device = "/dev/disk/by-id/";
+        device = "/dev/disk/by-id/nvme-CT1000P310SSD8_24474C4BCD55";
         content = {
           type = "bcachefs";
           filesystem = "master";
           label = "nvme1";
-          extraFormatArgs = ["--discard"];
+          extraFormatArgs = [ "--discard" ];
         };
       };
 
-      bcachefs_filesystems = {
-        master = {
-          type = "bcachefs_filesystem";
-          extraFormatArgs = [
-            "--compression=zstd"
-            "--background_compression=ztsd"
-          ];
-          subvolumes = {
-            nix = {
-              mountpoint = "/nix";
-            };
-            root = {
-              mountpoint = "/nix/persist";
-            };
-            home = {
-              mountpoint = "/nix/persist/home";
-            };
-          };
-        };
-
-        np1 = {
-          type = "bcachefs_filesystem";
-          extraFormatArgs = [
-            "--compression zstd:1"
-            "--erasure_code"
-            "--data_replicas 1"
-            "--metadata_replicas 2"
-          ];
-          subvolumes = {
-            root = {
-              mountpoint = "/nix/persist/npool";
-            };
-          };
-        };
-
-        dp1 = {
-          type = "bcachefs_filesystem";
-          extraFormatArgs = [
-            "--compression zstd:10"
-            "--replicas 2"
-          ];
-          subvolumes = {
-            root = {
-              mountpoint = "/nix/persist/dpool";
-            };
-          };
-        };
-      };
-
-      nodev."/" = {
-        fsType = "tmpfs";
-        mountOptions = [
-          "defaults"
-          "size=6G"
-          "mode=755"
+    };
+    bcachefs_filesystems = {
+      master = {
+        type = "bcachefs_filesystem";
+        extraFormatArgs = [
+          "--compression=zstd"
+          "--background_compression=zstd"
         ];
+        subvolumes = {
+          root = {
+            mountpoint = "/";
+          };
+          nix = {
+            mountpoint = "/nix";
+          };
+          persist = {
+            mountpoint = "/nix/persist";
+          };
+          home = {
+            mountpoint = "/nix/persist/home";
+          };
+        };
       };
     };
+
+    # nodev."/" = {
+    #  fsType = "tmpfs";
+    #  mountOptions = [
+    #    "defaults"
+    #    "size=6G"
+    #    "mode=755"
+    #  ];
+    #};
   };
 }
