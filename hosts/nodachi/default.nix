@@ -4,40 +4,34 @@
   pkgs,
   inputs,
   ...
-}: let
+}:
+let
   username = "quinno";
-  formatUsername = name:
+  formatUsername =
+    name:
     lib.strings.stringAsChars (
       c:
-        if c == builtins.substring ((builtins.stringLength name) - 1) 1 name
-        then " ${lib.strings.toUpper c}"
-        else if c == (builtins.substring 0 1 name)
-        then lib.strings.toUpper c
-        else c
-    )
-    name;
-in {
+      if c == builtins.substring ((builtins.stringLength name) - 1) 1 name then
+        " ${lib.strings.toUpper c}"
+      else if c == (builtins.substring 0 1 name) then
+        lib.strings.toUpper c
+      else
+        c
+    ) name;
+in
+{
   imports = [
     inputs.home-manager.nixosModules.home-manager
-    {
-      home-manager = {
-        useGlobalPkgs = true;
-        useUserPackages = true;
-      };
-    }
+    inputs.ff.nixosModules.freedpomFlake
+    inputs.qm.nixosModules.qModule
     ./disk-primary.nix
     ./disk-secondary.nix
     ./hardware.nix
   ];
 
-  virtualisation.podman = {
-    enable = true;
-    dockerCompat = true;
-  };
-
-  environment.systemPackages = [
-    pkgs.distrobox
-    pkgs.android-studio
+  environment.systemPackages = with pkgs; [
+    android-studio
+    pavucontrol
   ];
 
   #age = {
@@ -50,27 +44,21 @@ in {
   #};
 
   users = {
-    groups.caldera-rest-api = {};
     users = {
-      caldera-rest-api = {
-        isSystemUser = true;
-        group = "caldera-rest-api";
-      };
       ${username} = {
-        # User Configuration
         isNormalUser = true;
         description = formatUsername username;
         #hashedPasswordFile = config.sops.secrets.qpassword.path;
         initialPassword = "password";
         shell = pkgs.zsh;
         ignoreShellProgramCheck = true;
-        extraGroups =
-          [
-            "wheel"
-          ]
-          ++ lib.optional config.security.rtkit.enable "rtkit"
-          ++ lib.optional config.services.pipewire.enable "audio"
-          ++ lib.optional config.hardware.i2c.enable "i2c";
+        extraGroups = [
+          "wheel"
+        ]
+        ++ lib.optional config.security.rtkit.enable "rtkit"
+        ++ lib.optional config.services.pipewire.enable "audio"
+        ++ lib.optional config.services.pipewire.enable "pipewire"
+        ++ lib.optional config.hardware.i2c.enable "i2c";
       };
     };
     mutableUsers = lib.mkForce false;
@@ -78,15 +66,36 @@ in {
 
   home-manager = {
     users.${username} = import ./home.nix;
-    extraSpecialArgs = {inherit username;};
+    extraSpecialArgs = { inherit username inputs; };
+    backupFileExtension = "bk";
+    useGlobalPkgs = true;
+    useUserPackages = true;
   };
+  security.rtkit.enable = true;
+  systemd.user.services.wireplumber.wantedBy = [ "default.target" ];
   services = {
-    blueman.enable = true;
+    pipewire = {
+      enable = true;
+      alsa = {
+        enable = true;
+        support32Bit = true;
+      };
+      pulse.enable = true;
+      socketActivation = false;
+    };
+
+    #blueman.enable = true;
     getty.autologinUser = "${username}";
     tailscale.enable = lib.mkForce true;
-    pipewire.enable = lib.mkForce true;
     flatpak.enable = true;
+
   };
+
+  nixpkgs.config.allowUnfreePredicate =
+    pkg:
+    builtins.elem (lib.getName pkg) [
+      "tampermonkey"
+    ];
 
   programs.obs-studio = {
     enable = true;
@@ -106,7 +115,7 @@ in {
     services = {
       ntp.enable = true;
       ananicy.enable = true;
-      pipewire.enable = true;
+      pipewire.enable = false;
       openssh.enable = true;
       ollama.enable = false;
       consoles = {

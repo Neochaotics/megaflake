@@ -2,7 +2,8 @@
   pkgs,
   inputs,
   ...
-}: {
+}:
+{
   imports = [
     inputs.ff.homeModules.freedpomFlake
     inputs.qm.homeModules.qModule
@@ -29,7 +30,7 @@
 
   qm = {
     programs = {
-      firefox.enable = false;
+      firefox.enable = true;
       foot.enable = true;
       git.enable = true;
       utils.enable = true;
