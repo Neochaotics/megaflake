@@ -4,8 +4,7 @@
   inputs,
   self,
   ...
-}:
-{
+}: {
   imports = [
     inputs.ff.homeModules.freedpomFlake
     self.homeModules.qModule
@@ -13,7 +12,7 @@
 
   home = {
     stateVersion = "24.05";
-    username = username;
+    inherit username;
     homeDirectory = "/home/${username}";
     #enableNixpkgsReleaseCheck = false;
     packages = with pkgs; [
