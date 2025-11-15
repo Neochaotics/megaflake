@@ -3,6 +3,7 @@
   config,
   pkgs,
   inputs,
+  self,
   ...
 }:
 let
@@ -21,9 +22,11 @@ let
 in
 {
   imports = [
+    inputs.chaotic.nixosModules.default
+    inputs.disko.nixosModules.disko
     inputs.home-manager.nixosModules.home-manager
     inputs.ff.nixosModules.freedpomFlake
-    inputs.qm.nixosModules.qModule
+    self.nixosModules.qModule
     ./disk-primary.nix
     ./disk-secondary.nix
     ./hardware.nix
@@ -66,7 +69,7 @@ in
 
   home-manager = {
     users.${username} = import ./home.nix;
-    extraSpecialArgs = { inherit username inputs; };
+    extraSpecialArgs = { inherit username inputs self; };
     backupFileExtension = "bk";
     useGlobalPkgs = true;
     useUserPackages = true;

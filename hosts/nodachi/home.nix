@@ -1,18 +1,20 @@
 {
   pkgs,
+  username,
   inputs,
+  self,
   ...
 }:
 {
   imports = [
     inputs.ff.homeModules.freedpomFlake
-    inputs.qm.homeModules.qModule
+    self.homeModules.qModule
   ];
 
   home = {
     stateVersion = "24.05";
-    username = "quinno";
-    homeDirectory = "/home/quinno";
+    username = username;
+    homeDirectory = "/home/${username}";
     #enableNixpkgsReleaseCheck = false;
     packages = with pkgs; [
       zed-editor
