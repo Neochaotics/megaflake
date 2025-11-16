@@ -4,8 +4,7 @@
   inputs,
   self,
   ...
-}:
-{
+}: {
   imports = [
     inputs.ff.homeModules.freedpomFlake
     self.homeModules.qModule

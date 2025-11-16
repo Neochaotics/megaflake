@@ -67,13 +67,12 @@
       };
     };
   };
-  outputs =
-    inputs@{
-      self,
-      flake-parts,
-      ...
-    }:
-    flake-parts.lib.mkFlake { inherit inputs; } {
+  outputs = inputs @ {
+    self,
+    flake-parts,
+    ...
+  }:
+    flake-parts.lib.mkFlake {inherit inputs;} {
       systems = [
         "x86_64-linux"
       ];
@@ -85,14 +84,12 @@
         inputs.flake-parts.flakeModules.easyOverlay
       ];
 
-      perSystem =
-        { pkgs, ... }:
-        {
-          packages = {
-            antec-flux-pro-display = pkgs.callPackage ./packages/antec-flux-pro-display.nix { };
-            antec-flux-pro-display-udev = pkgs.callPackage ./packages/antec-flux-pro-display-udev.nix { };
-          };
+      perSystem = {pkgs, ...}: {
+        packages = {
+          antec-flux-pro-display = pkgs.callPackage ./packages/antec-flux-pro-display.nix {};
+          antec-flux-pro-display-udev = pkgs.callPackage ./packages/antec-flux-pro-display-udev.nix {};
         };
+      };
 
       flake = {
         nixosModules = {
@@ -102,34 +99,32 @@
           qModule = ./modules/home-manager;
         };
 
-        nixosConfigurations =
-          let
-            inherit (self.inputs.nixpkgs) lib;
-            hostNames = builtins.attrNames (
-              lib.attrsets.filterAttrs (_name: type: type == "directory") (builtins.readDir ./hosts)
-            );
-            mkHost =
-              hostname:
-              self.inputs.nixpkgs.lib.nixosSystem {
-                specialArgs = {
-                  inherit
-                    inputs
-                    hostname
-                    lib
-                    self
-                    ;
-                };
-                modules = [
-                  {
-                    nixpkgs.config.allowUnfree = lib.mkForce true;
-                    nixpkgs.hostPlatform = "x86_64-linux";
-                    networking.hostName = hostname;
-                    system.stateVersion = "24.11";
-                  }
-                  ./hosts/${hostname}
-                ];
+        nixosConfigurations = let
+          inherit (self.inputs.nixpkgs) lib;
+          hostNames = builtins.attrNames (
+            lib.attrsets.filterAttrs (_name: type: type == "directory") (builtins.readDir ./hosts)
+          );
+          mkHost = hostname:
+            self.inputs.nixpkgs.lib.nixosSystem {
+              specialArgs = {
+                inherit
+                  inputs
+                  hostname
+                  lib
+                  self
+                  ;
               };
-          in
+              modules = [
+                {
+                  nixpkgs.config.allowUnfree = lib.mkForce true;
+                  nixpkgs.hostPlatform = "x86_64-linux";
+                  networking.hostName = hostname;
+                  system.stateVersion = "24.11";
+                }
+                ./hosts/${hostname}
+              ];
+            };
+        in
           lib.genAttrs hostNames mkHost;
       };
     };
