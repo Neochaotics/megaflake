@@ -4,6 +4,7 @@
   pkgs,
   inputs,
   self,
+  pkgs-stable,
   ...
 }: let
   username = "quinno";
@@ -96,13 +97,13 @@ in {
       "tampermonkey"
     ];
 
-  programs.obs-studio = {
-    enable = true;
-    enableVirtualCamera = true;
-    plugins = with pkgs.obs-studio-plugins; [
-      droidcam-obs
-    ];
-  };
+  #programs.obs-studio = {
+  #  enable = true;
+  #  enableVirtualCamera = true;
+  #  plugins = with pkgs.obs-studio-plugins; [
+  #    droidcam-obs
+  #  ];
+  #;
 
   #programs.coolercontrol.enable = true;
 
@@ -144,6 +145,7 @@ in {
         enable = true;
         autoStart = true;
         bitrate = 150000000;
+        wivrnPkg = pkgs-stable.wivrn;
       };
     };
     system = {

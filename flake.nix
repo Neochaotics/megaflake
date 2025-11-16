@@ -18,6 +18,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.11";
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -113,6 +114,11 @@
                   lib
                   self
                   ;
+                pkgs-stable = import self.inputs.nixpkgs-stable {
+                  system = "x86_64-linux";
+                  config.allowUnfree = true;
+                  nixpkgs.hostPlatform = "x86_64-linux";
+                };
               };
               modules = [
                 {

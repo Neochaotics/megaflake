@@ -26,22 +26,6 @@
     programs = {
       bash.enable = true;
     };
-    hardware.videoPorts = {
-      "DP-5" = {
-        resolution = {
-          width = 1920;
-          height = 1080;
-        };
-        position = "auto-right";
-      };
-      "HDMI-A-1" = {
-        resolution = {
-          width = 3840;
-          height = 2160;
-        };
-        scale = 2;
-      };
-    };
   };
 
   qm = {

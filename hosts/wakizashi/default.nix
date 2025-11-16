@@ -22,6 +22,7 @@ in {
     inputs.ff.nixosModules.freedpomFlake
     self.nixosModules.qModule
     inputs.disko.nixosModules.disko
+    inputs.home-manager.nixosModules.home-manager
     ./disks.nix
     ./hardware.nix
   ];
@@ -62,7 +63,7 @@ in {
   services.getty.autologinUser = "${username}";
   home-manager = {
     users.${username} = import ./home.nix;
-    extraSpecialArgs = {inherit username;};
+    extraSpecialArgs = {inherit username self inputs;};
   };
   system.stateVersion = "24.11";
 
