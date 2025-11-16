@@ -5,23 +5,22 @@
   inputs,
   self,
   ...
-}:
-let
+}: let
   username = "quinno";
-  formatUsername =
-    name:
+  formatUsername = name:
     lib.strings.stringAsChars (
       c:
-      if c == builtins.substring ((builtins.stringLength name) - 1) 1 name then
-        " ${lib.strings.toUpper c}"
-      else if c == (builtins.substring 0 1 name) then
-        lib.strings.toUpper c
-      else
-        c
-    ) name;
-in
-{
+        if c == builtins.substring ((builtins.stringLength name) - 1) 1 name
+        then " ${lib.strings.toUpper c}"
+        else if c == (builtins.substring 0 1 name)
+        then lib.strings.toUpper c
+        else c
+    )
+    name;
+in {
   imports = [
+    inputs.chaotic.nixosModules.default
+    inputs.disko.nixosModules.disko
     inputs.home-manager.nixosModules.home-manager
     inputs.ff.nixosModules.freedpomFlake
     self.nixosModules.qModule
@@ -30,9 +29,9 @@ in
     ./hardware.nix
   ];
 
-  environment.systemPackages = [
-    pkgs.stable.android-studio
-    pkgs.pavucontrol
+  environment.systemPackages = with pkgs; [
+    android-studio
+    pavucontrol
   ];
 
   #age = {
@@ -53,13 +52,14 @@ in
         initialPassword = "password";
         shell = pkgs.zsh;
         ignoreShellProgramCheck = true;
-        extraGroups = [
-          "wheel"
-        ]
-        ++ lib.optional config.security.rtkit.enable "rtkit"
-        ++ lib.optional config.services.pipewire.enable "audio"
-        ++ lib.optional config.services.pipewire.enable "pipewire"
-        ++ lib.optional config.hardware.i2c.enable "i2c";
+        extraGroups =
+          [
+            "wheel"
+          ]
+          ++ lib.optional config.security.rtkit.enable "rtkit"
+          ++ lib.optional config.services.pipewire.enable "audio"
+          ++ lib.optional config.services.pipewire.enable "pipewire"
+          ++ lib.optional config.hardware.i2c.enable "i2c";
       };
     };
     mutableUsers = lib.mkForce false;
@@ -67,13 +67,13 @@ in
 
   home-manager = {
     users.${username} = import ./home.nix;
-    extraSpecialArgs = { inherit username inputs self; };
+    extraSpecialArgs = {inherit username inputs self;};
     backupFileExtension = "bk";
     useGlobalPkgs = true;
     useUserPackages = true;
   };
   security.rtkit.enable = true;
-  systemd.user.services.wireplumber.wantedBy = [ "default.target" ];
+  systemd.user.services.wireplumber.wantedBy = ["default.target"];
   services = {
     pipewire = {
       enable = true;
@@ -90,13 +90,19 @@ in
     tailscale.enable = lib.mkForce true;
     flatpak.enable = true;
   };
-  #programs.obs-studio = {
-  #  enable = true;
-  #  enableVirtualCamera = true;
-  #  plugins = with pkgs.obs-studio-plugins; [
-  #    droidcam-obs
-  #  ];
-  #};
+
+  nixpkgs.config.allowUnfreePredicate = pkg:
+    builtins.elem (lib.getName pkg) [
+      "tampermonkey"
+    ];
+
+  programs.obs-studio = {
+    enable = true;
+    enableVirtualCamera = true;
+    plugins = with pkgs.obs-studio-plugins; [
+      droidcam-obs
+    ];
+  };
 
   #programs.coolercontrol.enable = true;
 
@@ -138,7 +144,6 @@ in
         enable = true;
         autoStart = true;
         bitrate = 150000000;
-        wivrnPkg = pkgs.stable.wivrn;
       };
     };
     system = {
