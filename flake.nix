@@ -1,17 +1,13 @@
 {
-  # MegaFlake - A comprehensive NixOS system configuration
   description = "NixOS System Configuration";
 
-  # Binary cache configuration for faster builds
   nixConfig = {
-    # Binary cache servers (substituters)
     extra-substituters = [
       "https://cache.nixos.org"
       "https://chaotic-nyx.cachix.org"
       "https://hyprland.cachix.org"
       "https://nix-community.cachix.org"
     ];
-    # Public keys for binary cache verification
     extra-trusted-public-keys = [
       "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
       "chaotic-nyx.cachix.org-1:HfnXSw4pj95iI/n17rIDy40agHj12WfF+Gqk6SonIT8="
@@ -28,19 +24,19 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     disko = {
-      url = "github:nothingnesses/disko";
+      url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     stylix.url = "github:danth/stylix";
-    #agenix = {
-    #  url = "github:ryantm/agenix";
-    #  inputs.nixpkgs.follows = "nixpkgs";
-    #  inputs.darwin.follows = "";
-    #};
-    #agenix-rekey = {
-    #  url = "github:oddlama/agenix-rekey";
-    #  inputs.nixpkgs.follows = "nixpkgs";
-    #};
+    agenix = {
+      url = "github:ryantm/agenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.darwin.follows = "";
+    };
+    agenix-rekey = {
+      url = "github:oddlama/agenix-rekey";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     flake-parts.url = "github:hercules-ci/flake-parts";
     flake-root.url = "github:srid/flake-root";
     fpFmt = {
@@ -71,18 +67,17 @@
       };
     };
   };
-  outputs = inputs @ {
-    self,
-    flake-parts,
-    ...
-  }:
-    flake-parts.lib.mkFlake {inherit inputs;} {
-      # Supported system types
+  outputs =
+    inputs@{
+      self,
+      flake-parts,
+      ...
+    }:
+    flake-parts.lib.mkFlake { inherit inputs; } {
       systems = [
         "x86_64-linux"
       ];
 
-      # Flake modules to import
       imports = [
         inputs.flake-root.flakeModule
         #inputs.agenix-rekey.flakeModule
@@ -90,12 +85,15 @@
         inputs.flake-parts.flakeModules.easyOverlay
       ];
 
-      perSystem = {pkgs, ...}: {
-        packages = {
-          antec-flux-pro-display = pkgs.callPackage ./packages/antec-flux-pro-display.nix {};
-          antec-flux-pro-display-udev = pkgs.callPackage ./packages/antec-flux-pro-display-udev.nix {};
+      perSystem =
+        { pkgs, ... }:
+        {
+          packages = {
+            antec-flux-pro-display = pkgs.callPackage ./packages/antec-flux-pro-display.nix { };
+            antec-flux-pro-display-udev = pkgs.callPackage ./packages/antec-flux-pro-display-udev.nix { };
+          };
         };
-      };
+
       flake = {
         nixosModules = {
           qModule = ./modules/nixos;
@@ -104,32 +102,34 @@
           qModule = ./modules/home-manager;
         };
 
-        nixosConfigurations = let
-          inherit (self.inputs.nixpkgs) lib;
-          hostNames = builtins.attrNames (
-            lib.attrsets.filterAttrs (_name: type: type == "directory") (builtins.readDir ./hosts)
-          );
-          mkHost = hostname:
-            self.inputs.nixpkgs.lib.nixosSystem {
-              specialArgs = {
-                inherit
-                  inputs
-                  hostname
-                  lib
-                  self
-                  ;
+        nixosConfigurations =
+          let
+            inherit (self.inputs.nixpkgs) lib;
+            hostNames = builtins.attrNames (
+              lib.attrsets.filterAttrs (_name: type: type == "directory") (builtins.readDir ./hosts)
+            );
+            mkHost =
+              hostname:
+              self.inputs.nixpkgs.lib.nixosSystem {
+                specialArgs = {
+                  inherit
+                    inputs
+                    hostname
+                    lib
+                    self
+                    ;
+                };
+                modules = [
+                  {
+                    nixpkgs.config.allowUnfree = lib.mkForce true;
+                    nixpkgs.hostPlatform = "x86_64-linux";
+                    networking.hostName = hostname;
+                    system.stateVersion = "24.11";
+                  }
+                  ./hosts/${hostname}
+                ];
               };
-              modules = [
-                {
-                  nixpkgs.config.allowUnfree = lib.mkForce true;
-                  nixpkgs.hostPlatform = "x86_64-linux";
-                  networking.hostName = hostname;
-                  system.stateVersion = "24.11";
-                }
-                ./hosts/${hostname}
-              ];
-            };
-        in
+          in
           lib.genAttrs hostNames mkHost;
       };
     };

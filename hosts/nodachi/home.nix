@@ -4,7 +4,8 @@
   inputs,
   self,
   ...
-}: {
+}:
+{
   imports = [
     inputs.ff.homeModules.freedpomFlake
     self.homeModules.qModule
@@ -21,6 +22,7 @@
       kmon
       gping
       gitoxide
+      tidal-hifi
     ];
   };
   ff = {

@@ -1,25 +1,31 @@
 {
+  # nix run github:nix-community/nixos-anywhere -- --flake /etc/nixos#kozuka --target-host root@10.0.1.245
   lib,
   inputs,
   config,
   pkgs,
+  self,
   ...
-}: let
+}:
+let
   username = "quinno";
-  formatUsername = name:
+  formatUsername =
+    name:
     lib.strings.stringAsChars (
       c:
-        if c == builtins.substring ((builtins.stringLength name) - 1) 1 name
-        then " ${lib.strings.toUpper c}"
-        else if c == (builtins.substring 0 1 name)
-        then lib.strings.toUpper c
-        else c
-    )
-    name;
-in {
+      if c == builtins.substring ((builtins.stringLength name) - 1) 1 name then
+        " ${lib.strings.toUpper c}"
+      else if c == (builtins.substring 0 1 name) then
+        lib.strings.toUpper c
+      else
+        c
+    ) name;
+in
+{
   imports = [
+    inputs.chaotic.nixosModules.default
     inputs.ff.nixosModules.freedpomFlake
-    inputs.qm.nixosModules.qModule
+    self.nixosModules.qModule
     inputs.disko.nixosModules.disko
     ./bcachefs.nix
     ./hardware.nix
@@ -47,13 +53,12 @@ in {
       initialPassword = "password";
       shell = pkgs.zsh;
       ignoreShellProgramCheck = true;
-      extraGroups =
-        [
-          "wheel"
-        ]
-        ++ lib.optional config.security.rtkit.enable "rtkit"
-        ++ lib.optional config.services.pipewire.enable "audio"
-        ++ lib.optional config.hardware.i2c.enable "i2c";
+      extraGroups = [
+        "wheel"
+      ]
+      ++ lib.optional config.security.rtkit.enable "rtkit"
+      ++ lib.optional config.services.pipewire.enable "audio"
+      ++ lib.optional config.hardware.i2c.enable "i2c";
     };
     mutableUsers = false;
   };
