@@ -2,9 +2,11 @@
   lib,
   config,
   ...
-}: let
+}:
+let
   cfg = config.qm.system.bash;
-in {
+in
+{
   options.qm.system.bash = {
     enable = lib.mkEnableOption "Enable bash configuration and settings";
   };
@@ -13,7 +15,7 @@ in {
     programs.bash = {
       enable = true;
       enableCompletion = true;
-      historyControl = ["ignoreboth"];
+      historyControl = [ "ignoreboth" ];
       historyFile = "${config.home.homeDirectory}/.bash_history";
       historyFileSize = 1000;
       historyIgnore = [

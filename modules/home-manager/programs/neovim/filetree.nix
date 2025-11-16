@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   programs.nvf.settings = {
     vim.filetree.nvimTree = {
       enable = true; # Default: false [1]
@@ -28,7 +29,7 @@
           };
           expand_all = {
             # Configuration for expand_all behaviour [5]
-            exclude = []; # Default: [ ".git" "target" "build" "result" ] [5]
+            exclude = [ ]; # Default: [ ".git" "target" "build" "result" ] [5]
             max_folder_discovery = 300; # Default: 300 [6]
           };
           file_popup = {
@@ -101,12 +102,12 @@
           # Use file system watcher (libuv fs_event) for changes [17]
           enable = true; # Default: true [18]
           debounce_delay = 50; # Default: 50 [18]
-          ignore_dirs = []; # Default: [ ] [19]
+          ignore_dirs = [ ]; # Default: [ ] [19]
         };
         filters = {
           # Filtering options [19]
           dotfiles = false; # Default: false [19]
-          exclude = []; # Default: [ ] [20]
+          exclude = [ ]; # Default: [ ] [20]
           git_clean = false; # Default: false [20]
           git_ignored = false; # Default: false [21]
           no_buffer = false; # Default: false [21]
@@ -114,7 +115,7 @@
         git = {
           # Git integration with icons and colors [21]
           enable = false; # Default: false [21]
-          disable_for_dirs = []; # Default: [ ] [22]
+          disable_for_dirs = [ ]; # Default: [ ] [22]
           show_on_dirs = true; # Default: true [22]
           show_on_open_dirs = true; # Default: true [22]
           timeout = 400; # Default: 400 [23]
@@ -226,7 +227,7 @@
           symlink_destination = true; # Default: true [45]
         };
         respect_buf_cwd = false; # Default: false [45]
-        root_dirs = []; # Default: [ ] [45]
+        root_dirs = [ ]; # Default: [ ] [45]
         select_prompts = false; # Default: false [46]
         sort = {
           # Sorting options [46]
@@ -236,7 +237,7 @@
         sync_root_with_cwd = false; # Default: false [47]
         system_open = {
           # System open command [47]
-          args = []; # Default: [ ] [47]
+          args = [ ]; # Default: [ ] [47]
           cmd = "${pkgs.xdg-utils}/bin/xdg-open"; # Default: "${pkgs.xdg-utils}/bin/xdg-open" [48]
         };
         tab = {
@@ -244,7 +245,7 @@
           sync = {
             # Configuration for syncing nvim-tree across tabs [48]
             close = false; # Default: false [49]
-            ignore = []; # Default: [ ] [49]
+            ignore = [ ]; # Default: [ ] [49]
             open = false; # Default: false [50]
           };
         };
@@ -263,7 +264,7 @@
         update_focused_file = {
           # Update the focused file on BufEnter [52]
           enable = false; # Default: false [52]
-          ignore_list = []; # Default: [ ] [53]
+          ignore_list = [ ]; # Default: [ ] [53]
           update_root = false; # Default: false [53]
         };
         view = {

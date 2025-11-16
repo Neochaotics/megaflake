@@ -2,9 +2,11 @@
   lib,
   config,
   ...
-}: let
+}:
+let
   cfg = config.qm.programs.hyprland;
-in {
+in
+{
   options.qm.programs.hyprland = {
     enable = lib.mkEnableOption "Enable Hyprland with UWSM";
   };

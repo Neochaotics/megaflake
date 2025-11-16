@@ -2,7 +2,8 @@
   config,
   lib,
   ...
-}: {
+}:
+{
   wayland.windowManager.hyprland.settings = lib.mkIf config.qm.desktop.hyprland.enable {
     general = {
       border_size = 3;

@@ -2,9 +2,11 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   cfg = config.qm.system.xdg;
-in {
+in
+{
   options.qm.system.xdg = {
     enable = lib.mkEnableOption "Enables XDG directory configuration and default paths";
   };

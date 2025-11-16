@@ -14,7 +14,7 @@
                 type = "filesystem";
                 format = "vfat";
                 mountpoint = "/boot";
-                mountOptions = ["umask=0077"];
+                mountOptions = [ "umask=0077" ];
               };
             };
 
@@ -24,7 +24,7 @@
                 type = "bcachefs";
                 filesystem = "master";
                 label = "nvme0";
-                extraFormatArgs = ["--discard"];
+                extraFormatArgs = [ "--discard" ];
               };
             };
           };
@@ -38,7 +38,7 @@
           type = "bcachefs";
           filesystem = "master";
           label = "nvme1";
-          extraFormatArgs = ["--discard"];
+          extraFormatArgs = [ "--discard" ];
         };
       };
     };

@@ -2,9 +2,11 @@
   lib,
   config,
   ...
-}: let
+}:
+let
   cfg = config.qm.desktop.hyprland.idlelock;
-in {
+in
+{
   options.qm.desktop.hyprland.idlelock = {
     enable = lib.mkEnableOption "Enable";
   };

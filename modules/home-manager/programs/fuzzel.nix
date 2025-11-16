@@ -2,9 +2,11 @@
   lib,
   config,
   ...
-}: let
+}:
+let
   cfg = config.qm.programs.fuzzel;
-in {
+in
+{
   options.qm.programs.fuzzel = {
     enable = lib.mkEnableOption "Enable configuration";
   };

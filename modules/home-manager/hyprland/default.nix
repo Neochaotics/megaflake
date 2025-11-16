@@ -3,9 +3,11 @@
   config,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.qm.desktop.hyprland;
-in {
+in
+{
   imports = [
     ./general.nix
     ./appearance.nix

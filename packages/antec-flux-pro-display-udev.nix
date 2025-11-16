@@ -1,4 +1,4 @@
-{pkgs}:
+{ pkgs }:
 pkgs.writeTextFile {
   name = "antec-flux-pro-display-udev";
   destination = "/lib/udev/rules.d/99-antec-flux-pro-display.rules";

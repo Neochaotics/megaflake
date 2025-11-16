@@ -2,9 +2,11 @@
   lib,
   config,
   ...
-}: let
+}:
+let
   cfg = config.qm.programs.bottom;
-in {
+in
+{
   options.qm.programs.bottom = {
     enable = lib.mkEnableOption "Enable configuration";
   };

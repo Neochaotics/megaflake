@@ -8,7 +8,7 @@
     "usbhid"
     "xhci_pci"
   ];
-  boot.kernelModules = ["kvm-amd"];
+  boot.kernelModules = [ "kvm-amd" ];
 
   hardware = {
     cpu.amd.updateMicrocode = true;

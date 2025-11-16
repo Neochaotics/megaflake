@@ -2,9 +2,11 @@
   lib,
   config,
   ...
-}: let
+}:
+let
   cfg = config.qm.programs.foot;
-in {
+in
+{
   options.qm.programs.foot = {
     enable = lib.mkEnableOption "Enable foot terminal configuration";
   };

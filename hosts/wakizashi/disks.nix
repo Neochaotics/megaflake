@@ -13,7 +13,7 @@
               type = "filesystem";
               format = "vfat";
               mountpoint = "/boot";
-              mountOptions = ["umask=0077"];
+              mountOptions = [ "umask=0077" ];
             };
           };
 
@@ -25,7 +25,7 @@
               settings.allowDiscards = true;
               content = {
                 type = "btrfs";
-                extraArgs = ["-f"];
+                extraArgs = [ "-f" ];
                 subvolumes = {
                   "nix" = {
                     mountpoint = "/nix";

@@ -4,9 +4,11 @@
   inputs,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.qm.programs.nvim;
-in {
+in
+{
   imports = [
     inputs.nvf.homeManagerModules.default
     ./autocomplete.nix
@@ -73,7 +75,7 @@ in {
 
             spellcheck = {
               enable = true;
-              languages = ["en"];
+              languages = [ "en" ];
             };
 
             enableLuaLoader = true;

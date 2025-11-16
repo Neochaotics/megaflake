@@ -2,9 +2,11 @@
   lib,
   config,
   ...
-}: let
+}:
+let
   cfg = config.qm.programs.starship;
-in {
+in
+{
   options.qm.programs.starship = {
     enable = lib.mkEnableOption "Enable";
   };
@@ -294,8 +296,8 @@ in {
             "package-lock.json"
             "yarn.lock"
           ];
-          detect_folders = ["node_modules"];
-          detect_extensions = [];
+          detect_folders = [ "node_modules" ];
+          detect_extensions = [ ];
         };
 
         package = {

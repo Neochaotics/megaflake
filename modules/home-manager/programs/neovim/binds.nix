@@ -6,12 +6,12 @@
 
     hardtime-nvim = {
       enable = true;
-      setupOpts = {};
+      setupOpts = { };
     };
 
     whichKey = {
       enable = true;
-      register = {};
+      register = { };
       setupOpts = {
         notify = true;
         preset = "modern";

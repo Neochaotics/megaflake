@@ -2,7 +2,8 @@
   config,
   lib,
   ...
-}: {
+}:
+{
   wayland.windowManager.hyprland.settings = lib.mkIf config.qm.desktop.hyprland.enable {
     env = [
       "XDG_CURRENT_DESKTOP, Hyprland" # Current desktop name

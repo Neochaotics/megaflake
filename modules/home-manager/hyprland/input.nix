@@ -2,7 +2,8 @@
   config,
   lib,
   ...
-}: {
+}:
+{
   wayland.windowManager.hyprland.settings = lib.mkIf config.qm.desktop.hyprland.enable {
     input = {
       # kb_model=pc104;

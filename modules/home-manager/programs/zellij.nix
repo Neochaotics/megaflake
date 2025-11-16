@@ -2,9 +2,11 @@
   lib,
   config,
   ...
-}: let
+}:
+let
   cfg = config.qm.programs.zellij;
-in {
+in
+{
   options.qm.programs.zellij = {
     enable = lib.mkEnableOption "Enable zellij configuration";
   };

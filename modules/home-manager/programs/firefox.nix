@@ -4,9 +4,11 @@
   inputs,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.qm.programs.firefox;
-in {
+in
+{
   options.qm.programs.firefox = {
     enable = lib.mkEnableOption "Firefox browser configuration";
   };
@@ -15,7 +17,7 @@ in {
       firefox = {
         colorTheme.enable = true;
         firefoxGnomeTheme.enable = true;
-        profileNames = ["default"];
+        profileNames = [ "default" ];
       };
     };
     programs = {
@@ -189,7 +191,7 @@ in {
                   }
                 ];
                 icon = "${pkgs.papirus-icon-theme}/share/icons/Papirus/64x64/apps/brave.svg";
-                definedAliases = ["@br"];
+                definedAliases = [ "@br" ];
               };
               "bing".metaData.hidden = true;
               "google".metaData.hidden = true;

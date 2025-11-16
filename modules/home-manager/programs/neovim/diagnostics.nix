@@ -1,4 +1,5 @@
-{lib, ...}: {
+{ lib, ... }:
+{
   programs.nvf.settings = {
     vim.diagnostics = {
       enable = true;
@@ -30,17 +31,17 @@
         enable = true;
         lint_after_save = true;
         linters_by_ft = {
-          bash = ["shellcheck"];
-          javascript = ["eslint_d"];
-          lua = ["luacheck"];
-          markdown = ["markdownlint-cli2"];
+          bash = [ "shellcheck" ];
+          javascript = [ "eslint_d" ];
+          lua = [ "luacheck" ];
+          markdown = [ "markdownlint-cli2" ];
           nix = [
             "statix"
             "deadnix"
           ];
-          ruby = ["rubocop"];
-          svelte = ["eslint_d"];
-          typescript = ["eslint_d"];
+          ruby = [ "rubocop" ];
+          svelte = [ "eslint_d" ];
+          typescript = [ "eslint_d" ];
         };
       };
     };

@@ -6,19 +6,22 @@
   self,
   pkgs-stable,
   ...
-}: let
+}:
+let
   username = "quinno";
-  formatUsername = name:
+  formatUsername =
+    name:
     lib.strings.stringAsChars (
       c:
-        if c == builtins.substring ((builtins.stringLength name) - 1) 1 name
-        then " ${lib.strings.toUpper c}"
-        else if c == (builtins.substring 0 1 name)
-        then lib.strings.toUpper c
-        else c
-    )
-    name;
-in {
+      if c == builtins.substring ((builtins.stringLength name) - 1) 1 name then
+        " ${lib.strings.toUpper c}"
+      else if c == (builtins.substring 0 1 name) then
+        lib.strings.toUpper c
+      else
+        c
+    ) name;
+in
+{
   imports = [
     inputs.chaotic.nixosModules.default
     inputs.disko.nixosModules.disko
@@ -53,14 +56,13 @@ in {
         initialPassword = "password";
         shell = pkgs.zsh;
         ignoreShellProgramCheck = true;
-        extraGroups =
-          [
-            "wheel"
-          ]
-          ++ lib.optional config.security.rtkit.enable "rtkit"
-          ++ lib.optional config.services.pipewire.enable "audio"
-          ++ lib.optional config.services.pipewire.enable "pipewire"
-          ++ lib.optional config.hardware.i2c.enable "i2c";
+        extraGroups = [
+          "wheel"
+        ]
+        ++ lib.optional config.security.rtkit.enable "rtkit"
+        ++ lib.optional config.services.pipewire.enable "audio"
+        ++ lib.optional config.services.pipewire.enable "pipewire"
+        ++ lib.optional config.hardware.i2c.enable "i2c";
       };
     };
     mutableUsers = lib.mkForce false;
@@ -68,13 +70,13 @@ in {
 
   home-manager = {
     users.${username} = import ./home.nix;
-    extraSpecialArgs = {inherit username inputs self;};
+    extraSpecialArgs = { inherit username inputs self; };
     backupFileExtension = "bk";
     useGlobalPkgs = true;
     useUserPackages = true;
   };
   security.rtkit.enable = true;
-  systemd.user.services.wireplumber.wantedBy = ["default.target"];
+  systemd.user.services.wireplumber.wantedBy = [ "default.target" ];
   services = {
     pipewire = {
       enable = true;
@@ -92,7 +94,8 @@ in {
     flatpak.enable = true;
   };
 
-  nixpkgs.config.allowUnfreePredicate = pkg:
+  nixpkgs.config.allowUnfreePredicate =
+    pkg:
     builtins.elem (lib.getName pkg) [
       "tampermonkey"
     ];

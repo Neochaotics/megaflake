@@ -2,9 +2,11 @@
   lib,
   config,
   ...
-}: let
+}:
+let
   cfg = config.qm.programs.mpv;
-in {
+in
+{
   options.qm.programs.mpv = {
     enable = lib.mkEnableOption "Enable configuration";
   };

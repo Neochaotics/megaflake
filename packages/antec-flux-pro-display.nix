@@ -1,4 +1,4 @@
-{pkgs}:
+{ pkgs }:
 pkgs.rustPlatform.buildRustPackage {
   pname = "antec-flux-pro-display";
   version = "1.0";
@@ -10,7 +10,7 @@ pkgs.rustPlatform.buildRustPackage {
     sha256 = "sha256-T/Q1oroxprJqMnEN3nb/lyOqaQKHZjNTY7kGFHp0trw=";
   };
 
-  buildInputs = [pkgs.lm_sensors];
+  buildInputs = [ pkgs.lm_sensors ];
   cargoHash = "sha256-GR/ZcT1v1Tv4KAfD+IldhkYwz0kaT/lhN6wXtMbmO9o=";
 
   meta = with pkgs.lib; {

@@ -2,20 +2,22 @@
   lib,
   config,
   ...
-}: let
+}:
+let
   cfg = config.qm.wireguard;
-in {
+in
+{
   options.qm.wireguard = {
     enable = lib.mkEnableOption "Enable";
   };
 
   config = lib.mkIf cfg.enable {
     networking = {
-      firewall.allowedUDPPorts = [51820];
-      wg-quick.interfaces = lib.mkForce {};
+      firewall.allowedUDPPorts = [ 51820 ];
+      wg-quick.interfaces = lib.mkForce { };
       wireguard.interfaces = {
         wgBM = {
-          ips = ["10.1.4.3/24"];
+          ips = [ "10.1.4.3/24" ];
           listenPort = 51820;
           privateKeyFile = "/persist/wgBM.key";
           peers = [

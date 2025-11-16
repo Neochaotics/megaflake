@@ -3,12 +3,13 @@
   config,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.qm.antec-display;
-  antec-flux-pro-display = pkgs.callPackage ../../../packages/antec-flux-pro-display.nix {};
+  antec-flux-pro-display = pkgs.callPackage ../../../packages/antec-flux-pro-display.nix { };
   antec-flux-pro-display-udev =
     pkgs.callPackage ../../../packages/antec-flux-pro-display-udev.nix
-    {};
+      { };
 
   configFileText = ''
     # CPU device for temperature monitoring
@@ -22,7 +23,8 @@
     # Update interval in milliseconds
     update_interval=${toString cfg.updateInterval}
   '';
-in {
+in
+{
   options.qm.antec-display = {
     enable = lib.mkEnableOption "Enable";
 
@@ -60,12 +62,12 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    services.udev.packages = [antec-flux-pro-display-udev];
+    services.udev.packages = [ antec-flux-pro-display-udev ];
     environment.etc."antec-flux-pro-display/config.conf".text = configFileText;
     systemd.services.antec-flux-pro-display = {
       description = "Antec Flux Pro Display Service";
-      wantedBy = ["multi-user.target"];
-      after = ["network.target"];
+      wantedBy = [ "multi-user.target" ];
+      after = [ "network.target" ];
 
       serviceConfig = {
         Type = "simple";

@@ -37,7 +37,7 @@ _: {
               "snippets"
               "buffer"
             ];
-            providers = {};
+            providers = { };
           };
         };
 
@@ -63,7 +63,7 @@ _: {
     autopairs = {
       nvim-autopairs = {
         enable = true;
-        setupOpts = {};
+        setupOpts = { };
       };
     };
   };

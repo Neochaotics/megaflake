@@ -3,9 +3,11 @@
   config,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.qm.programs.steam;
-in {
+in
+{
   options.qm.programs.steam = {
     enable = lib.mkEnableOption "Enable Steam gaming configuration with proton-ge, gamescope, mangohud and gamemode";
   };
@@ -22,7 +24,7 @@ in {
       };
       steam = {
         enable = true;
-        extraCompatPackages = with pkgs; [proton-ge-bin];
+        extraCompatPackages = with pkgs; [ proton-ge-bin ];
         protontricks.enable = true;
         gamescopeSession = {
           enable = true;

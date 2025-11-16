@@ -4,13 +4,15 @@
   pkgs,
   osConfig,
   ...
-}: let
+}:
+let
   cfg = config.qm.programs.waybar;
 
-  persistentWorkspaces = lib.filterAttrs (_: workspaces: workspaces != []) (
+  persistentWorkspaces = lib.filterAttrs (_: workspaces: workspaces != [ ]) (
     lib.mapAttrs (_: cfg: cfg.workspaces) osConfig.ff.hardware.displays
   );
-in {
+in
+{
   options.qm.programs.waybar = {
     enable = lib.mkEnableOption "Enable waybar with custom workspace mapping";
   };
@@ -56,9 +58,9 @@ in {
           layer = "top";
           position = "top";
 
-          modules-left = ["hyprland/workspaces"];
-          modules-center = ["hyprland/window"];
-          modules-right = ["clock"];
+          modules-left = [ "hyprland/workspaces" ];
+          modules-center = [ "hyprland/window" ];
+          modules-right = [ "clock" ];
 
           clock = {
             format-alt = "{:%Y-%m-%d}";
