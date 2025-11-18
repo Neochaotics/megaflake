@@ -46,22 +46,11 @@
     };
     ff = {
       url = "github:freedpom/FreedpomFlake";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        home-manager.follows = "home-manager";
-      };
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     nvf = {
       url = "github:notashelf/nvf";
       inputs.nixpkgs.follows = "nixpkgs";
-    };
-    qm = {
-      url = "github:Neochaotics/NixModule";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        home-manager.follows = "home-manager";
-        ff.follows = "ff";
-      };
     };
   };
   outputs =
