@@ -112,9 +112,6 @@ in
 
   ff = {
     common.enable = true;
-    security = {
-      sudo-rs.enable = true;
-    };
     services = {
       ntp.enable = true;
       ananicy.enable = true;
@@ -152,6 +149,11 @@ in
       };
     };
     system = {
+      rust-utils = {
+        sudo-rs.enable = true;
+        fuc.enable = true;
+        uutils.enable = true;
+      };
       fontsu.enable = true;
       nix.enable = true;
       sysctl = {

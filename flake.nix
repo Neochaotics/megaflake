@@ -66,7 +66,7 @@
 
       imports = [
         inputs.flake-root.flakeModule
-        #inputs.agenix-rekey.flakeModule
+        inputs.agenix-rekey.flakeModule
         inputs.ff.fmtModule
         inputs.flake-parts.flakeModules.easyOverlay
       ];
