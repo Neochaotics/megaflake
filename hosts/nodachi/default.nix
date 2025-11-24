@@ -43,10 +43,10 @@ in
   age = {
     rekey = {
       agePlugins = [ pkgs.age-plugin-yubikey ];
-      hostPubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFBIhUBdQuuN+sT9JtrNhEq1BqjXBw05djos2ZQDeKn4 quinno@titan";
+      hostPubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDX9AJIAYoQF1zAXtRkxhdJuxAkn00rfayPC1B0aoIXy root@titan";
       masterIdentities = [
         {
-          identity = "/home/${username}/.ssh/yubikey.agekey";
+          identity = "${self}" + "/secrets/keys/yubikey.agekey";
           pubkey = "age1yubikey1q296zd6ksfpqufd68us8x75mfyc45qtytsvphhj65y9az6th3z8c2kd7987";
         }
       ];
@@ -56,7 +56,7 @@ in
     };
     secrets = {
       "${username}-password" = {
-        rekeyFile = "${self}" + "/secrets/users/${username}                      /pass.age";
+        rekeyFile = "${self}" + "/secrets/users/${username}/pass.age";
       };
     };
   };
