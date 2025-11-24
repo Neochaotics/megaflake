@@ -72,8 +72,16 @@
       ];
 
       perSystem =
-        { pkgs, ... }:
+        { config, pkgs, ... }:
         {
+          devShells.default = pkgs.mkShell {
+            nativeBuildInputs = [
+              config.agenix-rekey.package
+              pkgs.age-plugin-yubikey
+              pkgs.rage
+            ];
+          };
+
           packages = {
             antec-flux-pro-display = pkgs.callPackage ./packages/antec-flux-pro-display.nix { };
             antec-flux-pro-display-udev = pkgs.callPackage ./packages/antec-flux-pro-display-udev.nix { };

@@ -73,9 +73,6 @@ in
 
   ff = {
     common.enable = true;
-    security = {
-      sudo-rs.enable = true;
-    };
     services = {
       ananicy.enable = true;
       pipewire.enable = true;

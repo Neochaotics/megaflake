@@ -23,6 +23,8 @@ let
 in
 {
   imports = [
+    inputs.agenix.nixosModules.default
+    inputs.agenix-rekey.nixosModules.default
     inputs.chaotic.nixosModules.default
     inputs.disko.nixosModules.disko
     inputs.home-manager.nixosModules.home-manager
@@ -38,22 +40,34 @@ in
     pavucontrol
   ];
 
-  #age = {
-  #  rekey = {
-  #    masterIdentities = ["/persist/age.key"];
-  #    localStorageDir = "${self}" + "/secrets/rekeyed/${config.networking.hostName}";
-  #    generatedSecretsDir = "${self}" + "/secrets/generated/${config.networking.hostName}";
-  #    storageMode = "local";
-  #  };
-  #};
+  age = {
+    rekey = {
+      agePlugins = [ pkgs.age-plugin-yubikey ];
+      hostPubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFBIhUBdQuuN+sT9JtrNhEq1BqjXBw05djos2ZQDeKn4 quinno@titan";
+      masterIdentities = [
+        {
+          identity = "/home/${username}/.ssh/yubikey.agekey";
+          pubkey = "age1yubikey1q296zd6ksfpqufd68us8x75mfyc45qtytsvphhj65y9az6th3z8c2kd7987";
+        }
+      ];
+      localStorageDir = "${self}" + "/secrets/rekeyed/${config.networking.hostName}";
+      generatedSecretsDir = "${self}" + "/secrets/generated/${config.networking.hostName}";
+      storageMode = "local";
+    };
+    secrets = {
+      "${username}-password" = {
+        rekeyFile = "${self}" + "/secrets/users/${username}                      /pass.age";
+      };
+    };
+  };
 
   users = {
     users = {
       ${username} = {
         isNormalUser = true;
         description = formatUsername username;
-        #hashedPasswordFile = config.sops.secrets.qpassword.path;
-        initialPassword = "password";
+        hashedPasswordFile = config.age.secrets."${username}-password".path;
+        #initialPassword = "password";
         shell = pkgs.zsh;
         ignoreShellProgramCheck = true;
         extraGroups = [
@@ -170,6 +184,7 @@ in
       hyprland.enable = true;
       steam.enable = true;
     };
+    yubikey.enable = true;
     stylix.enable = true;
     wireguard.enable = true;
     antec-display = {
