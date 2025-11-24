@@ -1,6 +1,8 @@
 {
   lib,
   config,
+  inputs,
+  pkgs,
   ...
 }:
 let
@@ -8,7 +10,7 @@ let
 in
 {
   options.qm.programs.hyprland = {
-    enable = lib.mkEnableOption "Enable Hyprland with UWSM";
+    enable = lib.mkEnableOption "Enable Hyprland";
   };
 
   config = lib.mkIf cfg.enable {
@@ -17,10 +19,19 @@ in
       hyprland = {
         enable = true;
         withUWSM = false;
-        #package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
-        #portalPackage =
-        #  inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
+        package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+        portalPackage =
+          inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
       };
     };
+    hardware.graphics =
+      let
+        hyprpkgs = inputs.hyprland.inputs.nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system};
+      in
+      {
+        package = lib.mkForce hyprpkgs.mesa;
+        enable32Bit = lib.mkForce true;
+        package32 = lib.mkForce hyprpkgs.pkgsi686Linux.mesa;
+      };
   };
 }

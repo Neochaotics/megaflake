@@ -52,6 +52,9 @@
       url = "github:notashelf/nvf";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    hyprland = {
+      url = "github:hyprwm/Hyprland?ref=v0.52.1";
+    };
   };
   outputs =
     inputs@{
