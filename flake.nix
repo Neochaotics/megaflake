@@ -55,6 +55,10 @@
     hyprland = {
       url = "github:hyprwm/Hyprland?ref=v0.52.1";
     };
+    hyprland-plugins = {
+      url = "github:hyprwm/hyprland-plugins";
+      inputs.hyprland.follows = "hyprland";
+    };
   };
   outputs =
     inputs@{

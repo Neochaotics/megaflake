@@ -80,6 +80,8 @@
       "fadeLayersOut, 1, 4.5, menu_accel"
       "workspaces, 1, 7, menu_decel, slide"
       "specialWorkspace, 1, 3, md3_decel, slidevert"
+      "hyprfocusIn, 1, 1.7, md3_decel"
+      "hyprfocusOut, 1, 1.7, md3_accel"
     ];
   };
 }

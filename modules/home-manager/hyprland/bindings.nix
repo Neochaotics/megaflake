@@ -21,6 +21,7 @@
       "SUPER CTRL ALT, P, exec, systemctl poweroff"
       "SUPER CTRL ALT, R, exec, systemctl reboot"
       "SUPER CTRL ALT, L, exec, hyprlock"
+      "SUPER CTRL ALT, K, exit"
 
       # General Control
       # --------------------
@@ -31,6 +32,8 @@
       "SUPER, F10, togglefloating" # Toggle Floating Window
       "SUPER, F11, fullscreen, 0" # Toggle Fullscreen
       "SUPER, F12, pin" # Pin window above others
+      "SUPER, TAB, hyprexpo:expo, toggle"
+      "SUPER ALT, TAB, hyprexpo:expo, select"
 
       # Window Control
       # --------------------

@@ -2,6 +2,7 @@
   lib,
   config,
   pkgs,
+  inputs,
   ...
 }:
 let
@@ -22,10 +23,11 @@ in
     ./idlelock.nix
 
     ./plugins/dynamic-cursors.nix
+    ./plugins/hyprexpo.nix
   ];
 
   options.qm.desktop.hyprland = {
-    enable = lib.mkEnableOption "Enable Quinn's Hyprland configuration";
+    enable = lib.mkEnableOption "Enable Hyprland configuration";
   };
 
   config = lib.mkIf cfg.enable {
@@ -61,12 +63,15 @@ in
         systemd = {
           enable = true;
           enableXdgAutostart = true;
-          #variables = [ "--all" ];
         };
 
         xwayland.enable = true;
 
-        #plugins = [ inputs.hypr-dynamic-cursors.packages.${pkgs.system}.hypr-dynamic-cursors ];
+        plugins = [
+          inputs.hyprland-plugins.packages.${pkgs.system}.hyprexpo
+          inputs.hyprland-plugins.packages.${pkgs.system}.hyprfocus
+          inputs.hyprland-plugins.packages.${pkgs.system}.xtra-dispatchers
+        ];
       };
     };
   };
