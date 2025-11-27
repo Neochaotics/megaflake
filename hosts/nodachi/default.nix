@@ -174,7 +174,7 @@ in
         cachyos = true;
         mineral = false;
       };
-      systemd-boot.enable = true;
+      boot.enable = true;
       performance.enable = true;
     };
   };
