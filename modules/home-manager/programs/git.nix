@@ -19,10 +19,11 @@ in
       git = {
         enable = true;
 
-        userName = "Neochaotics";
-        userEmail = "72465280+Neochaotics@users.noreply.github.com";
-
-        extraConfig = {
+        settings = {
+          user = {
+            name = "Neochaotics";
+            email = "72465280+Neochaotics@users.noreply.github.com";
+          };
           core = {
             editor = "nvim";
           };

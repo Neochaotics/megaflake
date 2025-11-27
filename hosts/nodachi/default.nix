@@ -46,7 +46,7 @@ in
       hostPubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDX9AJIAYoQF1zAXtRkxhdJuxAkn00rfayPC1B0aoIXy root@titan";
       masterIdentities = [
         {
-          identity = "${self}" + "/secrets/keys/yubikey.agekey";
+          identity = "AGE-PLUGIN-YUBIKEY-1GDE3QQ5ZEC6RA6G62VFSN";
           pubkey = "age1yubikey1q296zd6ksfpqufd68us8x75mfyc45qtytsvphhj65y9az6th3z8c2kd7987";
         }
       ];
