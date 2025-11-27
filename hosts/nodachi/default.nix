@@ -35,9 +35,9 @@ in
     ./hardware.nix
   ];
 
-  environment.systemPackages = with pkgs; [
-    android-studio
-    pavucontrol
+  environment.systemPackages = [
+    pkgs-stable.android-studio
+    pkgs.pavucontrol
   ];
 
   age = {

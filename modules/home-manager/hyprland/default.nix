@@ -68,9 +68,9 @@ in
         xwayland.enable = true;
 
         plugins = [
-          inputs.hyprland-plugins.packages.${pkgs.system}.hyprexpo
-          inputs.hyprland-plugins.packages.${pkgs.system}.hyprfocus
-          inputs.hyprland-plugins.packages.${pkgs.system}.xtra-dispatchers
+          #inputs.hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}.hyprexpo
+          inputs.hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}.hyprfocus
+          #inputs.hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}.xtra-dispatchers
         ];
       };
     };
