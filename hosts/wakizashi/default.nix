@@ -83,7 +83,7 @@ in
       sysctl = {
         cachyos = true;
       };
-      systemd-boot.enable = true;
+      boot.enable = true;
     };
   };
 
