@@ -38,6 +38,8 @@ in
   environment.systemPackages = [
     pkgs-stable.android-studio
     pkgs.pavucontrol
+    pkgs-stable.r2modman
+    pkgs.easyeffects
   ];
 
   age = {

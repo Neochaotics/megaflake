@@ -222,11 +222,11 @@
         "treefmt-nix": "treefmt-nix_2"
       },
       "locked": {
-        "lastModified": 1764224712,
-        "narHash": "sha256-a0Yy2PSr+MC4rmap9P/qg/6VVtiNm6g5G1H2fWRiTNM=",
+        "lastModified": 1764388915,
+        "narHash": "sha256-ELJfpo9wY2fKw7SmlJTNsTRr8L09nX86KSLFu5mHPxU=",
         "owner": "freedpom",
         "repo": "FreedpomFlake",
-        "rev": "a043929eb67623b8a11bc75c1874a1c9626cc578",
+        "rev": "f4964ee67c960aa1ae11e861ca181e38e9b4e206",
         "type": "github"
       },
       "original": {

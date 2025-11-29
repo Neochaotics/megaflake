@@ -18,7 +18,6 @@ in
         general = {
           lock_cmd = "pidof hyprlock || hyprlock";
           after_sleep_cmd = "hyprctl dispatch dpms on";
-          ignore_dbus_inhibit = false;
         };
 
         listener = [
@@ -36,6 +35,13 @@ in
     };
     programs.hyprlock = {
       enable = true;
+      settings = {
+        general = {
+          hide_cursor = true;
+          ignore_empty_input = true;
+        };
+
+      };
     };
   };
 }

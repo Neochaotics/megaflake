@@ -31,6 +31,7 @@ in
   };
 
   config = lib.mkIf cfg.enable {
+    home.pointerCursor.hyprcursor.enable = true;
     home.packages = with pkgs; [
       wl-clipboard
       hyprpolkitagent
