@@ -38,23 +38,6 @@ in
       hyprland-qtutils
     ];
 
-    # systemd.user.services.hyprland = {
-    #   Unit = {
-    #     Description = "Hyprland Wayland Compositor";
-    #     After = [ "graphical-session-pre.target" ];
-    #     Wants = [ "graphical-session-pre.target" ];
-    #   };
-    #   Service = {
-    #     Type = "simple";
-
-    #     ExecStart = "${inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland}/bin/Hyprland";
-    #     Restart = "on-failure";
-    #   };
-    #   Install = {
-    #     WantedBy = [ "graphical-session.target" ];
-    #   };
-    # };
-
     wayland = {
       systemd.target = "hyprland-session.target";
       windowManager.hyprland = {
@@ -62,8 +45,8 @@ in
         package = null;
         portalPackage = null;
         systemd = {
-          enable = true;
-          enableXdgAutostart = true;
+          enable = false;
+          enableXdgAutostart = false;
         };
 
         xwayland.enable = true;

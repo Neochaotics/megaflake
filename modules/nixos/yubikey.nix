@@ -33,20 +33,27 @@ in
       #sshAgentAuth.enable = true;
       u2f = {
         enable = true;
-        control = "requisite";
+        #control = "requisite";
         settings = {
-          cue = true;
-          interactive = true;
-          authfile = pkgs.writeText "u2f-mappings" (
-            lib.concatStrings [
-              "quinno"
-              ":nRc24/jKDKo7e7tslz13JzPo9tKjFZDpT35gS7vPYzc6fB10mhEieLafayM7cOjInGDzFwLxbr8WFEZlSVs0/g==,+QCDrdP/ylH8XB5rnxgN7K+J5yx+MULRrtWW0nEa7epdcUwMI3G6TCdnbPuw5C5PGxtn46jgUeGyr4k7TwtKfQ==,es256,+presence%"
-            ]
+          cue = lib.mkForce true;
+          interactive = lib.mkForce true;
+          origin = "pam://u2f";
+          authfile = lib.mkForce (
+            pkgs.writeText "u2f-mappings" (
+              lib.concatStrings [
+                "quinno"
+                ":0p6HaYKXcoX66uJNr6a1q1+OlXZXAPQBYR3QFtG8j9/WAajpAJFdu74P7w/q/W2iXCVNfQrSWDrn/hZs9Ngt/Q==,73Qs5oeyhtOf5+OzDHx4FuOG5cvyLxgzMdYIpEWscXNQ0p6WMpbCP3nH66+tE4qbiRXyjGQxbj8iOx9ycdow4A==,es256,+presence%"
+              ]
+            )
           );
         };
       };
       services = {
         login.u2fAuth = true;
+        hyprlock = {
+          u2fAuth = true;
+          unixAuth = false;
+        };
         sudo = {
           u2fAuth = true;
           #unixAuth = false;

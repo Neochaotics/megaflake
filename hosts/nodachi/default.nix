@@ -63,27 +63,6 @@ in
     };
   };
 
-  users = {
-    users = {
-      ${username} = {
-        isNormalUser = true;
-        description = formatUsername username;
-        hashedPasswordFile = config.age.secrets."${username}-password".path;
-        #initialPassword = "password";
-        shell = pkgs.zsh;
-        ignoreShellProgramCheck = true;
-        extraGroups = [
-          "wheel"
-        ]
-        ++ lib.optional config.security.rtkit.enable "rtkit"
-        ++ lib.optional config.services.pipewire.enable "audio"
-        ++ lib.optional config.services.pipewire.enable "pipewire"
-        ++ lib.optional config.hardware.i2c.enable "i2c";
-      };
-    };
-    mutableUsers = lib.mkForce false;
-  };
-
   home-manager = {
     users.${username} = import ./home.nix;
     extraSpecialArgs = { inherit username inputs self; };
@@ -127,6 +106,20 @@ in
   #programs.coolercontrol.enable = true;
 
   ff = {
+    userConfig = {
+      users = {
+        ${username} = {
+          role = "admin";
+          userOptions = {
+            description = formatUsername username;
+            hashedPasswordFile = config.age.secrets."${username}-password".path;
+            shell = pkgs.zsh;
+            ignoreShellProgramCheck = true;
+          };
+        };
+      };
+    };
+
     common.enable = true;
     services = {
       ntp.enable = true;

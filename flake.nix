@@ -21,7 +21,7 @@
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.11";
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.11";
+      url = "github:nix-community/home-manager"; # /release-25.11
       inputs.nixpkgs.follows = "nixpkgs";
     };
     disko = {
@@ -45,7 +45,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     ff = {
-      url = "github:freedpom/FreedpomFlake";
+      url = "github:freedpom/FreedpomFlake/userConfig";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nvf = {
