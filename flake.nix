@@ -45,7 +45,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     ff = {
-      url = "github:freedpom/FreedpomFlake/userConfig";
+      url = "github:freedpom/FreedpomFlake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nvf = {
