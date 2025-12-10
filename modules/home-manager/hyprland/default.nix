@@ -39,7 +39,7 @@ in
     ];
 
     wayland = {
-      systemd.target = "hyprland-session.target";
+      #systemd.target = "hyprland-session.target";
       windowManager.hyprland = {
         enable = true;
         package = null;

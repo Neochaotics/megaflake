@@ -3,6 +3,7 @@
   username,
   inputs,
   self,
+  config,
   ...
 }:
 {
@@ -10,6 +11,19 @@
     inputs.ff.homeModules.freedpomFlake
     self.homeModules.qModule
   ];
+
+  programs.ssh = {
+    enableDefaultConfig = false;
+    enable = true;
+    matchBlocks = {
+      github = {
+        hostname = "github.com";
+        identityFile = [ "${config.home.homeDirectory}/.ssh/ssh_id_ed25519_key" ];
+        identitiesOnly = true;
+        addKeysToAgent = "yes";
+      };
+    };
+  };
 
   home = {
     stateVersion = "24.05";
@@ -39,7 +53,6 @@
       git.enable = true;
       utils.enable = true;
       fuzzel.enable = true;
-      ssh.enable = true;
       aria2.enable = true;
       waybar.enable = true;
       zsh.enable = true;

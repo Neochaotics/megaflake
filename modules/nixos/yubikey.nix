@@ -14,25 +14,38 @@ in
     };
   };
   config = lib.mkIf cfg.enable {
+    programs.ssh = {
+      startAgent = false;
+      askPassword = "${pkgs.x11_ssh_askpass}/libexec/x11-ssh-askpass";
+      enableAskPassword = true;
+    };
     environment.systemPackages = with pkgs; [
       yubioath-flutter
       yubikey-manager
       yubikey-personalization
       yubico-piv-tool
       pam_u2f
+      x11_ssh_askpass
     ];
+    environment.variables = {
+      SSH_ASKPASS = "${pkgs.x11_ssh_askpass}/libexec/x11-ssh-askpass";
+    };
     services = {
       udev.packages = [
         pkgs.yubikey-personalization
       ];
 
       pcscd.enable = true;
-      yubikey-agent.enable = true;
+      yubikey-agent.enable = false;
     };
     security.pam = {
-      #sshAgentAuth.enable = true;
+      sshAgentAuth = {
+        enable = false;
+        authorizedKeysFiles = [ "/etc/ssh/authorized_keys.d/quinno" ];
+      };
+
       u2f = {
-        enable = true;
+        enable = false;
         #control = "requisite";
         settings = {
           cue = lib.mkForce true;
@@ -48,14 +61,23 @@ in
           );
         };
       };
+      rssh = {
+        enable = true;
+        settings = {
+          auth_key_file = "/etc/ssh/authorized_keys.d/\${user}";
+          cue = true;
+          loglevel = "trace";
+          #authorized_keys_command = "/run/current-system/sw/bin/cat /etc/ssh/authorized_keys.d/$USER";
+        };
+      };
       services = {
-        login.u2fAuth = true;
+        login.rssh = true;
         hyprlock = {
-          u2fAuth = true;
+          rssh = true;
           unixAuth = false;
         };
         sudo = {
-          u2fAuth = true;
+          rssh = true;
           #unixAuth = false;
         };
       };

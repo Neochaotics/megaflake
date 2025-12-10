@@ -22,7 +22,7 @@
         "4"
       ];
     };
-    "DP-5" = {
+    "HDMI-A-1" = {
       resolution = {
         width = 1920;
         height = 1080;

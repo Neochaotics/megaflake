@@ -5,7 +5,6 @@
     ./git.nix
     ./utils.nix
     ./fuzzel.nix
-    ./ssh.nix
     ./aria2.nix
     ./waybar.nix
     ./zsh.nix

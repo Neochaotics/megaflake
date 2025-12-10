@@ -38,7 +38,7 @@ in
   environment.systemPackages = [
     pkgs-stable.android-studio
     pkgs.pavucontrol
-    pkgs-stable.r2modman
+    pkgs.r2modman
     pkgs.easyeffects
   ];
 
@@ -63,6 +63,8 @@ in
     };
   };
 
+  networking.networkmanager.enable = true;
+
   home-manager = {
     users.${username} = import ./home.nix;
     extraSpecialArgs = { inherit username inputs self; };
@@ -71,7 +73,10 @@ in
     useUserPackages = true;
   };
   security.rtkit.enable = true;
-  systemd.user.services.wireplumber.wantedBy = [ "default.target" ];
+  systemd = {
+    user.services.wireplumber.wantedBy = [ "default.target" ];
+    services.NetworkManager-wait-online.enable = false;
+  };
   services = {
     pipewire = {
       enable = true;
@@ -82,28 +87,8 @@ in
       pulse.enable = true;
       socketActivation = false;
     };
-
-    #blueman.enable = true;
-    getty.autologinUser = "${username}";
-    tailscale.enable = lib.mkForce true;
     flatpak.enable = true;
   };
-
-  nixpkgs.config.allowUnfreePredicate =
-    pkg:
-    builtins.elem (lib.getName pkg) [
-      "tampermonkey"
-    ];
-
-  #programs.obs-studio = {
-  #  enable = true;
-  #  enableVirtualCamera = true;
-  #  plugins = with pkgs.obs-studio-plugins; [
-  #    droidcam-obs
-  #  ];
-  #;
-
-  #programs.coolercontrol.enable = true;
 
   ff = {
     userConfig = {
@@ -115,6 +100,9 @@ in
             hashedPasswordFile = config.age.secrets."${username}-password".path;
             shell = pkgs.zsh;
             ignoreShellProgramCheck = true;
+            openssh.authorizedKeys.keys = [
+              "sk-ssh-ed25519@openssh.com AAAAGnNrLXNzaC1lZDI1NTE5QG9wZW5zc2guY29tAAAAICU1ToHVRo5curH9yPzJPhRsf2FkqKMtroVtojTJ6IOZAAAACnNzaDpzaGluanU= slaw_dormitory861@aleeas.com"
+            ];
           };
         };
       };
@@ -181,7 +169,6 @@ in
     };
     yubikey.enable = true;
     stylix.enable = true;
-    wireguard.enable = true;
     antec-display = {
       enable = true;
       cpu.device = "k10temp-pci-00c3";
