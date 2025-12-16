@@ -5,7 +5,7 @@
 }:
 {
   stylix.targets.hyprland.hyprpaper.enable = true;
-  wayland.windowManager.hyprland.settings = lib.mkIf config.qm.desktop.hyprland.enable {
+  wayland.windowManager.hyprland.settings = lib.mkIf config.qm.desktop.hypr.land.enable {
     decoration = {
       rounding = 6;
       rounding_power = 3.0;

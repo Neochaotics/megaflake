@@ -5,7 +5,7 @@
   ...
 }:
 {
-  wayland.windowManager.hyprland.settings = lib.mkIf config.qm.desktop.hyprland.enable {
+  wayland.windowManager.hyprland.settings = lib.mkIf config.qm.desktop.hypr.land.enable {
     monitor = lib.mapAttrsToList (
       name: cfg:
       let

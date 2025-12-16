@@ -49,9 +49,10 @@
     system = {
       xdg.enable = true;
     };
-    desktop.hyprland = {
-      enable = true;
-      idlelock.enable = true;
+    desktop.hypr = {
+      land.enable = true;
+      idle-lock.enable = true;
+      sunset.enable = true;
     };
   };
 }

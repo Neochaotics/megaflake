@@ -28,6 +28,7 @@ in
           horizontal-pad = 30;
           vertical-pad = 12;
           inner-pad = 3;
+          launch-prefix = "uwsm app --";
         };
         border = {
           width = 2;

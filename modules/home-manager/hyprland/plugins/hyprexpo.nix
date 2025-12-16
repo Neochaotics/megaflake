@@ -4,7 +4,7 @@
   ...
 }:
 {
-  wayland.windowManager.hyprland.settings = lib.mkIf config.qm.desktop.hyprland.enable {
+  wayland.windowManager.hyprland.settings = lib.mkIf config.qm.desktop.hypr.land.enable {
     "plugin:hyprexpo" = {
       columns = 4;
       gap_size = 6;

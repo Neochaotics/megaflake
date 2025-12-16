@@ -45,7 +45,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     ff = {
-      url = "github:freedpom/FreedpomFlake";
+      url = "github:freedpom/FreedpomFlake/niri";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nvf = {

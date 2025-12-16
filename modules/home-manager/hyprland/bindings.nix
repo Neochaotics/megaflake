@@ -6,24 +6,23 @@
   ...
 }:
 {
-  wayland.windowManager.hyprland.settings = lib.mkIf config.qm.desktop.hyprland.enable {
+  wayland.windowManager.hyprland.settings = lib.mkIf config.qm.desktop.hypr.land.enable {
     bind = [
       # Program Launching
       # --------------------
-      "SUPER, R, exec, pkill fuzzle || fuzzel"
-      "SUPER, B, exec, firefox"
-      "SUPER ALT, B, exec, chromium"
-      "SUPER, Return, exec, foot"
-      "SUPER, E, exec, thunar.desktop"
-      "SUPER, V, exec, pavucontrol"
-      "SUPER, D, exec, legcord"
+      "SUPER, R, exec, pkill fuzzle || uwsm app -- fuzzel"
+      "SUPER, B, exec, uwsm app -- firefox"
+      "SUPER ALT, B, exec, uwsm app -- chromium"
+      "SUPER, Return, exec, uwsm app -- foot"
+      "SUPER, V, exec, uwsm app -- pavucontrol"
+      "SUPER, D, exec, uwsm app -- legcord"
 
       # General Control
       # --------------------
       "SUPER CTRL ALT, P, exec, systemctl poweroff"
       "SUPER CTRL ALT, R, exec, systemctl reboot"
       "SUPER CTRL ALT, L, exec, hyprlock"
-      "SUPER CTRL ALT, K, exit"
+      "SUPER CTRL ALT, K, exec, uwsm stop"
 
       # General Control
       # --------------------

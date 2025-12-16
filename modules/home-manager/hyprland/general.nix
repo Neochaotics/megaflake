@@ -4,7 +4,7 @@
   ...
 }:
 {
-  wayland.windowManager.hyprland.settings = lib.mkIf config.qm.desktop.hyprland.enable {
+  wayland.windowManager.hyprland.settings = lib.mkIf config.qm.desktop.hypr.land.enable {
     general = {
       border_size = 3;
       no_border_on_floating = false;

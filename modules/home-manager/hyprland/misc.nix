@@ -4,7 +4,7 @@
   ...
 }:
 {
-  wayland.windowManager.hyprland.settings = lib.mkIf config.qm.desktop.hyprland.enable {
+  wayland.windowManager.hyprland.settings = lib.mkIf config.qm.desktop.hypr.land.enable {
     misc = {
       disable_hyprland_logo = true;
       disable_splash_rendering = true;

@@ -4,14 +4,14 @@
   ...
 }:
 let
-  cfg = config.qm.desktop.hyprland.idlelock;
+  cfg = config.qm.desktop.hypr;
 in
 {
-  options.qm.desktop.hyprland.idlelock = {
+  options.qm.desktop.hypr.idle-lock = {
     enable = lib.mkEnableOption "Enable";
   };
 
-  config = lib.mkIf (config.stylix.enable && cfg.enable) {
+  config = lib.mkIf (cfg.idle-lock.enable && cfg.land.enable) {
     services.hypridle = {
       enable = true;
       settings = {
