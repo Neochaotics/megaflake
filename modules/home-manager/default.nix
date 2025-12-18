@@ -2,6 +2,7 @@
 {
   imports = [
     ./hyprland
+    ./niri
     ./programs
     ./system
     inputs.ff.homeModules.freedpomFlake

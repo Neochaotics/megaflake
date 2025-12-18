@@ -2,20 +2,23 @@
   lib,
   config,
   pkgs,
-  inputs,
   ...
 }:
 let
-  cfg = config.qm.desktop.hypr.land;
+  cfg = config.qm.desktop.niri;
 in
 {
   options.qm.desktop.niri = {
     enable = lib.mkEnableOption "Enable niri configuration";
+    autoStart = lib.mkOption {
+      type = lib.types.bool;
+      default = false;
+    };
   };
 
   config = lib.mkIf cfg.enable {
 
-    systemd.user.services.uwsm-start = {
+    systemd.user.services.uwsm-start = lib.mkIf cfg.autoStart {
       Unit = {
         Description = "Start UWSM.";
         After = "graphical-session-pre.target";
@@ -33,6 +36,24 @@ in
 
     ff.wayland.windowManager.niri = {
       enable = true;
+      settings = {
+        output = {
+          "DP-2" = {
+            mode = "2560x1440@179.960";
+            focus-at-startup = { };
+          };
+        };
+        binds = {
+          "Super+R".spawn = "fuzzle";
+          "Super+Return".spawn = "foot";
+        };
+        input = {
+          mouse = {
+            accel-profile = "flat";
+            accel-speed = 0.0;
+          };
+        };
+      };
     };
   };
 }

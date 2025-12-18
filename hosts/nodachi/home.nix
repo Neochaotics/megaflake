@@ -65,10 +65,13 @@
     system = {
       xdg.enable = true;
     };
-    desktop.hypr = {
-      land.enable = true;
-      idle-lock.enable = true;
-      sunset.enable = true;
+    desktop = {
+      niri.enable = true;
+      hypr = {
+        land.enable = true;
+        idle-lock.enable = true;
+        sunset.enable = true;
+      };
     };
   };
 }
