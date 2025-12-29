@@ -36,7 +36,6 @@
       git.enable = true;
       utils.enable = true;
       fuzzel.enable = true;
-      ssh.enable = true;
       aria2.enable = true;
       waybar.enable = true;
       zsh.enable = true;
