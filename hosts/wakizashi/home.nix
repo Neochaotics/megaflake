@@ -3,6 +3,7 @@
   inputs,
   username,
   self,
+  config,
   ...
 }:
 {
@@ -11,16 +12,30 @@
     self.homeModules.qModule
   ];
 
+  programs.ssh = {
+    enableDefaultConfig = false;
+    enable = true;
+    matchBlocks = {
+      github = {
+        hostname = "github.com";
+        identityFile = [ "${config.home.homeDirectory}/.ssh/ssh_id_ed25519_key" ];
+        identitiesOnly = true;
+        addKeysToAgent = "yes";
+      };
+    };
+  };
+
   home = {
     stateVersion = "24.05";
     inherit username;
     homeDirectory = "/home/${username}";
     #enableNixpkgsReleaseCheck = false;
     packages = with pkgs; [
-      element-desktop
+      legcord
       kmon
       gping
       gitoxide
+      tidal-hifi
     ];
   };
   ff = {
@@ -48,10 +63,6 @@
     system = {
       xdg.enable = true;
     };
-    desktop.hypr = {
-      land.enable = true;
-      idle-lock.enable = true;
-      sunset.enable = true;
-    };
+    desktop.niri.enable = true;
   };
 }
