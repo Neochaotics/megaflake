@@ -14,7 +14,6 @@
       "hid_apple"
       "sd_mod"
       "sr_mod"
-      "nouveau"
     ];
     kernelModules = [
       "kvm-intel"
@@ -25,17 +24,10 @@
       "video=LVDS-1:1280x800@60"
     ];
   };
-  services.xserver = {
-    enable = false;
-    videoDrivers = [ "nouveau" ];
-  };
+
   hardware = {
     enableRedistributableFirmware = true;
     firmware = [ pkgs.b43Firmware_5_1_138 ];
-    nvidia = {
-      open = true;
-      modesetting.enable = true;
-    };
     graphics = {
       enable = true;
       enable32Bit = true;

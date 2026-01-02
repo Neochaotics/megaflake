@@ -42,6 +42,7 @@
         width = 3840;
         height = 2160;
       };
+      mirror = "DP-2";
       scale = 2;
       position = "auto-center-left";
       workspaces = [

@@ -29,11 +29,14 @@ in
     inputs.disko.nixosModules.disko
     inputs.home-manager.nixosModules.home-manager
     inputs.ff.nixosModules.freedpomFlake
+    #inputs.niri.nixosModules.niri
     self.nixosModules.qModule
     ./disk-primary.nix
     ./disk-secondary.nix
     ./hardware.nix
   ];
+
+  nixpkgs.overlays = [ inputs.niri.overlays.niri ];
 
   environment.systemPackages = [
     pkgs-stable.android-studio

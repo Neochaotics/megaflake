@@ -55,6 +55,9 @@
     hyprland = {
       url = "github:hyprwm/Hyprland?ref=v0.52.1";
     };
+    niri = {
+      url = "github:sodiboo/niri-flake";
+    };
     hyprland-plugins = {
       url = "github:hyprwm/hyprland-plugins";
       inputs.hyprland.follows = "hyprland";

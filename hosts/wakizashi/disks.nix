@@ -1,48 +1,30 @@
 {
   disko.devices = {
-    disk.nix = {
-      type = "disk";
-      device = "/dev/disk/by-id/ata-CT1000BX500SSD1_2451E99B1181";
-      content = {
-        type = "gpt";
-        partitions = {
-          ESP = {
-            size = "1G";
-            type = "EF00";
-            content = {
-              type = "filesystem";
-              format = "vfat";
-              mountpoint = "/boot";
-              mountOptions = [ "umask=0077" ];
-            };
-          };
-
-          root = {
-            size = "100%";
-            content = {
-              type = "luks";
-              name = "nixcrypt";
-              settings.allowDiscards = true;
+    disk = {
+      nvme0 = {
+        type = "disk";
+        device = "/dev/disk/by-id/ata-CT1000BX500SSD1_2451E99B1181";
+        content = {
+          type = "gpt";
+          partitions = {
+            diskp1 = {
+              size = "1G";
+              type = "EF00";
               content = {
-                type = "btrfs";
-                extraArgs = [ "-f" ];
-                subvolumes = {
-                  "nix" = {
-                    mountpoint = "/nix";
-                    mountOptions = [
-                      "compress-force=zstd:1"
-                      "noatime"
-                    ];
-                  };
-                  "swap" = {
-                    mountpoint = "/.swap";
-                    mountOptions = [
-                      "compress-force=zstd:1"
-                      "noatime"
-                    ];
-                    swap.swapfile.size = "8G";
-                  };
-                };
+                type = "filesystem";
+                format = "vfat";
+                mountpoint = "/boot";
+                mountOptions = [ "umask=0077" ];
+              };
+            };
+
+            diskp2 = {
+              size = "100%";
+              content = {
+                type = "bcachefs";
+                filesystem = "rootfs";
+                label = "nvme0";
+                extraFormatArgs = [ "--discard" ];
               };
             };
           };
@@ -50,14 +32,14 @@
       };
     };
 
-    nodev."/" = {
-      fsType = "tmpfs";
-      mountOptions = [
-        "defaults"
-        "size=3G"
-        "mode=755"
-      ];
+    bcachefs_filesystems = {
+      rootfs = {
+        type = "bcachefs_filesystem";
+        mountpoint = "/";
+        extraFormatArgs = [
+          "--background_compression=zstd:3"
+        ];
+      };
     };
   };
-  fileSystems."/nix".neededForBoot = true;
 }

@@ -23,9 +23,6 @@
       "SUPER CTRL ALT, R, exec, systemctl reboot"
       "SUPER CTRL ALT, L, exec, hyprlock"
       "SUPER CTRL ALT, K, exec, uwsm stop"
-
-      # General Control
-      # --------------------
       "SUPER, W, killactive" # Close Active Window
       "SUPER, S, togglesplit" # Toggle Split Layout
       "SUPER, T, togglegroup" # Toggle Grouped Layout
@@ -33,6 +30,8 @@
       "SUPER, F10, togglefloating" # Toggle Floating Window
       "SUPER, F11, fullscreen, 0" # Toggle Fullscreen
       "SUPER, F12, pin" # Pin window above others
+      "SUPER, N, exec, hyprctl hyprsunset gamma 100 && hyprctl hyprsunset identity"
+      "SUPER SHIFT, N, exec, hyprctl hyprsunset gamma 60 && hyprctl hyprsunset temperature 3700"
 
       # Window Control
       # --------------------

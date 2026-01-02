@@ -16,6 +16,10 @@ in
       enable = true;
       cacheHome = config.home.homeDirectory + "/.local/cache";
 
+      portal = {
+        enable = lib.mkForce true;
+      };
+
       mimeApps = {
         enable = true;
       };

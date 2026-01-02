@@ -63,6 +63,5 @@
     system = {
       xdg.enable = true;
     };
-    desktop.niri.enable = true;
   };
 }
