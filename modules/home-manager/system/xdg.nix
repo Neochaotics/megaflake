@@ -1,6 +1,8 @@
 {
   config,
   lib,
+  pkgs,
+  inputs,
   ...
 }:
 let
@@ -18,6 +20,22 @@ in
 
       portal = {
         enable = lib.mkForce true;
+        config = {
+          common = {
+            default = [
+              "gtk"
+            ];
+          };
+          hyprland = {
+            default = [
+              "hyprland"
+            ];
+          };
+        };
+        extraPortals = [
+          inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland
+          pkgs.xdg-desktop-portal-gtk
+        ];
       };
 
       mimeApps = {

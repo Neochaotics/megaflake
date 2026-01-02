@@ -32,10 +32,6 @@ in
     ./hardware.nix
   ];
 
-  boot = {
-    kernelPackages = pkgs.linuxPackages_latest;
-  };
-
   age = {
     rekey = {
       agePlugins = [ pkgs.age-plugin-yubikey ];
@@ -96,7 +92,7 @@ in
       consoles = {
         enable = true;
         getty = [
-          "quinno@tty1"
+          "${username}@tty1"
           "tty3"
           "tty5"
         ];

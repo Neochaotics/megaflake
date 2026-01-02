@@ -23,6 +23,7 @@ in
       syntaxHighlighting.enable = true;
       autocd = true;
       enableCompletion = true;
+      dotDir = "${config.xdg.configHome}/zsh";
     };
   };
 }

@@ -1,22 +1,21 @@
 { pkgs, ... }:
 {
   boot = {
-    #kernelPackages = pkgs.linuxPackages_cachyos_lts;
+    kernelPackages = pkgs.linuxPackages_zen;
     initrd.availableKernelModules = [
-      "ehci_pci"
-      "xhci_pci"
-      "ohci_pci"
       "ahci"
+      "ehci_pci"
       "firewire_ohci"
-      "usb_storage"
-      "usbhid"
       "hid-generic"
       "hid_apple"
+      "ohci_pci"
       "sd_mod"
       "sr_mod"
+      "usb_storage"
+      "usbhid"
+      "xhci_pci"
     ];
     kernelModules = [
-      "kvm-intel"
       "wl"
     ];
     blacklistedKernelModules = [ "nvidia" ];
