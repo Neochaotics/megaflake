@@ -33,6 +33,8 @@ in
     ./hardware.nix
   ];
 
+  nixpkgs.overlays = [ inputs.niri.overlays.niri ];
+
   age = {
     rekey = {
       agePlugins = [ pkgs.age-plugin-yubikey ];
