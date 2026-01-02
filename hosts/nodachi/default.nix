@@ -43,6 +43,9 @@ in
     pkgs.pavucontrol
     pkgs.r2modman
     pkgs.easyeffects
+    pkgs.kmon
+    pkgs.gping
+    pkgs.gitoxide
   ];
 
   age = {
@@ -70,7 +73,14 @@ in
 
   home-manager = {
     users.${username} = import ./home.nix;
-    extraSpecialArgs = { inherit username inputs self; };
+    extraSpecialArgs = {
+      inherit
+        username
+        inputs
+        self
+        pkgs-stable
+        ;
+    };
     backupFileExtension = "bk";
     useGlobalPkgs = true;
     useUserPackages = true;

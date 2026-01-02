@@ -23,7 +23,7 @@
               content = {
                 type = "bcachefs";
                 filesystem = "rootfs";
-                label = "nvme0";
+                label = "ssd";
                 extraFormatArgs = [ "--discard" ];
               };
             };
@@ -35,10 +35,27 @@
     bcachefs_filesystems = {
       rootfs = {
         type = "bcachefs_filesystem";
-        mountpoint = "/";
+        passwordFile = "/tmp/secret.key";
         extraFormatArgs = [
-          "--background_compression=zstd:3"
+          "--compression=zstd:2"
+          "--background_compression=zstd:4"
         ];
+        subvolumes = {
+          "subvolumes/root" = {
+            mountpoint = "/";
+            mountOptions = [
+              "verbose"
+            ];
+          };
+          "subvolumes/home" = {
+            mountpoint = "/home";
+          };
+          "subvolumes/nix" = {
+            mountpoint = "/nix";
+          };
+          "subvolumes/nix/os" = {
+          };
+        };
       };
     };
   };

@@ -1,5 +1,5 @@
 {
-  pkgs,
+  pkgs-stable,
   username,
   inputs,
   self,
@@ -42,12 +42,9 @@
     inherit username;
     homeDirectory = "/home/${username}";
     #enableNixpkgsReleaseCheck = false;
-    packages = with pkgs; [
+    packages = with pkgs-stable; [
       zed-editor
       legcord
-      kmon
-      gping
-      gitoxide
       tidal-hifi
     ];
   };
