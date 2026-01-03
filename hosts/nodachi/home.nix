@@ -8,7 +8,8 @@
 }:
 {
   imports = [
-    inputs.ff.homeModules.freedpomFlake
+    inputs.ff.homeModules.ff
+    inputs.ff.homeModules.windowManagers
     self.homeModules.qModule
     inputs.niri.homeModules.niri
   ];
@@ -52,6 +53,11 @@
     gpg.enable = true;
     programs = {
       bash.enable = true;
+    };
+    desktop = {
+      hypr = {
+        land.enable = true;
+      };
     };
   };
 

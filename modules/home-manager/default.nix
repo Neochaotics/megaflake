@@ -4,7 +4,7 @@
     ./hyprland
     ./programs
     ./system
-    inputs.ff.homeModules.freedpomFlake
+    inputs.ff.homeModules.ff
   ];
   programs.home-manager.enable = true;
 }

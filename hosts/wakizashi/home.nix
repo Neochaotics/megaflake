@@ -8,8 +8,9 @@
 }:
 {
   imports = [
-    inputs.ff.homeModules.freedpomFlake
+    inputs.ff.homeModules.ff
     self.homeModules.qModule
+    inputs.niri.homeModules.niri
   ];
   programs = {
 

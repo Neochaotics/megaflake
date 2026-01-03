@@ -29,6 +29,7 @@ in
     inputs.disko.nixosModules.disko
     inputs.home-manager.nixosModules.home-manager
     inputs.ff.nixosModules.freedpomFlake
+    inputs.ff.nixosModules.windowManagers
     #inputs.niri.nixosModules.niri
     self.nixosModules.qModule
     ./disk-primary.nix
@@ -104,6 +105,7 @@ in
   };
 
   ff = {
+    programs.hyprland.enable = true;
     userConfig = {
       users = {
         ${username} = {
@@ -177,7 +179,7 @@ in
 
   qm = {
     programs = {
-      hyprland.enable = true;
+      #hyprland.enable = true;
       steam.enable = true;
     };
     yubikey.enable = true;

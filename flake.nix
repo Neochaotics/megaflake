@@ -47,7 +47,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     ff = {
-      url = "github:freedpom/FreedpomFlake";
+      url = "github:freedpom/FreedpomFlake/niri";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nvf = {
@@ -55,7 +55,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     hyprland = {
-      url = "github:hyprwm/Hyprland?ref=v0.52.1";
+      url = "github:hyprwm/Hyprland?ref=v0.53.1";
     };
     niri = {
       url = "github:sodiboo/niri-flake";
