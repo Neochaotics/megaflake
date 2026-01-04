@@ -11,7 +11,6 @@
     inputs.ff.homeModules.ff
     inputs.ff.homeModules.windowManagers
     self.homeModules.qModule
-    inputs.niri.homeModules.niri
   ];
   programs = {
 
@@ -24,15 +23,6 @@
           identityFile = [ "${config.home.homeDirectory}/.ssh/ssh_id_ed25519_key" ];
           identitiesOnly = true;
           addKeysToAgent = "yes";
-        };
-      };
-    };
-    niri = {
-      enable = true;
-      #package = lib.mkForce pkgs.niri-stable;
-      settings = {
-        binds = {
-          "Mod+R".action.spawn = "fuzzel";
         };
       };
     };
@@ -54,10 +44,9 @@
     programs = {
       bash.enable = true;
     };
-    desktop = {
-      hypr = {
-        land.enable = true;
-      };
+    windowManagers = {
+      autoStart = true;
+      hyprland.enable = true;
     };
   };
 

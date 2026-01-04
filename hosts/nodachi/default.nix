@@ -30,14 +30,11 @@ in
     inputs.home-manager.nixosModules.home-manager
     inputs.ff.nixosModules.freedpomFlake
     inputs.ff.nixosModules.windowManagers
-    #inputs.niri.nixosModules.niri
     self.nixosModules.qModule
     ./disk-primary.nix
     ./disk-secondary.nix
     ./hardware.nix
   ];
-
-  nixpkgs.overlays = [ inputs.niri.overlays.niri ];
 
   environment.systemPackages = [
     pkgs-stable.android-studio
@@ -105,7 +102,7 @@ in
   };
 
   ff = {
-    programs.hyprland.enable = true;
+    windowManagers.hyprland.enable = true;
     userConfig = {
       users = {
         ${username} = {
@@ -140,8 +137,12 @@ in
         kmscon = [
           "tty2"
           "tty4"
-          "tty6"
         ];
+        spawn = {
+          "quinno@tty6" = {
+            execStart = "${pkgs.uwsm}/bin/uwsm start -N 'Hyprland' -- ${config.programs.hyprland.package}/bin/start-hyprland";
+          };
+        };
         kmsconConfig = {
           font = {
             name = "monospace";
