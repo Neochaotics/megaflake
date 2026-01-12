@@ -10,6 +10,7 @@
   imports = [
     inputs.ff.homeModules.ff
     inputs.ff.homeModules.windowManagers
+    inputs.ff.homeModules.core
     self.homeModules.qModule
   ];
   programs = {
@@ -40,6 +41,7 @@
     ];
   };
   ff = {
+    core.programs.opencode.enable = true;
     gpg.enable = true;
     programs = {
       bash.enable = true;

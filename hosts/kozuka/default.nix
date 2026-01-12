@@ -22,7 +22,6 @@ let
 in
 {
   imports = [
-    inputs.chaotic.nixosModules.default
     inputs.ff.nixosModules.freedpomFlake
     self.nixosModules.qModule
     inputs.disko.nixosModules.disko

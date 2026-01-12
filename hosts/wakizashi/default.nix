@@ -28,12 +28,11 @@ in
     inputs.disko.nixosModules.disko
     inputs.home-manager.nixosModules.home-manager
     inputs.ff.nixosModules.freedpomFlake
+    inputs.ff.nixosModules.core
     self.nixosModules.qModule
     ./disks.nix
     ./hardware.nix
   ];
-
-  nixpkgs.overlays = [ inputs.niri.overlays.niri ];
 
   age = {
     rekey = {
@@ -77,6 +76,7 @@ in
   ];
 
   ff = {
+    core.services.openssh.enable = true;
     userConfig = {
       users = {
         ${username} = {
@@ -98,7 +98,6 @@ in
     services = {
       ntp.enable = true;
       ananicy.enable = true;
-      openssh.enable = true;
       consoles = {
         enable = true;
         getty = [

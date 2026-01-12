@@ -25,11 +25,11 @@ in
   imports = [
     inputs.agenix.nixosModules.default
     inputs.agenix-rekey.nixosModules.default
-    inputs.chaotic.nixosModules.default
     inputs.disko.nixosModules.disko
     inputs.home-manager.nixosModules.home-manager
     inputs.ff.nixosModules.freedpomFlake
     inputs.ff.nixosModules.windowManagers
+    inputs.ff.nixosModules.core
     self.nixosModules.qModule
     ./disk-primary.nix
     ./disk-secondary.nix
@@ -39,6 +39,7 @@ in
   environment.systemPackages = [
     pkgs-stable.android-studio
     pkgs.pavucontrol
+    pkgs.qpwgraph
     pkgs.r2modman
     pkgs.easyeffects
     pkgs.kmon
@@ -89,6 +90,9 @@ in
     services.NetworkManager-wait-online.enable = false;
   };
   services = {
+    ollama.environmentVariables = {
+      HIP_VISIBLE_DEVICES = "0";
+    };
     pipewire = {
       enable = true;
       alsa = {
@@ -103,6 +107,7 @@ in
 
   ff = {
     windowManagers.hyprland.enable = true;
+    core.services.openssh.enable = true;
     userConfig = {
       users = {
         ${username} = {
@@ -125,8 +130,7 @@ in
       ntp.enable = true;
       ananicy.enable = true;
       pipewire.enable = false;
-      openssh.enable = true;
-      ollama.enable = false;
+      ollama.enable = true;
       consoles = {
         enable = true;
         getty = [
@@ -138,11 +142,6 @@ in
           "tty2"
           "tty4"
         ];
-        spawn = {
-          "quinno@tty6" = {
-            execStart = "${pkgs.uwsm}/bin/uwsm start -N 'Hyprland' -- ${config.programs.hyprland.package}/bin/start-hyprland";
-          };
-        };
         kmsconConfig = {
           font = {
             name = "monospace";

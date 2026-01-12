@@ -12,7 +12,7 @@
     ];
     kernelModules = [ "kvm-amd" ];
 
-    kernelPackages = pkgs.linuxPackages_cachyos-server;
+    kernelPackages = pkgs.linuxPackages_zen;
     supportedFilesystems = [ "bcachefs" ];
 
   };
