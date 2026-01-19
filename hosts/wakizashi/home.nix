@@ -12,7 +12,6 @@
     self.homeModules.qModule
   ];
   programs = {
-
     ssh = {
       enableDefaultConfig = false;
       enable = true;

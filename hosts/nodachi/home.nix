@@ -10,7 +10,7 @@
   imports = [
     inputs.ff.homeModules.ff
     inputs.ff.homeModules.windowManagers
-    inputs.ff.homeModules.core
+    inputs.ff.homeModules.default
     self.homeModules.qModule
   ];
   programs = {
@@ -40,15 +40,17 @@
       tidal-hifi
     ];
   };
-  ff = {
-    core.programs.opencode.enable = true;
-    gpg.enable = true;
-    programs = {
-      bash.enable = true;
-    };
+  freedpom = {
+    programs.opencode.enable = true;
     windowManagers = {
       autoStart = true;
       hyprland.enable = true;
+    };
+  };
+  ff = {
+    gpg.enable = true;
+    programs = {
+      bash.enable = true;
     };
   };
 

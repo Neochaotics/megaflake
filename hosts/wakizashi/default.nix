@@ -28,7 +28,7 @@ in
     inputs.disko.nixosModules.disko
     inputs.home-manager.nixosModules.home-manager
     inputs.ff.nixosModules.freedpomFlake
-    inputs.ff.nixosModules.core
+    inputs.ff.nixosModules.default
     self.nixosModules.qModule
     ./disks.nix
     ./hardware.nix
@@ -75,28 +75,11 @@ in
     "/share/xdg-desktop-portal"
   ];
 
-  ff = {
-    core.services.openssh.enable = true;
-    userConfig = {
-      users = {
-        ${username} = {
-          role = "admin";
-          userOptions = {
-            description = formatUsername username;
-            #hashedPasswordFile = config.age.secrets."${username}-password".path;
-            initialPassword = "password";
-            shell = pkgs.zsh;
-            ignoreShellProgramCheck = true;
-            openssh.authorizedKeys.keys = [
-              "sk-ssh-ed25519@openssh.com AAAAGnNrLXNzaC1lZDI1NTE5QG9wZW5zc2guY29tAAAAICU1ToHVRo5curH9yPzJPhRsf2FkqKMtroVtojTJ6IOZAAAACnNzaDpzaGluanU= slaw_dormitory861@aleeas.com"
-            ];
-          };
-        };
-      };
-    };
-    common.enable = true;
+  ff.common.enable = true;
+  freedpom = {
     services = {
-      ntp.enable = true;
+      ssh.enable = true;
+      ntpd.enable = true;
       ananicy.enable = true;
       consoles = {
         enable = true;
@@ -122,13 +105,30 @@ in
         };
       };
     };
+    programs = {
+      sudo-rs.enable = true;
+      fuc.enable = true;
+      uutils.enable = true;
+    };
     system = {
-      rust-utils = {
-        sudo-rs.enable = true;
-        fuc.enable = true;
-        uutils.enable = true;
+      users = {
+        users = {
+          ${username} = {
+            role = "admin";
+            userOptions = {
+              description = formatUsername username;
+              #hashedPasswordFile = config.age.secrets."${username}-password".path;
+              initialPassword = "password";
+              shell = pkgs.zsh;
+              ignoreShellProgramCheck = true;
+              openssh.authorizedKeys.keys = [
+                "sk-ssh-ed25519@openssh.com AAAAGnNrLXNzaC1lZDI1NTE5QG9wZW5zc2guY29tAAAAICU1ToHVRo5curH9yPzJPhRsf2FkqKMtroVtojTJ6IOZAAAACnNzaDpzaGluanU= slaw_dormitory861@aleeas.com"
+              ];
+            };
+          };
+        };
       };
-      fontsu.enable = true;
+      fonts.enable = true;
       nix.enable = true;
       sysctl = {
         cachyos = true;

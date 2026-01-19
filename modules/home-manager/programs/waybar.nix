@@ -9,7 +9,7 @@ let
   cfg = config.qm.programs.waybar;
 
   persistentWorkspaces = lib.filterAttrs (_: workspaces: workspaces != [ ]) (
-    lib.mapAttrs (_: cfg: cfg.workspaces) osConfig.ff.hardware.displays
+    lib.mapAttrs (_: cfg: cfg.workspaces) osConfig.freedpom.hardware.displays
   );
 in
 {

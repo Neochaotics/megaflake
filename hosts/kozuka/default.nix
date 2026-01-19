@@ -23,6 +23,7 @@ in
 {
   imports = [
     inputs.ff.nixosModules.freedpomFlake
+    inputs.ff.nixosModules.default
     self.nixosModules.qModule
     inputs.disko.nixosModules.disko
     ./disks.nix
@@ -44,8 +45,8 @@ in
   };
 
   services.getty.autologinUser = "${username}";
-  ff = {
-    common.enable = true;
+  ff.common.enable = true;
+  freedpom = {
     system = {
       nix.enable = true;
       boot.enable = true;

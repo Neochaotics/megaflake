@@ -4,7 +4,7 @@
   ...
 }:
 {
-  ff.hardware.displays = {
+  freedpom.hardware.displays = {
     "DP-2" = {
       includeKernelParams = true;
       resolution = {
