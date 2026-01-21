@@ -1,88 +1,143 @@
 {
   lib,
   inputs,
-  config,
   pkgs,
   self,
+  config,
+  pkgs-stable,
   ...
 }:
 let
   username = "quinno";
+  formatUsername =
+    name:
+    lib.strings.stringAsChars (
+      c:
+      if c == builtins.substring ((builtins.stringLength name) - 1) 1 name then
+        " ${lib.strings.toUpper c}"
+      else if c == (builtins.substring 0 1 name) then
+        lib.strings.toUpper c
+      else
+        c
+    ) name;
 in
 {
   imports = [
-    inputs.ff.nixosModules.freedpomFlake
-    inputs.qm.nixosModules.qModule
+    inputs.agenix.nixosModules.default
+    inputs.agenix-rekey.nixosModules.default
     inputs.disko.nixosModules.disko
+    inputs.home-manager.nixosModules.home-manager
+    inputs.ff.nixosModules.default
+    self.nixosModules.qModule
     ./disks.nix
     ./hardware.nix
-    (import ../../home/quinno {
-      userName = username;
-      inherit lib;
-    })
   ];
-
-  boot = {
-    kernelPackages = pkgs.linuxPackages_latest;
-  };
 
   age = {
     rekey = {
-      masterIdentities = [ "/persist/age.key" ];
+      agePlugins = [ pkgs.age-plugin-yubikey ];
+      #hostPubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDX9AJIAYoQF1zAXtRkxhdJuxAkn00rfayPC1B0aoIXy root@titan";
+      masterIdentities = [
+        {
+          identity = "AGE-PLUGIN-YUBIKEY-1GDE3QQ5ZEC6RA6G62VFSN";
+          pubkey = "age1yubikey1q296zd6ksfpqufd68us8x75mfyc45qtytsvphhj65y9az6th3z8c2kd7987";
+        }
+      ];
       localStorageDir = "${self}" + "/secrets/rekeyed/${config.networking.hostName}";
       generatedSecretsDir = "${self}" + "/secrets/generated/${config.networking.hostName}";
       storageMode = "local";
     };
+    secrets = {
+      "${username}-password" = {
+        rekeyFile = "${self}" + "/secrets/users/${username}/pass.age";
+      };
+    };
   };
 
-  users = {
-    users.${username} = {
-      initialPassword = "password";
-      shell = pkgs.zsh;
-      ignoreShellProgramCheck = true;
-      extraGroups =
-        [ "wheel" ]
-        ++ lib.optional config.security.rtkit.enable "rtkit"
-        ++ lib.optional config.services.pipewire.enable "audio";
+  home-manager = {
+    users.${username} = import ./home.nix;
+    extraSpecialArgs = {
+      inherit
+        username
+        inputs
+        self
+        pkgs-stable
+        ;
     };
-    mutableUsers = lib.mkForce true;
+    backupFileExtension = "bk";
+    useGlobalPkgs = true;
+    useUserPackages = true;
   };
 
-  services.getty.autologinUser = "${username}";
+  environment.pathsToLink = [
+    "/share/applications"
+    "/share/xdg-desktop-portal"
+  ];
 
-  # System Configuration
-  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-  system.stateVersion = "24.11";
-
-  services.tailscale.enable = true;
-
-  nixpkgs.config.allowUnfree = true;
-
-  ff = {
-    common.enable = true;
-    security = {
-      sudo-rs.enable = true;
-    };
+  freedpom = {
     services = {
+      ssh.enable = true;
+      ntpd.enable = true;
       ananicy.enable = true;
-      pipewire.enable = true;
-      openssh.enable = true;
+      consoles = {
+        enable = true;
+        getty = [
+          "${username}@tty1"
+          "tty3"
+          "tty5"
+        ];
+        kmscon = [
+          "tty2"
+          "tty4"
+          "tty6"
+        ];
+        kmsconConfig = {
+          font = {
+            name = "monospace";
+            size = 14;
+          };
+          hwaccel = true;
+          drm = true;
+          #video.gpus = "primary";
+          scrollbackSize = 2000;
+        };
+      };
+    };
+    programs = {
+      sudo-rs.enable = true;
+      fuc.enable = true;
+      uutils.enable = true;
     };
     system = {
-      persistence.enable = true;
+      users = {
+        users = {
+          ${username} = {
+            role = "admin";
+            userOptions = {
+              description = formatUsername username;
+              #hashedPasswordFile = config.age.secrets."${username}-password".path;
+              initialPassword = "password";
+              shell = pkgs.zsh;
+              ignoreShellProgramCheck = true;
+              openssh.authorizedKeys.keys = [
+                "sk-ssh-ed25519@openssh.com AAAAGnNrLXNzaC1lZDI1NTE5QG9wZW5zc2guY29tAAAAICU1ToHVRo5curH9yPzJPhRsf2FkqKMtroVtojTJ6IOZAAAACnNzaDpzaGluanU= slaw_dormitory861@aleeas.com"
+              ];
+            };
+          };
+        };
+      };
+      fonts.enable = true;
       nix.enable = true;
       sysctl = {
         cachyos = true;
+        mineral = false;
       };
-      systemd-boot.enable = true;
+      boot.enable = true;
+      performance.enable = true;
     };
   };
 
-  # Custom Module Configuration
   qm = {
-    programs = {
-      hyprland.enable = true;
-    };
     stylix.enable = true;
   };
 }

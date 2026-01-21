@@ -1,0 +1,29 @@
+{
+  lib,
+  config,
+  ...
+}:
+let
+  cfg = config.qm.programs.zsh;
+in
+{
+  options.qm.programs.zsh = {
+    enable = lib.mkEnableOption "Enable";
+  };
+
+  config = lib.mkIf cfg.enable {
+    programs.zsh = {
+      enable = true;
+      autosuggestion.enable = true;
+      history = {
+        ignoreAllDups = true;
+        ignoreSpace = true;
+        size = 1000;
+      };
+      syntaxHighlighting.enable = true;
+      autocd = true;
+      enableCompletion = true;
+      dotDir = "${config.xdg.configHome}/zsh";
+    };
+  };
+}

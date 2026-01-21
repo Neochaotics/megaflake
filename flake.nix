@@ -1,48 +1,33 @@
 {
-  # MegaFlake - A comprehensive NixOS system configuration
   description = "NixOS System Configuration";
 
-  # Binary cache configuration for faster builds
   nixConfig = {
-    # Binary cache servers (substituters)
     extra-substituters = [
       "https://cache.nixos.org"
-      "https://chaotic-nyx.cachix.org"
       "https://hyprland.cachix.org"
+      "https://niri.cachix.org"
       "https://nix-community.cachix.org"
     ];
-    # Public keys for binary cache verification
     extra-trusted-public-keys = [
       "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
-      "chaotic-nyx.cachix.org-1:HfnXSw4pj95iI/n17rIDy40agHj12WfF+Gqk6SonIT8="
       "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
+      "niri.cachix.org-1:Wv0OmO7PsuocRKzfDoJ3mulSl7Z6oezYhGhR+3W2964="
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
     ];
   };
 
   inputs = {
-    # -- Core dependencies --
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
-    chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
-
-    # -- System management --
-    nix-on-droid = {
-      url = "github:nix-community/nix-on-droid/release-24.05";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.11";
     home-manager = {
-      url = "github:nix-community/home-manager";
+      url = "github:nix-community/home-manager"; # /release-25.11
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    impermanence.url = "github:nix-community/impermanence";
     disko = {
-      url = "github:nix-community/disko/latest";
+      url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     stylix.url = "github:danth/stylix";
-
-    # -- Security and secrets management --
     agenix = {
       url = "github:ryantm/agenix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -52,130 +37,109 @@
       url = "github:oddlama/agenix-rekey";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    # -- Development tools --
     flake-parts.url = "github:hercules-ci/flake-parts";
     flake-root.url = "github:srid/flake-root";
-    fpFmt = {
-      url = "github:freedpom/FreedpomFormatter";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    # -- Applications and add-ons --
     firefox-addons = {
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    trackers = {
-      url = "github:ngosang/trackerslist";
-      flake = false;
-    };
-
-    # -- Custom modules and flakes --
     ff = {
-      #url = "path:/home/quinno/github/freedpom/FreedpomFlake";
       url = "github:freedpom/FreedpomFlake";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        home-manager.follows = "home-manager";
-      };
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     nvf = {
       url = "github:notashelf/nvf";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    qm = {
-      #url = "path:/home/quinno/github/Neochaotics/NixModule";
-      url = "github:Neochaotics/NixModule";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        home-manager.follows = "home-manager";
-        ff.follows = "ff";
-      };
+    hyprland = {
+      url = "github:hyprwm/Hyprland?ref=v0.53.1";
     };
-
-    # -- Disabled modules (kept for reference) --
-    #lix-module = {
-    #  url = "git+https://git.lix.systems/lix-project/nixos-module?ref=stable";
-    #  inputs.nixpkgs.follows = "nixpkgs";
-    #};
+    hyprland-plugins = {
+      url = "github:hyprwm/hyprland-plugins";
+      inputs.hyprland.follows = "hyprland";
+    };
   };
   outputs =
-    inputs@{ self, flake-parts, ... }:
+    inputs@{
+      self,
+      flake-parts,
+      ...
+    }:
     flake-parts.lib.mkFlake { inherit inputs; } {
-      # Supported system types
       systems = [
         "x86_64-linux"
-        "aarch64-linux"
       ];
 
-      # Flake modules to import
       imports = [
         inputs.flake-root.flakeModule
         inputs.agenix-rekey.flakeModule
-        inputs.fpFmt.flakeModule
+        inputs.ff.fmtModule
+        inputs.flake-parts.flakeModules.easyOverlay
       ];
 
-      # NixOS system configurations
-      flake.nixosConfigurations =
-        let
-          # Import nixpkgs library
-          inherit (self.inputs.nixpkgs) lib;
+      perSystem =
+        {
+          config,
+          pkgs,
+          ...
+        }:
+        {
+          devShells.default = pkgs.mkShell {
+            nativeBuildInputs = [
+              config.agenix-rekey.package
+              pkgs.age-plugin-yubikey
+              pkgs.rage
+            ];
+          };
 
-          # Automatically discover all host configurations from the hosts directory
-          hostNames = builtins.attrNames (
-            lib.attrsets.filterAttrs (_name: type: type == "directory") (builtins.readDir ./hosts)
-          );
-
-          # Function to create a NixOS system configuration for each host
-          mkHost =
-            hostname:
-            self.inputs.nixpkgs.lib.nixosSystem {
-              # Special arguments passed to all modules
-              specialArgs = {
-                inherit
-                  inputs
-                  hostname
-                  lib
-                  self
-                  ;
-              };
-
-              # Modules to include in each system configuration
-              modules = [
-                # Host-specific configuration
-                ./hosts/${hostname}
-
-                # Core system modules
-                inputs.impermanence.nixosModules.impermanence
-                inputs.home-manager.nixosModules.home-manager
-
-                # Security modules
-                inputs.agenix.nixosModules.default
-                inputs.agenix-rekey.nixosModules.default
-
-                # Package repositories
-                inputs.chaotic.nixosModules.default
-
-                # Disabled modules
-                #inputs.lix-module.nixosModules.default
-              ];
-            };
-        in
-        # Generate configurations for all hosts
-        lib.genAttrs hostNames mkHost;
-
-      # Nix-on-Droid configurations
-      flake.nixOnDroidConfigurations.tanto = inputs.nix-on-droid.lib.nixOnDroidConfiguration {
-        pkgs = inputs.nixpkgs.legacyPackages.aarch64-linux;
-        extraSpecialArgs = {
-          inherit inputs self;
-          inherit (inputs.nixpkgs) lib;
-          hostname = "tanto";
+          packages = {
+            antec-flux-pro-display = pkgs.callPackage ./packages/antec-flux-pro-display.nix { };
+            antec-flux-pro-display-udev = pkgs.callPackage ./packages/antec-flux-pro-display-udev.nix { };
+          };
         };
-        modules = [
-          ./hosts/tanto.nix
-        ];
+
+      flake = {
+        nixosModules = {
+          qModule = ./modules/nixos;
+        };
+        homeModules = {
+          qModule = ./modules/home-manager;
+        };
+
+        nixosConfigurations =
+          let
+            inherit (self.inputs.nixpkgs) lib;
+            hostNames = builtins.attrNames (
+              lib.attrsets.filterAttrs (_name: type: type == "directory") (builtins.readDir ./hosts)
+            );
+            mkHost =
+              hostname:
+              self.inputs.nixpkgs.lib.nixosSystem {
+                specialArgs = {
+                  inherit
+                    inputs
+                    hostname
+                    lib
+                    self
+                    ;
+                  pkgs-stable = import self.inputs.nixpkgs-stable {
+                    system = "x86_64-linux";
+                    config.allowUnfree = true;
+                    nixpkgs.hostPlatform = "x86_64-linux";
+                  };
+                };
+                modules = [
+                  {
+                    nixpkgs.config.allowUnfree = lib.mkForce true;
+                    nixpkgs.hostPlatform = "x86_64-linux";
+                    networking.hostName = hostname;
+                    system.stateVersion = "24.11";
+                  }
+                  ./hosts/${hostname}
+                ];
+              };
+          in
+          lib.genAttrs hostNames mkHost;
       };
     };
 }

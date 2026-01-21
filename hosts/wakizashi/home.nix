@@ -1,7 +1,7 @@
 {
   pkgs-stable,
-  username,
   inputs,
+  username,
   self,
   config,
   ...
@@ -13,7 +13,6 @@
     self.homeModules.qModule
   ];
   programs = {
-
     ssh = {
       enableDefaultConfig = false;
       enable = true;
@@ -34,7 +33,6 @@
     homeDirectory = "/home/${username}";
     #enableNixpkgsReleaseCheck = false;
     packages = with pkgs-stable; [
-      zed-editor
       legcord
       tidal-hifi
     ];
@@ -69,13 +67,6 @@
     };
     system = {
       xdg.enable = true;
-    };
-    desktop = {
-      hypr = {
-        land.enable = true;
-        idle-lock.enable = true;
-        sunset.enable = true;
-      };
     };
   };
 }

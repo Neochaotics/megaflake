@@ -1,23 +1,21 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 {
   boot = {
-    #kernelPackages = pkgs.linuxPackages_cachyos_lts;
+    kernelPackages = pkgs.linuxPackages_zen;
     initrd.availableKernelModules = [
-      "ehci_pci"
-      "xhci_pci"
-      "ohci_pci"
       "ahci"
+      "ehci_pci"
       "firewire_ohci"
-      "usb_storage"
-      "usbhid"
       "hid-generic"
       "hid_apple"
+      "ohci_pci"
       "sd_mod"
       "sr_mod"
-      "nouveau"
+      "usb_storage"
+      "usbhid"
+      "xhci_pci"
     ];
     kernelModules = [
-      "kvm-intel"
       "wl"
     ];
     blacklistedKernelModules = [ "nvidia" ];
@@ -25,17 +23,10 @@
       "video=LVDS-1:1280x800@60"
     ];
   };
-  services.xserver = {
-    enable = false;
-    videoDrivers = [ "nouveau" ];
-  };
+
   hardware = {
     enableRedistributableFirmware = true;
     firmware = [ pkgs.b43Firmware_5_1_138 ];
-    nvidia = {
-      open = true;
-      modesetting.enable = true;
-    };
     graphics = {
       enable = true;
       enable32Bit = true;
