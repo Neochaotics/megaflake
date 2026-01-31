@@ -37,6 +37,7 @@
       zed-editor
       legcord
       tidal-hifi
+      element-desktop
     ];
   };
   freedpom = {

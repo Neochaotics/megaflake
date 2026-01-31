@@ -19,6 +19,15 @@
             };
 
             diskp2 = {
+              size = "8G";
+              content = {
+                type = "swap";
+                randomEncryption = true;
+                priority = 100;
+              };
+            };
+
+            diskp3 = {
               size = "100%";
               content = {
                 type = "bcachefs";
@@ -39,19 +48,37 @@
         extraFormatArgs = [
           "--compression=zstd:2"
           "--background_compression=zstd:4"
+          "--data_checksum=crc64"
+          "--metadata_checksum=crc64"
+          "--metadata_replicas=2"
+          "--data_replicas=1"
+          "--wide_macs"
+          "--journal_flush_delay=1000"
+          "--usrquota"
+          "--grpquota"
         ];
         subvolumes = {
           "subvolumes/root" = {
             mountpoint = "/";
             mountOptions = [
               "verbose"
+              "discard"
+              "relatime"
             ];
           };
           "subvolumes/home" = {
             mountpoint = "/home";
+            mountOptions = [
+              "discard"
+              "relatime"
+            ];
           };
           "subvolumes/nix" = {
             mountpoint = "/nix";
+            mountOptions = [
+              "discard"
+              "relatime"
+            ];
           };
           "subvolumes/nix/os" = {
           };
