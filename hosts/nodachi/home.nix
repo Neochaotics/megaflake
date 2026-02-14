@@ -13,17 +13,52 @@
     self.homeModules.qModule
   ];
   programs = {
-    opencode.settings = {
-      provider = {
-        ollama = {
-          npm = "@ai-sdk/openai-compatible";
-          name = "Ollama";
-          options = {
-            baseURL = "http://localhost:11434/v1";
+    mcp = {
+      enable = true;
+      servers = {
+        nixos = {
+          command = "docker";
+          args = [
+            "run" "--rm" "-i" "ghcr.io/utensils/mcp-nixos"
+          ];
+        };
+      };
+    };
+    opencode = {
+      enableMcpIntegration = false;
+      settings = {
+        mcp = {
+          nixos = {
+            type = "local";
+            command = ["docker" "run" "--rm" "-i" "ghcr.io/utensils/mcp-nixos"];
+            enabled = true;
           };
-          models = {
-            qwen3-coder = {
-              name = "qwen3-coder";
+        };
+        formatter = {
+          nixfmt = {
+            command = ["nix" "fmt"];
+            extensions = [".nix"];
+          };
+        };
+        permission = {
+          bash= {
+            "*" = "ask";
+            "git *" = "allow";
+            "rm *" = "deny";
+            "grep *" = "allow";
+          };
+        };
+        provider = {
+          ollama = {
+            npm = "@ai-sdk/openai-compatible";
+            name = "Ollama";
+            options = {
+              baseURL = "http://localhost:11434/v1";
+            };
+            models = {
+              qwen3-coder = {
+                name = "qwen3-coder";
+              };
             };
           };
         };

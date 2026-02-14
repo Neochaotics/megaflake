@@ -44,6 +44,8 @@ in
     pkgs.kmon
     pkgs.gping
     pkgs.gitoxide
+    pkgs.mcp-nixos
+    pkgs.deskflow
   ];
 
   age = {
@@ -94,7 +96,15 @@ in
     user.services.wireplumber.wantedBy = [ "default.target" ];
     services.NetworkManager-wait-online.enable = false;
   };
+  security.tpm2 = {
+  enable = true;
+  #abrmd.enable = true;
+  };
   services = {
+    tailscale = {
+      enable = lib.mkForce true;
+   package = pkgs-stable.tailscale;
+    };
     ollama.environmentVariables = {
       HIP_VISIBLE_DEVICES = "0";
     };

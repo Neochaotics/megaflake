@@ -1,27 +1,34 @@
-{ withSystem, inputs, ... }: {
-  perSystem = { system, pkgs, ... }: {
-    # pkgs is already available here, but let's configure it explicitly if needed
-    _module.args.pkgs = import inputs.nixpkgs {
-      inherit system;
-      config = {
-        allowUnfree = true;
+{ withSystem, inputs, ... }:
+{
+  perSystem =
+    {
+      config,
+      system,
+      pkgs,
+      ...
+    }:
+    {
+      # Ensure pkgs allows unfree packages
+      _module.args.pkgs = import inputs.nixpkgs {
+        inherit system;
+        config = {
+          allowUnfree = true;
+        };
+      };
+
+      devShells.default = pkgs.mkShell {
+        nativeBuildInputs = [
+          config.agenix-rekey.package
+          pkgs.age-plugin-yubikey
+          pkgs.rage
+        ];
+      };
+
+      packages = {
+        antec-flux-pro-display = pkgs.callPackage ./packages/antec-flux-pro-display.nix { };
+        antec-flux-pro-display-udev = pkgs.callPackage ./packages/antec-flux-pro-display-udev.nix { };
       };
     };
-
-    # Now use this configured pkgs in your packages, devShells, etc.
-    devShells.default = pkgs.mkShell {
-      nativeBuildInputs = [
-        inputs.agenix-rekey.legacyPackages.${system}.agenix-rekey
-        pkgs.age-plugin-yubikey
-        pkgs.rage
-      ];
-    };
-
-    packages = {
-      antec-flux-pro-display = pkgs.callPackage ./packages/antec-flux-pro-display.nix { };
-      antec-flux-pro-display-udev = pkgs.callPackage ./packages/antec-flux-pro-display-udev.nix { };
-    };
-  };
 
   flake.nixosConfigurations =
     let
@@ -32,32 +39,29 @@
       mkHost =
         hostname:
         inputs.nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
           modules = [
             ./hosts/${hostname}
-            inputs.nixpkgs.nixosModules.readOnlyPkgs
-            ({ config, ... }: {
-              # Use the configured pkgs from perSystem
-              nixpkgs.pkgs = withSystem config.nixpkgs.hostPlatform.system (
-                { pkgs, ... }: # perSystem module arguments
-                pkgs
-              );
-              
-              networking.hostName = hostname;
-              system.stateVersion = "24.11";
-              
-              # Include the stable pkgs in specialArgs
-              _module.args.pkgs-stable = import inputs.nixpkgs-stable {
-                inherit (config.nixpkgs) hostPlatform;
-                config.allowUnfree = true;
-              };
-            })
+            (
+              _:
+              {
+                networking.hostName = hostname;
+                system.stateVersion = "24.11";
+                nixpkgs.hostPlatform = "x86_64-linux";
+
+                # Use the configured pkgs from perSystem
+                nixpkgs.pkgs = withSystem "x86_64-linux" ({ pkgs, ... }: pkgs);
+
+                _module.args.pkgs-stable = import inputs.nixpkgs-stable {
+                  system = "x86_64-linux";
+                  config.allowUnfree = true;
+                };
+              }
+            )
           ];
           specialArgs = {
-            inherit
-              inputs
-              hostname
-              lib
-              ;
+            inherit inputs hostname lib;
+            inherit (inputs) self;
           };
         };
     in
