@@ -10,7 +10,11 @@
     ];
 
     windowrulev2 = [
-      "match:xwayland 1, bordercolor rgb (93000A)"
+      "match:xwayland 1, border_color rgb(1d2021)"
+      "match:class ^steam_app_.*, idle_inhibit fullscreen"
+      "match:title ^(.*\\[Playing\\].*)$, idle_inhibit fullscreen"
+      "match:class ^(com.stremio.stremio)$, idle_inhibit fullscreen"
+      "match:class ^(tidal-hifi)$, idle_inhibit focus"
     ];
   };
 }
