@@ -42,22 +42,19 @@
           system = "x86_64-linux";
           modules = [
             ./hosts/${hostname}
-            (
-              _:
-              {
-                networking.hostName = hostname;
-                system.stateVersion = "24.11";
-                nixpkgs.hostPlatform = "x86_64-linux";
+            (_: {
+              networking.hostName = hostname;
+              system.stateVersion = "24.11";
+              nixpkgs.hostPlatform = "x86_64-linux";
 
-                # Use the configured pkgs from perSystem
-                nixpkgs.pkgs = withSystem "x86_64-linux" ({ pkgs, ... }: pkgs);
+              # Use the configured pkgs from perSystem
+              nixpkgs.pkgs = withSystem "x86_64-linux" ({ pkgs, ... }: pkgs);
 
-                _module.args.pkgs-stable = import inputs.nixpkgs-stable {
-                  system = "x86_64-linux";
-                  config.allowUnfree = true;
-                };
-              }
-            )
+              _module.args.pkgs-stable = import inputs.nixpkgs-stable {
+                system = "x86_64-linux";
+                config.allowUnfree = true;
+              };
+            })
           ];
           specialArgs = {
             inherit inputs hostname lib;

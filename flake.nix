@@ -43,10 +43,6 @@
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    ff = {
-      url = "github:freedpom/FreedpomFlake";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     nvf = {
       url = "github:notashelf/nvf";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -57,6 +53,12 @@
     hyprland-plugins = {
       url = "github:hyprwm/hyprland-plugins";
       inputs.hyprland.follows = "hyprland";
+    };
+    ff = {
+      url = "github:freedpom/FreedpomFlake";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.wm-hypr.follows = "hyprland";
+      inputs.home-manager.follows = "home-manager";
     };
   };
   outputs =

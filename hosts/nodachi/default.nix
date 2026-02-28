@@ -29,23 +29,19 @@ in
     inputs.home-manager.nixosModules.home-manager
     inputs.ff.nixosModules.windowManagers
     inputs.ff.nixosModules.default
+    inputs.ff.nixosModules.containers
     self.nixosModules.qModule
     ./disk-primary.nix
     ./disk-secondary.nix
     ./hardware.nix
   ];
 
-  environment.systemPackages = [
-    pkgs-stable.android-studio
-    pkgs.pavucontrol
-    pkgs.qpwgraph
-    pkgs.r2modman
-    #pkgs.easyeffects
-    pkgs.kmon
-    pkgs.gping
-    pkgs.gitoxide
-    pkgs.mcp-nixos
-    pkgs.deskflow
+  environment.systemPackages = with pkgs; [
+    pavucontrol
+    qpwgraph
+    r2modman
+    kmon
+    gping
   ];
 
   age = {
@@ -97,13 +93,13 @@ in
     services.NetworkManager-wait-online.enable = false;
   };
   security.tpm2 = {
-  enable = true;
-  #abrmd.enable = true;
+    enable = true;
+    #abrmd.enable = true;
   };
   services = {
     tailscale = {
       enable = lib.mkForce true;
-   package = pkgs-stable.tailscale;
+      package = pkgs-stable.tailscale;
     };
     ollama.environmentVariables = {
       HIP_VISIBLE_DEVICES = "0";
@@ -136,7 +132,6 @@ in
       ntpd.enable = true;
       ananicy.enable = true;
       pipewire.enable = false;
-      ollama.enable = true;
       consoles = {
         enable = true;
         getty = [
@@ -160,7 +155,7 @@ in
         };
       };
       vr = {
-        enable = true;
+        enable = false;
         autoStart = true;
         bitrate = 150000000;
         wivrnPkg = pkgs-stable.wivrn;
@@ -202,10 +197,8 @@ in
 
   qm = {
     programs = {
-      #hyprland.enable = true;
       steam.enable = true;
     };
-    yubikey.enable = true;
     stylix.enable = true;
     antec-display = {
       enable = true;
