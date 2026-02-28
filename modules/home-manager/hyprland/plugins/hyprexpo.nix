@@ -11,7 +11,7 @@
       bg_col = config.wayland.windowManager.hyprland.settings.misc.background_color;
       workspace_method = "center current"; # [center/first] [workspace] e.g. first 1 or center m+1
       skip_empty = true;
-      gesture_distance = 300;
+      enable_gesture = true;
     };
   };
 }

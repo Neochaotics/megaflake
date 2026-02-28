@@ -39,7 +39,6 @@
   };
   freedpom = {
     programs = {
-      opencode.enable = true;
       bash.enable = true;
     };
     windowManagers = {
@@ -50,6 +49,7 @@
   };
 
   qm = {
+    opencode.enable = true;
     programs = {
       firefox.enable = true;
       foot.enable = true;

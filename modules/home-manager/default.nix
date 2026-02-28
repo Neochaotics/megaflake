@@ -1,7 +1,7 @@
-{ ... }:
 {
   imports = [
     ./hyprland
+    ./opencode
     ./programs
     ./system
   ];

@@ -48,7 +48,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     hyprland = {
-      url = "github:hyprwm/Hyprland?ref=v0.53.1";
+      url = "github:hyprwm/Hyprland?ref=v0.54.0";
     };
     hyprland-plugins = {
       url = "github:hyprwm/hyprland-plugins";
@@ -85,6 +85,7 @@
         };
         homeModules = {
           qModule = ./modules/home-manager;
+          opencode = ./modules/home-manager/opencode;
         };
       };
     };
