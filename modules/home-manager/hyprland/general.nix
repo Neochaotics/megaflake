@@ -6,9 +6,9 @@
 {
   wayland.windowManager.hyprland.settings = lib.mkIf config.qm.desktop.hypr.land.enable {
     general = {
-      border_size = 3;
-      gaps_in = 3;
-      gaps_out = 6;
+      border_size = 4;
+      gaps_in = 5;
+      gaps_out = 12;
       gaps_workspaces = 0;
       # "col.active_border" = "rgb(D34000)"; Managed by stylix
       # "col.inactive_border" = "rgb(2C1B16)"; Managed by stylix
@@ -36,23 +36,19 @@
       merge_groups_on_groupbar = true;
       merge_floated_into_tiled_on_groupbar = true;
       group_on_movetoworkspace = false;
-      # "col.border_active" = "rgb(782100)"; Managed by stylix
-      # "col.border_inactive" = "rgb(2C1B16)"; Managed by stylix
-      # "col.border_locked_active" = "rgb(782100)"; Managed by stylix
       groupbar = {
         enabled = true;
-        # font_family=; # Defaults to misc:font_family
-        font_size = 8;
+        font_size = 12;
         gradients = true;
-        height = 14;
+        height = 16;
+        indicator_height = 4;
         stacked = false;
         priority = 3;
         render_titles = true;
         scrolling = true;
-        # text_color = "rgb(FBDCD3)"; Managed by stylix
-        # "col.active" = "rgba(00000000)"; Managed by stylix
-        # "col.inactive" = "rgba(00000000)"; Managed by stylix
-        # "col.locked_active" = "rgba(00000000)"; Managed by stylix
+        rounding = 0;
+        gradient_rounding = 0;
+        text_padding = 4;
       };
     };
   };

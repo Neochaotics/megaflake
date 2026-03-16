@@ -38,10 +38,15 @@ in
 
   environment.systemPackages = with pkgs; [
     pavucontrol
+    podman-compose
     qpwgraph
     r2modman
     kmon
     gping
+    qt6.qtwayland
+    qt5.qtwayland
+    libsForQt5.qtstyleplugin-kvantum
+    papirus-icon-theme
   ];
 
   age = {

@@ -213,7 +213,7 @@ in
               skip-redirect
               ublock-origin
               stylus
-              #tampermonkey
+              violentmonkey
             ];
           };
         };

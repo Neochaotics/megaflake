@@ -7,30 +7,29 @@
   stylix.targets.hyprland.hyprpaper.enable = true;
   wayland.windowManager.hyprland.settings = lib.mkIf config.qm.desktop.hypr.land.enable {
     decoration = {
-      rounding = 6;
-      rounding_power = 3.0;
-      active_opacity = 0.9;
-      inactive_opacity = 0.8;
+      rounding = 0;
+      rounding_power = 2.0;
+      active_opacity = 1.0;
+      inactive_opacity = 0.95;
       fullscreen_opacity = 1.0;
       dim_inactive = true;
-      dim_strength = 0.1;
+      dim_strength = 0.08;
       dim_special = 0.0;
       dim_around = 0.3;
       border_part_of_window = false;
-      # screen_shader = ;
 
       blur = {
         enabled = true;
-        size = 9;
-        passes = 3;
+        size = 4;
+        passes = 2;
         ignore_opacity = false;
         new_optimizations = true;
         xray = false;
-        noise = 0.003;
-        contrast = 0.6;
-        brightness = 0.6;
-        vibrancy = 0.09;
-        vibrancy_darkness = 0.09;
+        noise = 0.002;
+        contrast = 0.65;
+        brightness = 0.7;
+        vibrancy = 0.15;
+        vibrancy_darkness = 0.1;
         special = false;
         popups = false;
         popups_ignorealpha = 0.2;
@@ -38,12 +37,12 @@
 
       shadow = {
         enabled = true;
-        range = 6;
-        render_power = 1;
+        range = 5;
+        render_power = 3;
         sharp = false;
         ignore_window = true;
-        offset = "0, 0";
-        scale = 2.0;
+        offset = "0, 1";
+        scale = 1.3;
       };
     };
 
@@ -53,35 +52,32 @@
     };
     bezier = [
       "linear, 0, 0, 1, 1"
-      "md3_standard, 0.2, 0, 0, 1"
-      "md3_decel, 0.05, 0.7, 0.1, 1"
-      "md3_accel, 0.3, 0, 0.8, 0.15"
+      "smoothOut, 0.36, 0, 0.66, -0.56"
+      "smoothIn, 0.25, 1, 0.5, 1"
       "overshot, 0.05, 0.9, 0.1, 1.1"
       "crazyshot, 0.1, 1.5, 0.76, 0.92"
-      "hyprnostretch, 0.05, 0.9, 0.1, 1.0"
-      "menu_decel, 0.1, 1, 0, 1"
-      "menu_accel, 0.38, 0.04, 1, 0.07"
-      "easeInOutCirc, 0.85, 0, 0.15, 1"
-      "easeOutCirc, 0, 0.55, 0.45, 1"
-      "easeOutExpo, 0.16, 1, 0.3, 1"
       "softAcDecel, 0.26, 0.26, 0.15, 1"
-      "md2, 0.4, 0, 0.2, 1" # use with .2s duration
+      "decel, 0.05, 0.9, 0.1, 1.0"
+      "accel, 0.3, 0, 0.8, 0.15"
+      "woodie, 0.05, 0.03, 0, 0.97"
+      "expo, 0.01, 1.56, 0.06, 1"
     ];
 
     animation = [
-      "windows, 1, 3, md3_decel, popin 60%"
-      "windowsIn, 1, 3, md3_decel, popin 60%"
-      "windowsOut, 1, 3, md3_accel, popin 60%"
-      "border, 1, 10, default"
-      "fade, 1, 3, md3_decel"
-      "layersIn, 1, 3, menu_decel, slide"
-      "layersOut, 1, 1.6, menu_accel"
-      "fadeLayersIn, 1, 2, menu_decel"
-      "fadeLayersOut, 1, 4.5, menu_accel"
-      "workspaces, 1, 7, menu_decel, slide"
-      "specialWorkspace, 1, 3, md3_decel, slidevert"
-      "hyprfocusIn, 1, 1.7, md3_decel"
-      "hyprfocusOut, 1, 1.7, md3_accel"
+      "windows, 1, 1.5, smoothOut, popin 70%"
+      "windowsIn, 1, 1.5, smoothOut, popin 70%"
+      "windowsOut, 1, 1.5, smoothIn, popin 50%"
+      "border, 1, 8, default"
+      "fade, 1, 1.5, decel"
+      "fadeIn, 1, 1.5, decel"
+      "fadeOut, 1, 1, accel"
+      "fadeSwitch, 1, 1.5, decel"
+      "layersIn, 1, 1.5, decel, slide"
+      "layersOut, 1, 1, accel"
+      "fadeLayersIn, 1, 1.5, decel"
+      "fadeLayersOut, 1, 1, accel"
+      "workspaces, 1, 2, decel, slide"
+      "specialWorkspace, 1, 1.5, decel, slidevert"
     ];
   };
 }

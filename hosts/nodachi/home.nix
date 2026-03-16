@@ -23,8 +23,25 @@
           identitiesOnly = true;
           addKeysToAgent = "yes";
         };
+        "gitlab.com" = {
+          hostname = "gitlab.com";
+          identityFile = [ "${config.home.homeDirectory}/.ssh/id_isc_gitlab" ];
+          identitiesOnly = true;
+          addKeysToAgent = "yes";
+        };
+        hetznerva = {
+          hostname = "5.161.179.69";
+          identityFile = [ "${config.home.homeDirectory}/.ssh/id_isc_gitlab" ];
+          identitiesOnly = true;
+          addKeysToAgent = "yes";
+        };
       };
     };
+  };
+
+  qt = {
+    enable = true;
+    platformTheme.name = "qtct";
   };
 
   home = {

@@ -19,10 +19,7 @@ in
     stylix = {
       enable = true;
       autoEnable = true;
-      image = pkgs.fetchurl {
-        url = "https://raw.githubusercontent.com/AngelJumbo/gruvbox-wallpapers/refs/heads/main/wallpapers/minimalistic/war-in-space.png";
-        sha256 = "Ur2HybgIrLUDz9GZPigPOgjhEYNK/DymbNKBRWwT6GE=";
-      };
+      image = ./vista-gruvbox.jxl;
       imageScalingMode = "fit";
       base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-material-dark-hard.yaml";
       opacity = {
@@ -31,23 +28,21 @@ in
         popups = 0.9;
         terminal = 0.9;
       };
-      cursor = {
-        package = pkgs.bibata-cursors;
-        name = "Bibata-Modern-Amber";
-        size = 32;
-      };
       fonts = {
         monospace = {
-          package = pkgs.nerd-fonts._0xproto;
-          name = "0xProto Nerd Font Mono";
+          package = pkgs.nerd-fonts.overpass;
+          name = "Overpass Nerd Font Mono";
         };
 
         serif = {
-          package = pkgs.nerd-fonts._0xproto;
-          name = "0xProto Nerd Font Propo";
+          package = pkgs.nerd-fonts.noto;
+          name = "Noto Sans Nerd Font";
         };
 
-        sansSerif = config.stylix.fonts.serif;
+        sansSerif = {
+          package = pkgs.nerd-fonts.noto;
+          name = "Noto Sans Nerd Font";
+        };
 
         emoji = {
           package = pkgs.noto-fonts-color-emoji;
@@ -59,6 +54,11 @@ in
           popups = 14;
           terminal = 16;
         };
+      };
+      cursor = {
+        package = pkgs.bibata-cursors;
+        name = "Bibata-Modern-Amber";
+        size = 28;
       };
     };
   };
