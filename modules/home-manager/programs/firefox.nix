@@ -22,6 +22,7 @@ in
     };
     programs = {
       chromium.enable = true;
+      chromium.package = pkgs.ungoogled-chromium;
       firefox = {
         enable = true;
         package = pkgs.firefox;

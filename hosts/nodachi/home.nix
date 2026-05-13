@@ -29,9 +29,21 @@
           identitiesOnly = true;
           addKeysToAgent = "yes";
         };
-        hetznerva = {
+        "codeberg.org" = {
+          hostname = "codeberg.org";
+          identityFile = [ "${config.home.homeDirectory}/.ssh/id_codeberg" ];
+          identitiesOnly = true;
+          addKeysToAgent = "yes";
+        };
+        "capuchin-us-ne" = {
           hostname = "5.161.179.69";
-          identityFile = [ "${config.home.homeDirectory}/.ssh/id_isc_gitlab" ];
+          identityFile = [ "${config.home.homeDirectory}/.ssh/id_codeberg" ];
+          identitiesOnly = true;
+          addKeysToAgent = "yes";
+        };
+        "kogatana" = {
+          hostname = "kogatana";
+          identityFile = [ "${config.home.homeDirectory}/.ssh/id_codeberg" ];
           identitiesOnly = true;
           addKeysToAgent = "yes";
         };

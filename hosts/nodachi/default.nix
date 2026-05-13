@@ -184,7 +184,7 @@ in
           };
         };
       };
-      fonts.enable = true;
+      fonts.enable = false;
       nix.enable = true;
       sysctl = {
         cachyos = true;
