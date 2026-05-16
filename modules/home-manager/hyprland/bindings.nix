@@ -105,16 +105,7 @@
       "SUPER, PRINT, exec, hyprshot -m window" # Screenshot a window
       ", PRINT, exec, hyprshot -m output" # Screenshot a monitor
       "SUPER SHIFT, PRINT, exec, hyprshot -m region" # Screenshot a region
-    ]
-    ++
-      lib.optionals
-        (builtins.elem inputs.hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}.hyprexpo
-          config.wayland.windowManager.hyprland.plugins
-        )
-        [
-          "SUPER, TAB, hyprexpo:expo, toggle"
-          "SUPER ALT, TAB, hyprexpo:expo, select"
-        ];
+    ];
     bindm = [
       # Move/resize windows with mainMod + LMB/RMB and dragging
       "SUPER, mouse:272, movewindow" # Move Window

@@ -65,6 +65,10 @@
       inputs.wm-hypr.follows = "hyprland";
       inputs.home-manager.follows = "home-manager";
     };
+    #freedpom = {
+    #  url = "git://codeberg.org/FREEDPOM/flake";
+    #  inputs.nixpkgs.follows = "nixpkgs-stable";
+    #};
   };
   outputs =
     inputs@{

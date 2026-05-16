@@ -51,11 +51,6 @@
     };
   };
 
-  qt = {
-    enable = true;
-    platformTheme.name = "qtct";
-  };
-
   home = {
     stateVersion = "24.05";
     inherit username;
@@ -64,7 +59,6 @@
       zed-editor
       legcord
       tidal-hifi
-      element-desktop
       limo
       deskflow
     ];
@@ -77,7 +71,6 @@
       autoStart = true;
       hyprland.enable = true;
     };
-    security.gpg.enable = true;
   };
 
   qm = {
@@ -88,14 +81,10 @@
       git.enable = true;
       utils.enable = true;
       fuzzel.enable = true;
-      aria2.enable = false;
       waybar.enable = true;
       zsh.enable = true;
       starship.enable = true;
       yazi.enable = true;
-      bottom.enable = true;
-      nvim.enable = true;
-      mpv.enable = true;
     };
     system = {
       xdg.enable = true;

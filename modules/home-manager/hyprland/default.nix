@@ -21,9 +21,6 @@ in
 
     ./ecosystem/hyprsunset.nix
     ./ecosystem/idle-lock.nix
-
-    ./plugins/dynamic-cursors.nix
-    ./plugins/hyprexpo.nix
   ];
 
   options.qm.desktop.hypr.land = {
@@ -35,7 +32,7 @@ in
       windowManager.hyprland = {
         plugins = [
           #inputs.hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}.hyprexpo
-          inputs.hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}.hyprfocus
+          #inputs.hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}.hyprfocus
           #inputs.hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}.xtra-dispatchers
         ];
       };

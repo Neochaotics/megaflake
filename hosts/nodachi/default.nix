@@ -29,7 +29,6 @@ in
     inputs.home-manager.nixosModules.home-manager
     inputs.ff.nixosModules.windowManagers
     inputs.ff.nixosModules.default
-    inputs.ff.nixosModules.containers
     self.nixosModules.qModule
     ./disk-primary.nix
     ./disk-secondary.nix
@@ -39,14 +38,8 @@ in
   environment.systemPackages = with pkgs; [
     pavucontrol
     podman-compose
-    qpwgraph
     r2modman
-    kmon
-    gping
-    qt6.qtwayland
-    qt5.qtwayland
-    libsForQt5.qtstyleplugin-kvantum
-    papirus-icon-theme
+    element-desktop
   ];
 
   age = {
@@ -97,17 +90,10 @@ in
     user.services.wireplumber.wantedBy = [ "default.target" ];
     services.NetworkManager-wait-online.enable = false;
   };
-  security.tpm2 = {
-    enable = true;
-    #abrmd.enable = true;
-  };
   services = {
     tailscale = {
       enable = lib.mkForce true;
       package = pkgs-stable.tailscale;
-    };
-    ollama.environmentVariables = {
-      HIP_VISIBLE_DEVICES = "0";
     };
     pipewire = {
       enable = true;
@@ -119,15 +105,6 @@ in
       socketActivation = false;
     };
     flatpak.enable = true;
-  };
-
-  virtualisation = {
-    containers.enable = true;
-    podman = {
-      enable = true;
-      dockerCompat = true;
-      defaultNetwork.settings.dns_enabled = true;
-    };
   };
 
   freedpom = {
@@ -159,12 +136,6 @@ in
           scrollbackSize = 2000;
         };
       };
-      vr = {
-        enable = false;
-        autoStart = true;
-        bitrate = 150000000;
-        wivrnPkg = pkgs-stable.wivrn;
-      };
     };
     system = {
       locale.enable = true;
@@ -184,19 +155,12 @@ in
           };
         };
       };
-      fonts.enable = false;
       nix.enable = true;
-      sysctl = {
-        cachyos = true;
-        mineral = false;
-      };
       boot.enable = true;
       performance.enable = true;
     };
     programs = {
       sudo-rs.enable = true;
-      fuc.enable = true;
-      uutils.enable = true;
     };
   };
 
