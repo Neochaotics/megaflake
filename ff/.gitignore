@@ -1,0 +1,4 @@
+.pre-commit-config.yaml
+/result
+core
+AGENTS.md
