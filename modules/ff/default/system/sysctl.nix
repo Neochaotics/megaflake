@@ -28,11 +28,6 @@ in
       "vm.page-cluster" = 0;
       "vm.dirty_background_bytes" = 67108864;
       "vm.dirty_writeback_centisecs" = 1500;
-      "kernel.nmi_watchdog" = 0;
-      "kernel.unprivileged_userns_clone" = 1;
-      "kernel.printk" = "3 3 3 3";
-      "kernel.kptr_restrict" = 2;
-      "kernel.kexec_load_disabled" = 1;
       "net.ipv4.tcp_ecn" = 1;
       "net.core.netdev_max_backlog" = 4096;
       "net.ipv4.tcp_slow_start_after_idle" = 0;

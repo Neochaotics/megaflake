@@ -8,7 +8,7 @@ let
 in
 {
   options.freedpom.system.boot = {
-    enable = lib.mkEnableOption "Modern bootloader configuration with UEFI/BIOS support and security hardening";
+    enable = lib.mkEnableOption "Modern bootloader configuration with UEFI/BIOS support";
 
     verbosity = lib.mkOption {
       type = lib.types.enum [
@@ -30,12 +30,6 @@ in
       type = lib.types.bool;
       default = false;
       description = "When enabled, this will disable nvme APST and ACPI (power management features).";
-    };
-
-    hard = lib.mkOption {
-      type = lib.types.bool;
-      default = true;
-      description = "Apply kernel security hardening";
     };
 
     firmware = lib.mkOption {
@@ -95,33 +89,6 @@ in
         };
       };
 
-      blacklistedKernelModules = [
-        "ax25"
-        "netrom"
-        "rose"
-        "adfs"
-        "affs"
-        "bfs"
-        "befs"
-        "cramfs"
-        "efs"
-        "erofs"
-        "exofs"
-        "freevxfs"
-        "f2fs"
-        "hfs"
-        "hpfs"
-        "jfs"
-        "minix"
-        "nilfs2"
-        "ntfs"
-        "omfs"
-        "qnx4"
-        "qnx6"
-        "sysv"
-        "ufs"
-      ];
-
       kernelParams =
         (lib.optionals (cfg.verbosity == "quiet") [
           "quiet"
@@ -141,12 +108,6 @@ in
         ++ (lib.optionals cfg.nvme-nopower [
           "nvme.noacpi=1"
           "nvme_core.default_ps_max_latency_us=0"
-        ])
-        ++ (lib.optionals cfg.hard [
-          "slab_nomerge"
-          "page_poison=1"
-          "page_alloc.shuffle=1"
-          "debugfs=off"
         ]);
       consoleLogLevel = if cfg.verbosity == "quiet" then lib.mkForce 0 else lib.mkForce 7;
       initrd = {
