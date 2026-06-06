@@ -55,9 +55,6 @@
     homeDirectory = "/home/${username}";
   };
   freedpom = {
-    programs = {
-      bash.enable = true;
-    };
     windowManagers = {
       autoStart = true;
       hyprland.enable = true;

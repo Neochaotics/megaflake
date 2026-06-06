@@ -201,8 +201,6 @@ in
     };
   };
 
-  networking.networkmanager.enable = true;
-
   home-manager = {
     users.${username} = import ./home.nix;
     extraSpecialArgs = {
@@ -240,9 +238,6 @@ in
 
   freedpom = {
     windowManagers.hyprland.enable = true;
-    services = {
-      ssh.enable = true;
-    };
     system = {
       users = {
         users = {
@@ -267,9 +262,6 @@ in
         };
       };
       boot.enable = true;
-    };
-    programs = {
-      sudo-rs.enable = true;
     };
   };
 
