@@ -7,8 +7,7 @@
 }:
 {
   imports = [
-    inputs.ff.homeModules.windowManagers
-    inputs.ff.homeModules.default
+    self.homeModules.ffDefault
     self.homeModules.qModule
   ];
   programs = {

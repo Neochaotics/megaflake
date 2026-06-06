@@ -18,7 +18,7 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-26.05";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-26.05";
     home-manager = {
-      url = "github:nix-community/home-manager/release-26.05"; # /release-25.11
+      url = "github:nix-community/home-manager/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     disko = {
@@ -37,18 +37,13 @@
     };
     flake-parts.url = "github:hercules-ci/flake-parts";
     flake-root.url = "github:srid/flake-root";
+    treefmt-nix.url = "github:numtide/treefmt-nix";
     firefox-addons = {
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     hyprland = {
       url = "github:hyprwm/Hyprland?ref=v0.54.0";
-    };
-    ff = {
-      url = "path:./ff";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.wm-hypr.follows = "hyprland";
-      inputs.home-manager.follows = "home-manager";
     };
     freedpom = {
       url = "path:/home/quinno/Documents/projects/bigmonkey/";
@@ -68,18 +63,27 @@
       imports = [
         inputs.flake-root.flakeModule
         inputs.agenix-rekey.flakeModule
-        inputs.ff.fmtModule
+        inputs.treefmt-nix.flakeModule
         inputs.flake-parts.flakeModules.easyOverlay
+        inputs.flake-parts.flakeModules.modules
         ./nixos.nix
       ];
 
-      flake = {
-        nixosModules = {
-          qModule = ./modules/nixos;
+      perSystem =
+        { config, pkgs, ... }:
+        {
+          treefmt.config = {
+            inherit (config.flake-root) projectRootFile;
+            programs = {
+              nixfmt.enable = true;
+              deadnix.enable = true;
+            };
+          };
         };
-        homeModules = {
-          qModule = ./modules/home-manager;
-        };
-      };
+
+      flake.nixosModules.qModule = ./modules/nixos;
+      flake.nixosModules.ffDefault = ./modules/ff/nixosModules.nix;
+      flake.homeModules.qModule = ./modules/home-manager;
+      flake.homeModules.ffDefault = ./modules/ff/homeModules.nix;
     };
 }

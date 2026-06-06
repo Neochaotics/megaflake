@@ -154,8 +154,7 @@ in
     inputs.agenix-rekey.nixosModules.default
     inputs.disko.nixosModules.disko
     inputs.home-manager.nixosModules.home-manager
-    inputs.ff.nixosModules.windowManagers
-    inputs.ff.nixosModules.default
+    self.nixosModules.ffDefault
     inputs.freedpom.modules.nixos.ntpd
     inputs.freedpom.modules.nixos.locale
     inputs.freedpom.modules.nixos.ananicy
