@@ -159,11 +159,11 @@ in
     inputs.home-manager.nixosModules.home-manager
     inputs.ff.nixosModules.windowManagers
     inputs.ff.nixosModules.default
-    inputs.freedpom.flake.modules.nixos.ntpd
-    inputs.freedpom.flake.modules.nixos.locale
-    inputs.freedpom.flake.modules.nixos.ananicy
-    inputs.freedpom.flake.modules.nixos.daemon
-    inputs.freedpom.flake.modules.nixos.performance
+    inputs.freedpom.modules.nixos.ntpd
+    inputs.freedpom.modules.nixos.locale
+    inputs.freedpom.modules.nixos.ananicy
+    inputs.freedpom.modules.nixos.daemon
+    inputs.freedpom.modules.nixos.performance
     self.nixosModules.qModule
     ./disk-primary.nix
     ./disk-secondary.nix

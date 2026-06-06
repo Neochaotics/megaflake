@@ -527,18 +527,14 @@
         "wm-niri": "wm-niri"
       },
       "locked": {
-        "lastModified": 1774816422,
-        "narHash": "sha256-ftvNh5q/FIFE0nKQejXiuyZyY/aacaT6E296nn3wbjM=",
-        "owner": "freedpom",
-        "repo": "FreedpomFlake",
-        "rev": "0eea1c8cbed3654fa28c70caa45e21907ec281ed",
-        "type": "github"
+        "path": "./ff",
+        "type": "path"
       },
       "original": {
-        "owner": "freedpom",
-        "repo": "FreedpomFlake",
-        "type": "github"
-      }
+        "path": "./ff",
+        "type": "path"
+      },
+      "parent": []
     },
     "firefox-addons": {
       "inputs": {

@@ -15,6 +15,10 @@ in
     enable = lib.mkEnableOption "Enable stylix";
   };
 
+        options.services.kmscon.config = lib.mkOption  {
+        type = lib.types.package;
+      };
+
   config = lib.mkIf cfg.enable {
     stylix = {
       enable = true;
@@ -60,6 +64,7 @@ in
         name = "Bibata-Modern-Amber";
         size = 28;
       };
+      targets.kmscon.enable = false;
     };
   };
 }
