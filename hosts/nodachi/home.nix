@@ -1,5 +1,4 @@
 {
-  pkgs-stable,
   username,
   inputs,
   self,
@@ -55,13 +54,6 @@
     stateVersion = "24.05";
     inherit username;
     homeDirectory = "/home/${username}";
-    packages = with pkgs-stable; [
-      zed-editor
-      legcord
-      tidal-hifi
-      limo
-      deskflow
-    ];
   };
   freedpom = {
     programs = {

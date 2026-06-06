@@ -3,29 +3,22 @@
 
   nixConfig = {
     extra-substituters = [
-      "https://cache.nixos.org?priority=10"
-      "https://install.determinate.systems"
+      "https://cache.nixos.org"
       "https://hyprland.cachix.org"
-      "https://niri.cachix.org"
       "https://nix-community.cachix.org"
-      "https://numtide.cachix.org"
     ];
     extra-trusted-public-keys = [
       "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
       "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
-      "niri.cachix.org-1:Wv0OmO7PsuocRKzfDoJ3mulSl7Z6oezYhGhR+3W2964="
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-      "cache.flakehub.com-3:hJuILl5sVK4iKm86JzgdXW12Y2Hwd5G07qKtHTOcDCM"
-      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-      "numtide.cachix.org-1:2ps1kLBUWjxIneOy1Ik6cQjb41X0iXVXeHigGmycPPE="
     ];
   };
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.11";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-26.05";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-26.05";
     home-manager = {
-      url = "github:nix-community/home-manager"; # /release-25.11
+      url = "github:nix-community/home-manager/release-26.05"; # /release-25.11
       inputs.nixpkgs.follows = "nixpkgs";
     };
     disko = {
@@ -48,27 +41,19 @@
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nvf = {
-      url = "github:notashelf/nvf";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     hyprland = {
       url = "github:hyprwm/Hyprland?ref=v0.54.0";
     };
-    hyprland-plugins = {
-      url = "github:hyprwm/hyprland-plugins";
-      inputs.hyprland.follows = "hyprland";
-    };
     ff = {
-      url = "github:freedpom/FreedpomFlake";
+      url = "path:./ff";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.wm-hypr.follows = "hyprland";
       inputs.home-manager.follows = "home-manager";
     };
-    #freedpom = {
-    #  url = "git://codeberg.org/FREEDPOM/flake";
-    #  inputs.nixpkgs.follows = "nixpkgs-stable";
-    #};
+    freedpom = {
+      url = "path:/home/quinno/Documents/projects/bigmonkey/";
+      inputs.nixpkgs.follows = "nixpkgs-stable";
+    };
   };
   outputs =
     inputs@{

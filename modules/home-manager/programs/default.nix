@@ -10,4 +10,7 @@
     ./starship.nix
     ./yazi.nix
   ];
+
+  gtk.gtk4.theme = null;
+  xdg.userDirs.setSessionVariables = true;
 }

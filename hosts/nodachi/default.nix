@@ -20,6 +20,136 @@ let
       else
         c
     ) name;
+
+  inherit (config.lib.stylix) colors;
+
+  elementTheme = {
+    name = "Stylix";
+
+    is_dark = lib.hasInfix "dark" (builtins.toString config.stylix.base16Scheme);
+
+    colors = {
+      accent-color = colors.base0D;
+      primary-color = colors.base0D;
+      warning-color = colors.base08;
+
+      sidebar-color = colors.base01;
+
+      roomlist-background-color = colors.base00;
+      roomlist-text-color = colors.base05;
+      roomlist-text-secondary-color = colors.base04;
+      roomlist-highlights-color = colors.base02;
+      roomlist-separator-color = colors.base03;
+
+      timeline-background-color = colors.base00;
+      timeline-text-color = colors.base05;
+      timeline-text-secondary-color = colors.base04;
+      timeline-highlights-color = colors.base02;
+
+      secondary-content = colors.base04;
+      tertiary-content = colors.base03;
+      quinary-content = colors.base02;
+
+      reaction-row-button-selected-bg-color = colors.base0D;
+      menu-selected-color = colors.base02;
+      icon-button-color = colors.base04;
+
+      accent = colors.base0D;
+      alert = colors.base08;
+
+      username-colors = [
+        colors.base08
+        colors.base09
+        colors.base0A
+        colors.base0B
+        colors.base0C
+        colors.base0D
+        colors.base0E
+        colors.base0F
+      ];
+
+      avatar-background-colors = [
+        colors.base08
+        colors.base09
+        colors.base0A
+        colors.base0B
+        colors.base0C
+        colors.base0D
+        colors.base0E
+        colors.base0F
+      ];
+    };
+  };
+
+  elementWebConfig = pkgs.writeText "element-config.json" (
+    builtins.toJSON {
+      brand = "Freedchat";
+
+      default_server_name = "matrix.org";
+
+      disable_guests = true;
+      disable_3pid_login = true;
+      disable_login_language_selector = true;
+
+      show_labs_settings = true;
+
+      force_verification = true;
+
+      setting_defaults = {
+        "UIFeature.urlPreviews" = false;
+        "UIFeature.shareQrCode" = false;
+        "UIFeature.shareSocial" = false;
+        "UIFeature.widgets" = false;
+        "UIFeature.feedback" = false;
+        "UIFeature.identityServer" = false;
+        "UIFeature.thirdPartyId" = false;
+
+        "UIFeature.advancedEncryption" = true;
+        "UIFeature.advancedSettings" = true;
+        "UIFeature.roomHistorySettings" = true;
+      };
+
+      enable_presence_by_hs_url = {
+        "https://matrix.org" = false;
+        "https://matrix-client.matrix.org" = false;
+      };
+
+      integrations_ui_url = null;
+      integrations_rest_url = null;
+      integrations_widgets_urls = null;
+
+      features = {
+        feature_group_calls = true;
+        feature_element_call_video_rooms = true;
+        feature_video_rooms = true;
+      };
+
+      element_call = {
+        use_exclusively = true;
+        brand = "Freedpom Call";
+      };
+
+      jitsi = {
+        preferred_domain = null;
+      };
+
+      default_theme = "custom-Stylix";
+
+      setting_defaults = {
+        urlPreviewsEnabled = false;
+        webRtcAllowPeerToPeer = false;
+        #blacklistUnverifiedDevices = true;
+        enableEventIndexing = false; # Message Search Cache
+        showAvatarChanges = false;
+        showDisplaynameChanges = false;
+        showJoinLeaves = false;
+        custom_themes = [
+          elementTheme
+        ];
+      };
+
+    }
+  );
 in
 {
   imports = [
@@ -29,6 +159,11 @@ in
     inputs.home-manager.nixosModules.home-manager
     inputs.ff.nixosModules.windowManagers
     inputs.ff.nixosModules.default
+    inputs.freedpom.flake.modules.nixos.ntpd
+    inputs.freedpom.flake.modules.nixos.locale
+    inputs.freedpom.flake.modules.nixos.ananicy
+    inputs.freedpom.flake.modules.nixos.daemon
+    inputs.freedpom.flake.modules.nixos.performance
     self.nixosModules.qModule
     ./disk-primary.nix
     ./disk-secondary.nix
@@ -39,7 +174,8 @@ in
     pavucontrol
     podman-compose
     r2modman
-    element-desktop
+    (element-desktop.override { commandLineArgs = "--config ${elementWebConfig}"; })
+    me3
   ];
 
   age = {
@@ -104,46 +240,25 @@ in
       pulse.enable = true;
       socketActivation = false;
     };
-    flatpak.enable = true;
   };
 
   freedpom = {
     windowManagers.hyprland.enable = true;
     services = {
       ssh.enable = true;
-      ntpd.enable = true;
-      ananicy.enable = true;
-      pipewire.enable = false;
-      consoles = {
-        enable = true;
-        getty = [
-          "quinno@tty1"
-          "tty3"
-          "tty5"
-        ];
-        kmscon = [
-          "tty2"
-          "tty4"
-        ];
-        kmsconConfig = {
-          font = {
-            name = "monospace";
-            size = 14;
-          };
-          hwaccel = true;
-          drm = true;
-          video.gpus = "primary";
-          scrollbackSize = 2000;
-        };
-      };
     };
     system = {
-      locale.enable = true;
       users = {
         users = {
           ${username} = {
             role = "admin";
             userOptions = {
+              packages = with pkgs; [
+                zed-editor
+                sone
+                limo
+                stremio-linux-shell
+              ];
               description = formatUsername username;
               hashedPasswordFile = config.age.secrets."${username}-password".path;
               shell = pkgs.zsh;
@@ -155,9 +270,7 @@ in
           };
         };
       };
-      nix.enable = true;
       boot.enable = true;
-      performance.enable = true;
     };
     programs = {
       sudo-rs.enable = true;
@@ -169,10 +282,5 @@ in
       steam.enable = true;
     };
     stylix.enable = true;
-    antec-display = {
-      enable = true;
-      cpu.device = "k10temp-pci-00c3";
-      gpu.device = "amdgpu-pci-0300";
-    };
   };
 }

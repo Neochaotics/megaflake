@@ -27,7 +27,7 @@
         width = 1920;
         height = 1080;
       };
-      framerate = 60;
+      framerate = 75;
       position = "auto-center-right";
       transform = 3;
       workspaces = [
@@ -35,19 +35,6 @@
         "6"
         "7"
         "8"
-      ];
-    };
-    "HDMI-A-2" = {
-      resolution = {
-        width = 3840;
-        height = 2160;
-      };
-      mirror = "DP-2";
-      scale = 2;
-      position = "auto-center-left";
-      workspaces = [
-        "9"
-        "10"
       ];
     };
   };

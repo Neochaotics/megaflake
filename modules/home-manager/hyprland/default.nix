@@ -1,8 +1,6 @@
 {
   lib,
   config,
-  pkgs,
-  inputs,
   ...
 }:
 let
@@ -30,6 +28,7 @@ in
   config = lib.mkIf cfg.enable {
     wayland = {
       windowManager.hyprland = {
+        configType = "hyprlang";
         plugins = [
           #inputs.hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}.hyprexpo
           #inputs.hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}.hyprfocus
