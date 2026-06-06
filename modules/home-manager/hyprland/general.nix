@@ -10,8 +10,6 @@
       gaps_in = 5;
       gaps_out = 12;
       gaps_workspaces = 0;
-      # "col.active_border" = "rgb(D34000)"; Managed by stylix
-      # "col.inactive_border" = "rgb(2C1B16)"; Managed by stylix
       layout = "dwindle";
       no_focus_fallback = false;
       resize_on_border = true;

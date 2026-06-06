@@ -6,12 +6,6 @@
 {
   wayland.windowManager.hyprland.settings = lib.mkIf config.qm.desktop.hypr.land.enable {
     input = {
-      # kb_model=pc104;
-      # b_layout=us;
-      # b_variant=;
-      # b_options=;
-      # kb_rules=;
-      # b_file=;
       numlock_by_default = false;
       resolve_binds_by_sym = false;
       repeat_rate = 25;
@@ -20,8 +14,6 @@
       accel_profile = "flat";
       force_no_accel = false; # Enabling this is not recommended due to potential cursor desynchronization.
       left_handed = false;
-      # scroll_points=;
-      # scroll_method=;
       scroll_button = "no_scroll";
       scroll_button_lock = 0;
       scroll_factor = 1.0;

@@ -6,14 +6,8 @@
     flake-parts.url = "github:hercules-ci/flake-parts";
     flake-root.url = "github:srid/flake-root";
     treefmt-nix.url = "github:numtide/treefmt-nix";
-    nix2container.url = "github:nlewo/nix2container";
     wm-hypr.url = "github:hyprwm/Hyprland?ref=v0.53.1";
-    wm-niri.url = "github:sodiboo/niri-flake";
     home-manager.url = "github:nix-community/home-manager";
-    fenix = {
-      url = "github:nix-community/fenix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs =
@@ -35,21 +29,6 @@
           inputs.flake-parts.flakeModules.partitions
           inputs.flake-parts.flakeModules.modules
           ./modules
-          ./packages
-          ./packages/containers/image-base.nix
-          ./packages/containers/authentik.nix
-          ./packages/containers/postgresql.nix
-          ./packages/containers/caddy.nix
-          ./packages/containers/crowdsec.nix
-          ./packages/containers/victoria-metrics.nix
-          ./packages/containers/grafana.nix
-          ./packages/containers/qdrant.nix
-          ./packages/containers/redis.nix
-          ./packages/containers/ollama.nix
-          ./packages/containers/langchain.nix
-          ./packages/containers/zomboid-oci.nix
-          ./packages/containers/steam/zomboid.nix
-          ./packages/containers/steam/modtest.nix
         ];
         flake = {
           inherit fmtModule;

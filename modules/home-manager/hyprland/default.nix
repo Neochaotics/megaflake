@@ -29,11 +29,6 @@ in
     wayland = {
       windowManager.hyprland = {
         configType = "hyprlang";
-        plugins = [
-          #inputs.hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}.hyprexpo
-          #inputs.hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}.hyprfocus
-          #inputs.hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}.xtra-dispatchers
-        ];
       };
     };
   };

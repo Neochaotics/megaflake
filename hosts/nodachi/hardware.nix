@@ -109,9 +109,5 @@
       };
     };
     i2c.enable = true;
-
-    #fancontrol = {
-    #  enable = true;
-    #};
   };
 }

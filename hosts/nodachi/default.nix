@@ -95,20 +95,6 @@ let
 
       force_verification = true;
 
-      setting_defaults = {
-        "UIFeature.urlPreviews" = false;
-        "UIFeature.shareQrCode" = false;
-        "UIFeature.shareSocial" = false;
-        "UIFeature.widgets" = false;
-        "UIFeature.feedback" = false;
-        "UIFeature.identityServer" = false;
-        "UIFeature.thirdPartyId" = false;
-
-        "UIFeature.advancedEncryption" = true;
-        "UIFeature.advancedSettings" = true;
-        "UIFeature.roomHistorySettings" = true;
-      };
-
       enable_presence_by_hs_url = {
         "https://matrix.org" = false;
         "https://matrix-client.matrix.org" = false;
@@ -136,9 +122,20 @@ let
       default_theme = "custom-Stylix";
 
       setting_defaults = {
+        "UIFeature.urlPreviews" = false;
+        "UIFeature.shareQrCode" = false;
+        "UIFeature.shareSocial" = false;
+        "UIFeature.widgets" = false;
+        "UIFeature.feedback" = false;
+        "UIFeature.identityServer" = false;
+        "UIFeature.thirdPartyId" = false;
+
+        "UIFeature.advancedEncryption" = true;
+        "UIFeature.advancedSettings" = true;
+        "UIFeature.roomHistorySettings" = true;
+
         urlPreviewsEnabled = false;
         webRtcAllowPeerToPeer = false;
-        #blacklistUnverifiedDevices = true;
         enableEventIndexing = false; # Message Search Cache
         showAvatarChanges = false;
         showDisplaynameChanges = false;

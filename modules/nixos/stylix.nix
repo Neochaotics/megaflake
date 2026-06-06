@@ -15,9 +15,9 @@ in
     enable = lib.mkEnableOption "Enable stylix";
   };
 
-        options.services.kmscon.config = lib.mkOption  {
-        type = lib.types.package;
-      };
+  options.services.kmscon.config = lib.mkOption {
+    type = lib.types.package;
+  };
 
   config = lib.mkIf cfg.enable {
     stylix = {

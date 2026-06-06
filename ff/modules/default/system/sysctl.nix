@@ -20,16 +20,6 @@
             See: https://github.com/CachyOS/CachyOS-Settings
           '';
         };
-        mineral = lib.mkOption {
-          type = lib.types.bool;
-          default = true;
-          description = ''
-            Apply nix-mineral security hardening settings for enhanced system protection 
-            and privacy. Includes kernel pointer restrictions, kexec disablement, 
-            and TCP security enhancements.
-            See: https://github.com/cynicsketch/nix-mineral
-          '';
-        };
       };
 
       config = lib.mkIf cfg.cachyos {

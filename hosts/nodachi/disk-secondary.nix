@@ -1,6 +1,5 @@
 {
   disko.devices.disk.secondary = {
-    #sudo nix --experimental-features "nix-command flakes" run github:nix-community/disko/latest -- --mode destroy,format,mount ~/megaflake/hosts/titan/disk-secondary.nix
     type = "disk";
     device = "/dev/disk/by-id/nvme-CT2000P5PSSD8_23113F244794";
     content = {
@@ -14,7 +13,6 @@
             settings = {
               allowDiscards = true;
             };
-            #passwordFile = "/tmp/secondary.key";
             content = {
               type = "btrfs";
               extraArgs = [ "-f" ];

@@ -84,8 +84,6 @@
 
       # Media Keys
       # --------------------
-      ", XF86MonBrightnessUp, exec, $SCRIPTS_DIR/system-functions change_brightness -i -10"
-      ", XF86MonBrightnessDown, exec, $SCRIPTS_DIR/system-functions change_brightness -i 10"
       ", XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"
       ", XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
       "ALT, XF86AudioRaiseVolume, exec, playerctl volume 0.1+"

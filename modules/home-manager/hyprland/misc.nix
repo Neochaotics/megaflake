@@ -8,8 +8,6 @@
     misc = {
       disable_hyprland_logo = true;
       disable_splash_rendering = true;
-      # font_family = "Iosevka Nerd Font";
-      # splash_font_family=;
       force_default_wallpaper = 0;
       vfr = true; # Heavily recommended to leave enabled to conserve resources.
       vrr = 2;
@@ -22,13 +20,9 @@
       disable_autoreload = false;
       enable_swallow = true;
       swallow_regex = "foot";
-      # swallow_exception_regex=;
       focus_on_activate = false;
       mouse_move_focuses_monitor = true;
-      #render_ahead_of_time = false; # [Warning: buggy] starts rendering before your monitor displays a frame in order to lower latency
-      #render_ahead_safezone = 1; # how many ms of safezone to add to rendering ahead of time. Recommended 1-2.
       allow_session_lock_restore = false;
-      # background_color = "rgb(1F0F0B)"; Managed by stylix
       close_special_on_empty = true;
       exit_window_retains_fullscreen = false;
       initial_workspace_tracking = 1;
@@ -46,7 +40,6 @@
     ecosystem = {
       no_update_news = true; # https://hyprland.org/rss.xml
       no_donation_nag = true;
-      #enforce_permissions = true;
     };
 
     render = {

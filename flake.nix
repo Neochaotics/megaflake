@@ -79,7 +79,6 @@
         };
         homeModules = {
           qModule = ./modules/home-manager;
-          opencode = ./modules/home-manager/opencode;
         };
       };
     };

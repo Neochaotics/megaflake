@@ -46,7 +46,6 @@ in
           "DisableSetDesktopBackground" = true;
           "DisableSystemAddonUpdate" = true;
           "DisableTelemetry" = true;
-          "DisplayMenuBar" = "default-off";
           "DNSOverHTTPS" = {
             "Enabled" = true;
             "ProviderURL" = "https://dns.quad9.net/dns-query";
@@ -87,10 +86,6 @@ in
             "StartPage" = "none";
           };
           "HttpsOnlyMode" = "force_enabled";
-          #"InstallAddonsPermission" = {
-          #  "Default" = false;
-          #};
-          #"ManualAppUpdateOnly" = true;
           "NetworkPrediction" = false;
           "NewTabPage" = true;
           "NoDefaultBookmarks" = true;
@@ -146,7 +141,6 @@ in
             "Locked" = true;
           };
           "UserMessaging" = {
-            # "WhatsNew" = false; Deprecated
             "ExtensionRecommendations" = false;
             "FeatureRecommendations" = false;
             "UrlbarInterventions" = false;
