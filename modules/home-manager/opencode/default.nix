@@ -15,7 +15,7 @@ in
     programs.opencode = {
       enable = true;
 
-      rules = ''
+      context = ''
         ## Decision Making
 
         - Act decisively without hesitation - don't ask permission for routine tasks

@@ -279,4 +279,6 @@ in
     };
     stylix.enable = true;
   };
+
+  services.ananicy.settings.cgroup_realtime_workaround = lib.mkForce false;
 }

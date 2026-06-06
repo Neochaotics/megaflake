@@ -25,6 +25,7 @@ in
       chromium.package = pkgs.ungoogled-chromium;
       firefox = {
         enable = true;
+        configPath = ".mozilla/firefox";
         package = pkgs.firefox;
         policies = {
           "AppAutoUpdate" = false;

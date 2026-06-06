@@ -23,6 +23,7 @@ in
     stylix = {
       enable = true;
       autoEnable = true;
+      enableReleaseChecks = false;
       image = ./vista-gruvbox.jxl;
       imageScalingMode = "fit";
       base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-material-dark-hard.yaml";
