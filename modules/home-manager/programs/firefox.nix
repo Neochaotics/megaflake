@@ -23,6 +23,12 @@ in
     programs = {
       chromium.enable = true;
       chromium.package = pkgs.ungoogled-chromium;
+      chromium.commandLineArgs = [
+        "--incognito"
+        "--no-first-run"
+        "--no-default-browser-check"
+        "--disable-sync"
+      ];
       firefox = {
         enable = true;
         configPath = ".mozilla/firefox";

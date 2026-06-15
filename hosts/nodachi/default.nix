@@ -21,106 +21,34 @@ let
         c
     ) name;
 
-  inherit (config.lib.stylix) colors;
-
-  elementTheme = {
-    name = "Stylix";
-
-    is_dark = lib.hasInfix "dark" (builtins.toString config.stylix.base16Scheme);
-
-    colors = {
-      accent-color = colors.base0D;
-      primary-color = colors.base0D;
-      warning-color = colors.base08;
-
-      sidebar-color = colors.base01;
-
-      roomlist-background-color = colors.base00;
-      roomlist-text-color = colors.base05;
-      roomlist-text-secondary-color = colors.base04;
-      roomlist-highlights-color = colors.base02;
-      roomlist-separator-color = colors.base03;
-
-      timeline-background-color = colors.base00;
-      timeline-text-color = colors.base05;
-      timeline-text-secondary-color = colors.base04;
-      timeline-highlights-color = colors.base02;
-
-      secondary-content = colors.base04;
-      tertiary-content = colors.base03;
-      quinary-content = colors.base02;
-
-      reaction-row-button-selected-bg-color = colors.base0D;
-      menu-selected-color = colors.base02;
-      icon-button-color = colors.base04;
-
-      accent = colors.base0D;
-      alert = colors.base08;
-
-      username-colors = [
-        colors.base08
-        colors.base09
-        colors.base0A
-        colors.base0B
-        colors.base0C
-        colors.base0D
-        colors.base0E
-        colors.base0F
-      ];
-
-      avatar-background-colors = [
-        colors.base08
-        colors.base09
-        colors.base0A
-        colors.base0B
-        colors.base0C
-        colors.base0D
-        colors.base0E
-        colors.base0F
-      ];
-    };
-  };
-
   elementWebConfig = pkgs.writeText "element-config.json" (
     builtins.toJSON {
       brand = "Freedchat";
-
       default_server_name = "matrix.org";
-
       disable_guests = true;
       disable_3pid_login = true;
       disable_login_language_selector = true;
-
       show_labs_settings = true;
-
       force_verification = true;
-
       enable_presence_by_hs_url = {
         "https://matrix.org" = false;
         "https://matrix-client.matrix.org" = false;
       };
-
       integrations_ui_url = null;
       integrations_rest_url = null;
       integrations_widgets_urls = null;
-
       features = {
         feature_group_calls = true;
         feature_element_call_video_rooms = true;
         feature_video_rooms = true;
       };
-
       element_call = {
         use_exclusively = true;
         brand = "Freedpom Call";
       };
-
       jitsi = {
         preferred_domain = null;
       };
-
-      default_theme = "custom-Stylix";
-
       setting_defaults = {
         "UIFeature.urlPreviews" = false;
         "UIFeature.shareQrCode" = false;
@@ -129,22 +57,16 @@ let
         "UIFeature.feedback" = false;
         "UIFeature.identityServer" = false;
         "UIFeature.thirdPartyId" = false;
-
         "UIFeature.advancedEncryption" = true;
         "UIFeature.advancedSettings" = true;
         "UIFeature.roomHistorySettings" = true;
-
         urlPreviewsEnabled = false;
         webRtcAllowPeerToPeer = false;
-        enableEventIndexing = false; # Message Search Cache
+        enableEventIndexing = false;
         showAvatarChanges = false;
         showDisplaynameChanges = false;
         showJoinLeaves = false;
-        custom_themes = [
-          elementTheme
-        ];
       };
-
     }
   );
 in
@@ -169,7 +91,9 @@ in
   environment.systemPackages = with pkgs; [
     pavucontrol
     podman-compose
+    prismlauncher
     r2modman
+    vscodium
     (element-desktop.override { commandLineArgs = "--config ${elementWebConfig}"; })
     me3
   ];
@@ -249,6 +173,7 @@ in
                 sone
                 limo
                 stremio-linux-shell
+                bleachbit
               ];
               description = formatUsername username;
               hashedPasswordFile = config.age.secrets."${username}-password".path;
@@ -266,6 +191,7 @@ in
   };
 
   qm = {
+    nixos.programs.chromium.enable = true;
     programs = {
       steam.enable = true;
     };
@@ -273,4 +199,10 @@ in
   };
 
   services.ananicy.settings.cgroup_realtime_workaround = lib.mkForce false;
+
+  programs.ssh.knownHosts = {
+    "codeberg.org" = {
+      publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIVIC02vnjFyL+I4RHfvIGNtOgJMe769VTF1VR4EB3ZB";
+    };
+  };
 }

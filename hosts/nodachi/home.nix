@@ -1,6 +1,5 @@
 {
   username,
-  inputs,
   self,
   config,
   ...
@@ -12,7 +11,7 @@
   ];
   programs = {
     ssh = {
-      enableDefaultConfig = false;
+      enableDefaultConfig = true;
       enable = true;
       matchBlocks = {
         github = {

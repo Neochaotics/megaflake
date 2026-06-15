@@ -99,7 +99,6 @@ in
 
           modules-right = [
             "idle_inhibitor"
-            "bluetooth"
             "cpu"
             "memory"
             "wireplumber"
@@ -190,13 +189,6 @@ in
             };
             tooltip-format = "Idle: {status}";
           };
-
-          bluetooth = {
-            format = "{icon}";
-            format-connected = "󰂱";
-            format-disconnected = "󰂲";
-          };
-
           tray = {
             icon-size = 14;
             spacing = 4;

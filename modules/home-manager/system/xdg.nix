@@ -23,6 +23,7 @@ in
         config = {
           common = {
             default = [
+              "hyprland"
               "gtk"
             ];
           };

@@ -29,7 +29,7 @@ localFlake:
             excludes = [ "*.png" ];
             configFile =
               let
-                tomlConfig = '''';
+                tomlConfig = "";
                 tomlFile = pkgs.writeText "typos.toml" tomlConfig;
               in
               toString tomlFile;

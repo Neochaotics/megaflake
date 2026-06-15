@@ -1,7 +1,7 @@
 {
   lib,
   config,
-  pkgs,
+  pkgs-unstable,
   ...
 }:
 let
@@ -9,46 +9,27 @@ let
 in
 {
   options.qm.programs.steam = {
-    enable = lib.mkEnableOption "Enable Steam gaming configuration with proton-ge, gamescope, mangohud and gamemode";
+    enable = lib.mkEnableOption "Enable Steam with proton-ge";
   };
 
   config = lib.mkIf cfg.enable {
-    programs = {
-      gamescope = {
-        enable = true;
-        capSysNice = true;
-      };
-      gamemode = {
-        enable = true;
-        enableRenice = false; # handled by ananicy
-      };
-      steam = {
-        enable = true;
-        extraCompatPackages = with pkgs; [ proton-ge-bin ];
-        protontricks.enable = true;
-        localNetworkGameTransfers.openFirewall = true;
-        gamescopeSession = {
-          enable = true;
-          args = [
-            "-b"
-            "-W 2560"
-            "-H 1440"
-            "-r 144"
-            "--hdr-enabled"
-            "-O DP-2"
-          ];
-        };
-        extraPackages = with pkgs; [
-          mangohud
-          gamemode
-        ];
-      };
+    programs.steam = {
+      enable = true;
+      package = pkgs-unstable.steam;
+      extraCompatPackages = with pkgs-unstable; [ proton-ge-bin ];
+      protontricks.enable = true;
+      localNetworkGameTransfers.openFirewall = true;
+      gamescopeSession.enable = false;
     };
 
-    # Configure mangohud system-wide
-    environment.sessionVariables = {
-      MANGOHUD = "1";
-      MANGOHUD_CONFIG = "cpu_temp,gpu_temp,gpu_core_clock,gpu_mem_clock,fps,frametime,vram,ram";
+    boot.kernel.sysctl."kernel.unprivileged_userns_clone" = 1;
+
+    security.wrappers.bwrap = {
+      source = "${pkgs-unstable.bubblewrap}/bin/bwrap";
+      owner = "root";
+      group = "root";
+      setuid = true;
+      permissions = "u+rx,g+x,o+x";
     };
   };
 }
