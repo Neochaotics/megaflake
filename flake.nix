@@ -68,6 +68,7 @@
         inputs.flake-parts.flakeModules.easyOverlay
         inputs.flake-parts.flakeModules.modules
         ./nixos.nix
+        ./pkgs.nix
       ];
 
       perSystem =
