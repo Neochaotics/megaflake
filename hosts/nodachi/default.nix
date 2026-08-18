@@ -76,13 +76,14 @@ in
     inputs.agenix-rekey.nixosModules.default
     inputs.disko.nixosModules.disko
     inputs.home-manager.nixosModules.home-manager
+    inputs.nix-mineral.nixosModules.nix-mineral
     self.nixosModules.ffDefault
     inputs.freedpom.modules.nixos.ntpd
     inputs.freedpom.modules.nixos.locale
     inputs.freedpom.modules.nixos.ananicy
     inputs.freedpom.modules.nixos.daemon
     inputs.freedpom.modules.nixos.performance
-    self.nixosModules.qModule
+    inputs.freedpom.modules.nixos.steam
     ./disk-primary.nix
     ./disk-secondary.nix
     ./hardware.nix
@@ -190,14 +191,9 @@ in
     };
   };
 
-  qm = {
-    nixos.programs.chromium.enable = true;
-    programs = {
-      steam.enable = true;
-    };
-    stylix.enable = true;
-  };
+  nixpkgs.flake.source = lib.mkForce null;
 
+  # freedpom's ananicy sets this to false, nixpkgs's default is a conflicting true
   services.ananicy.settings.cgroup_realtime_workaround = lib.mkForce false;
 
   programs.ssh.knownHosts = {
