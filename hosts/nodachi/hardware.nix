@@ -65,9 +65,18 @@
   powerManagement = {
     enable = true;
     cpuFreqGovernor = "performance";
-    powertop.enable = true;
     scsiLinkPolicy = "max_performance";
   };
+
+  # In-memory compressed swap (zstd). Makes the CachyOS swappiness=170 and
+  # page-cluster=0 sysctls (from freedpom's steam module) behave as intended
+  # and buffers memory pressure during heavy gaming/AI loads.
+  zramSwap = {
+    enable = true;
+    priority = 100;
+  };
+
+  boot.tmp.useZram = true;
   services = {
     scx.enable = false;
     udev.extraRules = ''
