@@ -68,7 +68,6 @@ in
   systemd.services.fanctl = {
     description = "fanctl case fan control (tied to GPU temp)";
     wantedBy = [ "multi-user.target" ];
-    after = [ "lactd.service" ];
     serviceConfig = {
       ExecStart = "${pkgs.fanctl}/bin/fanctl -c ${fanctlConfig}";
       Restart = "on-failure";
