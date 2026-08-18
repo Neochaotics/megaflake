@@ -4,6 +4,8 @@
   ...
 }:
 {
+  hardware.facter.reportPath = ./facter.json;
+
   freedpom.hardware.displays = {
     "DP-2" = {
       includeKernelParams = true;
@@ -43,19 +45,14 @@
     kernelPackages = pkgs.linuxPackages_zen;
     extraModulePackages = with config.boot.kernelPackages; [ it87 ];
     initrd.availableKernelModules = [
-      "ahci"
       "hid-generic"
-      "nvme"
       "usbhid"
-      "xhci_pci"
-      "sp5100_tco"
     ];
     kernelModules = [ "it87" ];
     extraModprobeConfig = "
     options it87 ignore_resource_conflict=1
     ";
     kernelParams = [
-      "amd_pstate=active" # Enable active pstate for better power management
       "amd_iommu=on" # Enable IOMMU for better device isolation
       "iommu=pt" # Pass-through mode for IOMMU
       "idle=nomwait" # Improves AMD CPU power efficiency
@@ -63,8 +60,6 @@
       "transparent_hugepage=always" # Better memory management for Zen architecture
       "amdgpu.hw_i2c=1" # Enable hardware I2C
       "nowatchdog"
-      "quiet"
-      "splash"
     ];
   };
   powerManagement = {
@@ -84,25 +79,18 @@
     '';
   };
   hardware = {
-
     cpu = {
       amd = {
-        updateMicrocode = true;
         sev.enable = true; # Enable AMD Secure Encrypted Virtualization
       };
     };
 
-    graphics = {
-      enable = true;
-    };
-
-    # AMD chipset specific features
+    # AMD GPU features not covered by facter
     amdgpu = {
-      initrd.enable = true;
       opencl.enable = true;
+      overdrive.enable = true;
     };
 
-    enableRedistributableFirmware = true;
     display = {
       edid = {
         enable = true;
