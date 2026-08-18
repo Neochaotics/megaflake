@@ -87,6 +87,7 @@ in
     ./disk-primary.nix
     ./disk-secondary.nix
     ./hardware.nix
+    ./gpu.nix
   ];
 
   environment.systemPackages = with pkgs; [

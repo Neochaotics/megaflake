@@ -74,12 +74,18 @@ let
       return 0
     }
 
-    # 1. GLmark2 off-screen (moderate load, ~50% util)
-    run_load "glmark2" "$GLMARK2" --off-screen -s 2560x1440
+    # 1. clpeak compute load on the dGPU (device 0 = gfx1030, RX 6950 XT).
+    #    This is the AI/compute workload that previously caused a critical
+    #    thermal fault, so it runs first on a cold GPU with the safety abort.
+    run_load "clpeak" "$CLPEAK" --cl-device 0
     echo "" >> "$OUT"
 
-    # 2. clpeak (compute/AI load, the CTF-inducing workload)
-    run_load "clpeak" "$CLPEAK"
+    # Cooldown between the two tests so results don't overlap.
+    echo "Cooling down for 30s..." >> "$OUT"
+    sleep 30
+
+    # 2. GLmark2 off-screen (moderate load, ~50% util)
+    run_load "glmark2" "$GLMARK2" --off-screen -s 2560x1440
 
     echo "=== BENCH COMPLETE $(date +%H:%M:%S) ===" >> "$OUT"
     echo "Done. Full log: $OUT"
