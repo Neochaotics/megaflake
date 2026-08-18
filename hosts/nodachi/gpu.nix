@@ -14,28 +14,43 @@ let
 
     gpus:
       1002:73A5-1DA2:441D-0000:03:00.0:
-        # -50 mV undervolt: big junction temp reduction, negligible perf loss
-        voltage_offset: -50
-        # Power cap 284W -> 260W: less sustained heat, ~2-3% perf cost max
-        power_cap: 260.0
-        # Custom aggressive fan curve driven by junction (hotspot) temp.
-        # LACT's default passive curve lets the card reach 107C before the
-        # fan responds; this spins it up early to keep junction under control.
+        # -100 mV undervolt: reduces junction temp on a card with degraded
+        # thermal paste (still hits ~111C at only 195W). ~5-10% perf cost on
+        # sustained compute but keeps it safe until repaste.
+        voltage_offset: -100
+        # Power cap 284W -> 240W: less sustained heat. Keep lower than ideal
+        # given the card's cooling is degraded.
+        power_cap: 240.0
+        # Aggressive fan curve driven by junction (hotspot) temp. Ramp hard
+        # and early; the stock passive curve let the card hit 107C.
         fan_control_enabled: true
         fan_control_settings:
           mode: curve
           temperature_key: junction
           interval_ms: 500
           curve:
-            45: 0.4
-            60: 0.6
-            75: 0.85
-            90: 1.0
+            40: 0.5
+            55: 0.75
+            70: 1.0
 
     profiles:
       Gaming:
         gpus:
           1002:73A5-1DA2:441D-0000:03:00.0:
+            # IMPORTANT: LACT profiles replace the whole GPU config, so the
+            # thermal protections MUST be repeated here or they'd be dropped
+            # while gaming (the exact worst time).
+            voltage_offset: -100
+            power_cap: 240.0
+            fan_control_enabled: true
+            fan_control_settings:
+              mode: curve
+              temperature_key: junction
+              interval_ms: 500
+              curve:
+                40: 0.5
+                55: 0.75
+                70: 1.0
             performance_level: manual
             power_profile_mode_index: 1
         rule:
