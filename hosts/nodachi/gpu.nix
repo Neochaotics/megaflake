@@ -3,9 +3,11 @@
   ...
 }:
 let
-  # Raw YAML for LACT. We provide it directly (rather than via
-  # services.lact.settings) because pkgs.formats.yaml quotes the fan-curve
-  # keys as strings, but LACT's serde requires unquoted integer keys.
+  # Raw YAML for LACT. Nix attrsets can only have string keys, so both
+  # builtins.toJSON and pkgs.formats.yaml emit the fan-curve keys quoted
+  # ('45' / "45"), which LACT's serde rejects (expects unquoted i32 keys).
+  # A hand-written YAML string emits them as bare integers (45), which LACT
+  # parses correctly.
   lactConfig = pkgs.writeText "lact-config.yaml" ''
     daemon:
       log_level: warn
@@ -51,7 +53,7 @@ in
     settings = { };
   };
 
-  # Provide the LACT config as raw YAML (integer fan-curve keys).
+  # Provide the LACT config as raw YAML (unquoted integer fan-curve keys).
   environment.etc."lact/config.yaml" = {
     source = lactConfig;
   };
