@@ -53,8 +53,20 @@ in
     settings = { };
   };
 
-  # Provide the LACT config as raw YAML (unquoted integer fan-curve keys).
-  environment.etc."lact/config.yaml" = {
-    source = lactConfig;
+  # LACT 0.10+ writes its config on startup (settings application /
+  # migrate_versions), but /etc is read-only on NixOS so the default
+  # /etc/lact/config.yaml is an immutable store symlink and the write fails.
+  # Redirect the config dir to a writable location via the upstream
+  # LACT_DAEMON_CONFIG_DIR env var and seed it from the baked config.
+  systemd.services.lactd = {
+    serviceConfig = {
+      StateDirectory = "lact";
+      Environment = "LACT_DAEMON_CONFIG_DIR=/var/lib/lact";
+    };
+    preStart = ''
+      mkdir -p /var/lib/lact
+      cp -f ${lactConfig} /var/lib/lact/config.yaml
+      rm -f /run/lactd.sock
+    '';
   };
 }
