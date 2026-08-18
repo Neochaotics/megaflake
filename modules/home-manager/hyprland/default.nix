@@ -1,6 +1,8 @@
 {
   lib,
   config,
+  pkgs,
+  inputs,
   ...
 }:
 let
@@ -29,7 +31,13 @@ in
     wayland = {
       windowManager.hyprland = {
         configType = "hyprlang";
+        enable = true;
+        package = lib.mkForce (inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland);
+        portalPackage = lib.mkForce (
+          inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland
+        );
       };
+
     };
   };
 }

@@ -15,6 +15,10 @@
       "idle_inhibit fullscreen, match:title ^(.*\\[Playing\\].*)$"
       "idle_inhibit fullscreen, match:class ^(com.stremio.stremio)$"
       "idle_inhibit focus, match:class ^(tidal-hifi)$"
+      "fullscreen 1, match:class ^(steam_app_.*)"
+      "immediate 1, match:class ^(steam_app_.*)"
+      "no_blur 1, match:class ^(steam_app_.*)"
+      "no_anim 1, match:class ^(steam_app_.*)"
     ];
   };
 }

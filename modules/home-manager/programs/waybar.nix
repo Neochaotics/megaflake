@@ -17,7 +17,6 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    stylix.targets.waybar.enable = lib.mkForce false;
 
     programs.waybar = {
       enable = true;

@@ -2,6 +2,7 @@
   username,
   self,
   config,
+  pkgs,
   ...
 }:
 {
@@ -52,6 +53,8 @@
     stateVersion = "24.05";
     inherit username;
     homeDirectory = "/home/${username}";
+    pointerCursor.package = pkgs.bibata-cursors;
+    pointerCursor.name = "Bibata-Modern-Amber";
   };
   freedpom = {
     windowManagers = {
@@ -70,7 +73,6 @@
       fuzzel.enable = true;
       waybar.enable = true;
       zsh.enable = true;
-      starship.enable = true;
       yazi.enable = true;
     };
     system = {

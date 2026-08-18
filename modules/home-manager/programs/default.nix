@@ -7,7 +7,6 @@
     ./fuzzel.nix
     ./waybar.nix
     ./zsh.nix
-    ./starship.nix
     ./yazi.nix
   ];
 

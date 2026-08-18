@@ -13,22 +13,9 @@ in
     enable = lib.mkEnableOption "Firefox browser configuration";
   };
   config = lib.mkIf cfg.enable {
-    stylix.targets = {
-      firefox = {
-        colorTheme.enable = true;
-        firefoxGnomeTheme.enable = true;
-        profileNames = [ "default" ];
-      };
-    };
     programs = {
       chromium.enable = true;
       chromium.package = pkgs.ungoogled-chromium;
-      chromium.commandLineArgs = [
-        "--incognito"
-        "--no-first-run"
-        "--no-default-browser-check"
-        "--disable-sync"
-      ];
       firefox = {
         enable = true;
         configPath = ".mozilla/firefox";

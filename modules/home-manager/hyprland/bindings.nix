@@ -22,7 +22,7 @@
       "SUPER CTRL ALT, L, exec, hyprlock"
       "SUPER CTRL ALT, K, exec, uwsm stop"
       "SUPER, W, killactive" # Close Active Window
-      "SUPER, S, togglesplit" # Toggle Split Layout
+      "SUPER, S, layoutmsg, togglesplit" # Toggle Split Layout
       "SUPER, T, togglegroup" # Toggle Grouped Layout
       "SUPER, F9, pseudo" # Enable Pseudo Tiling
       "SUPER, F10, togglefloating" # Toggle Floating Window

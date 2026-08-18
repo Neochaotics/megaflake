@@ -1,8 +1,6 @@
 {
   config,
   lib,
-  pkgs,
-  inputs,
   ...
 }:
 let
@@ -17,27 +15,6 @@ in
     xdg = {
       enable = true;
       cacheHome = config.home.homeDirectory + "/.local/cache";
-
-      portal = {
-        enable = lib.mkForce true;
-        config = {
-          common = {
-            default = [
-              "hyprland"
-              "gtk"
-            ];
-          };
-          hyprland = {
-            default = [
-              "hyprland"
-            ];
-          };
-        };
-        extraPortals = [
-          inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland
-          pkgs.xdg-desktop-portal-gtk
-        ];
-      };
 
       mimeApps = {
         enable = true;

@@ -8,6 +8,7 @@
     home.sessionVariables = {
       EDITOR = "nvim";
       TERMINAL = "foot";
+      RADV_TEX_ANISO = "16";
     };
     xdg.configFile = {
       "env" = {
@@ -19,7 +20,7 @@
           export CLUTTER_BACKEND=wayland
           export QT_QPA_PLATFORM="wayland;xcb"
           export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
-          export SDL_VIDEODRIVER=x11
+          export RADV_TEX_ANISO=16
           export QT_AUTO_SCREEN_SCALE_FACTOR=1
           export QT_SCALE_FACTOR=1
           export GDK_SCALE=1
