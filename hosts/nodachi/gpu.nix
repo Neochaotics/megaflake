@@ -18,9 +18,11 @@ let
         # thermal paste (still hits ~111C at only 195W). ~5-10% perf cost on
         # sustained compute but keeps it safe until repaste.
         voltage_offset: -100
-        # Power cap 284W -> 240W: less sustained heat. Keep lower than ideal
-        # given the card's cooling is degraded.
-        power_cap: 240.0
+        # Power cap 284W -> 255W. 255W is the hardware floor for this card
+        # (power1_cap_min); requesting less (e.g. 240W) gets clamped up to
+        # 255W by the driver, so set it explicitly to the true minimum to
+        # reduce sustained heat on the paste-degraded cooler.
+        power_cap: 255.0
         # Aggressive fan curve driven by junction (hotspot) temp. Ramp hard
         # and early; the stock passive curve let the card hit 107C.
         fan_control_enabled: true
@@ -41,7 +43,8 @@ let
             # thermal protections MUST be repeated here or they'd be dropped
             # while gaming (the exact worst time).
             voltage_offset: -100
-            power_cap: 240.0
+            # 255W = hardware power floor (power1_cap_min), see above.
+            power_cap: 255.0
             fan_control_enabled: true
             fan_control_settings:
               mode: curve
