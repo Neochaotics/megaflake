@@ -285,6 +285,20 @@
         "type": "github"
       }
     },
+    "flake-compat_5": {
+      "locked": {
+        "lastModified": 1733328505,
+        "narHash": "sha256-NeCCThCEP3eCl2l/+27kNNK7QrwZB1IJCrXfrbv5oqU=",
+        "rev": "ff81ac966bb2cae68946d5ed5fc4994f96d0ffec",
+        "revCount": 69,
+        "type": "tarball",
+        "url": "https://api.flakehub.com/f/pinned/edolstra/flake-compat/1.1.0/01948eb7-9cba-704f-bbf3-3fa956735b52/source.tar.gz"
+      },
+      "original": {
+        "type": "tarball",
+        "url": "https://flakehub.com/f/edolstra/flake-compat/1.tar.gz"
+      }
+    },
     "flake-parts": {
       "inputs": {
         "nixpkgs-lib": [
@@ -367,6 +381,24 @@
           "terranix",
           "nixpkgs"
         ]
+      },
+      "locked": {
+        "lastModified": 1778716662,
+        "narHash": "sha256-m1Yf0wZ8j1OHjTc2UwHwyQRSnNeSgLJOd7q5Y45hzi4=",
+        "owner": "hercules-ci",
+        "repo": "flake-parts",
+        "rev": "f7c1a2d347e4c52d5fb8d10cb4d94b5884e546fb",
+        "type": "github"
+      },
+      "original": {
+        "owner": "hercules-ci",
+        "repo": "flake-parts",
+        "type": "github"
+      }
+    },
+    "flake-parts_6": {
+      "inputs": {
+        "nixpkgs-lib": "nixpkgs-lib_4"
       },
       "locked": {
         "lastModified": 1778716662,
@@ -1330,6 +1362,26 @@
         "type": "github"
       }
     },
+    "nix-mineral_2": {
+      "inputs": {
+        "flake-compat": "flake-compat_5",
+        "flake-parts": "flake-parts_6",
+        "nixpkgs": "nixpkgs_3"
+      },
+      "locked": {
+        "lastModified": 1787011487,
+        "narHash": "sha256-44aBWEG084QhWNui26K2IhtoVfqW/p5vBYrrkPkvCAE=",
+        "owner": "cynicsketch",
+        "repo": "nix-mineral",
+        "rev": "a4309999db8be3e3ebd8d74a280501bf18241de3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "cynicsketch",
+        "repo": "nix-mineral",
+        "type": "github"
+      }
+    },
     "nix2container": {
       "inputs": {
         "nixpkgs": [
@@ -1412,6 +1464,21 @@
         "type": "github"
       }
     },
+    "nixpkgs-lib_4": {
+      "locked": {
+        "lastModified": 1777168982,
+        "narHash": "sha256-GOkGPcboWE9BmGCRMLX3worL4EMnsnG8MyKmXNeYuhQ=",
+        "owner": "nix-community",
+        "repo": "nixpkgs.lib",
+        "rev": "f5901329dade4a6ea039af1433fb087bd9c1fe14",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "nixpkgs.lib",
+        "type": "github"
+      }
+    },
     "nixpkgs-stable": {
       "locked": {
         "lastModified": 1786943417,
@@ -1478,6 +1545,22 @@
     },
     "nixpkgs_3": {
       "locked": {
+        "lastModified": 1780453794,
+        "narHash": "sha256-bXMRa9VTsHSPXL4Cw8R6JJLQeY3Y/IP4+YJCYVmQ7FY=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "6b316287bae2ee04c9b93c8c858d930fd07d7338",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-26.05",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_4": {
+      "locked": {
         "lastModified": 1787022431,
         "narHash": "sha256-Kly49ipfBSEIKPFcKUUjlL6yzNAnFetwKAehc9P1h4I=",
         "owner": "nixos",
@@ -1492,7 +1575,7 @@
         "type": "github"
       }
     },
-    "nixpkgs_4": {
+    "nixpkgs_5": {
       "locked": {
         "lastModified": 1770107345,
         "narHash": "sha256-tbS0Ebx2PiA1FRW8mt8oejR0qMXmziJmPaU1d4kYY9g=",
@@ -1633,7 +1716,8 @@
         "freedpom": "freedpom",
         "home-manager": "home-manager_2",
         "hyprland": "hyprland_2",
-        "nixpkgs": "nixpkgs_3",
+        "nix-mineral": "nix-mineral_2",
+        "nixpkgs": "nixpkgs_4",
         "nixpkgs-stable": "nixpkgs-stable",
         "nixpkgs-unstable": "nixpkgs-unstable_2",
         "treefmt-nix": "treefmt-nix_3"
@@ -1784,7 +1868,7 @@
     },
     "treefmt-nix_3": {
       "inputs": {
-        "nixpkgs": "nixpkgs_4"
+        "nixpkgs": "nixpkgs_5"
       },
       "locked": {
         "lastModified": 1786901030,

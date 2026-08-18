@@ -14,6 +14,12 @@
         config = {
           allowUnfree = true;
         };
+        overlays = [
+          # Expose freedpom's local packages (used by freedpom modules e.g. steam)
+          (_final: _prev: {
+            local.proton-cachyos-bin = inputs.freedpom.packages.${system}.proton-cachyos-bin;
+          })
+        ];
       };
 
       devShells.default = pkgs.mkShell {
@@ -22,11 +28,6 @@
           pkgs.age-plugin-yubikey
           pkgs.rage
         ];
-      };
-
-      packages = {
-        antec-flux-pro-display = pkgs.callPackage ./packages/antec-flux-pro-display.nix { };
-        antec-flux-pro-display-udev = pkgs.callPackage ./packages/antec-flux-pro-display-udev.nix { };
       };
     };
 

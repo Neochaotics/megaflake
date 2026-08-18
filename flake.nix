@@ -15,18 +15,17 @@
   };
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-26.05";
+    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-26.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     home-manager = {
-      url = "github:nix-community/home-manager/release-26.05";
+      url = "github:nix-community/home-manager/";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     disko = {
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    stylix.url = "github:danth/stylix";
     agenix = {
       url = "github:ryantm/agenix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -44,10 +43,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     hyprland = {
-      url = "github:hyprwm/Hyprland?ref=v0.54.0";
+      url = "github:hyprwm/Hyprland?ref=v0.55.0";
     };
+    nix-mineral.url = "github:cynicsketch/nix-mineral";
     freedpom = {
-      url = "path:/home/quinno/Documents/projects/bigmonkey/";
+      url = "path:/home/quinno/Documents/projects/freedpom/flake/";
       inputs.nixpkgs.follows = "nixpkgs-stable";
     };
   };
@@ -82,7 +82,6 @@
           };
         };
 
-      flake.nixosModules.qModule = ./modules/nixos;
       flake.nixosModules.ffDefault = ./modules/ff/nixosModules.nix;
       flake.homeModules.qModule = ./modules/home-manager;
       flake.homeModules.ffDefault = ./modules/ff/homeModules.nix;
