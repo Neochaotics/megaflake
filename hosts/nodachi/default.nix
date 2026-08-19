@@ -88,7 +88,6 @@ in
     ./disk-secondary.nix
     ./hardware.nix
     ./gpu.nix
-    ./fans.nix
   ];
 
   environment.systemPackages = with pkgs; [
