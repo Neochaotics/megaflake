@@ -7,10 +7,10 @@
 }:
 
 let
-  # GPU benchmark runner for the RX 6950 XT on nodachi.
+  # GPU benchmark runner v3 for the RX 6950 XT on nodachi.
   # Runs compute (clpeak) and graphics (glmark2 offscreen) loads while
-  # sampling the dGPU hwmon, capturing each tool's score output and the
-  # peak live core clock. Hard-aborts if junction exceeds the safety limit.
+  # sampling the dGPU hwmon. Outputs a one-line SUMMARY with all key
+  # metrics in key=value format for easy run-to-run comparison.
   benchScript = writeShellScriptBin "bench" ''
     set -u
 
@@ -19,6 +19,9 @@ let
 
     # Safety: hard-abort the load if junction exceeds this (millidegrees C).
     ABORT_JUNCTION=$((95 * 1000))
+
+    # Cooldown between tests (seconds). Override with BENCH_COOLDOWN env var.
+    COOLDOWN="''${BENCH_COOLDOWN:-30}"
 
     # Locate the dGPU hwmon dir (amdgpu with a junction sensor).
     HWMON=""
@@ -79,30 +82,47 @@ let
       done
       wait "$LOAD_PID" 2>/dev/null
       echo "=== $name DONE: peak junc=$peak_junc edge=$peak_edge fan=$peak_fan pwr=$peak_pwr clk=$peak_clk cap=$peak_cap ===" >> "$OUT"
-      echo "=== $name DONE: junc=$((peak_junc/1000))C edge=$((peak_edge/1000))C pwr=$((peak_pwr/1000000))W clk=$((peak_clk/1000000))MHz cap=$((peak_cap/1000000))W ==="
     }
 
-    # 1. Compute load on the dGPU (device 0 = gfx1030). Output captured so
-    #    GFLOPS can be compared between profiles.
+    # 1. Compute load on the dGPU (device 0 = gfx1030).
     run_load "clpeak" "$CLPEAK" --cl-device 0
     grep -E "float |half |Clock frequency|bandwidth \(GBPS\)" "$OUT.txt" | sed 's/^/[clpeak] /' | tee -a "$OUT"
     echo "" >> "$OUT"
 
     # Cooldown between the two tests.
-    echo "Cooling down for 30s..." >> "$OUT"
-    sleep 30
+    echo "Cooling down for ''${COOLDOWN}s..." >> "$OUT"
+    sleep "$COOLDOWN"
 
     # 2. Graphics load (offscreen EGL at native res).
     run_load "glmark2" "$GLMARK2" --off-screen -s 2560x1440
     grep "glmark2 Score" "$OUT.txt" | sed 's/^/[glmark2] /' | tee -a "$OUT"
 
+    # Extract metrics for structured summary.
+    CLPEAK_FLOAT=$(grep "float    :" "$OUT.txt" | head -1 | awk '{print $NF}')
+    CLPEAK_HALF=$(grep "half     :" "$OUT.txt" | head -1 | awk '{print $NF}')
+    CLPEAK_BW=$(grep -A1 "Global memory bandwidth" "$OUT.txt" | grep "float" | awk '{print $NF}')
+    CLPEAK_LOCAL=$(grep -A1 "Local memory bandwidth" "$OUT.txt" | grep "float" | awk '{print $NF}')
+    GLMARK_SCORE=$(grep "glmark2 Score" "$OUT.txt" | awk '{print $NF}')
+
+    # Peak values from hwmon sampling.
+    CLPEAK_DONE=$(grep "clpeak DONE" "$OUT" | tail -1)
+    GLMARK_DONE=$(grep "glmark2 DONE" "$OUT" | tail -1)
+    JUNC_MAX=$(echo "$CLPEAK_DONE" | sed 's/.*peak junc=\([0-9]*\).*/\1/' | head -1)
+    PWR_MAX=$(echo "$CLPEAK_DONE" | sed 's/.*pwr=\([0-9]*\).*/\1/' | head -1)
+    CAP_LIVE=$(echo "$GLMARK_DONE" | sed 's/.*cap=\([0-9]*\).*/\1/' | head -1)
+    JUNC_GM=$(echo "$GLMARK_DONE" | sed 's/.*peak junc=\([0-9]*\).*/\1/' | head -1)
+
+    echo "" >> "$OUT"
     echo "=== BENCH COMPLETE $(date +%H:%M:%S) ===" >> "$OUT"
-    echo "Done. Full log: $OUT (+ captured .txt outputs)"
+
+    # Structured summary — one line, grep-friendly.
+    echo "SUMMARY: glmark2=''${GLMARK_SCORE:-0} clpeak_float=''${CLPEAK_FLOAT:-0} clpeak_half=''${CLPEAK_HALF:-0} clpeak_bw=''${CLPEAK_BW:-0} clpeak_local=''${CLPEAK_LOCAL:-0} junc_clpeak=''${JUNC_MAX:-0} junc_glmark=''${JUNC_GM:-0} pwr_max=''${PWR_MAX:-0} cap=''${CAP_LIVE:-0}" | tee -a "$OUT"
+    echo "Done. Full log: $OUT"
   '';
 in
 stdenv.mkDerivation {
   pname = "bench";
-  version = "2.0.0";
+  version = "3.0.0";
 
   nativeBuildInputs = [ benchScript ];
 
@@ -119,7 +139,7 @@ stdenv.mkDerivation {
   '';
 
   meta = {
-    description = "GPU thermal/performance benchmark runner with score capture and safety abort";
+    description = "GPU benchmark runner with structured summary for run-to-run comparison";
     license = lib.licenses.gpl3;
   };
 }

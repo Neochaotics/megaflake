@@ -20,9 +20,6 @@ let
         # 255W is the hardware floor (power1_cap_min); the driver clamps any
         # lower request up to it. Efficient/silent for desktop and compute.
         power_cap: 255.0
-        # VRAM probe: starting at 1149 MHz (+25 above stock 1124).
-        # Iterate upward in +25 MHz steps; revert on instability.
-        max_memory_clock: 1174
         # Moderate fan curve on junction (hotspot). Repaste means the old
         # aggressive curve is no longer needed for desktop idle.
         fan_control_enabled: true
@@ -52,7 +49,7 @@ let
             # bench-abort line.
             voltage_offset: -100
             power_cap: 325.0
-            # VRAM probe: same value as default profile.
+            # VRAM probe: gaming-only. Desktop stays at stock MCLK.
             max_memory_clock: 1174
             fan_control_enabled: true
             fan_control_settings:
