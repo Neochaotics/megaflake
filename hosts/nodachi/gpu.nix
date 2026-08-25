@@ -22,7 +22,7 @@ let
         power_cap: 255.0
         # VRAM probe: starting at 1149 MHz (+25 above stock 1124).
         # Iterate upward in +25 MHz steps; revert on instability.
-        max_memory_clock: 1149
+        max_memory_clock: 1174
         # Moderate fan curve on junction (hotspot). Repaste means the old
         # aggressive curve is no longer needed for desktop idle.
         fan_control_enabled: true
@@ -53,7 +53,7 @@ let
             voltage_offset: -100
             power_cap: 325.0
             # VRAM probe: same value as default profile.
-            max_memory_clock: 1149
+            max_memory_clock: 1174
             fan_control_enabled: true
             fan_control_settings:
               mode: curve
