@@ -14,26 +14,24 @@ let
 
     gpus:
       1002:73A5-1DA2:441D-0000:03:00.0:
-        # -100 mV undervolt: reduces junction temp on a card with degraded
-        # thermal paste (still hits ~111C at only 195W). ~5-10% perf cost on
-        # sustained compute but keeps it safe until repaste.
+        # -100 mV undervolt: efficiency. After repasting, clpeak peak junction
+        # dropped from 110C to 77C, so this is comfortable margin.
         voltage_offset: -100
-        # Power cap 284W -> 255W. 255W is the hardware floor for this card
-        # (power1_cap_min); requesting less (e.g. 240W) gets clamped up to
-        # 255W by the driver, so set it explicitly to the true minimum to
-        # reduce sustained heat on the paste-degraded cooler.
+        # 255W is the hardware floor (power1_cap_min); the driver clamps any
+        # lower request up to it. Efficient/silent for desktop and compute.
         power_cap: 255.0
-        # Aggressive fan curve driven by junction (hotspot) temp. Ramp hard
-        # and early; the stock passive curve let the card hit 107C.
+        # Moderate fan curve on junction (hotspot). Repaste means the old
+        # aggressive curve is no longer needed for desktop idle.
         fan_control_enabled: true
         fan_control_settings:
           mode: curve
           temperature_key: junction
           interval_ms: 500
           curve:
-            40: 0.5
-            55: 0.75
-            70: 1.0
+            45: 0.35
+            60: 0.6
+            75: 0.9
+            90: 1.0
 
     profiles:
       Gaming:
@@ -42,18 +40,25 @@ let
             # IMPORTANT: LACT profiles replace the whole GPU config, so the
             # thermal protections MUST be repeated here or they'd be dropped
             # while gaming (the exact worst time).
+            # Measured (bench v2 matrix): raising max_core_clock to 2725 with
+            # -85 mV gave +0.13% graphics score and -4% compute throughput,
+            # so clocks stay stock; the profile exists purely to grant extra
+            # power headroom while keeping the proven -100 mV undervolt.
+            # 325W: card TBP spec is 335W (sysfs max 340W); post-repaste
+            # junction stays <80C at full load — large margin to the 95C
+            # bench-abort line.
             voltage_offset: -100
-            # 255W = hardware power floor (power1_cap_min), see above.
-            power_cap: 255.0
+            power_cap: 325.0
             fan_control_enabled: true
             fan_control_settings:
               mode: curve
               temperature_key: junction
               interval_ms: 500
               curve:
-                40: 0.5
-                55: 0.75
-                70: 1.0
+                45: 0.35
+                60: 0.6
+                75: 0.9
+                90: 1.0
             performance_level: manual
             power_profile_mode_index: 1
         rule:
@@ -76,10 +81,17 @@ in
   # /etc/lact/config.yaml is an immutable store symlink and the write fails.
   # Redirect the config dir to a writable location via the upstream
   # LACT_DAEMON_CONFIG_DIR env var and seed it from the baked config.
+  #
+  # PATH: the stock unit PATH lacks sudo/busctl, which LACT requires to talk
+  # to gamemoded over its session bus for automatic profile switching
+  # (otherwise profiles silently never activate).
   systemd.services.lactd = {
     serviceConfig = {
       StateDirectory = "lact";
-      Environment = "LACT_DAEMON_CONFIG_DIR=/var/lib/lact";
+      Environment = [
+        "LACT_DAEMON_CONFIG_DIR=/var/lib/lact"
+        "PATH=/run/current-system/sw/bin"
+      ];
     };
     preStart = ''
       mkdir -p /var/lib/lact
