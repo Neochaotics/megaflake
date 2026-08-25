@@ -96,6 +96,8 @@ in
     prismlauncher
     r2modman
     vscodium
+    # Read-only Ryzen SMU telemetry (pairs with the ryzen-smu module).
+    ryzenadj
     (element-desktop.override { commandLineArgs = "--config ${elementWebConfig}"; })
     me3
   ];

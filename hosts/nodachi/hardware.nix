@@ -43,12 +43,20 @@
 
   boot = {
     kernelPackages = pkgs.linuxPackages_zen;
-    extraModulePackages = with config.boot.kernelPackages; [ it87 ];
+    # it87: motherboard sensor/fan chip. ryzen-smu: read-only SMU telemetry
+    # (per-core clocks, temps) — no write attempts are made with it.
+    extraModulePackages = with config.boot.kernelPackages; [
+      it87
+      ryzen-smu
+    ];
     initrd.availableKernelModules = [
       "hid-generic"
       "usbhid"
     ];
-    kernelModules = [ "it87" ];
+    kernelModules = [
+      "it87"
+      "ryzen-smu"
+    ];
     extraModprobeConfig = "
     options it87 ignore_resource_conflict=1
     ";
