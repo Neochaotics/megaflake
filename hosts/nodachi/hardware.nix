@@ -101,7 +101,10 @@
     # AMD GPU features not covered by facter
     amdgpu = {
       opencl.enable = true;
-      overdrive.enable = true;
+      overdrive = {
+        enable = true;
+        ppfeaturemask = "0xffffffff"; # Full OD: required for memory clock OC via LACT
+      };
     };
 
     display = {
