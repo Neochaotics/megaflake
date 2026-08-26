@@ -142,6 +142,20 @@ in
     useUserPackages = true;
   };
   security.rtkit.enable = true;
+
+  # Gamemode: boost games to nice -10 + desktop notification on start/stop.
+  # steam.nix already enables the service; these are the tunables.
+  programs.gamemode.settings = {
+    general = {
+      renice = 10;
+      softrealtime = "auto";
+    };
+    custom = {
+      start = "notify-send 'GameMode started'";
+      end = "notify-send 'GameMode ended'";
+    };
+  };
+
   systemd = {
     user.services.wireplumber.wantedBy = [ "default.target" ];
     services.NetworkManager-wait-online.enable = false;
@@ -181,6 +195,7 @@ in
               hashedPasswordFile = config.age.secrets."${username}-password".path;
               shell = pkgs.zsh;
               ignoreShellProgramCheck = true;
+              extraGroups = [ "gamemode" ];
               openssh.authorizedKeys.keys = [
                 "sk-ssh-ed25519@openssh.com AAAAGnNrLXNzaC1lZDI1NTE5QG9wZW5zc2guY29tAAAAICU1ToHVRo5curH9yPzJPhRsf2FkqKMtroVtojTJ6IOZAAAACnNzaDpzaGluanU= slaw_dormitory861@aleeas.com"
               ];
