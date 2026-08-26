@@ -9,24 +9,68 @@ under sustained compute/gaming. Kernel log: `amdgpu: GPU over temperature range(
 - Fan curve + power cap were working, but junction stayed ~110C even at only ~192-255W.
 - Conclusion: **dried-out 2022 thermal paste** prevented die->heatsink heat transfer.
 
-## Fixes applied (committed)
+## Fixes applied
 1. **Repaste** (physical) — the definitive fix.
 2. **LACT** (`hosts/nodachi/gpu.nix`): undervolt `-100mV`, power cap `255W`
-   (hardware floor), aggressive junction-based fan curve, gamemode Gaming
-   profile carrying all thermal protections. Daemon run against a writable
-   config dir (`LACT_DAEMON_CONFIG_DIR=/var/lib/lact`) because LACT writes
-   its config on startup and `/etc` is read-only on NixOS.
+   (hardware floor), junction-based fan curve, three profiles:
+   - **Default** (always): −100mV / 255W / auto fan curve
+   - **Gaming** (gamemode-triggered): −100mV / 325W / 3D_FULL_SCREEN power profile / manual perf
+   - **Compute** (manual): −100mV / 255W / COMPUTE power profile (index 5)
+   Daemon uses writable config dir (`LACT_DAEMON_CONFIG_DIR=/var/lib/lact`).
+   `amdgpu.ppfeaturemask=0xffffffff` for full overdrive access.
 3. **zram swap** (priority 100) + `boot.tmp.useZram`, powertop removed
    (`f889c53`).
 4. Case-fan control via `fanctl` was attempted and **reverted** — the
    IT8689/it87 chip ignores manual PWM writes on this board.
 5. `scx`/sched-ext deferred (marginal benefit on 8-core homogeneous CPU).
+6. `RADV_PERFTEST=transfer_queue` added to session env for Vulkan perf.
+7. **BIOS Curve Optimizer −20 all-core** — held 4.91 GHz all-core under
+   stress-ng (vs ~4.6–4.75 GHz stock). ryzen-smu module was loaded but
+   exposed no debugfs on Raphael; removed as dead weight.
 
-## Measured result (identical `nix run .#bench` before/after)
+## GPU tuning outcomes (bench v3 matrix)
 
-| Load | Pre-repaste junction | Post-repaste junction |
+### Core overclock — DROPPED
+| Metric | Default (−100/255) | Gaming (2725/−85/284) | Delta |
+|---|---|---|---|
+| glmark2 Score | 11547 | 11562 | +0.13% (noise) |
+| clpeak float | 22523 GFLOPS | 21610 GFLOPS | **−4%** |
+| Conclusion | — | — | No gain, compute regressed. RDNA2 core OC not viable on this silicon. |
+
+### VRAM overclock — REVERTED
+| Metric | Stock (1124 MHz) | +50 (1174 MHz) | +75 (1199 MHz) |
+|---|---|---|---|
+| clpeak BW | 509 GB/s | 529 GB/s (+4%) | — |
+| Artifacts | None | None | **Black bars (unstable)** |
+| Conclusion | — | Marginally stable | Unstable. Not worth the risk. |
+
+### Final config
+| Setting | Desktop | Gaming |
 |---|---|---|
-| clpeak (compute) | 110C (abort) | **77C** |
-| glmark2 (GL) | 109C (abort) | **61C** |
+| Voltage offset | −100 mV | −100 mV |
+| Power cap | 255 W | 325 W |
+| MCLK | 1124 MHz (stock) | 1124 MHz (stock) |
+| Core clocks | Stock | Stock |
+| Power profile | Default | 3D_FULL_SCREEN |
+| Fan curve | Junction-based | Junction-based |
 
-Post-repaste the GPU fan stays in zero-RPM mode even at full 255W load.
+### Thermal results (post-repaste)
+
+| Load | Pre-repaste | Post-repaste |
+|---|---|---|
+| clpeak (compute) | 110°C (abort) | **57–68°C** |
+| glmark2 (GL) | 109°C (abort) | **47–55°C** |
+| Stress-ng 16-thread | — | 4.91 GHz sustained (CO −20) |
+
+## Bench infrastructure
+- `nix run .#bench` — bench v3: glmark2 offscreen + clpeak compute, hwmon
+  sampling, 95°C safety abort, structured `SUMMARY:` line for easy comparison
+- `BENCH_COOLDOWN` env var to shorten cooldown between tests
+- Per-test `.txt` output files retained alongside the main log
+
+## Files
+- `hosts/nodachi/gpu.nix` — LACT config (raw YAML), systemd service override
+- `hosts/nodachi/hardware.nix` — kernel modules (it87), ppfeaturemask, kernel params
+- `hosts/nodachi/home.nix` — RADV_PERFTEST env var
+- `pkgs/bench/package.nix` — benchmark runner
+- `/var/lib/lact/config.yaml` — runtime LACT config (writable, preStart reseeds)

@@ -55,6 +55,9 @@
     homeDirectory = "/home/${username}";
     pointerCursor.package = pkgs.bibata-cursors;
     pointerCursor.name = "Bibata-Modern-Amber";
+    sessionVariables = {
+      RADV_PERFTEST = "transfer_queue";
+    };
   };
   freedpom = {
     windowManagers = {

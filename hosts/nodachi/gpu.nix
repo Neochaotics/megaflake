@@ -64,6 +64,30 @@ let
         rule:
           type: gamemode
 
+      Compute:
+        gpus:
+          1002:73A5-1DA2:441D-0000:03:00.0:
+            # Compute profile for AI/OpenCL workloads. power_profile_mode 5
+            # optimizes GPU power management for sustained compute throughput
+            # rather than bursty graphics. Same undervolt + 255W cap as
+            # desktop — compute doesn't need the gaming profile's 325W headroom.
+            voltage_offset: -100
+            power_cap: 255.0
+            fan_control_enabled: true
+            fan_control_settings:
+              mode: curve
+              temperature_key: junction
+              interval_ms: 500
+              curve:
+                45: 0.35
+                60: 0.6
+                75: 0.9
+                90: 1.0
+            performance_level: manual
+            power_profile_mode_index: 5
+        rule:
+          type: manual
+
     auto_switch_profiles: true
   '';
 in
