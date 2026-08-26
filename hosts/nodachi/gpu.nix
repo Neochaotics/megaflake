@@ -49,8 +49,6 @@ let
             # bench-abort line.
             voltage_offset: -100
             power_cap: 325.0
-            # VRAM probe: gaming-only. Desktop stays at stock MCLK.
-            max_memory_clock: 1174
             fan_control_enabled: true
             fan_control_settings:
               mode: curve
