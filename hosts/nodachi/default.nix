@@ -151,8 +151,8 @@ in
       softrealtime = "auto";
     };
     custom = {
-      start = "notify-send 'GameMode started'";
-      end = "notify-send 'GameMode ended'";
+      start = "hyprctl notify 5 3000 0 'GameMode started'";
+      end = "hyprctl notify 6 3000 0 'GameMode ended'";
     };
   };
 
