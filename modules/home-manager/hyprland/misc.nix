@@ -43,6 +43,13 @@
 
     render = {
       new_render_scheduling = true;
+      cm_auto_hdr = 1;
+      direct_scanout = 2;
+      use_fp16 = 2;
+    };
+
+    quirks = {
+      prefer_hdr = 2;
     };
 
     debug = {

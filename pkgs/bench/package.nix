@@ -47,7 +47,7 @@ let
     run_load() {
       local name="$1"; shift
       local bin="$1"; shift
-      local out_txt="''${OUT}.txt"
+      local out_txt="''${OUT}.$name.txt"
       : > "$out_txt"
       echo "=== $name START $(date +%H:%M:%S) ===" >> "$OUT"
       ( "$bin" "$@" > "$out_txt" 2>&1 ) &
@@ -86,7 +86,7 @@ let
 
     # 1. Compute load on the dGPU (device 0 = gfx1030).
     run_load "clpeak" "$CLPEAK" --cl-device 0
-    grep -E "float |half |Clock frequency|bandwidth \(GBPS\)" "$OUT.txt" | sed 's/^/[clpeak] /' | tee -a "$OUT"
+    grep -E "float |half |Clock frequency|bandwidth \(GBPS\)" "$OUT.clpeak.txt" | sed 's/^/[clpeak] /' | tee -a "$OUT"
     echo "" >> "$OUT"
 
     # Cooldown between the two tests.
@@ -95,14 +95,14 @@ let
 
     # 2. Graphics load (offscreen EGL at native res).
     run_load "glmark2" "$GLMARK2" --off-screen -s 2560x1440
-    grep "glmark2 Score" "$OUT.txt" | sed 's/^/[glmark2] /' | tee -a "$OUT"
+    grep "glmark2 Score" "$OUT.glmark2.txt" | sed 's/^/[glmark2] /' | tee -a "$OUT"
 
     # Extract metrics for structured summary.
-    CLPEAK_FLOAT=$(grep "float    :" "$OUT.txt" | head -1 | awk '{print $NF}')
-    CLPEAK_HALF=$(grep "half     :" "$OUT.txt" | head -1 | awk '{print $NF}')
-    CLPEAK_BW=$(grep -A1 "Global memory bandwidth" "$OUT.txt" | grep "float" | awk '{print $NF}')
-    CLPEAK_LOCAL=$(grep -A1 "Local memory bandwidth" "$OUT.txt" | grep "float" | awk '{print $NF}')
-    GLMARK_SCORE=$(grep "glmark2 Score" "$OUT.txt" | awk '{print $NF}')
+    CLPEAK_FLOAT=$(grep "float    :" "$OUT.clpeak.txt" | head -1 | awk '{print $NF}')
+    CLPEAK_HALF=$(grep "half     :" "$OUT.clpeak.txt" | head -1 | awk '{print $NF}')
+    CLPEAK_BW=$(grep -A1 "Global memory bandwidth" "$OUT.clpeak.txt" | grep "float" | awk '{print $NF}')
+    CLPEAK_LOCAL=$(grep -A1 "Local memory bandwidth" "$OUT.clpeak.txt" | grep "float" | awk '{print $NF}')
+    GLMARK_SCORE=$(grep "glmark2 Score" "$OUT.glmark2.txt" | awk '{print $NF}')
 
     # Peak values from hwmon sampling.
     CLPEAK_DONE=$(grep "clpeak DONE" "$OUT" | tail -1)

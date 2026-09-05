@@ -68,9 +68,41 @@ under sustained compute/gaming. Kernel log: `amdgpu: GPU over temperature range(
 - `BENCH_COOLDOWN` env var to shorten cooldown between tests
 - Per-test `.txt` output files retained alongside the main log
 
+## Hyprland HDR + Gaming
+
+### Monitor
+- LG ULTRAGEAR 2560×1440@120 (DP-2), HDR10 (PQ/ST2084), FreeSync
+- `bitdepth, 10` — 10-bit output for HDR when auto-switch activates
+- `cm, auto` — desktop stays SDR; `cm_auto_hdr` switches to HDR only for fullscreen games
+- `vrr, 3` — FreeSync force mode (fullscreen game/video content)
+
+### Hyprland render settings
+- `cm_auto_hdr = 1` — auto-switch to HDR in fullscreen game content (reverts on exit)
+- `direct_scanout = 2` — low-latency direct scanout (auto, game content only)
+- `use_fp16 = 2` — fp16 buffers in HDR mode
+- `quirks.prefer_hdr = 2` — gamescope-only HDR (avoids whitescreen/flicker)
+- `sdrBrightness = 1.2`, `sdrSaturation = 0.98` — SDR tone tuning when HDR is active
+
+### Gamescope HDR
+- `programs.gamescope.enableWsi = true` — enables Vulkan WSI layer for native HDR games
+- Launch options for HDR games:
+  ```
+  gamescope -f -e --hdr-enabled --hdr-itm-enabled --hdr-itm-target-nits 400 --expose-wayland -- %command%
+  ```
+- `--hdr-itm-target-nits 400` — HDR400 panel peak luminance
+- If a game looks washed out with `--hdr-enabled`, drop to `--hdr-itm-enabled` only (SDR→HDR upconversion for punch without tone-mapping)
+
+### Known limitations
+- HDR400 panels have modest HDR quality (edge-lit, 400 nits, no local dimming) — true HDR games may look flatter than SDR; gamescope ITM usually produces better results
+- gamescope SDR-blowout bug (#2331) affects ITM
+- 10-bit may break some screen capture tools
+- ICC profiles are "fundamentally incompatible with HDR gaming" — do not use
+
 ## Files
 - `hosts/nodachi/gpu.nix` — LACT config (raw YAML), systemd service override
-- `hosts/nodachi/hardware.nix` — kernel modules (it87), ppfeaturemask, kernel params
+- `hosts/nodachi/hardware.nix` — kernel modules (it87), ppfeaturemask, kernel params, DP-2 display config (10-bit, auto CM)
 - `hosts/nodachi/home.nix` — RADV_PERFTEST env var
+- `hosts/nodachi/default.nix` — gamemode, gamescope WSI
+- `modules/home-manager/hyprland/misc.nix` — render/quirks (HDR, direct scanout, VRR)
 - `pkgs/bench/package.nix` — benchmark runner
 - `/var/lib/lact/config.yaml` — runtime LACT config (writable, preStart reseeds)

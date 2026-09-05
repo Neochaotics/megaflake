@@ -13,10 +13,12 @@
         width = 2560;
         height = 1440;
       };
-      framerate = 120;
+      framerate = 180;
       vrr = 3;
       colorProfile = "auto";
-      colorDepth = 32;
+      colorDepth = 10;
+      sdrBrightness = 1.2;
+      sdrSaturation = 0.98;
       workspaces = [
         "1"
         "2"

@@ -67,7 +67,6 @@
   };
 
   qm = {
-    opencode.enable = true;
     programs = {
       firefox.enable = true;
       foot.enable = true;

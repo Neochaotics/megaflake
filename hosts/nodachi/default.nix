@@ -76,6 +76,7 @@ in
     inputs.agenix-rekey.nixosModules.default
     inputs.disko.nixosModules.disko
     inputs.home-manager.nixosModules.home-manager
+    inputs.hjem.nixosModules.default
     inputs.nix-mineral.nixosModules.nix-mineral
     self.nixosModules.ffDefault
     inputs.freedpom.modules.nixos.ntpd
@@ -96,6 +97,7 @@ in
     prismlauncher
     r2modman
     vscodium
+    netbird
     (element-desktop.override { commandLineArgs = "--config ${elementWebConfig}"; })
     me3
   ];
@@ -141,6 +143,37 @@ in
     useGlobalPkgs = true;
     useUserPackages = true;
   };
+
+  # Hjem: declarative file management for opencode (coexists with home-manager)
+  hjem = {
+    clobberByDefault = true;
+    users.${username} = {
+      enable = true;
+      directory = "/home/${username}";
+      user = username;
+    };
+    extraModules = [
+      # Core config (opencode.json, tui.json, vibeguard, AGENTS.md, theme)
+      inputs.freedpom.modules.hjem.opencode-core
+      # Tooling (opencode binary, nixd, nixfmt, alejandra, statix, etc.)
+      inputs.freedpom.modules.hjem.opencode-tooling
+      # Skills, agents, commands
+      inputs.freedpom.modules.hjem.opencode-skills
+      inputs.freedpom.modules.hjem.opencode-agents
+      inputs.freedpom.modules.hjem.opencode-commands
+      # Plugins
+      inputs.freedpom.modules.hjem.opencode-plugin-token-tracker
+      inputs.freedpom.modules.hjem.opencode-plugin-subagent-reporter
+      inputs.freedpom.modules.hjem.opencode-plugin-handoff
+      inputs.freedpom.modules.hjem.opencode-plugin-opencode-ignore
+      inputs.freedpom.modules.hjem.opencode-plugin-agent-memory
+      inputs.freedpom.modules.hjem.opencode-plugin-vibeguard
+      inputs.freedpom.modules.hjem.opencode-plugin-log-sanitizer
+      inputs.freedpom.modules.hjem.opencode-plugin-nix-safe
+      inputs.freedpom.modules.hjem.opencode-plugin-shell-strategy
+    ];
+  };
+
   security.rtkit.enable = true;
 
   # Gamemode: boost games to nice -10 + desktop notification on start/stop.
@@ -156,6 +189,12 @@ in
     };
   };
 
+  # Gamescope WSI: enables Vulkan WSI layer for native HDR games
+  programs.gamescope.enableWsi = true;
+  # Disable setcap wrapper — Steam's bwrap sandbox can't inherit capabilities
+  # ("failed to inherit capabilities: Operation not permitted")
+  programs.gamescope.capSysNice = lib.mkForce false;
+
   systemd = {
     user.services.wireplumber.wantedBy = [ "default.target" ];
     services.NetworkManager-wait-online.enable = false;
@@ -164,6 +203,10 @@ in
     tailscale = {
       enable = lib.mkForce true;
       package = pkgs-stable.tailscale;
+    };
+    netbird = {
+      enable = true;
+      ui.enable = true;
     };
     pipewire = {
       enable = true;

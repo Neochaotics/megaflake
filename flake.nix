@@ -43,9 +43,22 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     hyprland = {
-      url = "github:hyprwm/Hyprland?ref=v0.55.0";
+      url = "github:hyprwm/Hyprland?ref=v0.56.1";
     };
     nix-mineral.url = "github:cynicsketch/nix-mineral";
+    hjem = {
+      url = "github:feel-co/hjem";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    hjem-rum = {
+      url = "github:snugnug/hjem-rum";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.hjem.follows = "hjem";
+    };
+    opencode = {
+      url = "github:anomalyco/opencode";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     freedpom = {
       url = "path:/home/quinno/Documents/projects/freedpom/flake/";
       inputs.nixpkgs.follows = "nixpkgs-stable";
