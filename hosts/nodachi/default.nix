@@ -77,6 +77,7 @@ in
     inputs.disko.nixosModules.disko
     inputs.home-manager.nixosModules.home-manager
     inputs.hjem.nixosModules.default
+    inputs.preservation.nixosModules.default
     inputs.nix-mineral.nixosModules.nix-mineral
     self.nixosModules.ffDefault
     inputs.freedpom.modules.nixos.ntpd
@@ -85,6 +86,7 @@ in
     inputs.freedpom.modules.nixos.daemon
     inputs.freedpom.modules.nixos.performance
     inputs.freedpom.modules.nixos.steam
+    ./firewall-shim.nix
     ./disk-primary.nix
     ./disk-secondary.nix
     ./hardware.nix
@@ -167,7 +169,6 @@ in
       inputs.freedpom.modules.hjem.opencode-plugin-handoff
       inputs.freedpom.modules.hjem.opencode-plugin-opencode-ignore
       inputs.freedpom.modules.hjem.opencode-plugin-agent-memory
-      inputs.freedpom.modules.hjem.opencode-plugin-vibeguard
       inputs.freedpom.modules.hjem.opencode-plugin-log-sanitizer
       inputs.freedpom.modules.hjem.opencode-plugin-nix-safe
       inputs.freedpom.modules.hjem.opencode-plugin-shell-strategy

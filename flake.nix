@@ -46,6 +46,7 @@
       url = "github:hyprwm/Hyprland?ref=v0.56.1";
     };
     nix-mineral.url = "github:cynicsketch/nix-mineral";
+    preservation.url = "github:nix-community/preservation";
     hjem = {
       url = "github:feel-co/hjem";
       inputs.nixpkgs.follows = "nixpkgs";
