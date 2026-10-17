@@ -856,26 +856,6 @@
         "type": "github"
       }
     },
-    "home-manager_3": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1789695075,
-        "narHash": "sha256-HREFWgmCTp28ZdMkSFOW2QW8uI17v5CNc04W46h6aPo=",
-        "owner": "nix-community",
-        "repo": "home-manager",
-        "rev": "4ac5a2ae9025eab1ebece4f9df8c315fd84a738a",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-community",
-        "repo": "home-manager",
-        "type": "github"
-      }
-    },
     "hyprcursor": {
       "inputs": {
         "hyprlang": [
@@ -2122,7 +2102,6 @@
         "freedpom": "freedpom",
         "hjem": "hjem_2",
         "hjem-rum": "hjem-rum_2",
-        "home-manager": "home-manager_3",
         "hyprland": "hyprland_2",
         "nix-mineral": "nix-mineral_2",
         "nixpkgs": "nixpkgs_5",

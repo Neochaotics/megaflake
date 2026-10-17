@@ -18,10 +18,6 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-26.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
-    home-manager = {
-      url = "github:nix-community/home-manager/";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     disko = {
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -100,7 +96,6 @@
         };
 
       flake.nixosModules.ffDefault = ./modules/ff/nixosModules.nix;
-      flake.homeModules.qModule = ./modules/home-manager;
-      flake.homeModules.ffDefault = ./modules/ff/homeModules.nix;
+      flake.hjemModules.default = ./modules/hjem;
     };
 }

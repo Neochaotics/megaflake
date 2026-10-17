@@ -76,7 +76,6 @@ in
     inputs.fluxcast-flake.nixosModules.default
     inputs.agenix-rekey.nixosModules.default
     inputs.disko.nixosModules.disko
-    inputs.home-manager.nixosModules.home-manager
     inputs.hjem.nixosModules.default
     inputs.preservation.nixosModules.default
     inputs.nix-mineral.nixosModules.nix-mineral
@@ -131,30 +130,15 @@ in
     };
   };
 
-  home-manager = {
-    users.${username} = import ./home.nix;
-    extraSpecialArgs = {
-      inherit
-        username
-        inputs
-        self
-        pkgs-stable
-        ;
-    };
-    backupFileExtension = "bk";
-    useGlobalPkgs = true;
-    useUserPackages = true;
-  };
-
-  # Hjem: declarative file management for opencode (coexists with home-manager)
+  # Hjem: declarative management of $HOME.
   hjem = {
     clobberByDefault = true;
-    users.${username} = {
-      enable = true;
-      directory = "/home/${username}";
-      user = username;
-    };
+    users.${username} = import ./hjem.nix;
     extraModules = [
+      # Module collection (hyprland, foot, fuzzel, git, yazi, hyprlock, ...)
+      inputs.hjem-rum.hjemModules.default
+      # Local modules (bash, zsh, ssh, firefox, systemd user units, ...)
+      self.hjemModules.default
       # Core config (opencode.json, tui.json, vibeguard, AGENTS.md, theme)
       inputs.freedpom.modules.hjem.opencode-core
       # Tooling (opencode binary, nixd, nixfmt, alejandra, statix, etc.)
@@ -173,6 +157,8 @@ in
       inputs.freedpom.modules.hjem.opencode-plugin-nix-safe
       inputs.freedpom.modules.hjem.opencode-plugin-shell-strategy
     ];
+    # hjem modules cannot see flake inputs by default.
+    specialArgs.inputs = inputs;
   };
 
   security.rtkit.enable = true;
