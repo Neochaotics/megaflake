@@ -83,7 +83,7 @@ in
     inputs.freedpom.modules.nixos.ntpd
     inputs.freedpom.modules.nixos.locale
     inputs.freedpom.modules.nixos.ananicy
-    inputs.freedpom.modules.nixos.daemon
+    inputs.freedpom.modules.nixos.nix-daemon
     inputs.freedpom.modules.nixos.performance
     inputs.freedpom.modules.nixos.steam
     ./disk-primary.nix
@@ -139,23 +139,9 @@ in
       inputs.hjem-rum.hjemModules.default
       # Local modules (bash, zsh, ssh, firefox, systemd user units, ...)
       self.hjemModules.default
-      # Core config (opencode.json, tui.json, vibeguard, AGENTS.md, theme)
-      inputs.freedpom.modules.hjem.opencode-core
-      # Tooling (opencode binary, nixd, nixfmt, alejandra, statix, etc.)
-      inputs.freedpom.modules.hjem.opencode-tooling
-      # Skills, agents, commands
-      inputs.freedpom.modules.hjem.opencode-skills
-      inputs.freedpom.modules.hjem.opencode-agents
-      inputs.freedpom.modules.hjem.opencode-commands
-      # Plugins
-      inputs.freedpom.modules.hjem.opencode-plugin-token-tracker
-      inputs.freedpom.modules.hjem.opencode-plugin-subagent-reporter
-      inputs.freedpom.modules.hjem.opencode-plugin-handoff
-      inputs.freedpom.modules.hjem.opencode-plugin-opencode-ignore
-      inputs.freedpom.modules.hjem.opencode-plugin-agent-memory
-      inputs.freedpom.modules.hjem.opencode-plugin-log-sanitizer
-      inputs.freedpom.modules.hjem.opencode-plugin-nix-safe
-      inputs.freedpom.modules.hjem.opencode-plugin-shell-strategy
+      # Opencode via freedpom's single consolidated hjem module
+      # (config + tooling + skills; v2 schema, opencode/big-pickle default).
+      inputs.freedpom.modules.hjem.opencode
     ];
     # hjem modules cannot see flake inputs by default.
     specialArgs.inputs = inputs;

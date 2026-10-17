@@ -25,7 +25,6 @@
     agenix = {
       url = "github:ryantm/agenix";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.darwin.follows = "";
     };
     agenix-rekey = {
       url = "github:oddlama/agenix-rekey";
@@ -52,11 +51,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.hjem.follows = "hjem";
     };
-    opencode = {
-      url = "github:anomalyco/opencode";
+    # Opencode comes via freedpom (single consolidated hjem module +
+    # pinned opencode v2 package); no separate input here.
+    paseo = {
+      url = "github:getpaseo/paseo?ref=v0.9.2";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    paseo.url = "github:getpaseo/paseo";
     freedpom = {
       url = "path:/home/quinno/Documents/projects/freedpom/flake/";
       inputs.nixpkgs.follows = "nixpkgs-stable";
