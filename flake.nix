@@ -60,10 +60,12 @@
       url = "github:anomalyco/opencode";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    paseo.url = "github:getpaseo/paseo";
     freedpom = {
       url = "path:/home/quinno/Documents/projects/freedpom/flake/";
       inputs.nixpkgs.follows = "nixpkgs-stable";
     };
+    fluxcast-flake.url = "github:noblepayne/fluxcast-flake";
   };
   outputs =
     inputs@{

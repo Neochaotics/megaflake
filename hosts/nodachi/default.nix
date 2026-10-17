@@ -73,6 +73,7 @@ in
 {
   imports = [
     inputs.agenix.nixosModules.default
+    inputs.fluxcast-flake.nixosModules.default
     inputs.agenix-rekey.nixosModules.default
     inputs.disko.nixosModules.disko
     inputs.home-manager.nixosModules.home-manager
@@ -86,7 +87,6 @@ in
     inputs.freedpom.modules.nixos.daemon
     inputs.freedpom.modules.nixos.performance
     inputs.freedpom.modules.nixos.steam
-    ./firewall-shim.nix
     ./disk-primary.nix
     ./disk-secondary.nix
     ./hardware.nix
@@ -201,14 +201,16 @@ in
     services.NetworkManager-wait-online.enable = false;
   };
   services = {
+    fluxcast.enable = true;
     tailscale = {
-      enable = lib.mkForce true;
+      enable = lib.mkForce false;
       package = pkgs-stable.tailscale;
     };
     netbird = {
       enable = true;
       ui.enable = true;
     };
+    resolved.enable = true;
     pipewire = {
       enable = true;
       alsa = {
@@ -219,6 +221,16 @@ in
       socketActivation = false;
     };
   };
+
+  programs.obs-studio = {
+    enable = true;
+    enableVirtualCamera = true; # Requires v4l2loopback and polkit
+    plugins = with pkgs.obs-studio-plugins; [
+      droidcam-obs
+    ];
+  };
+
+  networking.nameservers = [ "10.0.1.1" ];
 
   freedpom = {
     windowManagers.hyprland.enable = true;

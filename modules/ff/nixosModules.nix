@@ -5,6 +5,7 @@
     ./default/programs/sudo-rs.nix
     ./default/programs/uutils.nix
     ./default/services/networking.nix
+    ./default/services/paseo.nix
     ./default/services/ssh-nixos.nix
     ./default/system/boot.nix
     ./default/system/sysctl.nix
