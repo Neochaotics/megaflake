@@ -660,8 +660,8 @@
         "treefmt-nix": "treefmt-nix_3"
       },
       "locked": {
-        "lastModified": 1792251345,
-        "narHash": "sha256-Kd/L8mFG6KliXUIXtj4f9U0L3ZMliRZJEu6v2XV0PTQ=",
+        "lastModified": 1792252103,
+        "narHash": "sha256-Saw3l9X8OZFVwcelX8xA604OSL8+StFHP7/P7f50xDU=",
         "path": "/home/quinno/Documents/projects/freedpom/flake/",
         "type": "path"
       },
@@ -1948,11 +1948,11 @@
         "nixpkgs": "nixpkgs_7"
       },
       "locked": {
-        "lastModified": 1792250875,
-        "narHash": "sha256-aFwyTTKG46h+y4uTvrxTCLAbuVfCkIWKB/MqI3GpGi0=",
+        "lastModified": 1792251908,
+        "narHash": "sha256-ITHigJP317aD6fv0PQOAx/uqFlGEP7onDtXqWE4EGKc=",
         "owner": "getpaseo",
         "repo": "paseo",
-        "rev": "ecd42015b98f27f2ddf4708f7266a5267ac638d4",
+        "rev": "6ff071a487f2c38bc7e0a2281bc7c38f197ceaa6",
         "type": "github"
       },
       "original": {
