@@ -748,9 +748,4 @@
     man-db
     xdg-user-dirs
   ];
-
-  # uwsm session autostart
-  windowManager = {
-    autoStart = true;
-  };
 }

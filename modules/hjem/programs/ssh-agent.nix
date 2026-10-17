@@ -79,14 +79,12 @@ in
     '';
     programs.zsh.profileExtra = zshIntegration;
 
-    system.systemd.user.services = {
+    systemd.services = {
       ssh-agent = {
-        Install.WantedBy = [ "default.target" ];
-        Unit = {
-          Description = "SSH authentication agent";
-          Documentation = "man:ssh-agent(1)";
-        };
-        Service = {
+        wantedBy = [ "default.target" ];
+        description = "SSH authentication agent";
+        documentation = [ "man:ssh-agent(1)" ];
+        serviceConfig = {
           ExecStart = "${lib.getExe' cfg.package "ssh-agent"} -D -a %t/${cfg.socket}${
             lib.optionalString (
               cfg.defaultMaximumIdentityLifetime != null
@@ -101,20 +99,18 @@ in
       };
 
       set-SSH_AUTH_SOCK = {
-        Unit = {
-          Description = "Sets SSH_AUTH_SOCK in the D-BUS daemon and systemd";
-          # Socket units are ordered before sockets.target by systemd. Ordering
-          # this service before them creates a cycle through basic.target.
-          Before = [ "ssh-agent.service" ];
-        };
-        Service = {
+        description = "Sets SSH_AUTH_SOCK in the D-BUS daemon and systemd";
+        # Socket units are ordered before sockets.target by systemd. Ordering
+        # this service before them creates a cycle through basic.target.
+        before = [ "ssh-agent.service" ];
+        serviceConfig = {
           Type = "oneshot";
           ExecStart = pkgs.writeShellScript "set-SSH_AUTH_SOCK" ''
             ${bashIntegration}
             ${pkgs.dbus}/bin/dbus-update-activation-environment --systemd SSH_AUTH_SOCK
           '';
         };
-        Install.WantedBy = [
+        wantedBy = [
           "default.target"
           "ssh-agent.service"
         ];

@@ -110,36 +110,33 @@ in
       source = pkgs.writeText "waybar/style.css" cfg.style;
     };
 
-    system.systemd.user = lib.mkMerge [
+    systemd = lib.mkMerge [
       (lib.mkIf cfg.systemd.enable {
         services.waybar = {
-          Unit = {
-            Description = "Highly customizable Wayland bar for Sway and Wlroots based compositors.";
-            Documentation = "https://github.com/Alexays/Waybar/wiki";
-            PartOf = [ "tray.target" ] ++ cfg.systemd.targets;
-            After = cfg.systemd.targets;
+          description = "Highly customizable Wayland bar for Sway and Wlroots based compositors.";
+          documentation = [ "https://github.com/Alexays/Waybar/wiki" ];
+          partOf = [ "tray.target" ] ++ cfg.systemd.targets;
+          after = cfg.systemd.targets;
+          wantedBy = [ "tray.target" ] ++ cfg.systemd.targets;
+          unitConfig = {
             ConditionEnvironment = "WAYLAND_DISPLAY";
             "X-Reload-Triggers" =
               lib.optional (settings != [ ]) "${config.xdg.config.files."waybar/config".source}"
               ++ lib.optional (cfg.style != null) "${config.xdg.config.files."waybar/style.css".source}";
           };
 
-          Service = {
+          serviceConfig = {
             Environment = lib.optional cfg.systemd.enableInspect "GTK_DEBUG=interactive";
             ExecReload = "${pkgs.coreutils}/bin/kill -SIGUSR2 $MAINPID";
             ExecStart = "${cfg.package}/bin/waybar${lib.optionalString cfg.systemd.enableDebug " -l debug"}";
             KillMode = "mixed";
             Restart = "on-failure";
           };
-
-          Install.WantedBy = [ "tray.target" ] ++ cfg.systemd.targets;
         };
 
         targets.tray = {
-          Unit = {
-            Description = "Home Manager System Tray";
-            Requires = [ "graphical-session-pre.target" ];
-          };
+          description = "Home Manager System Tray";
+          requires = [ "graphical-session-pre.target" ];
         };
       })
     ];

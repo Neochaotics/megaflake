@@ -7,6 +7,7 @@
     ./default/services/networking.nix
     ./default/services/paseo.nix
     ./default/services/ssh-nixos.nix
+    ./default/services/uwsm-session.nix
     ./default/system/boot.nix
     ./default/system/sysctl.nix
     ./default/system/users.nix

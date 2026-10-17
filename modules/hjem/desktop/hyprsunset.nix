@@ -70,22 +70,19 @@ in
       source = pkgs.writeText "hm_hyprhyprsunset.conf" confText;
     };
 
-    system.systemd.user.services.hyprsunset = {
-      Install = {
-        WantedBy = [ cfg.systemdTarget ];
-      };
-
-      Unit = {
+    systemd.services.hyprsunset = {
+      wantedBy = [ cfg.systemdTarget ];
+      description = "hyprsunset - Hyprland's blue-light filter";
+      after = [ cfg.systemdTarget ];
+      partOf = [ cfg.systemdTarget ];
+      unitConfig = {
         ConditionEnvironment = "WAYLAND_DISPLAY";
-        Description = "hyprsunset - Hyprland's blue-light filter";
-        After = [ cfg.systemdTarget ];
-        PartOf = [ cfg.systemdTarget ];
         "X-Restart-Triggers" = lib.optional (
           cfg.settings != { }
         ) "${config.xdg.config.files."hypr/hyprsunset.conf".source}";
       };
 
-      Service = {
+      serviceConfig = {
         ExecStart = "${lib.getExe cfg.package}${
           lib.optionalString (cfg.extraArgs != [ ]) " ${lib.escapeShellArgs cfg.extraArgs}"
         }";

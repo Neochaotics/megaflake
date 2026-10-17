@@ -38,7 +38,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     hyprland = {
-      url = "github:hyprwm/Hyprland?ref=v0.56.1";
+      url = "github:hyprwm/Hyprland";
     };
     nix-mineral.url = "github:cynicsketch/nix-mineral";
     preservation.url = "github:nix-community/preservation";
@@ -54,8 +54,7 @@
     # Opencode comes via freedpom (single consolidated hjem module +
     # pinned opencode v2 package); no separate input here.
     paseo = {
-      url = "github:getpaseo/paseo?ref=v0.9.2";
-      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:getpaseo/paseo";
     };
     freedpom = {
       url = "path:/home/quinno/Documents/projects/freedpom/flake/";

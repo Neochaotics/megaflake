@@ -1,8 +1,9 @@
-# Hyprland configuration.
+# Hyprland configuration (Lua).
 #
-# The `hypr/hyprland.conf` body is rendered with home-manager's exact
-# `toHyprconf` generator (see `lib/hyprconf.nix`), and `uwsm/env*` are written
-# verbatim the same way home-manager's `xdg.configFile` targets did.
+# Hyprland 0.56 reads `hypr/hyprland.lua`. The body is rendered with the local
+# Lua generator (see `lua.nix`) from the same `desktop.hyprland.settings`
+# attrset the submodules populate, so Nix stays the single source of truth.
+# `uwsm/env*` are written verbatim.
 {
   config,
   lib,
@@ -12,20 +13,7 @@
 let
   cfg = config.desktop.hyprland;
 
-  inherit (lib) mkIf optionalString;
-
-  hyprconf = import ../../lib/hyprconf.nix { inherit lib; };
-
-  # home-manager's default, so that top-level settings such as `bezier` are
-  # emitted first in the same order.
-  importantPrefixes = [
-    "$"
-    "bezier"
-    "curve"
-    "name"
-    "output"
-    "source"
-  ];
+  lua = import ./lua.nix { inherit lib; };
 in
 {
   imports = [
@@ -61,37 +49,14 @@ in
       description = "Hyprland configuration written in Nix.";
     };
 
-    importantPrefixes = lib.mkOption {
-      type = lib.types.listOf lib.types.str;
-      default = importantPrefixes;
-      defaultText = lib.literalExpression "importantPrefixes";
-      description = ''
-        List of prefix of attributes to source at the top of the config.
-      '';
-    };
-
-    extraConfig = lib.mkOption {
-      type = lib.types.lines;
-      default = "";
-      description = "Extra configuration appended verbatim to {file}`hyprland.conf`.";
-    };
-
     xwayland = {
       enable = lib.mkEnableOption "XWayland" // {
         default = true;
       };
     };
-
-    # `hyprland-session.target` integration; home-manager had it off for this
-    # host because uwsm owns the session lifecycle.
-    systemd = {
-      enable = lib.mkEnableOption "hyprland-session.target integration" // {
-        default = false;
-      };
-    };
   };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     packages = [
       cfg.package
     ]
@@ -103,17 +68,11 @@ in
     ++ [ pkgs.hyprpolkitagent ]
     ++ lib.optional (cfg.portalPackage != null) pkgs.xdg-desktop-portal;
 
-    xdg.config.files."hypr/hyprland.conf".text =
-      optionalString (cfg.settings != { }) (
-        hyprconf.toHyprconf {
-          attrs = cfg.settings;
-          inherit importantPrefixes;
-        }
-      )
-      + optionalString (cfg.extraConfig != "") cfg.extraConfig;
+    xdg.config.files."hypr/hyprland.lua".text = lib.mkIf (cfg.settings != { }) (
+      lua.render cfg.settings
+    );
 
-    # home-manager wrote these through `xdg.configFile` with an explicit
-    # `target`; hjem spells the same thing as a nested file name.
+    # uwsm sources these for the session environment.
     xdg.config.files = {
       "uwsm/env".text = cfg.sessionEnvironment;
       "uwsm/env-hyprland".text = cfg.hyprlandEnvironment;

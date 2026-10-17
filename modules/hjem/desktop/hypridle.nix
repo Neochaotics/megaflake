@@ -70,20 +70,17 @@ in
       source = confPath;
     };
 
-    system.systemd.user.services.hypridle = {
-      Install = {
-        WantedBy = [ cfg.systemdTarget ];
-      };
-
-      Unit = {
+    systemd.services.hypridle = {
+      wantedBy = [ cfg.systemdTarget ];
+      description = "hypridle";
+      after = [ cfg.systemdTarget ];
+      partOf = [ cfg.systemdTarget ];
+      unitConfig = {
         ConditionEnvironment = "WAYLAND_DISPLAY";
-        Description = "hypridle";
-        After = [ cfg.systemdTarget ];
-        PartOf = [ cfg.systemdTarget ];
         "X-Restart-Triggers" = lib.optional (cfg.settings != { }) confPath;
       };
 
-      Service = {
+      serviceConfig = {
         ExecStart = "${lib.getExe cfg.package}";
         Restart = "always";
         RestartSec = "10";

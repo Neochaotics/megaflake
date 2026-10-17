@@ -15,7 +15,7 @@
       # Enabling this is not recommended due to potential cursor desynchronization.
       force_no_accel = false;
       left_handed = false;
-      scroll_button = "no_scroll";
+      scroll_method = "no_scroll";
       scroll_button_lock = 0;
       scroll_factor = 1.0;
       natural_scroll = false;
@@ -51,7 +51,7 @@
       no_break_fs_vrr = 2;
       min_refresh_rate = 30;
       hotspot_padding = 3;
-      inactive_timeout = 180;
+      inactive_timeout = 20.0;
       no_warps = false;
       persistent_warps = false;
       warp_on_change_workspace = 2;

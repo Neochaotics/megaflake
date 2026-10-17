@@ -28,8 +28,6 @@
     ./system/pointer-cursor.nix
     ./system/session-env.nix
     ./system/session-paths.nix
-    ./system/systemd-user.nix
-    ./system/uwsm.nix
     ./system/xdg.nix
   ];
 }

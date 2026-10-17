@@ -12,5 +12,4 @@
 
   shell = import ./shell.nix { inherit lib; };
   ssh = import ./ssh.nix { inherit lib; };
-  mkSystemdLib = pkgs: import ./systemd.nix { inherit lib pkgs; };
 }
