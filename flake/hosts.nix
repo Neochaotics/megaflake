@@ -30,19 +30,10 @@
       hostNames = builtins.attrNames (
         lib.attrsets.filterAttrs (_name: type: type == "directory") (builtins.readDir ../hosts)
       );
-      facterSystem =
-        hostname:
-        let
-          report = ../hosts/${hostname}/facter.json;
-        in
-        if builtins.pathExists report then
-          (builtins.fromJSON (builtins.readFile report)).system or "x86_64-linux"
-        else
-          "x86_64-linux";
       mkHost =
         hostname:
         let
-          system = facterSystem hostname;
+          system = inputs.freedpom.flib.facter.facterSystem inputs.self hostname;
         in
         inputs.nixpkgs.lib.nixosSystem {
           inherit system;

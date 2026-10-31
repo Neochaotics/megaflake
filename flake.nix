@@ -97,6 +97,6 @@
         inputs.flake-parts.flakeModules.easyOverlay
         inputs.flake-parts.flakeModules.modules
       ]
-      ++ ((import ./_lib/import-tree.nix { lib = inputs.nixpkgs.lib; }) ./flake);
+      ++ (inputs.freedpom.flib.import-tree ./flake);
     };
 }
