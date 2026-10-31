@@ -79,7 +79,8 @@ in
     inputs.hjem.nixosModules.default
     inputs.preservation.nixosModules.default
     inputs.nix-mineral.nixosModules.nix-mineral
-    self.modules.nixos.ffDefault
+    self.modules.nixos.profile-desktop
+    self.modules.nixos.paseo
     inputs.freedpom.modules.nixos.ntpd
     inputs.freedpom.modules.nixos.locale
     inputs.freedpom.modules.nixos.ananicy
