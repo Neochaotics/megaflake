@@ -17,7 +17,8 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-26.05";
-    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    # Alias to the same source instead of locking a second nixpkgs node.
+    nixpkgs-unstable.follows = "nixpkgs";
     disko = {
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -29,10 +30,19 @@
     agenix-rekey = {
       url = "github:oddlama/agenix-rekey";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-parts.follows = "flake-parts";
+      inputs.treefmt-nix.follows = "treefmt-nix";
+      inputs.flake-compat.follows = "";
     };
-    flake-parts.url = "github:hercules-ci/flake-parts";
+    flake-parts = {
+      url = "github:hercules-ci/flake-parts";
+      inputs.nixpkgs-lib.follows = "nixpkgs";
+    };
     flake-root.url = "github:srid/flake-root";
-    treefmt-nix.url = "github:numtide/treefmt-nix";
+    treefmt-nix = {
+      url = "github:numtide/treefmt-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     firefox-addons = {
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -40,7 +50,12 @@
     hyprland = {
       url = "github:hyprwm/Hyprland";
     };
-    nix-mineral.url = "github:cynicsketch/nix-mineral";
+    nix-mineral = {
+      url = "github:cynicsketch/nix-mineral";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-parts.follows = "flake-parts";
+      inputs.flake-compat.follows = "";
+    };
     preservation.url = "github:nix-community/preservation";
     hjem = {
       url = "github:feel-co/hjem";
@@ -56,6 +71,9 @@
     paseo = {
       url = "github:getpaseo/paseo";
     };
+    # Local checkout for active development. For a portable build, replace
+    # this with a pinned Git URL, e.g.
+    # git+https://codeberg.org/FREEDPOM/flake.git?rev=<commit>.
     freedpom = {
       url = "path:/home/quinno/Documents/projects/freedpom/flake/";
       inputs.nixpkgs.follows = "nixpkgs-stable";

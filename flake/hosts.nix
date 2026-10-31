@@ -30,26 +30,37 @@
       hostNames = builtins.attrNames (
         lib.attrsets.filterAttrs (_name: type: type == "directory") (builtins.readDir ../hosts)
       );
+      facterSystem =
+        hostname:
+        let
+          report = ../hosts/${hostname}/facter.json;
+        in
+        if builtins.pathExists report then
+          (builtins.fromJSON (builtins.readFile report)).system or "x86_64-linux"
+        else
+          "x86_64-linux";
       mkHost =
         hostname:
+        let
+          system = facterSystem hostname;
+        in
         inputs.nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
+          inherit system;
           modules = [
             ../hosts/${hostname}
             inputs.self.modules.nixos.constants
             (_: {
               networking.hostName = hostname;
-              nixpkgs.hostPlatform = "x86_64-linux";
 
               # Use the configured pkgs from perSystem
-              nixpkgs.pkgs = withSystem "x86_64-linux" ({ pkgs, ... }: pkgs);
+              nixpkgs.pkgs = withSystem system ({ pkgs, ... }: pkgs);
 
               _module.args.pkgs-stable = import inputs.nixpkgs-stable {
-                system = "x86_64-linux";
+                inherit system;
                 config.allowUnfree = true;
               };
               _module.args.pkgs-unstable = import inputs.nixpkgs-unstable {
-                system = "x86_64-linux";
+                inherit system;
                 config.allowUnfree = true;
               };
             })
