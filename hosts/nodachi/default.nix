@@ -79,7 +79,7 @@ in
     inputs.hjem.nixosModules.default
     inputs.preservation.nixosModules.default
     inputs.nix-mineral.nixosModules.nix-mineral
-    self.nixosModules.ffDefault
+    self.modules.nixos.ffDefault
     inputs.freedpom.modules.nixos.ntpd
     inputs.freedpom.modules.nixos.locale
     inputs.freedpom.modules.nixos.ananicy
@@ -138,7 +138,7 @@ in
       # Module collection (hyprland, foot, fuzzel, git, yazi, hyprlock, ...)
       inputs.hjem-rum.hjemModules.default
       # Local modules (bash, zsh, ssh, firefox, systemd user units, ...)
-      self.hjemModules.default
+      self.modules.hjem.default
       # Opencode via freedpom's single consolidated hjem module
       # (config + tooling + skills; v2 schema, opencode/big-pickle default).
       inputs.freedpom.modules.hjem.opencode

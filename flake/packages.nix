@@ -1,7 +1,4 @@
-{
-  ...
-}:
-{
+_: {
   perSystem =
     {
       config,
@@ -9,7 +6,7 @@
       ...
     }:
     {
-      packages.bench = pkgs.callPackage ./pkgs/bench/package.nix { };
+      packages.bench = pkgs.callPackage ../pkgs/bench/package.nix { };
 
       apps.bench = {
         type = "app";

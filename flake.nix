@@ -78,23 +78,7 @@
         inputs.treefmt-nix.flakeModule
         inputs.flake-parts.flakeModules.easyOverlay
         inputs.flake-parts.flakeModules.modules
-        ./nixos.nix
-        ./pkgs.nix
-      ];
-
-      perSystem =
-        { config, ... }:
-        {
-          treefmt.config = {
-            inherit (config.flake-root) projectRootFile;
-            programs = {
-              nixfmt.enable = true;
-              deadnix.enable = true;
-            };
-          };
-        };
-
-      flake.nixosModules.ffDefault = ./modules/ff/nixosModules.nix;
-      flake.hjemModules.default = ./modules/hjem;
+      ]
+      ++ ((import ./_lib/import-tree.nix { lib = inputs.nixpkgs.lib; }) ./flake);
     };
 }

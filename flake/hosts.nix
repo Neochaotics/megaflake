@@ -2,9 +2,7 @@
 {
   perSystem =
     {
-      config,
       system,
-      pkgs,
       ...
     }:
     {
@@ -21,28 +19,20 @@
           })
         ];
       };
-
-      devShells.default = pkgs.mkShell {
-        nativeBuildInputs = [
-          config.agenix-rekey.package
-          pkgs.age-plugin-yubikey
-          pkgs.rage
-        ];
-      };
     };
 
   flake.nixosConfigurations =
     let
       inherit (inputs.nixpkgs) lib;
       hostNames = builtins.attrNames (
-        lib.attrsets.filterAttrs (_name: type: type == "directory") (builtins.readDir ./hosts)
+        lib.attrsets.filterAttrs (_name: type: type == "directory") (builtins.readDir ../hosts)
       );
       mkHost =
         hostname:
         inputs.nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [
-            ./hosts/${hostname}
+            ../hosts/${hostname}
             (_: {
               networking.hostName = hostname;
               system.stateVersion = "24.11";
