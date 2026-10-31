@@ -2,20 +2,23 @@
 {
   perSystem =
     {
+      config,
       system,
       ...
     }:
     {
-      # Ensure pkgs allows unfree packages
+      # Ensure pkgs allows unfree packages and exposes local packages.
       _module.args.pkgs = import inputs.nixpkgs {
         inherit system;
         config = {
           allowUnfree = true;
         };
         overlays = [
-          # Expose freedpom's local packages (used by freedpom modules e.g. steam)
           (_final: _prev: {
-            local.proton-cachyos-bin = inputs.freedpom.packages.${system}.proton-cachyos-bin;
+            local = config.packages // {
+              # Used by freedpom modules such as steam.
+              proton-cachyos-bin = inputs.freedpom.packages.${system}.proton-cachyos-bin;
+            };
           })
         ];
       };

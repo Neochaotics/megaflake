@@ -74,8 +74,11 @@ hash_tsv() {
     [ -n "$source" ] || continue
     rel="${target#"$home_dir"/}"
     if [ ! -e "$source" ]; then
-      nix build --no-link "$source" >/dev/null 2>&1 \
-        || { echo "!! unbuildable: $rel -> $source" >&2; continue; }
+      nix build --no-link "$source" >/dev/null 2>&1 ||
+        {
+          echo "!! unbuildable: $rel -> $source" >&2
+          continue
+        }
     fi
     real="$(realpath "$source")"
     if [ -d "$real" ]; then
@@ -90,10 +93,10 @@ hash_tsv() {
 
 capture() {
   # $1 = expression; writes $work.tsv and $work.pkgs
-  nix eval --impure --raw --expr "$1" --apply 'x: x.tsv' \
-    | grep -v '^$' | hash_tsv >"$work.tsv"
-  nix eval --impure --raw --expr "$1" --apply 'x: builtins.concatStringsSep "\n" x.packages' \
-    | grep -v '^$' | sort -u >"$work.pkgs"
+  nix eval --impure --raw --expr "$1" --apply 'x: x.tsv' |
+    grep -v '^$' | hash_tsv >"$work.tsv"
+  nix eval --impure --raw --expr "$1" --apply 'x: builtins.concatStringsSep "\n" x.packages' |
+    grep -v '^$' | sort -u >"$work.pkgs"
 }
 
 # hjem's manifest is the authoritative record of what it links, and building it
@@ -111,45 +114,48 @@ capture_hjem() {
 
   nix build --impure --no-link --expr "$unit_expr" >/dev/null
   manifest="$(nix eval --impure --raw --expr \
-    "(builtins.getFlake \"$flake_ref\").nixosConfigurations.$host.config.systemd.services.\"hjem-activate@\".script" \
-    | grep -o '/nix/store/[a-z0-9]*-hjem-manifests' | head -1)"
+    "(builtins.getFlake \"$flake_ref\").nixosConfigurations.$host.config.systemd.services.\"hjem-activate@\".script" |
+    grep -o '/nix/store/[a-z0-9]*-hjem-manifests' | head -1)"
   paste \
     <(grep -o '"target":"[^"]*"' "$manifest/manifest-$user.json" | sed 's/"target":"//; s/"$//') \
-    <(grep -o '"source":"[^"]*"' "$manifest/manifest-$user.json" | sed 's/"source":"//; s/"$//') \
-    | grep -v '"target":""' | hash_tsv >"$work.tsv"
+    <(grep -o '"source":"[^"]*"' "$manifest/manifest-$user.json" | sed 's/"source":"//; s/"$//') |
+    grep -v '"target":""' | hash_tsv >"$work.tsv"
   nix eval --impure --raw --expr "$hjem_expr" \
-    --apply 'x: builtins.concatStringsSep "\n" x.packages' \
-    | grep -v '^$' | sort -u >"$work.pkgs"
+    --apply 'x: builtins.concatStringsSep "\n" x.packages' |
+    grep -v '^$' | sort -u >"$work.pkgs"
 }
 
 case "$mode" in
-  baseline)
-    # putter.json is Home Manager's authoritative manifest of what its
-    # activation links, so read the file set from there rather than
-    # re-deriving it from Home Manager's option algebra.
-    # HM_PKG lets the baseline be re-derived from an already-built home-manager
-    # generation after the configuration has moved to hjem.
-    hm_pkg="${HM_PKG:-$(nix build --impure --no-link --print-out-paths \
-      --expr "(builtins.getFlake \"$flake_ref\").nixosConfigurations.$host.config.home-manager.users.$user.home.activationPackage")}"
-    # Every putter.json entry carries exactly one "source" and one "target", and no
-    # nested object does, so two greps in document order line up with paste.
-    paste \
-      <(grep -o '"target":"[^"]*"' "$hm_pkg/putter.json" | sed 's/"target":"//; s/"$//') \
-      <(grep -o '"source":"[^"]*"' "$hm_pkg/putter.json" | sed 's/"source":"//; s/"$//') \
-      | hash_tsv >"$cache/hm-baseline.tsv"
-    nix eval --impure --raw --expr "$hm_expr" \
-      --apply 'x: builtins.concatStringsSep "\n" x.packages' \
-      | grep -v '^$' | sort -u >"$cache/hm-baseline.pkgs"
-    echo "baseline: $(wc -l <"$cache/hm-baseline.tsv") files, $(wc -l <"$cache/hm-baseline.pkgs") packages -> $cache"
-    ;;
-  show)
-    capture_hjem
-    cat "$work.tsv"
-    ;;
-  check)
-    capture_hjem
-    [ -f "$cache/hm-baseline.tsv" ] || { echo "no baseline: run '$0 baseline' first" >&2; exit 66; }
-    nix eval --impure --raw --expr "
+baseline)
+  # putter.json is Home Manager's authoritative manifest of what its
+  # activation links, so read the file set from there rather than
+  # re-deriving it from Home Manager's option algebra.
+  # HM_PKG lets the baseline be re-derived from an already-built home-manager
+  # generation after the configuration has moved to hjem.
+  hm_pkg="${HM_PKG:-$(nix build --impure --no-link --print-out-paths \
+    --expr "(builtins.getFlake \"$flake_ref\").nixosConfigurations.$host.config.home-manager.users.$user.home.activationPackage")}"
+  # Every putter.json entry carries exactly one "source" and one "target", and no
+  # nested object does, so two greps in document order line up with paste.
+  paste \
+    <(grep -o '"target":"[^"]*"' "$hm_pkg/putter.json" | sed 's/"target":"//; s/"$//') \
+    <(grep -o '"source":"[^"]*"' "$hm_pkg/putter.json" | sed 's/"source":"//; s/"$//') |
+    hash_tsv >"$cache/hm-baseline.tsv"
+  nix eval --impure --raw --expr "$hm_expr" \
+    --apply 'x: builtins.concatStringsSep "\n" x.packages' |
+    grep -v '^$' | sort -u >"$cache/hm-baseline.pkgs"
+  echo "baseline: $(wc -l <"$cache/hm-baseline.tsv") files, $(wc -l <"$cache/hm-baseline.pkgs") packages -> $cache"
+  ;;
+show)
+  capture_hjem
+  cat "$work.tsv"
+  ;;
+check)
+  capture_hjem
+  [ -f "$cache/hm-baseline.tsv" ] || {
+    echo "no baseline: run '$0 baseline' first" >&2
+    exit 66
+  }
+  nix eval --impure --raw --expr "
       let
         lib = (builtins.getFlake \"$flake_ref\").inputs.nixpkgs.lib;
         set = f:
@@ -175,12 +181,15 @@ case "$mode" in
          + section \"extra (hjem adds it)\" extra
          + section \"changed (content differs)\" changed)
     "
-    diff -u "$cache/hm-baseline.pkgs" "$work.pkgs" >/dev/null \
-      && echo "packages: PARITY OK" \
-      || { echo "packages: PARITY FAIL"; diff -u "$cache/hm-baseline.pkgs" "$work.pkgs" || true; }
-    ;;
-  *)
-    echo "usage: $0 {baseline|check|show}" >&2
-    exit 64
-    ;;
+  diff -u "$cache/hm-baseline.pkgs" "$work.pkgs" >/dev/null &&
+    echo "packages: PARITY OK" ||
+    {
+      echo "packages: PARITY FAIL"
+      diff -u "$cache/hm-baseline.pkgs" "$work.pkgs" || true
+    }
+  ;;
+*)
+  echo "usage: $0 {baseline|check|show}" >&2
+  exit 64
+  ;;
 esac

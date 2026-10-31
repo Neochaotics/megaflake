@@ -5,8 +5,10 @@
       treefmt.config = {
         inherit (config.flake-root) projectRootFile;
         programs = {
-          nixfmt.enable = true;
+          actionlint.enable = true;
           deadnix.enable = true;
+          nixfmt.enable = true;
+          shfmt.enable = true;
         };
       };
     };
