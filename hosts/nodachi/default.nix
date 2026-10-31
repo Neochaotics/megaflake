@@ -32,6 +32,8 @@
     ./gpu.nix
   ];
 
+  constants.username = "quinno";
+
   networking.nameservers = [ "10.0.1.1" ];
 
   nixpkgs.flake.source = lib.mkForce null;

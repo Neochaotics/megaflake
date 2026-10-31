@@ -1,8 +1,12 @@
 {
+  osConfig,
   pkgs,
   inputs,
   ...
 }:
+let
+  home = osConfig.constants.home;
+in
 {
   programs = {
     bash = {
@@ -228,31 +232,31 @@
       matchBlocks = {
         github = {
           hostname = "github.com";
-          identityFile = [ "/home/quinno/.ssh/ssh_id_ed25519_key" ];
+          identityFile = [ "${home}/.ssh/ssh_id_ed25519_key" ];
           identitiesOnly = true;
           addKeysToAgent = "yes";
         };
         "gitlab.com" = {
           hostname = "gitlab.com";
-          identityFile = [ "/home/quinno/.ssh/id_isc_gitlab" ];
+          identityFile = [ "${home}/.ssh/id_isc_gitlab" ];
           identitiesOnly = true;
           addKeysToAgent = "yes";
         };
         "codeberg.org" = {
           hostname = "codeberg.org";
-          identityFile = [ "/home/quinno/.ssh/id_codeberg" ];
+          identityFile = [ "${home}/.ssh/id_codeberg" ];
           identitiesOnly = true;
           addKeysToAgent = "yes";
         };
         "capuchin-us-ne" = {
           hostname = "5.161.179.69";
-          identityFile = [ "/home/quinno/.ssh/id_codeberg" ];
+          identityFile = [ "${home}/.ssh/id_codeberg" ];
           identitiesOnly = true;
           addKeysToAgent = "yes";
         };
         kogatana = {
           hostname = "kogatana";
-          identityFile = [ "/home/quinno/.ssh/id_codeberg" ];
+          identityFile = [ "${home}/.ssh/id_codeberg" ];
           identitiesOnly = true;
           addKeysToAgent = "yes";
         };
@@ -260,17 +264,17 @@
           addKeysToAgent = "yes";
           compression = false;
           controlMaster = "no";
-          controlPath = "/home/quinno/.config/ssh/master-%r@%n:%p";
+          controlPath = "${home}/.config/ssh/master-%r@%n:%p";
           controlPersist = "no";
           forwardAgent = true;
           hashKnownHosts = false;
           identitiesOnly = true;
           serverAliveCountMax = 3;
           serverAliveInterval = 0;
-          userKnownHostsFile = "/home/quinno/.config/ssh/known_hosts";
+          userKnownHostsFile = "${home}/.config/ssh/known_hosts";
         };
         sk = {
-          identityFile = [ "/home/quinno/.config/ssh/id_ed25519_key_sk" ];
+          identityFile = [ "${home}/.config/ssh/id_ed25519_key_sk" ];
         };
       };
     };
@@ -289,7 +293,7 @@
       syntaxHighlighting.enable = true;
       autocd = true;
       enableCompletion = true;
-      dotDir = "/home/quinno/.config/zsh";
+      dotDir = "${home}/.config/zsh";
     };
 
     yazi = {

@@ -5,7 +5,7 @@
   ...
 }:
 let
-  username = "quinno";
+  username = config.constants.username;
 in
 {
   age = {

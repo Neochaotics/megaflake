@@ -20,7 +20,8 @@ in
 
     user = lib.mkOption {
       type = lib.types.str;
-      default = "quinno";
+      default = config.constants.username;
+      defaultText = lib.literalExpression "config.constants.username";
       description = "Seat user owning the uwsm console session on tty1.";
     };
   };

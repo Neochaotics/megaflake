@@ -33,9 +33,9 @@
           system = "x86_64-linux";
           modules = [
             ../hosts/${hostname}
+            inputs.self.modules.nixos.constants
             (_: {
               networking.hostName = hostname;
-              system.stateVersion = "24.11";
               nixpkgs.hostPlatform = "x86_64-linux";
 
               # Use the configured pkgs from perSystem

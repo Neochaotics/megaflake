@@ -1,10 +1,11 @@
 {
+  config,
   lib,
   pkgs-stable,
   ...
 }:
 let
-  username = "quinno";
+  username = config.constants.username;
 in
 {
   services = {

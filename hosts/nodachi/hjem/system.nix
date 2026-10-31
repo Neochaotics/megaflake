@@ -1,7 +1,11 @@
 {
+  osConfig,
   pkgs,
   ...
 }:
+let
+  home = osConfig.constants.home;
+in
 {
   system.session = {
     enable = true;
@@ -16,7 +20,7 @@
     userDirs = {
       enable = true;
       createDirectories = true;
-      extraConfig.SCREENSHOTS = "/home/quinno/Pictures/Screenshots";
+      extraConfig.SCREENSHOTS = "${home}/Pictures/Screenshots";
     };
 
     mimeApps.enable = true;

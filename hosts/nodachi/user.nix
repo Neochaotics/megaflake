@@ -7,7 +7,7 @@
   ...
 }:
 let
-  username = "quinno";
+  username = config.constants.username;
   formatUsername =
     name:
     lib.strings.stringAsChars (

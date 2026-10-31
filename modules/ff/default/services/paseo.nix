@@ -1,4 +1,7 @@
-{ inputs, ... }:
+{ config, inputs, ... }:
+let
+  constants = config.constants;
+in
 {
   imports = [ inputs.paseo.nixosModules.paseo ];
 
@@ -6,8 +9,8 @@
   # and their config/auth are reachable from the daemon's PATH.
   services.paseo = {
     enable = true;
-    user = "quinno";
-    dataDir = "/home/quinno/.paseo";
+    user = constants.username;
+    dataDir = "${constants.home}/.paseo";
     inheritUserEnvironment = true;
     listenAddress = "127.0.0.1";
     port = 6767;
