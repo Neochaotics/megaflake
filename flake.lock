@@ -607,6 +607,24 @@
         "type": "github"
       }
     },
+    "flake-utils_2": {
+      "inputs": {
+        "systems": "systems_5"
+      },
+      "locked": {
+        "lastModified": 1731533236,
+        "narHash": "sha256-l0KFg5HjrsfsO/JpG+r7fRrqm12kzFHyUHqHCVpMMbI=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "11707dc2f618dd54ca8739b309ec4fc024de578b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
     "fluxcast-flake": {
       "inputs": {
         "nixpkgs": "nixpkgs"
@@ -1604,6 +1622,28 @@
         "type": "github"
       }
     },
+    "nix2flatpak": {
+      "inputs": {
+        "flake-utils": "flake-utils_2",
+        "nixpkgs": [
+          "sone-jam",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1774860670,
+        "narHash": "sha256-YjJkQrvxrErXtfDi3obUn6rNmkA+CIAZ3f5NgL5xuYE=",
+        "owner": "neobrain",
+        "repo": "nix2flatpak",
+        "rev": "61d68e21e3fbc2d57590051f48736bea271f4aba",
+        "type": "github"
+      },
+      "original": {
+        "owner": "neobrain",
+        "repo": "nix2flatpak",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1790323409,
@@ -2077,6 +2117,7 @@
         "nixpkgs-unstable": "nixpkgs-unstable_2",
         "paseo": "paseo",
         "preservation": "preservation_2",
+        "sone-jam": "sone-jam",
         "treefmt-nix": "treefmt-nix_4"
       }
     },
@@ -2119,6 +2160,27 @@
         "owner": "wlrfx",
         "repo": "scenefx",
         "type": "github"
+      }
+    },
+    "sone-jam": {
+      "inputs": {
+        "nix2flatpak": "nix2flatpak",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1793758811,
+        "narHash": "sha256-GeLolrl/6/WGKgIskcnEdewSzV94riysNCVmTdJwa8A=",
+        "ref": "refs/heads/master",
+        "rev": "e22ee4b7d9264b9dac508792b65c026630b50a43",
+        "revCount": 1116,
+        "type": "git",
+        "url": "https://codeberg.org/blimbus/sone-jam"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://codeberg.org/blimbus/sone-jam"
       }
     },
     "systems": {
@@ -2178,6 +2240,21 @@
       "original": {
         "owner": "nix-systems",
         "repo": "default-linux",
+        "type": "github"
+      }
+    },
+    "systems_5": {
+      "locked": {
+        "lastModified": 1681028828,
+        "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
+        "owner": "nix-systems",
+        "repo": "default",
+        "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-systems",
+        "repo": "default",
         "type": "github"
       }
     },

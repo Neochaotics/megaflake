@@ -219,7 +219,7 @@ in
             userOptions = {
               packages = with pkgs; [
                 zed-editor
-                sone
+                inputs.sone-jam.packages.x86_64-linux.sone
                 #limo
                 stremio-linux-shell
                 bleachbit

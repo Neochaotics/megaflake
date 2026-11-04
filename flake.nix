@@ -15,6 +15,10 @@
   };
 
   inputs = {
+    sone-jam = {
+      url = "git+https://codeberg.org/blimbus/sone-jam";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-26.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
